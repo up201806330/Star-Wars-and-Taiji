@@ -1,9 +1,9 @@
 # LAIG 2020/2021
 
-## Group T0xG0y
+## Group T05G01
 | Name             | Number    | E-Mail               |
 | ---------------- | --------- | -------------------- |
-| John Doe         | 201801010 | ...                  |
+| João Sousa       | 201806613 | up201806613@fe.up.pt |
 | Rafael Ribeiro   | 201806330 | up201806330@fe.up.pt |
 
 ----
