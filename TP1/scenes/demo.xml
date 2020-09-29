@@ -545,9 +545,9 @@
             
             main body
                 sphere
-                cabin (triangles?)
+                windows
                 thruster (?)
-                2 cilinders (guns) (?)
+                2 cilinders (guns)
             
             wing support
                 top triangle
@@ -566,12 +566,206 @@
              (...)
         -->
 
-        <!-- Tie half wing panel-->
-        <node id="tieHalfWing">
-            <material id="tieHalfWingMaterial">
-            <texture id="tieHalfWingTexture">
+        <!-- Tie base rectangle FOR WING SUPPORTS-->
+        <node id="tieBaseRectangle">
+            <material id="null">
+            <texture id="null">
                 <amplification afs="" aft="" />
             </texture>
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <leaf type="rectangle" x1="0" y1="0" x2="1" y2="0.1" />
+            </descendants>
+        </node>
+
+        <!-- Support beam -->
+        <!-- Tie support 1st side-->
+        <node id="tieSupp1">
+            <material id="null">
+            <texture id="null">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+                <translation x="0" y="0" z="-0.05" />
+            </transformations>
+
+            <descendants>
+                <noderef id="tieBaseRectangle">
+            </descendants>
+        </node>
+        <!-- Tie support 2nd side-->
+        <node id="tieSupp2">
+            <material id="null">
+            <texture id="null">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+                <translation x="0" y="0" z="0.05" />
+            </transformations>
+
+            <descendants>
+                <noderef id="tieBaseRectangle">
+            </descendants>
+        </node>
+        <!-- Tie support 3rd side-->
+        <node id="tieSupp3">
+            <material id="null">
+            <texture id="null">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+                <translation x="0" y="0.1" z="-0.05" />
+                <rotation axis="xx" angle="90(?)" />
+            </transformations>
+
+            <descendants>
+                <noderef id="tieBaseRectangle">
+            </descendants>
+        </node>
+        <!-- Tie support 4th side-->
+        <node id="tieSupp4">
+            <material id="null">
+            <texture id="null">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+                <translation x="0" y="-0.1" z="-0.05" />
+                <rotation axis="xx" angle="90(?)" />
+            </transformations>
+
+            <descendants>
+                <noderef id="tieBaseRectangle">
+            </descendants>
+        </node>
+
+        <!-- Tie support beam -->
+        <node id="tieSupportBeam">
+            <material id="null">
+            <texture id="null">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <noderef id="tieSupp1">
+                <noderef id="tieSupp2">
+                <noderef id="tieSupp3">
+                <noderef id="tieSupp4">
+            </descendants>
+        </node>
+
+        <!-- Borders -->
+        <node id="tueBorder1">
+            <material id="null">
+            <texture id="null">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+                <scale x="2" y="1" z="1" />
+            </transformations>
+
+            <descendants>
+                <noderef id="tieSupportBeam">
+            </descendants>
+        </node>
+        <node id="tueBorder2">
+            <material id="null">
+            <texture id="null">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+                <translation x="-2" y="0" z="0" />
+                <scale x="2" y="1" z="1" />
+            </transformations>
+
+            <descendants>
+                <noderef id="tieSupportBeam">
+            </descendants>
+        </node>
+        <node id="tueBorder3">
+            <material id="null">
+            <texture id="null">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+                <translation x="-1" y="2" z="0" />
+                <scale x="2" y="1" z="1" />
+            </transformations>
+
+            <descendants>
+                <noderef id="tieSupportBeam">
+            </descendants>
+        </node>
+        <node id="tueBorder4">
+            <material id="null">
+            <texture id="null">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+                <rotation axis="zz" angle="53" />
+                <scale x="2.24" y="1" z="1" /> <!--sqrt(5) -->
+            </transformations>
+
+            <descendants>
+                <noderef id="tieSupportBeam">
+            </descendants>
+        </node>
+        <node id="tueBorder5">
+            <material id="null">
+            <texture id="null">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+                <translation x="-2" y="0" z="0" />
+                <rotation axis="zz" angle="53" />
+                <scale x="2.24" y="1" z="1" /> <!--sqrt(5) -->
+            </transformations>
+
+            <descendants>
+                <noderef id="tieSupportBeam">
+            </descendants>
+        </node>
+        <node id="tueBorder6">
+            <material id="null">
+            <texture id="null">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+                <rotation axis="zz" angle="53 + 90 (?)" />
+                <scale x="2.24" y="1" z="1" /> <!--sqrt(5) -->
+            </transformations>
+
+            <descendants>
+                <noderef id="tieSupportBeam">
+            </descendants>
+        </node>
+        <node id="tueBorder7">
+            <material id="null">
+            <texture id="null">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+                <translation x="2" y="0" z="0" />
+                <rotation axis="zz" angle="53 + 90 (?)" />
+                <scale x="2.24" y="1" z="1" /> <!--sqrt(5) -->
+            </transformations>
+
+            <descendants>
+                <noderef id="tieSupportBeam">
+            </descendants>
+        </node>
+
+        <!-- Tie half wing panel-->
+        <node id="tieHalfWing">
+            <material id="tieWingMaterial">
+            <texture id="tieWingTexture">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+            </transformations>
 
             <descendants>
                 <leaf type="triangle" x1="0" y1="0" x2="1" y2="2" x3="-1" y3="2" z3="0"/>
@@ -583,25 +777,48 @@
 
         <!-- Tie wing support-->
         <node id="tieWingSupport">
-            <material id="tieWingSupportMaterial">
-            <texture id="tieWingSupportTexture">
+            <material id="tieGreyMaterial">
+            <texture id="tieGreyTexture">
                 <amplification afs="" aft="" />
             </texture>
+            <transformations>
+            </transformations>
 
             <descendants>
-                <leaf type="cylinder" height="1" topRadius="0.2" bottomRadius="0.2" stacks="?" slices="?" />
+                <leaf type="cylinder" height="3" topRadius="0.2" bottomRadius="0.2" stacks="?" slices="?" />
+                <leaf type="triangle" x1="0" y1="1" x2="0" y2="0" x3="1.5" y3="0" z3="0"/>
+                <leaf type="triangle" x1="0" y1="-1" x2="0" y2="0" x3="1.5" y3="0" z3="0"/>
             </descendants>
         </node>
 
-        <!-- Tie wing body-->
-        <node id="tieWingBody">
-            <material id="tieWingBodyMaterial">
-            <texture id="tieWingBodyTexture">
+        <!-- Tie body windows-->
+        <node id="tieWingBodyWindows">
+            <material id="tieWindowsMaterial">
+            <texture id="tieWindowsTexture">
                 <amplification afs="" aft="" />
             </texture>
+            <transformations>
+                <translation x="0.2" y="0" z="0" />
+                <scale x="0.75" y="0.75" z="0.75" />
+            </transformations>
 
             <descendants>
                 <leaf type="sphere" radius="1" stacks="?" slices="?" />
+            </descendants>
+        </node>
+
+        <!-- Tie body-->
+        <node id="tieWingBody">
+            <material id="tieGreyMaterial">
+            <texture id="tieGreyTexture">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <leaf type="sphere" radius="1" stacks="?" slices="?" />
+                <noderef id="tieWingBodyWindows">
             </descendants>
         </node>
 
