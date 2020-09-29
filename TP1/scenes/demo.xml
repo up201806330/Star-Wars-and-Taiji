@@ -169,6 +169,68 @@
             -> Wing is a triangle or a triangular prism ?
         -->
 
+        <!-- X-Wing Wing Gun Default -->
+        <node id="xWingWingGunDefault">
+            <material id="xWingWingGunDefaultMaterial">
+            <texture id="xWingWingGunDefaultTexture">
+                <amplification afs="" aft="" />
+            </texture>
+
+            <descendants>
+                <noderef id="xWingWingGunDefaultAttachedBigPart">
+                <noderef id="xWingWingGunDefaultBarrel">
+                <noderef id="xWingWingGunDefaultBarrelSmall">
+                <noderef id="xWingWingGunDefaultBarrelDiskTip">
+                <noderef id="xWingWingGunDefaultBarrelTip">
+            </descendants>
+        </node>
+
+        <!-- TODO Wing Motor Default -->
+        <node id="xWingWingMotorDefault">
+            <material id="xWingBackBodyRightMotorMaterial">
+            <texture id="xWingBackBodyRightMotorTexture">
+                <amplification afs="" aft="" />
+            </texture>
+
+            <descendants>
+                <leaf type="cylinder" height="" topRadius="" bottomRadius="" stacks="" slices=""/>
+                <!-- TODO -->
+            </descendants>
+        </node>
+
+        <!-- Back Body of X-Wing section -->
+        <node id="xWingBackBodyRightMotor">
+            <material id="xWingBackBodyRightMotorMaterial">
+            <texture id="xWingBackBodyRightMotorTexture">
+                <amplification afs="" aft="" />
+            </texture>
+
+            <descendants>
+                <noderef id="xWingBackBodyMotorDefault">
+            </descendants>
+        </node>
+
+        <node id="xWingBackBodyLeftMotor">
+            <material id="xWingBackBodyLeftMotorMaterial">
+            <texture id="xWingBackBodyLeftMotorTexture">
+                <amplification afs="" aft="" />
+            </texture>
+
+            <descendants>
+                <noderef id="xWingBackBodyMotorDefault">
+            </descendants>
+        </node>
+
+        <node id="xWingBackBodyParallelepiped">
+            <material id="xWingBackBodyParallelepipedMaterial">
+            <texture id="xWingBackBodyParallelepipedTexture">
+                <amplification afs="" aft="" />
+            </texture>
+
+            <descendants>
+                <noderef id="xWingParallelepipedDefault">
+            </descendants>
+        </node>
 
         <!-- X-Wing Cabine section -->
         <node id="xWingCabineSlopeRectangle">
