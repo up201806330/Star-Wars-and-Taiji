@@ -170,6 +170,40 @@
         -->
 
 
+        <!-- X-Wing Cabine section -->
+        <node id="xWingCabineSlopeRectangle">
+            <material id="xWingCabineSlopeRectangleMaterial">
+            <texture id="xWingCabineSlopeRectangleTexture">
+                <amplification afs="" aft="" />
+            </texture>
+
+            <descendants>
+                <noderef id="xWingRectangleDefault">
+            </descendants>
+        </node>
+
+        <node id="xWingCabineRightTriangle">
+            <material id="xWingCabineLeftTriangleMaterial">
+            <texture id="xWingCabineLeftTriangleTexture">
+                <amplification afs="" aft="" />
+            </texture>
+
+            <descendants>
+                <noderef id="xWingTriangleDefault">
+            </descendants>
+        </node>
+
+        <node id="xWingCabineLeftTriangle">
+            <material id="xWingCabineLeftTriangleMaterial">
+            <texture id="xWingCabineLeftTriangleTexture">
+                <amplification afs="" aft="" />
+            </texture>
+
+            <descendants>
+                <noderef id="xWingTriangleDefault">
+            </descendants>
+        </node>
+
         <!-- Front Body section -->
         <node id="xWingFrontBodyParallelepiped">
             <material id="xWingFrontBodyParallelepipedMaterial">
