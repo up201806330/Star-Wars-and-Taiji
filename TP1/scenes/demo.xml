@@ -169,6 +169,176 @@
             -> Wing is a triangle or a triangular prism ?
         -->
 
+        <!-- ............................................................................. -->
+
+        <!-- TODO Rectangle Default -->
+        <node id="xWingRectangleDefault">
+            <material id="xWingRectangleDefaultMaterial">
+            <texture id="xWingRectangleDefaultTexture">
+                <amplification afs="" aft="" />
+            </texture>
+
+            <descendants>
+                <leaf type="rectangle" x1="" y1="" x2="" y2="" />
+            </descendants>
+        </node>
+
+        <!-- X-Wing Parallelepiped Default section -->
+        <node id="xWingRectangleBase2">
+            <material id="xWingRectangleBase2Material">
+            <texture id="xWingRectangleBase2Texture">
+                <amplification afs="" aft="" />
+            </texture>
+
+            <descendants>
+                <noderef id="xWingRectangleDefault">
+            </descendants>
+        </node>
+
+        <node id="xWingRectangleBase1">
+            <material id="xWingRectangleBase1Material">
+            <texture id="xWingRectangleBase1Texture">
+                <amplification afs="" aft="" />
+            </texture>
+
+            <descendants>
+                <noderef id="xWingRectangleDefault">
+            </descendants>
+        </node>
+
+        <node id="xWingRectangleSideFace4">
+            <material id="xWingRectangleSideFace4Material">
+            <texture id="xWingRectangleSideFace4Texture">
+                <amplification afs="" aft="" />
+            </texture>
+
+            <descendants>
+                <noderef id="xWingRectangleDefault">
+            </descendants>
+        </node>
+
+        <node id="xWingRectangleSideFace3">
+            <material id="xWingRectangleSideFace3Material">
+            <texture id="xWingRectangleSideFace3Texture">
+                <amplification afs="" aft="" />
+            </texture>
+
+            <descendants>
+                <noderef id="xWingRectangleDefault">
+            </descendants>
+        </node>
+
+        <node id="xWingRectangleSideFace2">
+            <material id="xWingRectangleSideFace2Material">
+            <texture id="xWingRectangleSideFace2Texture">
+                <amplification afs="" aft="" />
+            </texture>
+
+            <descendants>
+                <noderef id="xWingRectangleDefault">
+            </descendants>
+        </node>
+
+        <node id="xWingRectangleSideFace1">
+            <material id="xWingRectangleSideFace1Material">
+            <texture id="xWingRectangleSideFace1Texture">
+                <amplification afs="" aft="" />
+            </texture>
+
+            <descendants>
+                <noderef id="xWingRectangleDefault">
+            </descendants>
+        </node>
+
+        <!-- TODO X-Wing Gun Barrel cylinder -->
+        <node id="xWingWingGunDefaultBarrel">
+            <material id="xWingWingGunDefaultBarrelMaterial">
+            <texture id="xWingWingGunDefaultBarrelTexture">
+                <amplification afs="" aft="" />
+            </texture>
+
+            <descendants>
+                <leaf type="cylinder" height="" topRadius="" bottomRadius="" stacks="" slices=""/>
+            </descendants>
+        </node>
+
+        <!-- TODO X-Wing Gun Big cylinder (in the wing) -->
+        <node id="xWingWingGunDefaultAttachedBigPart">
+            <material id="xWingWingGunDefaultAttachedBigPartMaterial">
+            <texture id="xWingWingGunDefaultAttachedBigPartTexture">
+                <amplification afs="" aft="" />
+            </texture>
+
+            <descendants>
+                <leaf type="cylinder" height="" topRadius="" bottomRadius="" stacks="" slices=""/>
+            </descendants>
+        </node>
+
+        <!-- TODO Back Body Motor Default -->
+        <node id="xWingBackBodyMotorDefault">
+            <material id="xWingBackBodyMotorDefaultMaterial">
+            <texture id="xWingBackBodyMotorDefaultTexture">
+                <amplification afs="" aft="" />
+            </texture>
+
+            <descendants>
+                <leaf type="cylinder" height="" topRadius="" bottomRadius="" stacks="" slices=""/>
+            </descendants>
+        </node>
+
+        <!-- TODO Triangle Default -->
+        <node id="xWingTriangleDefault">
+            <material id="xWingTriangleDefaultMaterial">
+            <texture id="xWingTriangleDefaultTexture">
+                <amplification afs="" aft="" />
+            </texture>
+
+            <descendants>
+                <leaf type="triangle" x1="" y1="" x2="" y2="" x3="" y3="" />
+            </descendants>
+
+        </node>
+
+        <node id="xWingParallelepipedDefault">
+            <material id="xWingParallelepipedDefaultMaterial">
+            <texture id="xWingParallelepipedDefaultTexture">
+                <amplification afs="" aft="" />
+            </texture>
+
+            <descendants>
+                <noderef id="xWingRectangleSideFace1">
+                <noderef id="xWingRectangleSideFace2">
+                <noderef id="xWingRectangleSideFace3">
+                <noderef id="xWingRectangleSideFace4">
+                <noderef id="xWingRectangleBase1">
+                <noderef id="xWingRectangleBase2">
+            </descendants>
+        </node>
+
+        <!-- Right Wing Default -->
+        <node id="xWingRightWingDefault">
+            <material id="xWingRightWingDefaultMaterial">
+            <texture id="xWingRightWingDefaultTexture">
+                <amplification afs="" aft="" />
+            </texture>
+
+            <descendants>
+                <noderef id="xWingParallelepipedDefault">
+            </descendants>
+        </node>
+
+        <!-- Left Wing Default -->
+        <node id="xWingLeftWingDefault">
+            <material id="xWingLeftWingDefaultMaterial">
+            <texture id="xWingLeftWingDefaultTexture">
+                <amplification afs="" aft="" />
+            </texture>
+
+            <descendants>
+                <noderef id="xWingParallelepipedDefault">
+            </descendants>
+        </node>
+
         <!-- X-Wing Wing Gun Default -->
         <node id="xWingWingGunDefault">
             <material id="xWingWingGunDefaultMaterial">
@@ -179,22 +349,18 @@
             <descendants>
                 <noderef id="xWingWingGunDefaultAttachedBigPart">
                 <noderef id="xWingWingGunDefaultBarrel">
-                <noderef id="xWingWingGunDefaultBarrelSmall">
-                <noderef id="xWingWingGunDefaultBarrelDiskTip">
-                <noderef id="xWingWingGunDefaultBarrelTip">
             </descendants>
         </node>
 
         <!-- TODO Wing Motor Default -->
         <node id="xWingWingMotorDefault">
-            <material id="xWingBackBodyRightMotorMaterial">
-            <texture id="xWingBackBodyRightMotorTexture">
+            <material id="xWingWingMotorDefaultMaterial">
+            <texture id="xWingWingMotorDefaultTexture">
                 <amplification afs="" aft="" />
             </texture>
 
             <descendants>
                 <leaf type="cylinder" height="" topRadius="" bottomRadius="" stacks="" slices=""/>
-                <!-- TODO -->
             </descendants>
         </node>
 
@@ -245,8 +411,8 @@
         </node>
 
         <node id="xWingCabineRightTriangle">
-            <material id="xWingCabineLeftTriangleMaterial">
-            <texture id="xWingCabineLeftTriangleTexture">
+            <material id="xWingCabineRightTriangleMaterial">
+            <texture id="xWingCabineRightTriangleTexture">
                 <amplification afs="" aft="" />
             </texture>
 
@@ -280,8 +446,8 @@
 
         <!-- Front Edge of the X-Wing section -->
         <node id="xWingFrontEdgeParallelepiped">
-            <material id="xWingFrontEdgeRampPrismMaterial">
-            <texture id="xWingFrontEdgeRampPrismTexture">
+            <material id="xWingFrontEdgeParallelepipedMaterial">
+            <texture id="xWingFrontEdgeParallelepipedTexture">
                 <amplification afs="" aft="" />
             </texture>
 
@@ -290,6 +456,7 @@
             </descendants>
         </node>
 
+        <!-- TODO Decide either to change to a parallelepiped or do it
         <node id="xWingFrontEdgeRampPrism">
             <material id="xWingFrontEdgeRampPrismMaterial">
             <texture id="xWingFrontEdgeRampPrismTexture">
@@ -297,9 +464,10 @@
             </texture>
 
             <descendants>
-                <!-- TODO how to make a triangular prism -->
+                TODO how to make a triangular prism
             </descendants>
         </node>
+        -->
 
         <!-- Bottom Right Wing section -->
         <node id="xWingBottomRightWingGun">
