@@ -467,7 +467,7 @@
 
         <!-- All Wings -->
         <node id="xWingWings">
-             <material id="xWingWingsMaterial">
+            <material id="xWingWingsMaterial">
             <texture id="xWingWingsTexture">
                 <amplification afs="" aft="" />
             </texture>
@@ -492,6 +492,83 @@
                 <noderef id="xWingMainBody">
                 <noderef id="xWingWings">
             </descendants>            
+        </node>
+
+
+        <!--            -->
+        <!-- Tie Figher -->
+        <!--            -->
+
+
+        <!-- Division of the fighter in parts (to "illustrate") - temporary
+            tieFighter
+                main body
+                wings
+            
+            wings
+                left  -> top half, bottom half, support
+                right -> top half, bottom half, support
+            
+            main body
+                sphere
+                cabin (triangles?)
+                thruster (?)
+                2 cilinders (guns) (?)
+            
+            wing support
+                top triangle
+                bot triangle
+                cilider
+
+            half wing panel X2
+                up center rect triangles
+                left, right isoscls triangles
+
+            (Panels need border!!)
+
+            cabin 
+                triangles (?)
+
+             (...)
+        -->
+
+        <!-- Tie half wing panel-->
+        <node id="tieHalfWing">
+            <material id="tieHalfWingMaterial">
+            <texture id="tieHalfWingTexture">
+                <amplification afs="" aft="" />
+            </texture>
+
+            <descendants>
+                <leaf type="triangle" x1="0" y1="0" x2="1" y2="2" x3="-1" y3="2" z3="0"/>
+                <leaf type="triangle" x1="0" y1="0" x2="2" y2="0" x3="1" y3="2" z3="0"/>
+                <leaf type="triangle" x1="0" y1="0" x2="-2" y2="0" x3="-1" y3="2" z3="0"/>
+                <!-- borders (?)-->
+            </descendants>
+        </node>
+
+        <!-- Tie wing support-->
+        <node id="tieWingSupport">
+            <material id="tieWingSupportMaterial">
+            <texture id="tieWingSupportTexture">
+                <amplification afs="" aft="" />
+            </texture>
+
+            <descendants>
+                <leaf type="cylinder" height="1" topRadius="0.2" bottomRadius="0.2" stacks="?" slices="?" />
+            </descendants>
+        </node>
+
+        <!-- Tie wing body-->
+        <node id="tieWingBody">
+            <material id="tieWingBodyMaterial">
+            <texture id="tieWingBodyTexture">
+                <amplification afs="" aft="" />
+            </texture>
+
+            <descendants>
+                <leaf type="sphere" radius="1" stacks="?" slices="?" />
+            </descendants>
         </node>
 
     </nodes>
