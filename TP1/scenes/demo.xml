@@ -105,68 +105,8 @@
             </descendants>
         </node>
 
-
-        <!-- Division of the x-wing in parts (to "illustrate") - temporary
-            xWing
-                main body
-                wings
-            
-            wings
-                left  -> top, bottom
-                right -> top, bottom
-            
-            main body
-                front edge
-                front body
-                cabine
-                back body
-            
-            top left wing
-                top left wing engine
-                top left wing itself
-                wing gun
-            
-
-            bottom left wing
-                bottom left wing engine
-                bottom left wing itself
-                wing gun
-            
-            top right wing
-                top right wing engine
-                top right wing itself
-                wing gun
-            
-            bottom right wing
-                bottom right wing engine
-                bottom right wing itself
-                wing gun
-            
-            front edge
-                prisma triangular ("rampa")
-                paralelepipedo (por baixo do prisma)
-            
-            front body
-                paralelepípedo
-            
-            cabine
-                triangulo lateral 1
-                triangulo lateral 2
-                retangulo frontal
-            
-            back body
-                paralelepípedo
-                back left motor
-                back right motor
-                            
-             (...)
-        -->
-
         <!--
             TODO fill the materials / textures sections and add add transformations
-            TODO rest of the x-wing nodes
-            -> better 1 base wing or 2 base wings (different orientations) ?
-            -> Wing is a triangle or a triangular prism ?
         -->
 
         <!-- ............................................................................. -->
