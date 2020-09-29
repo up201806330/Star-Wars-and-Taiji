@@ -628,7 +628,7 @@
              (...)
         -->
 
-        <!-- Tie base rectangle FOR WING SUPPORTS-->
+        <!-- Tie base rectangle FOR WING SUPPORTS -->
         <node id="tieBaseRectangle">
             <material id="null">
             <texture id="null">
@@ -720,7 +720,7 @@
         </node>
 
         <!-- Borders -->
-        <node id="tueBorder1">
+        <node id="tieBorder1">
             <material id="null">
             <texture id="null">
                 <amplification afs="" aft="" />
@@ -733,7 +733,7 @@
                 <noderef id="tieSupportBeam">
             </descendants>
         </node>
-        <node id="tueBorder2">
+        <node id="tieBorder2">
             <material id="null">
             <texture id="null">
                 <amplification afs="" aft="" />
@@ -747,7 +747,7 @@
                 <noderef id="tieSupportBeam">
             </descendants>
         </node>
-        <node id="tueBorder3">
+        <node id="tieBorder3">
             <material id="null">
             <texture id="null">
                 <amplification afs="" aft="" />
@@ -761,7 +761,7 @@
                 <noderef id="tieSupportBeam">
             </descendants>
         </node>
-        <node id="tueBorder4">
+        <node id="tieBorder4">
             <material id="null">
             <texture id="null">
                 <amplification afs="" aft="" />
@@ -775,7 +775,7 @@
                 <noderef id="tieSupportBeam">
             </descendants>
         </node>
-        <node id="tueBorder5">
+        <node id="tieBorder5">
             <material id="null">
             <texture id="null">
                 <amplification afs="" aft="" />
@@ -790,7 +790,7 @@
                 <noderef id="tieSupportBeam">
             </descendants>
         </node>
-        <node id="tueBorder6">
+        <node id="tieBorder6">
             <material id="null">
             <texture id="null">
                 <amplification afs="" aft="" />
@@ -804,7 +804,7 @@
                 <noderef id="tieSupportBeam">
             </descendants>
         </node>
-        <node id="tueBorder7">
+        <node id="tieBorder7">
             <material id="null">
             <texture id="null">
                 <amplification afs="" aft="" />
@@ -820,8 +820,8 @@
             </descendants>
         </node>
 
-        <!-- Tie half wing panel-->
-        <node id="tieHalfWing">
+        <!-- Tie wing panels -->
+        <node id="tieWingPanels">
             <material id="tieWingMaterial">
             <texture id="tieWingTexture">
                 <amplification afs="" aft="" />
@@ -833,14 +833,66 @@
                 <leaf type="triangle" x1="0" y1="0" x2="1" y2="2" x3="-1" y3="2" z3="0"/>
                 <leaf type="triangle" x1="0" y1="0" x2="2" y2="0" x3="1" y3="2" z3="0"/>
                 <leaf type="triangle" x1="0" y1="0" x2="-2" y2="0" x3="-1" y3="2" z3="0"/>
-                <!-- borders (?)-->
+            </descendants>
+        </node>
+
+        <!-- Tie half wing panel-->
+        <node id="tieHalfWing">
+            <material id="null">
+            <texture id="null">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <!-- panels -->
+                <noderef id="tieWingPanels">
+                <!-- borders -->
+                <noderef id="tieBorder1">
+                <noderef id="tieBorder2">
+                <noderef id="tieBorder3">
+                <noderef id="tieBorder4">
+                <noderef id="tieBorder5">
+                <noderef id="tieBorder6">
+                <noderef id="tieBorder7">
+            </descendants>
+        </node>
+
+        <!-- Tie wing top half-->
+        <node id="tieWingTop">
+            <material id="null">
+            <texture id="null">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+                <translation x="3" y="0" z="0" />
+            </transformations>
+
+            <descendants>
+                <noderef id="tieHalfWing">
+            </descendants>
+        </node>
+        <!-- Tie wing bottom half-->
+        <node id="tieWingBottom">
+            <material id="null">
+            <texture id="null">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+                <translation x="3" y="0" z="0" />
+                <rotation axis="zz" angle="180" />
+            </transformations>
+
+            <descendants>
+                <noderef id="tieHalfWing">
             </descendants>
         </node>
 
         <!-- Tie wing support-->
         <node id="tieWingSupport">
-            <material id="tieGreyMaterial">
-            <texture id="tieGreyTexture">
+            <material id="null">
+            <texture id="null">
                 <amplification afs="" aft="" />
             </texture>
             <transformations>
@@ -850,6 +902,50 @@
                 <leaf type="cylinder" height="3" topRadius="0.2" bottomRadius="0.2" stacks="?" slices="?" />
                 <leaf type="triangle" x1="0" y1="1" x2="0" y2="0" x3="1.5" y3="0" z3="0"/>
                 <leaf type="triangle" x1="0" y1="-1" x2="0" y2="0" x3="1.5" y3="0" z3="0"/>
+            </descendants>
+        </node>
+
+        <!-- Tie Final Wing -->
+        <node id="tieFinalWing">
+            <material id="null">
+            <texture id="null">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <noderef id="tieWingSupport">
+                <noderef id="tieWingTop">
+                <noderef id="tieWingBottom">
+            </descendants>
+        </node>
+
+        <!-- Tie Left Wing -->
+        <node id="tieLeftWing">
+            <material id="null">
+            <texture id="null">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <noderef id="tieFinalWing">
+            </descendants>
+        </node>
+        <!-- Tie Right Wing -->
+        <node id="tieRightWing">
+            <material id="null">
+            <texture id="null">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+                <rotation axis="xx" angle="180" />
+            </transformations>
+
+            <descendants>
+                <noderef id="tieFinalWing">
             </descendants>
         </node>
 
@@ -871,8 +967,8 @@
 
         <!-- Tie body-->
         <node id="tieWingBody">
-            <material id="tieGreyMaterial">
-            <texture id="tieGreyTexture">
+            <material id="null">
+            <texture id="null">
                 <amplification afs="" aft="" />
             </texture>
             <transformations>
@@ -884,5 +980,20 @@
             </descendants>
         </node>
 
+        <!-- Tie Final Shape -->
+        <node id="tieFinalShape">
+            <material id="tieGreyMaterial">
+            <texture id="tieGreyTexture">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <noderef id="tieWingBody">
+                <noderef id="tieRightWing">
+                <noderef id="tieLeftWing">
+            </descendants>
+        </node>
     </nodes>
 </lsf>
