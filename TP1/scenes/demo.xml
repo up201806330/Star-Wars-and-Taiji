@@ -759,9 +759,9 @@
             </transformations>
 
             <descendants>
-                <noderef id="xWingBackBodyParallelepiped">
-                <noderef id="xWingBackBodyLeftMotor">
-                <noderef id="xWingBackBodyRightMotor">
+                <noderef id="xWingBackBodyParallelepiped" />
+                <noderef id="xWingBackBodyLeftMotor" />
+                <noderef id="xWingBackBodyRightMotor" />
             </descendants>
         </node>
 
@@ -892,10 +892,10 @@
             </transformations>
 
             <descendants>
-                <noderef id="xWingFrontEdge">
-                <noderef id="xWingFrontBody">
-                <noderef id="xWingCabine">
-                <noderef id="xWingBackBody">
+                <noderef id="xWingFrontEdge" />
+                <noderef id="xWingFrontBody" />
+                <noderef id="xWingCabine" />
+                <noderef id="xWingBackBody" />
             </descendants>
         </node>
 
