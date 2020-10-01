@@ -44,10 +44,15 @@
         <texture id="tieWindowsTexture" path="" />
         <texture id="tieWingTexture" path="" />
 
+        <!-- X-Wing Textures -->
         <texture id="xWingFullTexture" path="" />
         <texture id="xWingCabineTexture" path="" />
         <texture id="xWingWingMotorDefaultTexture" path="" />
         <texture id="xWingWingGunDefaultAttachedBigPartTexture" path="" />
+
+        <!-- Explosion Textures -->
+        <texture id="explosionWhiteTexture" path="" />
+        <texture id="exexplosionTexture" path="" />
         
     </textures>
 
@@ -1300,6 +1305,111 @@
                 <noderef id="tieWingBody" />
                 <noderef id="tieRightWing" />
                 <noderef id="tieLeftWing" />
+            </descendants>
+        </node>
+
+        <!-- Explosion -->
+        <!-- Main sphere-->
+        <node id="explosionMainSphere">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <leaf type="sphere" radius="5" stacks="?" slices="?" />
+            </descendants>
+        </node>
+
+        <!-- Secondary sphere-->
+        <node id="explosionSecondarySphere">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <leaf type="sphere" radius="2" stacks="?" slices="?" />
+            </descendants>
+        </node>
+
+        <!-- Secondary sphere 1-->
+        <node id="explosionSecondarySphere1">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+                <translation x="3" y="2" z="3" />
+            </transformations>
+
+            <descendants>
+                <noderef id="explosionSecondarySphere" />
+            </descendants>
+        </node>
+        <!-- Secondary sphere 2-->
+        <node id="explosionSecondarySphere2">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+                <translation x="-3" y="-2" z="2" />
+            </transformations>
+
+            <descendants>
+                <noderef id="explosionSecondarySphere" />
+            </descendants>
+        </node>
+        <!-- Secondary sphere 3-->
+        <node id="explosionSecondarySphere3">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+                <translation x="3" y="-4" z="-2" />
+            </transformations>
+
+            <descendants>
+                <noderef id="explosionSecondarySphere" />
+            </descendants>
+        </node>
+        
+
+        <!-- White ring -->
+        <node id="explosionWhiteRing">
+            <material id="explosionWhiteMaterial" />
+            <texture id="explosionWhiteTexture">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <leaf type="torus" inner="7" outer="8" slices="?" loops="?" />
+            </descendants>
+        </node>
+
+        <!-- Final Explosion -->
+        <node id="explosionFinal">
+            <material id="explosionMaterial" />
+            <texture id="explosionTexture">
+                <amplification afs="" aft="" />
+            </texture>
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <noderef id="explosionWhiteRing" />
+                <noderef id="explosionSecondarySphere1" />
+                <noderef id="explosionSecondarySphere2" />
+                <noderef id="explosionSecondarySphere3" />
+                <noderef id="explosionMainSphere" />
             </descendants>
         </node>
     </nodes>
