@@ -69,6 +69,30 @@
             <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
         </material>
 
+        <material id="tieGreyMaterial">
+            <shininess value="1.0" />
+            <ambient r="0.1" g="0.1" b="0.1" a="1.0" />
+            <diffuse r="0.4" g="0.4" b="0.4" a="1.0" />
+            <specular r="0.1" g="0.1" b="0.1" a="1.0" />
+            <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
+        </material>
+        
+        <material id="tieWindowsMaterial">
+            <shininess value="1.0" />
+            <ambient r="0.1" g="0.1" b="0.1" a="1.0" />
+            <diffuse r="0.4" g="0.4" b="0.4" a="1.0" />
+            <specular r="0.1" g="0.1" b="0.1" a="1.0" />
+            <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
+        </material>
+        
+        <material id="tieWingMaterial">
+            <shininess value="1.0" />
+            <ambient r="0.1" g="0.1" b="0.1" a="1.0" />
+            <diffuse r="0.4" g="0.4" b="0.4" a="1.0" />
+            <specular r="0.1" g="0.1" b="0.1" a="1.0" />
+            <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
+        </material>
+
         <material id="xWingBackBodyMotorDefaultMaterial">
             <shininess value="1.0" />
             <ambient r="0.1" g="0.1" b="0.1" a="1.0" />
@@ -83,6 +107,14 @@
             <diffuse r="0.3" g="0.3" b="0.3" a="1.0" />
             <specular r="0.1" g="0.1" b="0.1" a="1.0" />
             <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
+        </material>
+
+        <material id="explosionMaterial">
+            <shininess value="1.0" />
+            <ambient r="0.1" g="0.1" b="0.1" a="1.0" />
+            <diffuse r="0.3" g="0.3" b="0.3" a="1.0" />
+            <specular r="0.1" g="0.1" b="0.1" a="1.0" />
+            <emissive r="1.0" g="1.0" b="1.0" a="1.0" />
         </material>
     </materials>
 
@@ -1383,7 +1415,7 @@
 
         <!-- White ring -->
         <node id="explosionWhiteRing">
-            <material id="explosionWhiteMaterial" />
+            <material id="explosionMaterial" />
             <texture id="explosionWhiteTexture">
                 <amplification afs="" aft="" />
             </texture>
