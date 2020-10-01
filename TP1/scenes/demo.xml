@@ -1,11 +1,10 @@
 <lsf>
     <initials>
-        <reference length="2" />
-        <!-- axis length; "0" means no axis displayed -->
-        <root id="demoRoot" />
-        <!-- identifier of root node of the scene graph; this node -->
-        <!-- must be defined in one of the following NODE declarations -->
+        <reference length="2" />    <!-- axis length; "0" means no axis displayed -->
+        <root id="demoRoot" />      <!-- identifier of root node of the scene graph; this node -->
+                                    <!-- must be defined in one of the following NODE declarations -->
     </initials>
+
     <views default="defaultCamera">
         <!-- at least one of the following type of cameras must be declared -->
         <perspective id="defaultCamera" near="0.1" far="500" angle="45">
@@ -15,7 +14,7 @@
         <ortho id="demoOrtho" near="0.2" far="100" left="-0.2" right="0.2" top="0.2" bottom="-0.2">
             <from x="5" y="0" z="10" />
             <to x="5" y="0" z="0" />
-            <up x="0" y="1" z="0" /><!-- optional, default 0,1,0 -->
+            <up x="0" y="1" z="0" />    <!-- optional, default 0,1,0 -->
         </ortho>
     </views>
 
@@ -24,26 +23,25 @@
         <background r="0.1" g="0.7" b="1.0" a="1.0" />        <!-- background color -->
     </illumination>
 
-
     <lights>
         <!-- NOTE: this block "light" must be repeated as necessary with different "id". At least one light should be present, and a maximum of eight lights is accepted. -->
-        <light id="demoLight">            <!-- light identifier -->
-            <enable value="1" />
-            <!-- enable/disable -->
-            <position x="10" y="12" z="9.5" w="1.0" /><!-- light position; w=1: point light; w=0: directional light -->
-            <ambient r="0" g="0" b="0" a="1.0" />                   <!-- ambient component -->
-            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />             <!-- diffuse component -->
-            <specular r="1.0" g="1.0" b="1.0" a="1.0" />            <!-- specular component -->
+        <light id="demoLight">                              <!-- light identifier -->
+            <enable value="1" />                            <!-- enable/disable -->
+            <position x="10" y="12" z="9.5" w="1.0" />      <!-- light position; w=1: point light; w=0: directional light -->
+            <ambient r="0" g="0" b="0" a="1.0" />           <!-- ambient component -->
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />     <!-- diffuse component -->
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />    <!-- specular component -->
         </light>
     </lights>
 
-
+    <!-- TODO Textures -->
     <textures>
         <!-- NOTE: this block "TEXTURE" must be repeated as necessary with different "id" -->
         <texture id="demoTexture" path="./scenes/images/vidral.jpg" />
     </textures>
 
-
+    <!-- TODO Materials -->
+    <!-- Valores entre 0 e 1 exceto emissive -->
     <materials>
         <!-- NOTE: the "MATERIAL" block may be repeated as required. Each defined material
          requires a distinct "id". At least one material should be present. -->
@@ -105,30 +103,35 @@
             </descendants>
         </node>
 
-        <!--
-            TODO fill the materials / textures sections and add add transformations
-        -->
 
         <!-- ............................................................................. -->
 
-        <!-- TODO Rectangle Default -->
+        <!-- X-Wing "Rectangle" Default (1 x 1) -->
         <node id="xWingRectangleDefault">
-            <material id="xWingRectangleDefaultMaterial">
-            <texture id="xWingRectangleDefaultTexture">
+            <material id="null" />
+            <texture id="null">
                 <amplification afs="" aft="" />
             </texture>
 
+            <transformations>
+            </transformations>
+
             <descendants>
-                <leaf type="rectangle" x1="" y1="" x2="" y2="" />
+                <leaf type="rectangle" x1="0" y1="0" x2="1" y2="1" />
             </descendants>
         </node>
 
         <!-- X-Wing Parallelepiped Default section -->
         <node id="xWingRectangleBase2">
-            <material id="xWingRectangleBase2Material">
-            <texture id="xWingRectangleBase2Texture">
-                <amplification afs="" aft="" />
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <translation x="0" y="1" z="0" />
+                <rotation axis="x" angle="90" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingRectangleDefault">
@@ -136,10 +139,14 @@
         </node>
 
         <node id="xWingRectangleBase1">
-            <material id="xWingRectangleBase1Material">
-            <texture id="xWingRectangleBase1Texture">
-                <amplification afs="" aft="" />
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <rotation axis="x" angle="90" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingRectangleDefault">
@@ -147,10 +154,14 @@
         </node>
 
         <node id="xWingRectangleSideFace4">
-            <material id="xWingRectangleSideFace4Material">
-            <texture id="xWingRectangleSideFace4Texture">
-                <amplification afs="" aft="" />
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <rotation axis="y" angle="-90" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingRectangleDefault">
@@ -158,10 +169,14 @@
         </node>
 
         <node id="xWingRectangleSideFace3">
-            <material id="xWingRectangleSideFace3Material">
-            <texture id="xWingRectangleSideFace3Texture">
-                <amplification afs="" aft="" />
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <translation x="0" y="0" z="1" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingRectangleDefault">
@@ -169,10 +184,15 @@
         </node>
 
         <node id="xWingRectangleSideFace2">
-            <material id="xWingRectangleSideFace2Material">
-            <texture id="xWingRectangleSideFace2Texture">
+            <material id="null" />
+            <texture id="null">
                 <amplification afs="" aft="" />
             </texture>
+
+            <transformations>
+                <rotation axis="y" angle="90" />
+                <translation x="1" y="0" z="1" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingRectangleDefault">
@@ -180,70 +200,92 @@
         </node>
 
         <node id="xWingRectangleSideFace1">
-            <material id="xWingRectangleSideFace1Material">
-            <texture id="xWingRectangleSideFace1Texture">
-                <amplification afs="" aft="" />
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <rotation axis="y" angle="180" />
+                <translation x="1" y="0" z="0" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingRectangleDefault">
             </descendants>
         </node>
 
-        <!-- TODO X-Wing Gun Barrel cylinder -->
+        <!-- X-Wing Gun Barrel cylinder -->
         <node id="xWingWingGunDefaultBarrel">
-            <material id="xWingWingGunDefaultBarrelMaterial">
+            <material id="xWingWingGunDefaultBarrelMaterial" />
             <texture id="xWingWingGunDefaultBarrelTexture">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+            
+            <transformations>
+            </transformations>
 
             <descendants>
-                <leaf type="cylinder" height="" topRadius="" bottomRadius="" stacks="" slices=""/>
+                <leaf type="cylinder" height="9.0" topRadius="0.5" bottomRadius="0.5" stacks="4" slices="8"/>
             </descendants>
         </node>
 
-        <!-- TODO X-Wing Gun Big cylinder (in the wing) -->
+        <!-- X-Wing Gun Big cylinder (in the wing) -->
         <node id="xWingWingGunDefaultAttachedBigPart">
-            <material id="xWingWingGunDefaultAttachedBigPartMaterial">
+            <material id="xWingWingGunDefaultAttachedBigPartMaterial" />
             <texture id="xWingWingGunDefaultAttachedBigPartTexture">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
 
+            <transformations>
+                <translation x="0.0" y="0.0" z="-3.0" />
+            </transformations>
+
             <descendants>
-                <leaf type="cylinder" height="" topRadius="" bottomRadius="" stacks="" slices=""/>
+                <leaf type="cylinder" height="3.0" topRadius="2.0" bottomRadius="2.0" stacks="4" slices="8"/>
             </descendants>
         </node>
 
-        <!-- TODO Back Body Motor Default -->
+        <!-- Back Body Motor Default -->
         <node id="xWingBackBodyMotorDefault">
-            <material id="xWingBackBodyMotorDefaultMaterial">
+            <material id="xWingBackBodyMotorDefaultMaterial" />
             <texture id="xWingBackBodyMotorDefaultTexture">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
 
+            <transformations>
+            </transformations>
+
             <descendants>
-                <leaf type="cylinder" height="" topRadius="" bottomRadius="" stacks="" slices=""/>
+                <leaf type="cylinder" height="3.0" topRadius="3.0" bottomRadius="3.0" stacks="4" slices="8"/>
             </descendants>
         </node>
 
-        <!-- TODO Triangle Default -->
+        <!-- Triangle Default -->
         <node id="xWingTriangleDefault">
-            <material id="xWingTriangleDefaultMaterial">
-            <texture id="xWingTriangleDefaultTexture">
-                <amplification afs="" aft="" />
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
             </texture>
 
+            <transformations>
+            </transformations>
+
             <descendants>
-                <leaf type="triangle" x1="" y1="" x2="" y2="" x3="" y3="" />
+                <leaf type="triangle" x1="0" y1="0" x2="1" y2="0" x3="0" y3="1" />
             </descendants>
 
         </node>
 
+        <!-- Parallelepiped Default (1 x 1 x 1) -->
         <node id="xWingParallelepipedDefault">
-            <material id="xWingParallelepipedDefaultMaterial">
-            <texture id="xWingParallelepipedDefaultTexture">
-                <amplification afs="" aft="" />
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+            </transformations>
 
             <descendants>
                 <noderef id="xWingRectangleSideFace1">
@@ -257,10 +299,15 @@
 
         <!-- Right Wing Default -->
         <node id="xWingRightWingDefault">
-            <material id="xWingRightWingDefaultMaterial">
-            <texture id="xWingRightWingDefaultTexture">
-                <amplification afs="" aft="" />
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <rotation axis="x" angle="90" />
+                <scale sx="-8.0" sy="3.0" sz="0.5" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingParallelepipedDefault">
@@ -269,10 +316,15 @@
 
         <!-- Left Wing Default -->
         <node id="xWingLeftWingDefault">
-            <material id="xWingLeftWingDefaultMaterial">
-            <texture id="xWingLeftWingDefaultTexture">
-                <amplification afs="" aft="" />
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <rotation axis="x" angle="90" />
+                <scale sx="8.0" sy="3.0" sz="0.5" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingParallelepipedDefault">
@@ -281,10 +333,13 @@
 
         <!-- X-Wing Wing Gun Default -->
         <node id="xWingWingGunDefault">
-            <material id="xWingWingGunDefaultMaterial">
-            <texture id="xWingWingGunDefaultTexture">
-                <amplification afs="" aft="" />
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+            </transformations>
 
             <descendants>
                 <noderef id="xWingWingGunDefaultAttachedBigPart">
@@ -292,24 +347,31 @@
             </descendants>
         </node>
 
-        <!-- TODO Wing Motor Default -->
+        <!-- Wing Motor Default -->
         <node id="xWingWingMotorDefault">
-            <material id="xWingWingMotorDefaultMaterial">
+            <material id="xWingWingMotorDefaultMaterial" />
             <texture id="xWingWingMotorDefaultTexture">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
 
+            <transformations>
+            </transformations>
+
             <descendants>
-                <leaf type="cylinder" height="" topRadius="" bottomRadius="" stacks="" slices=""/>
+                <leaf type="cylinder" height="3.0" topRadius="3.0" bottomRadius="3.0" stacks="4" slices="8"/>
             </descendants>
         </node>
 
         <!-- Back Body of X-Wing section -->
         <node id="xWingBackBodyRightMotor">
-            <material id="xWingBackBodyRightMotorMaterial">
-            <texture id="xWingBackBodyRightMotorTexture">
-                <amplification afs="" aft="" />
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <translation x="-2.0" y="6.5" z="0.0" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingBackBodyMotorDefault">
@@ -317,10 +379,14 @@
         </node>
 
         <node id="xWingBackBodyLeftMotor">
-            <material id="xWingBackBodyLeftMotorMaterial">
-            <texture id="xWingBackBodyLeftMotorTexture">
-                <amplification afs="" aft="" />
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <translation x="2.0" y="6.5" z="0.0" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingBackBodyMotorDefault">
@@ -328,10 +394,15 @@
         </node>
 
         <node id="xWingBackBodyParallelepiped">
-            <material id="xWingBackBodyParallelepipedMaterial">
+            <material id="xWingBackBodyParallelepipedMaterial" />
             <texture id="xWingBackBodyParallelepipedTexture">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <translation x="-2.0" y="0.0" z="0.0" />
+                <scale sx="4.0" sy="5.0" sz="6.0" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingParallelepipedDefault">
@@ -340,10 +411,17 @@
 
         <!-- X-Wing Cabine section -->
         <node id="xWingCabineSlopeRectangle">
-            <material id="xWingCabineSlopeRectangleMaterial">
-            <texture id="xWingCabineSlopeRectangleTexture">
-                <amplification afs="" aft="" />
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <translation x="0.0" y="2.0" z="0.0" />
+                <rotation axis="x" angle="123.79" />
+                <translation x="-2.0" y="0.0" z="0.0" />
+                <scale sx="4.0" sy="4.0" sz="1.0" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingRectangleDefault">
@@ -351,10 +429,16 @@
         </node>
 
         <node id="xWingCabineRightTriangle">
-            <material id="xWingCabineRightTriangleMaterial">
-            <texture id="xWingCabineRightTriangleTexture">
-                <amplification afs="" aft="" />
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <translation x="-2.0" y="0.0" z="0.0" />
+                <rotation axis="y" angle="-90" />
+                <scale sx="3.0" sy="2.0" sz="1.0" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingTriangleDefault">
@@ -362,10 +446,16 @@
         </node>
 
         <node id="xWingCabineLeftTriangle">
-            <material id="xWingCabineLeftTriangleMaterial">
-            <texture id="xWingCabineLeftTriangleTexture">
-                <amplification afs="" aft="" />
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <translation x="2.0" y="0.0" z="0.0" />
+                <rotation axis="y" angle="270" />
+                <scale sx="3.0" sy="2.0" sz="1.0" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingTriangleDefault">
@@ -374,10 +464,15 @@
 
         <!-- Front Body section -->
         <node id="xWingFrontBodyParallelepiped">
-            <material id="xWingFrontBodyParallelepipedMaterial">
+            <material id="xWingFrontBodyParallelepipedMaterial" />
             <texture id="xWingFrontBodyParallelepipedTexture">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <translation x="0.0" y="0.0" z="6.0" />
+                <scale sx="4.0" sy="3.0" sz="6.0" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingParallelepipedDefault">
@@ -386,35 +481,31 @@
 
         <!-- Front Edge of the X-Wing section -->
         <node id="xWingFrontEdgeParallelepiped">
-            <material id="xWingFrontEdgeParallelepipedMaterial">
+            <material id="xWingFrontEdgeParallelepipedMaterial" />
             <texture id="xWingFrontEdgeParallelepipedTexture">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <translation x="0.0" y="0.0" z="12.0" />
+                <scale sx="3.0" sy="2.0" sz="4.0" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingParallelepipedDefault">
             </descendants>
         </node>
 
-        <!-- TODO Decide either to change to a parallelepiped or do it
-        <node id="xWingFrontEdgeRampPrism">
-            <material id="xWingFrontEdgeRampPrismMaterial">
-            <texture id="xWingFrontEdgeRampPrismTexture">
-                <amplification afs="" aft="" />
-            </texture>
-
-            <descendants>
-                TODO how to make a triangular prism
-            </descendants>
-        </node>
-        -->
-
         <!-- Bottom Right Wing section -->
         <node id="xWingBottomRightWingGun">
-            <material id="xWingBottomRightWingGunMaterial">
+            <material id="xWingBottomRightWingGunMaterial" />
             <texture id="xWingBottomRightWingGunTexture">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <translation x="-9.0" y="-1.5" z="0.0" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingWingGunDefault">
@@ -422,10 +513,15 @@
         </node>
 
         <node id="xWingBottomRightWingWing">
-            <material id="xWingBottomRightWingWingMaterial">
+            <material id="xWingBottomRightWingWingMaterial" />
             <texture id="xWingBottomRightWingWingTexture">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <translation x="-4.0" y="1.0" z="0.0" />
+                <rotation axis="z" angle="30" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingRightWingDefault">
@@ -433,10 +529,14 @@
         </node>
 
         <node id="xWingBottomRightWingEngine">
-            <material id="xWingBottomRightWingEngineMaterial">
+            <material id="xWingBottomRightWingEngineMaterial" />
             <texture id="xWingBottomRightWingEngineTexture">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <translation x="-3.5" y="-3.0" z="0.0" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingWingMotorDefault">
@@ -445,10 +545,14 @@
 
         <!-- Top Right Wing section -->
         <node id="xWingTopRightWingGun">
-            <material id="xWingTopRightWingGunMaterial">
+            <material id="xWingTopRightWingGunMaterial" />
             <texture id="xWingTopRightWingGunTexture">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <translation x="-9.0" y="1.5" z="0.0" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingWingGunDefault">
@@ -456,10 +560,15 @@
         </node>
 
         <node id="xWingTopRightWingWing">
-            <material id="xWingTopRightWingWingMaterial">
+            <material id="xWingTopRightWingWingMaterial" />
             <texture id="xWingTopRightWingWingTexture">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <translation x="-4.0" y="4.0" z="0.0" />
+                <rotation axis="z" angle="-30" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingRightWingDefault">
@@ -467,10 +576,14 @@
         </node>
 
         <node id="xWingTopRightWingEngine">
-            <material id="xWingTopRightWingEngineMaterial">
+            <material id="xWingTopRightWingEngineMaterial" />
             <texture id="xWingTopRightWingEngineTexture">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <translation x="-3.5" y="3.0" z="0.0" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingWingMotorDefault">
@@ -479,10 +592,14 @@
 
         <!-- Bottom Left Wing section -->
         <node id="xWingBottomLeftWingGun">
-            <material id="xWingBottomLeftWingGunMaterial">
+            <material id="xWingBottomLeftWingGunMaterial" />
             <texture id="xWingBottomLeftWingGunTexture">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <translation x="9.0" y="-1.5" z="0.0" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingWingGunDefault">
@@ -490,10 +607,15 @@
         </node>
 
         <node id="xWingBottomLeftWingWing">
-            <material id="xWingBottomLeftWingWingMaterial">
+            <material id="xWingBottomLeftWingWingMaterial" />
             <texture id="xWingBottomLeftWingWingTexture">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <translation x="4.0" y="1.0" z="0.0" />
+                <rotation axis="z" angle="-30" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingLeftWingDefault">
@@ -501,10 +623,14 @@
         </node>
 
         <node id="xWingBottomLeftWingEngine">
-            <material id="xWingBottomLeftWingEngineMaterial">
+            <material id="xWingBottomLeftWingEngineMaterial" />
             <texture id="xWingBottomLeftWingEngineTexture">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <translation x="3.5" y="-3.0" z="0.0" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingWingMotorDefault">
@@ -513,10 +639,14 @@
 
         <!-- Top Left Wing section -->
         <node id="xWingTopLeftWingGun">
-            <material id="xWingTopLeftWingGunMaterial">
+            <material id="xWingTopLeftWingGunMaterial" />
             <texture id="xWingTopLeftWingGunTexture">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <translation x="9.0" y="1.5" z="0.0" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingWingGunDefault">
@@ -524,10 +654,15 @@
         </node>
 
         <node id="xWingTopLeftWingWing">
-            <material id="xWingTopLeftWingWingMaterial">
+            <material id="xWingTopLeftWingWingMaterial" />
             <texture id="xWingTopLeftWingWingTexture">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <translation x="4.0" y="4.0" z="0.0" />
+                <rotation axis="z" angle="30" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingLeftWingDefault">
@@ -535,10 +670,14 @@
         </node>
 
         <node id="xWingTopLeftWingEngine">
-            <material id="xWingTopLeftWingEngineMaterial">
+            <material id="xWingTopLeftWingEngineMaterial" />
             <texture id="xWingTopLeftWingEngineTexture">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <translation x="3.5" y="3.0" z="0.0" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingWingMotorDefault">
@@ -547,10 +686,13 @@
 
         <!-- Back Body of the X-Wing -->
         <node id="xWingBackBody">
-            <material id="xWingBackBody">
+            <material id="xWingBackBody" />
             <texture id="xWingBackBody">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+            </transformations>
 
             <descendants>
                 <noderef id="xWingBackBodyParallelepiped">
@@ -561,10 +703,14 @@
 
         <!-- X-Wing Cabine (sits on top of the Front Body) -->
         <node id="xWingCabine">
-            <material id="xWingCabine">
-            <texture id="xWingCabine">
-                <amplification afs="" aft="" />
+            <material id="xWingCabineMaterial" />
+            <texture id="xWingCabineTexture">
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+                <translation x="-2.0" y="3.0" z="6.0" />
+            </transformations>
 
             <descendants>
                 <noderef id="xWingCabineLeftTriangle">
@@ -575,10 +721,13 @@
 
         <!-- Front Body (Body between Front Edge and Back Body) -->
         <node id="xWingFrontBody">
-            <material id="xWingFrontBody">
+            <material id="xWingFrontBody" />
             <texture id="xWingFrontBody">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+            </transformations>
 
             <descendants>
                 <noderef id="xWingFrontBodyParallelepiped">
@@ -587,23 +736,28 @@
 
         <!-- Front Edge of the X-Wing -->
         <node id="xWingFrontEdge">
-            <material id="xWingFrontEdge">
+            <material id="xWingFrontEdge" />
             <texture id="xWingFrontEdge">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
 
+            <transformations>
+            </transformations>
+
             <descendants>
-                <noderef id="xWingFrontEdgeRampPrism">
                 <noderef id="xWingFrontEdgeParallelepiped">
             </descendants>
         </node>
 
         <!-- Bottom Right Wing -->
         <node id="xWingBottomRightWing">
-            <material id="xWingBottomRightWingMaterial">
-            <texture id="xWingBottomRightWingTexture">
-                <amplification afs="" aft="" />
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+            </transformations>
 
             <descendants>
                 <noderef id="xWingBottomRightWingEngine">
@@ -614,10 +768,13 @@
 
         <!-- Top Right Wing -->
         <node id="xWingTopRightWing">
-            <material id="xWingTopRightWingMaterial">
-            <texture id="xWingTopRightWingTexture">
-                <amplification afs="" aft="" />
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+            </transformations>
 
             <descendants>
                 <noderef id="xWingTopRightWingEngine">
@@ -628,10 +785,13 @@
 
         <!-- Bottom Left Wing -->
         <node id="xWingBottomLeftWing">
-            <material id="xWingBottomLeftWingMaterial">
-            <texture id="xWingBottomLeftWingTexture">
-                <amplification afs="" aft="" />
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+            </transformations>
 
             <descendants>
                 <noderef id="xWingBottomLeftWingEngine">
@@ -642,10 +802,13 @@
 
         <!-- Top Left Wing -->
         <node id="xWingTopLeftWing">
-            <material id="xWingTopLeftWingMaterial">
-            <texture id="xWingTopLeftWingTexture">
-                <amplification afs="" aft="" />
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+            </transformations>
 
             <descendants>
                 <noderef id="xWingTopLeftWingEngine">
@@ -656,10 +819,13 @@
 
         <!-- Main Body -->
         <node id="xWingMainBody">
-            <material id="xWingBodyMaterial">
+            <material id="xWingBodyMaterial" />
             <texture id="xWingBodyTexture">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+            </transformations>
 
             <descendants>
                 <noderef id="xWingFrontEdge">
@@ -671,10 +837,13 @@
 
         <!-- All Wings -->
         <node id="xWingWings">
-            <material id="xWingWingsMaterial">
+            <material id="xWingWingsMaterial" />
             <texture id="xWingWingsTexture">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+            </transformations>
 
             <descendants>
                 <noderef id="xWingTopLeftWing">
@@ -687,10 +856,13 @@
         <!-- Complete X-Wing Starship -->
         <node id="xWingFull">
 
-            <material id="xWingFullMaterial">
+            <material id="xWingFullMaterial" />
             <texture id="xWingFullTexture">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
+
+            <transformations>
+            </transformations>
 
             <descendants>
                 <noderef id="xWingMainBody">
