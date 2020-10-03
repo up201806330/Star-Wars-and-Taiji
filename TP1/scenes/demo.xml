@@ -955,7 +955,7 @@
         <node id="tieBaseRectangle">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
             </transformations>
@@ -970,7 +970,7 @@
         <node id="tieSupp1">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
                 <translation x="0" y="0" z="-0.05" />
@@ -984,7 +984,7 @@
         <node id="tieSupp2">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
                 <translation x="0" y="0" z="0.05" />
@@ -998,11 +998,11 @@
         <node id="tieSupp3">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
                 <translation x="0" y="0.1" z="-0.05" />
-                <rotation axis="xx" angle="90(?)" />
+                <rotation axis="x" angle="90" /> <!-- (?) -->
             </transformations>
 
             <descendants>
@@ -1013,11 +1013,11 @@
         <node id="tieSupp4">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
                 <translation x="0" y="-0.1" z="-0.05" />
-                <rotation axis="xx" angle="90(?)" />
+                <rotation axis="x" angle="90" /> <!-- (?) --> 
             </transformations>
 
             <descendants>
@@ -1029,7 +1029,7 @@
         <node id="tieSupportBeam">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
             </transformations>
@@ -1059,7 +1059,7 @@
         <node id="tieBorder2">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
                 <translation x="-2" y="0" z="0" />
@@ -1073,7 +1073,7 @@
         <node id="tieBorder3">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
                 <translation x="-1" y="2" z="0" />
@@ -1087,10 +1087,10 @@
         <node id="tieBorder4">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
-                <rotation axis="zz" angle="53" />
+                <rotation axis="z" angle="53" />
                 <scale x="2.24" y="1" z="1" /> <!--sqrt(5) -->
             </transformations>
 
@@ -1101,11 +1101,11 @@
         <node id="tieBorder5">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
                 <translation x="-2" y="0" z="0" />
-                <rotation axis="zz" angle="53" />
+                <rotation axis="z" angle="53" />
                 <scale x="2.24" y="1" z="1" /> <!--sqrt(5) -->
             </transformations>
 
@@ -1116,10 +1116,10 @@
         <node id="tieBorder6">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
-                <rotation axis="zz" angle="53 + 90 (?)" />
+                <rotation axis="z" angle="143" /> <!-- 53 + 90 (?) -->
                 <scale x="2.24" y="1" z="1" /> <!--sqrt(5) -->
             </transformations>
 
@@ -1130,11 +1130,11 @@
         <node id="tieBorder7">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
                 <translation x="2" y="0" z="0" />
-                <rotation axis="zz" angle="53 + 90 (?)" />
+                <rotation axis="z" angle="143" /> <!-- 53 + 90 (?) -->
                 <scale x="2.24" y="1" z="1" /> <!--sqrt(5) -->
             </transformations>
 
@@ -1147,7 +1147,7 @@
         <node id="tieWingPanels">
             <material id="tieWingMaterial" />
             <texture id="tieWingTexture">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
             </transformations>
@@ -1163,7 +1163,7 @@
         <node id="tieHalfWing">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
             </transformations>
@@ -1186,7 +1186,7 @@
         <node id="tieWingTop">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
                 <translation x="3" y="0" z="0" />
@@ -1200,11 +1200,11 @@
         <node id="tieWingBottom">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
                 <translation x="3" y="0" z="0" />
-                <rotation axis="zz" angle="180" />
+                <rotation axis="z" angle="180" />
             </transformations>
 
             <descendants>
@@ -1216,13 +1216,13 @@
         <node id="tieWingSupport">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
             </transformations>
 
             <descendants>
-                <leaf type="cylinder" height="3" topRadius="0.2" bottomRadius="0.2" stacks="?" slices="?" />
+                <leaf type="cylinder" height="3" topRadius="0.2" bottomRadius="0.2" stacks="4" slices="8" /> <!-- temporary value for stacks / slices -->
                 <leaf type="triangle" x1="0" y1="1" x2="0" y2="0" x3="1.5" y3="0" z3="0"/>
                 <leaf type="triangle" x1="0" y1="-1" x2="0" y2="0" x3="1.5" y3="0" z3="0"/>
             </descendants>
@@ -1232,7 +1232,7 @@
         <node id="tieFinalWing">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
             </transformations>
@@ -1248,7 +1248,7 @@
         <node id="tieLeftWing">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
             </transformations>
@@ -1261,10 +1261,10 @@
         <node id="tieRightWing">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
-                <rotation axis="xx" angle="180" />
+                <rotation axis="x" angle="180" />
             </transformations>
 
             <descendants>
@@ -1276,7 +1276,7 @@
         <node id="tieWingBodyWindows">
             <material id="tieWindowsMaterial" />
             <texture id="tieWindowsTexture">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
                 <translation x="0.2" y="0" z="0" />
@@ -1284,7 +1284,7 @@
             </transformations>
 
             <descendants>
-                <leaf type="sphere" radius="1" stacks="?" slices="?" />
+                <leaf type="sphere" radius="1" stacks="4" slices="8" /> <!-- temporary value for stacks / slices -->
             </descendants>
         </node>
 
@@ -1292,13 +1292,13 @@
         <node id="tieWingBody">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
             </transformations>
 
             <descendants>
-                <leaf type="sphere" radius="1" stacks="?" slices="?" />
+                <leaf type="sphere" radius="1" stacks="4" slices="8" /> <!-- temporary value for stacks / slices -->
                 <noderef id="tieWingBodyWindows" />
             </descendants>
         </node>
@@ -1307,7 +1307,7 @@
         <node id="tieFinalShape">
             <material id="tieGreyMaterial" />
             <texture id="tieGreyTexture">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
             </transformations>
@@ -1324,13 +1324,13 @@
         <node id="explosionMainSphere">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
             </transformations>
 
             <descendants>
-                <leaf type="sphere" radius="5" stacks="?" slices="?" />
+                <leaf type="sphere" radius="5" stacks="4" slices="8" /> <!-- temporary value for stacks / slices -->
             </descendants>
         </node>
 
@@ -1338,13 +1338,13 @@
         <node id="explosionSecondarySphere">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
             </transformations>
 
             <descendants>
-                <leaf type="sphere" radius="2" stacks="?" slices="?" />
+                <leaf type="sphere" radius="2" stacks="4" slices="8" /> <!-- temporary value for stacks / slices -->
             </descendants>
         </node>
 
@@ -1352,7 +1352,7 @@
         <node id="explosionSecondarySphere1">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
                 <translation x="3" y="2" z="3" />
@@ -1366,7 +1366,7 @@
         <node id="explosionSecondarySphere2">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
                 <translation x="-3" y="-2" z="2" />
@@ -1380,7 +1380,7 @@
         <node id="explosionSecondarySphere3">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
                 <translation x="3" y="-4" z="-2" />
@@ -1396,13 +1396,13 @@
         <node id="explosionWhiteRing">
             <material id="explosionMaterial" />
             <texture id="explosionWhiteTexture">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
             </transformations>
 
             <descendants>
-                <leaf type="torus" inner="7" outer="8" slices="?" loops="?" />
+                <leaf type="torus" inner="7" outer="8" slices="4" loops="8" />  <!-- slices and loops numbers are super temporary -->
             </descendants>
         </node>
 
@@ -1410,7 +1410,7 @@
         <node id="explosionFinal">
             <material id="explosionMaterial" />
             <texture id="explosionTexture">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
             </transformations>
