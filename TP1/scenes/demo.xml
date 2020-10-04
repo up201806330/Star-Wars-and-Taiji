@@ -47,9 +47,9 @@
         <!-- NOTE: this block "TEXTURE" must be repeated as necessary with different "id" -->
 
         <!-- Tie Fighter Textures-->
-        <texture id="tieGreyTexture" path="" />
-        <texture id="tieWindowsTexture" path="" />
-        <texture id="tieWingTexture" path="" />
+        <texture id="tieGreyTexture" path="images/tieGrey.jpg" />
+        <texture id="tieWindowsTexture" path="images/tieWings.jpg" /> <!-- Temporary -->
+        <texture id="tieWingTexture" path="images/tieWings.jpg" />
 
         <!-- X-Wing Textures -->
         <texture id="xWingFullTexture" path="" />
