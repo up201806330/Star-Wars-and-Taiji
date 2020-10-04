@@ -153,7 +153,7 @@
         <node id="xWingRectangleDefault">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
 
             <transformations>
@@ -229,7 +229,7 @@
         <node id="xWingRectangleSideFace2">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
 
             <transformations>
@@ -905,6 +905,7 @@
             </texture>
 
             <transformations>
+                <translation x="0" y="0" z="10" />
             </transformations>
 
             <descendants>
@@ -1046,7 +1047,7 @@
         <node id="tieBorder1">
             <material id="null" />
             <texture id="null">
-                <amplification afs="" aft="" />
+                <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
                 <scale x="2" y="1" z="1" />
@@ -1413,6 +1414,7 @@
                 <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
+                <translation x="0" y="10" z="0" />
             </transformations>
 
             <descendants>
@@ -1431,6 +1433,7 @@
                 <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
+                <translation x="0" y="8" z="5" />
             </transformations>
 
             <descendants>
