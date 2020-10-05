@@ -223,6 +223,7 @@ class MySceneGraph {
             return "No root id defined for scene.";
 
         this.idRoot = id;
+        console.log("\t\t\t\t\t\t\tidRoot: " + this.idRoot);
 
         // Get axis length        
         if(referenceIndex == -1)
@@ -245,7 +246,107 @@ class MySceneGraph {
      * @param {view block element} viewsNode
      */
     parseViews(viewsNode) {
-        this.onXMLMinorError("To do: Parse views and create cameras.");
+        // this.onXMLMinorError("To do: Parse views and create cameras.");
+
+        this.views = [];
+
+        let i;
+        const nonexistentParameter = true;
+        const perspectiveParameters = ["id", "near", "far", "angle"];
+        const orthoParameters = ["id", "near", "far", "left", "right", "top", "bottom"];
+
+        let id, near, far, angle, left, right, top, bottom;
+        let from, to, up;
+        let xFrom, yFrom, zFrom;
+        let xTo, yTo, zTo;
+        let xUp, yUp, zUp;
+
+        var views = viewsNode.children; // views (Cameras) Array
+        var viewsChildren;
+
+        if (views.length == 0) {
+            this.onXMLError("No views are defined!");
+        }
+        for (let view of views) {
+            i = 0;
+            viewsChildren = view.children;
+
+            // https://www.w3schools.com/xml/dom_nodes_info.asp
+            if (view.nodeName == "perspective") {
+                // console.log("Found a Perspective View!");
+                
+                // main parameters
+                id    = this.reader.getString(view, perspectiveParameters[i++], nonexistentParameter);
+                near  = this.reader.getFloat(view, perspectiveParameters[i++], nonexistentParameter);
+                far   = this.reader.getFloat(view, perspectiveParameters[i++], nonexistentParameter);
+                angle = this.reader.getFloat(view, perspectiveParameters[i++], nonexistentParameter);
+
+                // coords
+                if (viewsChildren.length != 2) {
+                    this.onXMLError("Not a valid view!");
+                }
+
+                xFrom = this.reader.getFloat(viewsChildren[0], "x", nonexistentParameter);
+                yFrom = this.reader.getFloat(viewsChildren[0], "y", nonexistentParameter);
+                zFrom = this.reader.getFloat(viewsChildren[0], "z", nonexistentParameter);
+
+                xTo = this.reader.getFloat(viewsChildren[1], "x", nonexistentParameter);
+                yTo = this.reader.getFloat(viewsChildren[1], "y", nonexistentParameter);
+                zTo = this.reader.getFloat(viewsChildren[1], "z", nonexistentParameter);
+                
+                from = vec3.fromValues(xFrom, yFrom, zFrom);
+                to   = vec3.fromValues(xTo, yTo, zTo);
+
+                this.views[id] = new CGFcamera(angle, near, far, from, to);
+                
+                // console.log(this.views["defaultCamera"]);
+            }
+
+            else if (view.nodeName == "ortho") {
+                // console.log("Found an Ortho View!");
+
+                // main parameters
+                id    = this.reader.getString(view, orthoParameters[i++], nonexistentParameter);
+                near  = this.reader.getFloat(view, orthoParameters[i++], nonexistentParameter);
+                far   = this.reader.getFloat(view, orthoParameters[i++], nonexistentParameter);
+                left  = this.reader.getFloat(view, orthoParameters[i++], nonexistentParameter);
+                right = this.reader.getFloat(view, orthoParameters[i++], nonexistentParameter);
+                top   = this.reader.getFloat(view, orthoParameters[i++], nonexistentParameter);
+                bottom= this.reader.getFloat(view, orthoParameters[i++], nonexistentParameter);
+
+                // coords
+                if (viewsChildren.length != 3 && viewsChildren.length != 2) {
+                    this.onXMLError("Not a valid view!");
+                }
+
+                xFrom = this.reader.getFloat(viewsChildren[0], "x", nonexistentParameter);
+                yFrom = this.reader.getFloat(viewsChildren[0], "y", nonexistentParameter);
+                zFrom = this.reader.getFloat(viewsChildren[0], "z", nonexistentParameter);
+
+                xTo = this.reader.getFloat(viewsChildren[1], "x", nonexistentParameter);
+                yTo = this.reader.getFloat(viewsChildren[1], "y", nonexistentParameter);
+                zTo = this.reader.getFloat(viewsChildren[1], "z", nonexistentParameter);
+
+                if (viewsChildren.length == 2) {
+                    up = vec3.fromValues(0, 1, 0);
+                }
+                else {
+                    xUp = this.reader.getFloat(viewsChildren[2], "x", nonexistentParameter);
+                    yUp = this.reader.getFloat(viewsChildren[2], "y", nonexistentParameter);
+                    zUp = this.reader.getFloat(viewsChildren[2], "z", nonexistentParameter);
+                    up   = vec3.fromValues(xUp, yUp, zUp);
+                }
+
+                from = vec3.fromValues(xFrom, yFrom, zFrom);    // from "=" position
+                to   = vec3.fromValues(xTo, yTo, zTo);          // to "=" target
+
+                this.views[id] = new CGFcameraOrtho(left, right, bottom, top, near, far, from, to, up);
+                
+                // console.log(this.views["demoOrtho"]);
+            }
+
+        }
+
         return null;
     }
 
@@ -418,8 +519,9 @@ class MySceneGraph {
    * @param {nodes block element} nodesNode
    */
   parseNodes(nodesNode) {
-        var children = nodesNode.children;
 
+        var children = nodesNode.children;
+        
         this.nodes = [];
 
         var grandChildren = [];
@@ -436,6 +538,7 @@ class MySceneGraph {
 
             // Get id of the current node.
             var nodeID = this.reader.getString(children[i], 'id');
+
             if (nodeID == null)
                 return "no ID defined for nodeID";
 
@@ -444,6 +547,9 @@ class MySceneGraph {
                 return "ID must be unique for each node (conflict: ID = " + nodeID + ")";
 
             grandChildren = children[i].children;
+
+            this.nodes[nodeID] = new MyNode(nodeID, this);
+            console.log("\t\t\t\t\t\t\t" + this.nodes.length);
 
             nodeNames = [];
             for (var j = 0; j < grandChildren.length; j++) {
@@ -463,6 +569,49 @@ class MySceneGraph {
             // Texture
 
             // Descendants
+            if (descendantsIndex == -1) {
+                this.onXMLError("An intermediate node must have at least one descendant!");
+            }
+
+            let nodeDescendants = grandChildren[descendantsIndex].children;
+            if (nodeDescendants.length == 0) {
+                this.onXMLError("An intermediate node must have at least one descendant!");
+            }
+
+            for (let k = 0; k < nodeDescendants.length; k++) {
+                console.log(nodeDescendants[k]);
+                
+                if (nodeDescendants[k].nodeName == "noderef") {
+                    console.log("It's an intermediate node!");
+                }
+
+                else if (nodeDescendants[k].nodeName == "leaf") {
+                    console.log("It's a leaf!");
+                    let primType = this.reader.getItem(nodeDescendants[k], "type", ["rectangle", "triangle", "torus", "cylinder", "sphere"]);
+
+                    if (primType == null) {
+                        this.onXMLMinorError("Unknown primitive type!");
+                    }
+
+                    let newLeaf = new MyPrimitive(primType, this, nodeDescendants[k]);
+                    this.nodes[nodeID].addLeaf(newLeaf);
+                    // console.log(newLeaf);
+                    
+                    console.log(this.nodes[nodeID].leaves[0]);
+                    
+                }
+
+                else {
+                    this.onXMLError("Unknown descendant type!");
+                }
+            }
+
+            // this.nodes.push(nodeID);
+
+            // console.log(grandChildren[descendantsIndex].children[0].nodeName);
+            
+            // console.log(nodeDescendants[descendantsIndex].children);
+
         }
     }
 
@@ -565,9 +714,16 @@ class MySceneGraph {
      * Displays the scene, processing each node, starting in the root node.
      */
     displayScene() {
-        
         //To do: Create display loop for transversing the scene graph, calling the root node's display function
-        
-        //this.nodes[this.idRoot].display()
+       
+        // var currNode = this.nodes["xWingRectangleDefault"];
+        // console.log(this.nodes[this.idRoot].leaves[0]);
+        // console.log(currNode);
+        currNode.leaves[0].aPrimitive.display();
+
+
+        // this.nodes[this.idRoot].leaves[0].display();
+
+
     }
 }
