@@ -719,7 +719,7 @@ class MySceneGraph {
         // var currNode = this.nodes["xWingRectangleDefault"];
         // console.log(this.nodes[this.idRoot].leaves[0]);
         // console.log(currNode);
-        currNode.leaves[0].aPrimitive.display();
+        // currNode.leaves[0].aPrimitive.display();
 
 
         // this.nodes[this.idRoot].leaves[0].display();
