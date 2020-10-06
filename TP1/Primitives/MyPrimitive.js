@@ -39,6 +39,17 @@ class MyPrimitive {
             this.aPrimitive = new MySphere(this.graph.scene, radius, stacks, slices);
         }
 
+        else if (type == "cylinder") {
+            //height, topR, bottomR, stacks, slices
+            let height = this.graph.reader.getFloat(element, "height", true);
+            let topRadius = this.graph.reader.getFloat(element, "topRadius", true);
+            let bottomRadius = this.graph.reader.getFloat(element, "bottomRadius", true);
+            let stacks = this.graph.reader.getFloat(element, "stacks", true);
+            let slices = this.graph.reader.getFloat(element, "slices", true);
+
+            this.aPrimitive = new MyCylinder(this.graph.scene, height, topRadius, bottomRadius, stacks, slices);
+        }
+
         else {
             console.log("Not Implemented!");
         }
