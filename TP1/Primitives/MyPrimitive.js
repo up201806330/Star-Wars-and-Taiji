@@ -31,6 +31,14 @@ class MyPrimitive {
             
         }
 
+        else if (type == "sphere"){
+            let radius = this.graph.reader.getFloat(element, "radius", true);
+            let stacks = this.graph.reader.getFloat(element, "stacks", true);
+            let slices = this.graph.reader.getFloat(element, "slices", true);
+
+            this.aPrimitive = new MySphere(this.graph.scene, radius, stacks, slices);
+        }
+
         else {
             console.log("Not Implemented!");
         }
