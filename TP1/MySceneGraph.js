@@ -549,7 +549,7 @@ class MySceneGraph {
             grandChildren = children[i].children;
 
             this.nodes[nodeID] = new MyNode(nodeID, this);
-            console.log("\t\t\t\t\t\t\t" + this.nodes.length);
+            // console.log("\t\t\t\t\t\t\t" + this.nodes.length);
 
             nodeNames = [];
             for (var j = 0; j < grandChildren.length; j++) {
@@ -582,6 +582,11 @@ class MySceneGraph {
                 
                 if (nodeDescendants[k].nodeName == "noderef") {
                     console.log("It's an intermediate node!");
+
+                    let noderefElement = this.reader.getString(nodeDescendants[k], "id");
+                    // console.log("HEY " + noderefElement);
+
+                    this.nodes[nodeID].addChildNode(noderefElement);
                 }
 
                 else if (nodeDescendants[k].nodeName == "leaf") {
@@ -596,7 +601,7 @@ class MySceneGraph {
                     this.nodes[nodeID].addLeaf(newLeaf);
                     // console.log(newLeaf);
                     
-                    console.log(this.nodes[nodeID].leaves[0]);
+                    //console.log(this.nodes[nodeID].leaves[0]);
                     
                 }
 
@@ -740,6 +745,9 @@ class MySceneGraph {
         for (let leaf = 0; leaf < nodeToDisplay.leaves.length; leaf++) {
             nodeToDisplay.leaves[leaf].aPrimitive.display();
         }
-        // for (let i = 0; i < nodeToDisplay.children.length; i++)
+        
+        for (let i = 0; i < nodeToDisplay.childNodes.length; i++) {
+            this.display(nodeToDisplay.childNodes[i]);
+        }
     }
 }

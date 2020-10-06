@@ -6,7 +6,7 @@ class MyPrimitive {
         this.graph = graph;
         this.aPrimitive;
         
-        console.log("Leaf is: " + type);
+        // console.log("Leaf is: " + type);
         
         if (type == "rectangle") {
 
