@@ -579,7 +579,6 @@ class MySceneGraph {
             }
 
             for (let k = 0; k < nodeDescendants.length; k++) {
-                console.log(nodeDescendants[k]);
                 
                 if (nodeDescendants[k].nodeName == "noderef") {
                     console.log("It's an intermediate node!");
@@ -723,9 +722,24 @@ class MySceneGraph {
         // var currNode = this.nodes["xWingRectangleDefault"]; 
         // currNode.leaves[0].aPrimitive.display();
 
+        // this.nodes[this.idRoot].display();
 
-        var currNode = this.nodes["rootNode"]; 
-        currNode.leaves[0].aPrimitive.display();
+        // var currNode = this.nodes["rootNode"]; 
+        // currNode.leaves[0].aPrimitive.display();
 
+        //console.log("ROOT: ");
+        // console.log(this.nodes[this.idRoot]);
+        this.display(this.idRoot);
+        
+    }
+
+    display(nodeToDisplayID) {
+        let nodeToDisplay = this.nodes[nodeToDisplayID];
+        // console.log("NODE:" + nodeToDisplay);
+
+        for (let leaf = 0; leaf < nodeToDisplay.leaves.length; leaf++) {
+            nodeToDisplay.leaves[leaf].aPrimitive.display();
+        }
+        // for (let i = 0; i < nodeToDisplay.children.length; i++)
     }
 }
