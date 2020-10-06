@@ -159,7 +159,10 @@
             <!-- declaring descendants, at least one node or one leaf must be present
              descendants may be mixed, nodes and leafs -->
             <descendants>
-                <leaf type="triangle" x1="0" y1="0" x2="1" y2="0" x3="0" y3="1" />
+                <noderef id="xWingFull" />
+                <noderef id="tieFinalShape" />
+                <noderef id="explosionFinal" />
+                <noderef id="laser" />
             </descendants>
         </node>
 
