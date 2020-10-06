@@ -724,6 +724,8 @@ class MySceneGraph {
         // currNode.leaves[0].aPrimitive.display();
 
 
+        var currNode = this.nodes["rootNode"]; 
+        currNode.leaves[0].aPrimitive.display();
 
     }
 }
