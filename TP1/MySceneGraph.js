@@ -716,13 +716,13 @@ class MySceneGraph {
     displayScene() {
         //To do: Create display loop for transversing the scene graph, calling the root node's display function
        
-        // var currNode = this.nodes["xWingRectangleDefault"];
-        // console.log(this.nodes[this.idRoot].leaves[0]);
-        // console.log(currNode);
+        // HOW TO TEST:
+        // - Erase all of the nodes in the xml files except the "xWingRectangleDefault"
+        // - Put it as the root
+        // - Uncomment the following 2 lines and a rectangle (square) should appear
+        // var currNode = this.nodes["xWingRectangleDefault"]; 
         // currNode.leaves[0].aPrimitive.display();
 
-
-        // this.nodes[this.idRoot].leaves[0].display();
 
 
     }
