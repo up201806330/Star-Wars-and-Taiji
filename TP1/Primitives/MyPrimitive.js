@@ -40,7 +40,6 @@ class MyPrimitive {
         }
 
         else if (type == "cylinder") {
-            //height, topR, bottomR, stacks, slices
             let height = this.graph.reader.getFloat(element, "height", true);
             let topRadius = this.graph.reader.getFloat(element, "topRadius", true);
             let bottomRadius = this.graph.reader.getFloat(element, "bottomRadius", true);
@@ -48,6 +47,15 @@ class MyPrimitive {
             let slices = this.graph.reader.getFloat(element, "slices", true);
 
             this.aPrimitive = new MyCylinder(this.graph.scene, height, topRadius, bottomRadius, stacks, slices);
+        }
+
+        else if (type == "torus"){
+            let inner = this.graph.reader.getFloat(element, "inner", true);
+            let outer = this.graph.reader.getFloat(element, "outer", true);
+            let slices = this.graph.reader.getFloat(element, "slices", true);
+            let loops = this.graph.reader.getFloat(element, "loops", true);
+
+            this.aPrimitive = new MyTorus(this.graph.scene, inner, outer, slices, loops);
         }
 
         else {

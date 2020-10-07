@@ -159,7 +159,7 @@
             <!-- declaring descendants, at least one node or one leaf must be present
              descendants may be mixed, nodes and leafs -->
             <descendants>
-                <leaf type="sphere" radius="2" stacks="10" slices="10" />
+                <leaf type="torus" inner="1" outer="2" slices="30" loops="30" />
             </descendants>
         </node>
 

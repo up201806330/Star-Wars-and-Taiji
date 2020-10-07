@@ -2,10 +2,11 @@
  * MyCylinder
  * @constructor
  * @param scene - Reference to MyScene object
- * @param x1 - x coordinate corner 1
- * @param y1 - y coordinate corner 1
- * @param x2 - x coordinate corner 2
- * @param y2 - y coordinate corner 2
+ * @param height - height of cylinder
+ * @param topR - radius of top circle
+ * @param bottomR - radius of bottom circle
+ * @param stacks - sections along height
+ * @param slices - parts per section
  */
 class MyCylinder extends CGFobject {
 	constructor(scene, height, topR, bottomR, stacks, slices) {
