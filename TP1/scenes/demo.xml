@@ -304,6 +304,7 @@
                 <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
+                <translation x="-0.1" y="0" z="0" />
                 <scale sx="2" sy="1" sz="1" />
             </transformations>
 
@@ -331,8 +332,8 @@
                 <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
-                <translation x="-1" y="2" z="0" />
-                <scale sx="2" sy="1" sz="1" />
+                <translation x="-1.03" y="2" z="0" />
+                <scale sx="2.08" sy="1" sz="1" />
             </transformations>
 
             <descendants>
@@ -345,8 +346,8 @@
                 <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
-                <rotation axis="z" angle="53" />
-                <scale sx="2.24" sy="1" sz="1" /> <!--sqrt(5) -->
+                <rotation axis="z" angle="63.5" />
+                <scale sx="2.24" sy="1" sz="1" /> 
             </transformations>
 
             <descendants>
@@ -359,9 +360,9 @@
                 <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
-                <translation x="-2" y="0" z="0" />
-                <rotation axis="z" angle="53" />
-                <scale sx="2.24" sy="1" sz="1" /> <!--sqrt(5) -->
+                <translation x="-2" y="-0.071" z="0" />
+                <rotation axis="z" angle="63.5" />
+                <scale sx="2.39" sy="1" sz="1" /> 
             </transformations>
 
             <descendants>
@@ -374,8 +375,8 @@
                 <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
-                <rotation axis="z" angle="143" /> <!-- 53 + 90 (?) -->
-                <scale sx="2.24" sy="1" sz="1" /> <!--sqrt(5) -->
+                <rotation axis="z" angle="114" /> 
+                <scale sx="2.24" sy="1" sz="1" /> 
             </transformations>
 
             <descendants>
@@ -388,9 +389,9 @@
                 <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
-                <translation x="2" y="0" z="0" />
-                <rotation axis="z" angle="143" /> <!-- 53 + 90 (?) -->
-                <scale sx="2.24" sy="1" sz="1" /> <!--sqrt(5) -->
+                <translation x="2" y="0.04" z="0" />
+                <rotation axis="z" angle="115" /> 
+                <scale sx="2.27" sy="1" sz="1" /> 
             </transformations>
 
             <descendants>
@@ -425,6 +426,7 @@
                 <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
+                <translation x="0.05" y="0" z="0" />
             </transformations>
 
             <descendants>
@@ -511,12 +513,13 @@
                 <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
+                <translation x="0" y="0" z="0" />
             </transformations>
 
             <descendants>
                 <noderef id="tieWingSupport" />
                 <noderef id="tieWingTop" />
-                <!-- <noderef id="tieWingBottom" />-->
+                <noderef id="tieWingBottom" />
             </descendants>
         </node>
 
@@ -591,7 +594,7 @@
             <descendants>
                 <noderef id="tieWingBody" />
                 <noderef id="tieRightWing" />
-                <!--<noderef id="tieLeftWing" /> -->
+                <noderef id="tieLeftWing" />
             </descendants>
         </node>
 
