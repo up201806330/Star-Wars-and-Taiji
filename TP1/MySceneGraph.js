@@ -564,6 +564,59 @@ class MySceneGraph {
             this.onXMLMinorError("To do: Parse nodes.");
             
             // Transformations
+            if (transformationsIndex == -1) {
+                this.onXMLMinorError("There isn't a transformations tag");
+            }
+
+            let nodeTransformations = grandChildren[transformationsIndex].children;
+
+            let translX, translY, translZ;
+            let rotAxis, rotDegree;
+            let scaleX, scaleY, scaleZ;
+
+            for (let k = 0; k < nodeTransformations.length; k++) {
+                console.log("Transformation " + k + ": ");
+                console.log(nodeTransformations[k].nodeName);
+
+                switch (nodeTransformations[k].nodeName) {
+                    case "translation":
+                        translX = this.reader.getFloat(nodeTransformations[k], 'x');
+                        translY = this.reader.getFloat(nodeTransformations[k], 'y');
+                        translZ = this.reader.getFloat(nodeTransformations[k], 'z');
+                        // console.log(translZ);
+                        // console.log(this.nodes[nodeID].transformMatrix);
+
+                        // syntax: translate(out, a, v) -> out: the receiving matrix, a: the matrix to translate, v: vector to translate by
+                        // http://glmatrix.net/docs/module-mat4.html
+                        mat4.translate(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, [translX, translY, translZ]);
+                        // console.log(this.nodes[nodeID].transformMatrix);
+                        break;
+                    
+                    case "rotation":
+                        rotAxis = this.reader.getString(nodeTransformations[k], 'axis');
+                        rotDegree = this.reader.getFloat(nodeTransformations[k], 'angle') * DEGREE_TO_RAD;
+
+                        // mat4.rotate(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, rotDegree, rotAxis);
+                        mat4.rotate(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, rotDegree, this.axisCoords[rotAxis]);
+                        // console.log("AXIS: " + rotAxis);
+                        break;
+                    
+                    case "scale":
+                        scaleX = this.reader.getFloat(nodeTransformations[k], 'x');
+                        scaleY = this.reader.getFloat(nodeTransformations[k], 'y');
+                        scaleZ = this.reader.getFloat(nodeTransformations[k], 'z');
+
+                        // mat4.scale(dest, dest, vec);
+                        mat4.scale(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, [scaleX, scaleY, scaleZ]);
+                        break;
+                        
+                    default:
+                        console.log(nodeTransformations[k].nodeName);
+                        break;
+
+                }
+            }
+
 
             // Material
 
@@ -743,12 +796,16 @@ class MySceneGraph {
     displayNode(nodeToDisplayID) {
         let nodeToDisplay = this.nodes[nodeToDisplayID];
 
+        this.scene.multMatrix(nodeToDisplay.transformMatrix);
+
         for (let leaf = 0; leaf < nodeToDisplay.leaves.length; leaf++) {
             nodeToDisplay.leaves[leaf].aPrimitive.display();
         }
         
         for (let i = 0; i < nodeToDisplay.childNodes.length; i++) {
+            this.scene.pushMatrix();
             this.displayNode(nodeToDisplay.childNodes[i]);
+            this.scene.popMatrix();
         }
     }
 }

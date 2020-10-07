@@ -10,6 +10,8 @@ class MyNode {
         this.leaves = [];
 
         this.childNodes = [];
+
+        this.transformMatrix = mat4.create();
     }
 
     addLeaf(leafToAdd) {
