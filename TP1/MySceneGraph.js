@@ -223,7 +223,7 @@ class MySceneGraph {
             return "No root id defined for scene.";
 
         this.idRoot = id;
-        console.log("\t\t\t\t\t\t\tidRoot: " + this.idRoot);
+        // console.log("\t\t\t\t\t\t\tidRoot: " + this.idRoot);
 
         // Get axis length        
         if(referenceIndex == -1)
@@ -562,11 +562,13 @@ class MySceneGraph {
             var descendantsIndex = nodeNames.indexOf("descendants");
 
             this.onXMLMinorError("To do: Parse nodes.");
+            
             // Transformations
 
             // Material
 
             // Texture
+
 
             // Descendants
             if (descendantsIndex == -1) {
@@ -581,7 +583,7 @@ class MySceneGraph {
             for (let k = 0; k < nodeDescendants.length; k++) {
                 
                 if (nodeDescendants[k].nodeName == "noderef") {
-                    console.log("It's an intermediate node!");
+                    // console.log("It's an intermediate node!");
 
                     let noderefElement = this.reader.getString(nodeDescendants[k], "id");
                     // console.log("HEY " + noderefElement);
@@ -590,7 +592,7 @@ class MySceneGraph {
                 }
 
                 else if (nodeDescendants[k].nodeName == "leaf") {
-                    console.log("It's a leaf!");
+                    // console.log("It's a leaf!");
                     let primType = this.reader.getItem(nodeDescendants[k], "type", ["rectangle", "triangle", "torus", "cylinder", "sphere"]);
 
                     if (primType == null) {
@@ -734,20 +736,19 @@ class MySceneGraph {
 
         //console.log("ROOT: ");
         // console.log(this.nodes[this.idRoot]);
-        this.display(this.idRoot);
-        
+        this.displayNode(this.idRoot);
+
     }
 
-    display(nodeToDisplayID) {
+    displayNode(nodeToDisplayID) {
         let nodeToDisplay = this.nodes[nodeToDisplayID];
-        // console.log("NODE:" + nodeToDisplay);
 
         for (let leaf = 0; leaf < nodeToDisplay.leaves.length; leaf++) {
             nodeToDisplay.leaves[leaf].aPrimitive.display();
         }
         
         for (let i = 0; i < nodeToDisplay.childNodes.length; i++) {
-            this.display(nodeToDisplay.childNodes[i]);
+            this.displayNode(nodeToDisplay.childNodes[i]);
         }
     }
 }
