@@ -602,9 +602,9 @@ class MySceneGraph {
                         break;
                     
                     case "scale":
-                        scaleX = this.reader.getFloat(nodeTransformations[k], 'x');
-                        scaleY = this.reader.getFloat(nodeTransformations[k], 'y');
-                        scaleZ = this.reader.getFloat(nodeTransformations[k], 'z');
+                        scaleX = this.reader.getFloat(nodeTransformations[k], "sx");
+                        scaleY = this.reader.getFloat(nodeTransformations[k], "sy");
+                        scaleZ = this.reader.getFloat(nodeTransformations[k], "sz");
 
                         // mat4.scale(dest, dest, vec);
                         mat4.scale(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, [scaleX, scaleY, scaleZ]);
