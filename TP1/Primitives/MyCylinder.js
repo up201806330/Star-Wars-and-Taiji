@@ -14,6 +14,7 @@ class MyCylinder extends CGFobject {
         
         this.height = height;
         this.topR = topR;
+        this.bottomR = bottomR;
 
         this.body = new CylinderBody(scene, height, topR, bottomR, stacks, slices);
         this.topLid = new CylinderLid(scene, slices);
@@ -33,8 +34,8 @@ class MyCylinder extends CGFobject {
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.scale(this.topR, this.topR, 0);
-        this.scene.rotate(Math.PI, 0, 1, 0);
+        this.scene.scale(this.bottomR, this.bottomR, 0);
+        this.scene.rotate(Math.PI, 1, 0, 0);
         this.bottomLid.display();
         this.scene.popMatrix();
     }

@@ -9,7 +9,7 @@
  * @param slices - parts per section
  */
 class CylinderBody extends CGFobject {
-	constructor(scene, height, topR, bottomR, stacks, slices) {
+    constructor(scene, height, topR, bottomR, stacks, slices) {
         super(scene);
         this.height = height;
         this.topR = topR;
@@ -17,24 +17,24 @@ class CylinderBody extends CGFobject {
         this.stacks = stacks;
         this.slices = slices;
 
-		this.initBuffers();
-	}
-	
-	initBuffers() {
+        this.initBuffers();
+    }
+
+    initBuffers() {
         this.vertices = [];
         this.indices = [];
         this.normals = [];
         this.texCoords = [];
-        
+
         let r = this.bottomR;
         let delta_r = (this.topR - this.bottomR) / this.stacks;
         let delta_rad = 2 * Math.PI / this.slices;
         let delta_z = this.height / this.stacks;
         let m = this.height / (this.bottomR - this.topR);
-        let maxheight = (this.bottomR > this.topR) ? this.topR * m + this.height :  this.bottomR * m + this.height;
-    
-        for (var i = 0; i <= this.stacks; i++) {
-            for (var j = 0; j <= this.slices; j++) {
+        let maxheight = (this.bottomR > this.topR) ? this.topR * m + this.height : this.bottomR * m + this.height;
+        
+        for (let i = 0; i <= this.stacks; i++) {
+            for (let j = 0; j <= this.slices; j++) {
                 this.vertices.push(
                     r * Math.cos(j * delta_rad),
                     r * Math.sin(j * delta_rad),
@@ -59,13 +59,13 @@ class CylinderBody extends CGFobject {
                     );
                 }
                 this.texCoords.push(j / this.slices, i / this.stacks);
-    
+
             }
-            r = (i + 1) * delta_r + r;
+            r = (i + 1) * delta_r + this.bottomR;
         }
-    
-        for (var i = 0; i < this.stacks; i++) {
-            for (var j = 0; j < this.slices; j++) {
+
+        for (let i = 0; i < this.stacks; i++) {
+            for (let j = 0; j < this.slices; j++) {
                 this.indices.push(
                     i * (this.slices + 1) + j,
                     i * (this.slices + 1) + (j + 1),
@@ -76,12 +76,12 @@ class CylinderBody extends CGFobject {
                     (i + 1) * (this.slices + 1) + j,
                     i * (this.slices + 1) + j
                 );
-    
+
             }
         }
-
-		this.primitiveType = this.scene.gl.TRIANGLES;
-		this.initGLBuffers();
-	}
+        
+        this.primitiveType = this.scene.gl.TRIANGLES;
+        this.initGLBuffers();
+    }
 }
 
