@@ -8,10 +8,18 @@ class MyNode {
         this.graph = graph;
 
         this.leaves = [];
+
+        this.childNodes = [];
+
+        this.transformMatrix = mat4.create();
     }
 
     addLeaf(leafToAdd) {
         this.leaves.push(leafToAdd);
+    }
+
+    addChildNode(nodeToAdd) {
+        this.childNodes.push(nodeToAdd);
     }
 
 }

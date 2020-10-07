@@ -223,7 +223,7 @@ class MySceneGraph {
             return "No root id defined for scene.";
 
         this.idRoot = id;
-        console.log("\t\t\t\t\t\t\tidRoot: " + this.idRoot);
+        // console.log("\t\t\t\t\t\t\tidRoot: " + this.idRoot);
 
         // Get axis length        
         if(referenceIndex == -1)
@@ -549,7 +549,7 @@ class MySceneGraph {
             grandChildren = children[i].children;
 
             this.nodes[nodeID] = new MyNode(nodeID, this);
-            console.log("\t\t\t\t\t\t\t" + this.nodes.length);
+            // console.log("\t\t\t\t\t\t\t" + this.nodes.length);
 
             nodeNames = [];
             for (var j = 0; j < grandChildren.length; j++) {
@@ -562,11 +562,66 @@ class MySceneGraph {
             var descendantsIndex = nodeNames.indexOf("descendants");
 
             this.onXMLMinorError("To do: Parse nodes.");
+            
             // Transformations
+            if (transformationsIndex == -1) {
+                this.onXMLMinorError("There isn't a transformations tag");
+            }
+
+            let nodeTransformations = grandChildren[transformationsIndex].children;
+
+            let translX, translY, translZ;
+            let rotAxis, rotDegree;
+            let scaleX, scaleY, scaleZ;
+
+            for (let k = 0; k < nodeTransformations.length; k++) {
+                console.log("Transformation " + k + ": ");
+                console.log(nodeTransformations[k].nodeName);
+
+                switch (nodeTransformations[k].nodeName) {
+                    case "translation":
+                        translX = this.reader.getFloat(nodeTransformations[k], 'x');
+                        translY = this.reader.getFloat(nodeTransformations[k], 'y');
+                        translZ = this.reader.getFloat(nodeTransformations[k], 'z');
+                        // console.log(translZ);
+                        // console.log(this.nodes[nodeID].transformMatrix);
+
+                        // syntax: translate(out, a, v) -> out: the receiving matrix, a: the matrix to translate, v: vector to translate by
+                        // http://glmatrix.net/docs/module-mat4.html
+                        mat4.translate(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, [translX, translY, translZ]);
+                        // console.log(this.nodes[nodeID].transformMatrix);
+                        break;
+                    
+                    case "rotation":
+                        rotAxis = this.reader.getString(nodeTransformations[k], 'axis');
+                        rotDegree = this.reader.getFloat(nodeTransformations[k], 'angle') * DEGREE_TO_RAD;
+
+                        // mat4.rotate(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, rotDegree, rotAxis);
+                        mat4.rotate(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, rotDegree, this.axisCoords[rotAxis]);
+                        // console.log("AXIS: " + rotAxis);
+                        break;
+                    
+                    case "scale":
+                        scaleX = this.reader.getFloat(nodeTransformations[k], 'x');
+                        scaleY = this.reader.getFloat(nodeTransformations[k], 'y');
+                        scaleZ = this.reader.getFloat(nodeTransformations[k], 'z');
+
+                        // mat4.scale(dest, dest, vec);
+                        mat4.scale(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, [scaleX, scaleY, scaleZ]);
+                        break;
+                        
+                    default:
+                        console.log(nodeTransformations[k].nodeName);
+                        break;
+
+                }
+            }
+
 
             // Material
 
             // Texture
+
 
             // Descendants
             if (descendantsIndex == -1) {
@@ -579,14 +634,18 @@ class MySceneGraph {
             }
 
             for (let k = 0; k < nodeDescendants.length; k++) {
-                console.log(nodeDescendants[k]);
                 
                 if (nodeDescendants[k].nodeName == "noderef") {
-                    console.log("It's an intermediate node!");
+                    // console.log("It's an intermediate node!");
+
+                    let noderefElement = this.reader.getString(nodeDescendants[k], "id");
+                    // console.log("HEY " + noderefElement);
+
+                    this.nodes[nodeID].addChildNode(noderefElement);
                 }
 
                 else if (nodeDescendants[k].nodeName == "leaf") {
-                    console.log("It's a leaf!");
+                    // console.log("It's a leaf!");
                     let primType = this.reader.getItem(nodeDescendants[k], "type", ["rectangle", "triangle", "torus", "cylinder", "sphere"]);
 
                     if (primType == null) {
@@ -597,7 +656,7 @@ class MySceneGraph {
                     this.nodes[nodeID].addLeaf(newLeaf);
                     // console.log(newLeaf);
                     
-                    console.log(this.nodes[nodeID].leaves[0]);
+                    //console.log(this.nodes[nodeID].leaves[0]);
                     
                 }
 
@@ -723,9 +782,30 @@ class MySceneGraph {
         // var currNode = this.nodes["xWingRectangleDefault"]; 
         // currNode.leaves[0].aPrimitive.display();
 
+        // this.nodes[this.idRoot].display();
 
-        var currNode = this.nodes["rootNode"]; 
-        currNode.leaves[0].aPrimitive.display();
+        // var currNode = this.nodes["rootNode"]; 
+        // currNode.leaves[0].aPrimitive.display();
 
+        //console.log("ROOT: ");
+        // console.log(this.nodes[this.idRoot]);
+        this.displayNode(this.idRoot);
+
+    }
+
+    displayNode(nodeToDisplayID) {
+        let nodeToDisplay = this.nodes[nodeToDisplayID];
+
+        this.scene.multMatrix(nodeToDisplay.transformMatrix);
+
+        for (let leaf = 0; leaf < nodeToDisplay.leaves.length; leaf++) {
+            nodeToDisplay.leaves[leaf].aPrimitive.display();
+        }
+        
+        for (let i = 0; i < nodeToDisplay.childNodes.length; i++) {
+            this.scene.pushMatrix();
+            this.displayNode(nodeToDisplay.childNodes[i]);
+            this.scene.popMatrix();
+        }
     }
 }
