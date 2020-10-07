@@ -1266,7 +1266,7 @@
             </transformations>
 
             <descendants>
-                <leaf type="cylinder" height="2" topRadius="0.2" bottomRadius="0.2" stacks="4" slices="8" /> <!-- temporary value for stacks / slices -->
+                <leaf type="cylinder" height="2" topRadius="0.3" bottomRadius="0.4" stacks="3" slices="4" /> <!-- temporary value for stacks / slices -->
                 <noderef id="tieWingSupportTriangles" />
             </descendants>
         </node>
@@ -1328,7 +1328,7 @@
             </transformations>
 
             <descendants>
-                <leaf type="sphere" radius="1" stacks="4" slices="8" /> 
+                <leaf type="sphere" radius="1" stacks="3" slices="30" /> 
             </descendants>
         </node>
 
