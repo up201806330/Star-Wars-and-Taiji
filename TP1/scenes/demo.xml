@@ -444,7 +444,7 @@
                 <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
-                <translation x="3" y="0" z="0" />
+                <translation x="0" y="0" z="2" />
             </transformations>
 
             <descendants>
@@ -458,12 +458,30 @@
                 <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
-                <translation x="3" y="0" z="0" />
+                <translation x="0" y="0" z="2" />
                 <rotation axis="z" angle="180" />
             </transformations>
 
             <descendants>
                 <noderef id="tieHalfWing" />
+            </descendants>
+        </node>
+
+        <!-- Tie wing support triangles -->
+        <node id="tieWingSupportTriangles">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+            <transformations>
+                <rotation axis="y" angle="-90" />
+            </transformations>
+
+            <descendants>
+                <leaf type="triangle" x1="0" y1="0" x2="2" y2="0" x3="0" y3="1" />
+                <leaf type="triangle" x1="0" y1="0" x2="2" y2="0" x3="0" y3="-1" />
+                <leaf type="triangle" x1="0" y1="0" x2="0" y2="1" x3="2" y3="0" />
+                <leaf type="triangle" x1="0" y1="0" x2="0" y2="-1" x3="2" y3="0" />
             </descendants>
         </node>
 
@@ -477,9 +495,8 @@
             </transformations>
 
             <descendants>
-                <leaf type="cylinder" height="3" topRadius="0.2" bottomRadius="0.2" stacks="4" slices="8" /> <!-- temporary value for stacks / slices -->
-                <leaf type="triangle" x1="0" y1="1" x2="0" y2="0" x3="1.5" y3="0" z3="0"/>
-                <leaf type="triangle" x1="0" y1="-1" x2="0" y2="0" x3="1.5" y3="0" z3="0"/>
+                <leaf type="cylinder" height="2" topRadius="0.2" bottomRadius="0.2" stacks="4" slices="8" /> <!-- temporary value for stacks / slices -->
+                <noderef id="tieWingSupportTriangles" />
             </descendants>
         </node>
 
@@ -499,8 +516,8 @@
             </descendants>
         </node>
 
-        <!-- Tie Left Wing -->
-        <node id="tieLeftWing">
+        <!-- Tie Right Wing -->
+        <node id="tieRightWing">
             <material id="null" />
             <texture id="null">
                 <amplification afs="1.0" aft="1.0" />
@@ -512,8 +529,8 @@
                 <noderef id="tieFinalWing" />
             </descendants>
         </node>
-        <!-- Tie Right Wing -->
-        <node id="tieRightWing">
+        <!-- Tie Left Wing -->
+        <node id="tieLeftWing">
             <material id="null" />
             <texture id="null">
                 <amplification afs="1.0" aft="1.0" />
