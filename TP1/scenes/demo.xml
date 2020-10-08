@@ -47,27 +47,27 @@
         <!-- NOTE: this block "TEXTURE" must be repeated as necessary with different "id" -->
 
         <!-- Tie Fighter Textures-->
-        <texture id="tieGreyTexture" path="images/tieGrey.jpg" />
-        <texture id="tieWindowsTexture" path="images/tieWings.jpg" /> <!-- Temporary -->
-        <texture id="tieWingTexture" path="images/tieWings.jpg" />
+        <texture id="tieGreyTexture" path="./scenes/images/tieGrey.jpg" />
+        <texture id="tieWindowsTexture" path="./scenes/images/tieWings.jpg" /> <!-- Temporary -->
+        <texture id="tieWingTexture" path="./scenes/images/tieWings.jpg" />
 
         <!-- X-Wing Textures -->
-        <texture id="xWingFullTexture" path="images/tieGrey.jpg" />
-        <texture id="xWingCabineTexture" path="images/metal_gray1.jpg" />
-        <texture id="xWingWingMotorDefaultTexture" path="images/metal_gray2.jpg" />
-        <texture id="xWingWingGunDefaultAttachedBigPartTexture" path="images/metal_gray1.jpg" />
+        <texture id="xWingFullTexture" path="./scenes/images/tieGrey.jpg" />
+        <texture id="xWingCabineTexture" path="./scenes/images/metal_gray1.jpg" />
+        <texture id="xWingWingMotorDefaultTexture" path="./scenes/images/metal_gray2.jpg" />
+        <texture id="xWingWingGunDefaultAttachedBigPartTexture" path="./scenes/images/metal_gray1.jpg" />
 
         <!-- Explosion Textures -->
-        <texture id="explosionWhiteTexture" path="images/explosionWhite.jpg" />
-        <texture id="explosionTexture" path="images/explosion.jpg" />
+        <texture id="explosionWhiteTexture" path="./scenes/images/explosionWhite.jpg" />
+        <texture id="explosionTexture" path="./scenes/images/explosion.jpg" />
 
         <!-- Sky Box Textures -->
-        <texture id="spaceTop" path="images/spaceTop.jpg" />
-        <texture id="spaceBottom" path="images/spaceBottom.jpg" />
-        <texture id="spaceNorth" path="images/spaceNorth.jpg" />
-        <texture id="spaceSouth" path="images/spaceSouth.jpg" />
-        <texture id="spaceEast" path="images/spaceEast.jpg" />
-        <texture id="spaceWest" path="images/spaceWest.jpg" />
+        <texture id="spaceTop" path="./scenes/images/spaceTop.jpg" />
+        <texture id="spaceBottom" path="./scenes/images/spaceBottom.jpg" />
+        <texture id="spaceNorth" path="./scenes/images/spaceNorth.jpg" />
+        <texture id="spaceSouth" path="./scenes/images/spaceSouth.jpg" />
+        <texture id="spaceEast" path="./scenes/images/spaceEast.jpg" />
+        <texture id="spaceWest" path="./scenes/images/spaceWest.jpg" />
         
     </textures>
 
