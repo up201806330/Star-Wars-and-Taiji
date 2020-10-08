@@ -382,8 +382,8 @@
             </texture>
 
             <transformations>
-                <rotation axis="x" angle="90" />
-                <scale sx="-8.0" sy="3.0" sz="0.5" />
+                <rotation axis="y" angle="-180" />
+                <scale sx="4.5" sy="0.15" sz="1.5" />
             </transformations>
 
             <descendants>
@@ -399,8 +399,8 @@
             </texture>
 
             <transformations>
-                <rotation axis="x" angle="90" />
-                <scale sx="8.0" sy="3.0" sz="0.5" />
+                <!-- <rotation axis="x" angle="90" /> -->
+                <scale sx="4.5" sy="0.15" sz="1.5" />
             </transformations>
 
             <descendants>
@@ -595,8 +595,9 @@
             </texture>
 
             <transformations>
-                <translation x="-4.0" y="1.0" z="0.0" />
-                <rotation axis="z" angle="30" />
+                <translation x="1.5" y="0.0" z="1.5" />
+                <translation x="-0.9" y="0.4" z="0.0" />
+                <rotation axis="z" angle="12" />
             </transformations>
 
             <descendants>
@@ -642,8 +643,9 @@
             </texture>
 
             <transformations>
-                <translation x="-4.0" y="4.0" z="0.0" />
-                <rotation axis="z" angle="-30" />
+                <translation x="1.5" y="0.0" z="1.5" />
+                <translation x="-1.0" y="0.55" z="0.0" />
+                <rotation axis="z" angle="-12" />
             </transformations>
 
             <descendants>
@@ -689,8 +691,8 @@
             </texture>
 
             <transformations>
-                <translation x="4.0" y="1.0" z="0.0" />
-                <rotation axis="z" angle="-30" />
+                <translation x="0.9" y="0.4" z="0.0" />
+                <rotation axis="z" angle="-12" />
             </transformations>
 
             <descendants>
@@ -736,8 +738,8 @@
             </texture>
 
             <transformations>
-                <translation x="4.0" y="4.0" z="0.0" />
-                <rotation axis="z" angle="30" />
+                <translation x="1.0" y="0.55" z="0.0" />
+                <rotation axis="z" angle="12" />
             </transformations>
 
             <descendants>
@@ -836,9 +838,9 @@
             </transformations>
 
             <descendants>
-                <noderef id="xWingBottomRightWingEngine" />
+                <!-- <noderef id="xWingBottomRightWingEngine" /> -->
                 <noderef id="xWingBottomRightWingWing" />
-                <noderef id="xWingBottomRightWingGun" />
+                <!-- <noderef id="xWingBottomRightWingGun" /> -->
             </descendants>
         </node>
 
@@ -853,9 +855,9 @@
             </transformations>
 
             <descendants>
-                <noderef id="xWingTopRightWingEngine" />
+                <!-- <noderef id="xWingTopRightWingEngine" /> -->
                 <noderef id="xWingTopRightWingWing" />
-                <noderef id="xWingTopRightWingGun" />
+                <!-- <noderef id="xWingTopRightWingGun" /> -->
             </descendants>
         </node>
 
@@ -870,9 +872,9 @@
             </transformations>
 
             <descendants>
-                <noderef id="xWingBottomLeftWingEngine" />
+                <!-- <noderef id="xWingBottomLeftWingEngine" /> -->
                 <noderef id="xWingBottomLeftWingWing" />
-                <noderef id="xWingBottomLeftWingGun" />
+                <!-- <noderef id="xWingBottomLeftWingGun" /> -->
             </descendants>
         </node>
 
@@ -887,9 +889,9 @@
             </transformations>
 
             <descendants>
-                <noderef id="xWingTopLeftWingEngine" />
+                <!-- <noderef id="xWingTopLeftWingEngine" /> -->
                 <noderef id="xWingTopLeftWingWing" />
-                <noderef id="xWingTopLeftWingGun" />
+                <!-- <noderef id="xWingTopLeftWingGun" /> -->
             </descendants>
         </node>
 
@@ -943,7 +945,7 @@
 
             <descendants>
                 <noderef id="xWingMainBody" />
-                <!-- <noderef id="xWingWings" /> -->
+                <noderef id="xWingWings" />
             </descendants>            
         </node>
 
@@ -1369,7 +1371,7 @@
                 <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
-                <translation x="7" y="0" z="0"/>
+                <translation x="9" y="0" z="0"/>
                 <rotation axis="y" angle="-90" />
             </transformations>
 
