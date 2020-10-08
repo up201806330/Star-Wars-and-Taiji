@@ -160,11 +160,11 @@
             <!-- declaring descendants, at least one node or one leaf must be present
              descendants may be mixed, nodes and leafs -->
             <descendants>
-                <noderef id="skyBoxFinal" />
+                <!-- <noderef id="skyBoxFinal" /> -->
                 <noderef id="xWingFull" />
                 <noderef id="tieFinalShape" />
-                <noderef id="explosionFinal" />
-                <noderef id="laser" />
+                <!-- <noderef id="explosionFinal" /> -->
+                <!-- <noderef id="laser" /> -->
             </descendants>
         </node>
 
@@ -339,6 +339,21 @@
 
         </node>
 
+        <node id="xWingTriangleDefault2">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <leaf type="triangle" x1="1" y1="0" x2="0" y2="0" x3="0" y3="1" />
+            </descendants>
+
+        </node>
+
         <!-- Parallelepiped Default (1 x 1 x 1) -->
         <node id="xWingParallelepipedDefault">
             <material id="null" />
@@ -462,8 +477,8 @@
             </texture>
 
             <transformations>
-                <translation x="-2.0" y="0.0" z="0.0" />
-                <scale sx="4.0" sy="5.0" sz="6.0" />
+                <!-- <translation x="-2.0" y="0.0" z="0.0" /> -->
+                <scale sx="1.3" sy="1.3" sz="1.7" />
             </transformations>
 
             <descendants>
@@ -479,10 +494,9 @@
             </texture>
 
             <transformations>
-                <translation x="0.0" y="2.0" z="0.0" />
-                <rotation axis="x" angle="123.79" />
-                <translation x="-2.0" y="0.0" z="0.0" />
-                <scale sx="4.0" sy="4.0" sz="1.0" />
+                <translation x="0.0" y="0.735" z="3.03" />
+                <rotation axis="x" angle="-67" />
+                <scale sx="1.3" sy="1.445" sz="1.0" />
             </transformations>
 
             <descendants>
@@ -497,9 +511,9 @@
             </texture>
 
             <transformations>
-                <translation x="-2.0" y="0.0" z="0.0" />
+                <translation x="0.0" y="0.75" z="1.7" />
                 <rotation axis="y" angle="-90" />
-                <scale sx="3.0" sy="2.0" sz="1.0" />
+                <scale sx="1.3" sy="0.55" sz="1.0" />
             </transformations>
 
             <descendants>
@@ -514,13 +528,13 @@
             </texture>
 
             <transformations>
-                <translation x="2.0" y="0.0" z="0.0" />
-                <rotation axis="y" angle="270" />
-                <scale sx="3.0" sy="2.0" sz="1.0" />
+                <translation x="1.3" y="0.75" z="1.7" />
+                <rotation axis="y" angle="-90" />
+                <scale sx="1.3" sy="0.55" sz="1.0" />
             </transformations>
 
             <descendants>
-                <noderef id="xWingTriangleDefault" />
+                <noderef id="xWingTriangleDefault2" />
             </descendants>
         </node>
 
@@ -532,8 +546,8 @@
             </texture>
 
             <transformations>
-                <translation x="0.0" y="0.0" z="6.0" />
-                <scale sx="4.0" sy="3.0" sz="6.0" />
+                <translation x="0.0" y="0.0" z="1.7" />
+                <scale sx="1.3" sy="0.75" sz="2.7" />
             </transformations>
 
             <descendants>
@@ -549,8 +563,8 @@
             </texture>
 
             <transformations>
-                <translation x="0.0" y="0.0" z="12.0" />
-                <scale sx="3.0" sy="2.0" sz="4.0" />
+                <translation x="0.0" y="0.0" z="4.0" />
+                <scale sx="1.28" sy="0.6" sz="1.5" />
             </transformations>
 
             <descendants>
@@ -758,8 +772,8 @@
 
             <descendants>
                 <noderef id="xWingBackBodyParallelepiped" />
-                <noderef id="xWingBackBodyLeftMotor" />
-                <noderef id="xWingBackBodyRightMotor" />
+                <!-- <noderef id="xWingBackBodyLeftMotor" />
+                <noderef id="xWingBackBodyRightMotor" /> -->
             </descendants>
         </node>
 
@@ -771,7 +785,7 @@
             </texture>
 
             <transformations>
-                <translation x="-2.0" y="3.0" z="6.0" />
+                <translation x="0.0" y="0.0" z="0.0" />
             </transformations>
 
             <descendants>
@@ -924,12 +938,12 @@
             </texture>
 
             <transformations>
-                <translation x="0" y="0" z="10" />
+                <translation x="0" y="0" z="0" />
             </transformations>
 
             <descendants>
                 <noderef id="xWingMainBody" />
-                <noderef id="xWingWings" />
+                <!-- <noderef id="xWingWings" /> -->
             </descendants>            
         </node>
 
@@ -1355,6 +1369,8 @@
                 <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
+                <translation x="7" y="0" z="0"/>
+                <rotation axis="y" angle="-90" />
             </transformations>
 
             <descendants>
