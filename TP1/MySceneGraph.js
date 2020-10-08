@@ -478,6 +478,23 @@ class MySceneGraph {
     }
 
     /**
+     * Create fallback default material (hot pink so error is noticeable)
+     */
+    generateDefaultMaterial() {
+        var materialDefault = new CGFappearance(this.scene);
+        materialDefault.setShininess(1);
+        materialDefault.setSpecular(255,20,147, 1);
+        materialDefault.setDiffuse(255,20,147, 1);
+        materialDefault.setAmbient(255,20,147, 1);
+        materialDefault.setEmission(255,20,147, 1);
+    
+        // Generates random material ID not currently in use.
+        this.defaultMaterialID = "defaultMaterial"; //TODO Is this enough?
+    
+        this.materials[this.defaultMaterialID] = materialDefault;
+    }
+
+    /**
      * Parses the <materials> node.
      * @param {materials block element} materialsNode
      */
@@ -485,12 +502,10 @@ class MySceneGraph {
         var children = materialsNode.children;
 
         this.materials = [];
-
-        var grandChildren = [];
-        var nodeNames = [];
-
-        // Any number of materials.
-        for (var i = 0; i < children.length; i++) {
+        this.generateDefaultMaterial();
+        
+        let atLeastOne = false;
+        for (let i = 0; i < children.length; i++) {
 
             if (children[i].nodeName != "material") {
                 this.onXMLMinorError("unknown tag <" + children[i].nodeName + ">");
@@ -504,14 +519,158 @@ class MySceneGraph {
 
             // Checks for repeated IDs.
             if (this.materials[materialID] != null)
-                return "ID must be unique for each light (conflict: ID = " + materialID + ")";
+                return "ID must be unique for each material (conflict: ID = " + materialID + ")";
 
-            //Continue here
-            this.onXMLMinorError("To do: Parse materials.");
+            var materialSpecs = children[i].children;
+            var nodeNames = []; 
+            for (let j = 0 ; j < materialSpecs.length ; j++) nodeNames.push(materialSpecs[j].nodeName);
+            /**/
+            // Shininess
+            let shininessIndex = nodeNames.indexOf("shininess");
+            if (shininessIndex == -1) return "no shininess value defined for material with ID = " + materialID;
+            
+            let shininess = this.reader.getFloat(materialSpecs[shininessIndex], 'value');
+            if (shininess == null) return "unable to parse shininess value for material with ID = " + materialID;
+            else if (shininess <= 0) return "shininess must be positive (on material with ID = " + materialID + ")";
+            else if (isNaN(shininess)) return "shininess is non numeric value";
+            /**/
+            /**/
+            // Ambient
+            let ambientIndex = nodeNames.indexOf("ambient");
+            if (ambientIndex == -1) return "no ambient value defined for material with ID = " + materialID;
+
+            let ambient = [];
+            // R //
+            let r = this.reader.getFloat(materialSpecs[ambientIndex], 'r');
+            if (r == null) return "unable to parse r value of ambient for material with ID = " + materialID;
+            else if (r < 0 || r > 1) return "ambient r must be between 0 and 1 (on material with ID = " + materialID + ")";
+            else if (isNaN(r)) return "ambient r is non numeric value";
+            ambient.push(r);
+            // G //
+            let g = this.reader.getFloat(materialSpecs[ambientIndex], 'g');
+            if (g == null) return "unable to parse g value of ambient for material with ID = " + materialID;
+            else if (g < 0 || g > 1) return "ambient g must be between 0 and 1 (on material with ID = " + materialID + ")";
+            else if (isNaN(g)) return "ambient g is non numeric value";   
+            ambient.push(g);
+            // B //
+            let b = this.reader.getFloat(materialSpecs[ambientIndex], 'b');
+            if (b == null) return "unable to parse b value of ambient for material with ID = " + materialID;
+            else if (b < 0 || b > 1) return "ambient b must be between 0 and 1 (on material with ID = " + materialID + ")";
+            else if (isNaN(b)) return "ambient b is non numeric value";
+            ambient.push(b);
+            let a = this.reader.getFloat(materialSpecs[ambientIndex], 'a');
+            if (a == null) return "unable to parse a value of ambient for material with ID = " + materialID;
+            else if (a < 0 || a > 1) return "ambient a must be between 0 and 1 (on material with ID = " + materialID + ")";
+            else if (isNaN(a)) return "ambient a is non numeric value";
+            ambient.push(a);
+            /**/
+            /**/
+            // Diffuse
+            let diffuseIndex = nodeNames.indexOf("diffuse");
+            if (diffuseIndex == -1) return "no diffuse value defined for material with ID = " + materialID;
+            
+            let diffuse = [];
+            // R //
+            r = this.reader.getFloat(materialSpecs[diffuseIndex], 'r');
+            if (r == null) return "unable to parse r value of diffuse for material with ID = " + materialID;
+            else if (r < 0 || r > 1) return "diffuse r must be between 0 and 1 (on material with ID = " + materialID + ")";
+            else if (isNaN(r)) return "diffuse r is non numeric value";
+            diffuse.push(r);
+            // G //
+            g = this.reader.getFloat(materialSpecs[diffuseIndex], 'g');
+            if (g == null) return "unable to parse g value of diffuse for material with ID = " + materialID;
+            else if (g < 0 || g > 1) return "diffuse g must be between 0 and 1 (on material with ID = " + materialID + ")";
+            else if (isNaN(g)) return "diffuse g is non numeric value"; 
+            diffuse.push(b);
+            // B //
+            b = this.reader.getFloat(materialSpecs[diffuseIndex], 'b');
+            if (b == null) return "unable to parse b value of diffuse for material with ID = " + materialID;
+            else if (b < 0 || b > 1) return "diffuse b must be between 0 and 1 (on material with ID = " + materialID + ")";
+            else if (isNaN(b)) return "diffuse b is non numeric value";
+            diffuse.push(b);
+            // A //
+            a = this.reader.getFloat(materialSpecs[diffuseIndex], 'a');
+            if (a == null) return "unable to parse a value of diffuse for material with ID = " + materialID;
+            else if (a < 0 || a > 1) return "diffuse a must be between 0 and 1 (on material with ID = " + materialID + ")";
+            else if (isNaN(a)) return "diffuse a is non numeric value";
+            diffuse.push(a);
+            /**/
+            /**/
+            // Specular
+            let specularIndex = nodeNames.indexOf("specular");
+            if (specularIndex == -1) return "no specular value defined for material with ID = " + materialID;
+            
+            let specular = [];
+            // R //
+            r = this.reader.getFloat(materialSpecs[specularIndex], 'r');
+            if (r == null) return "unable to parse r value of specular for material with ID = " + materialID;
+            else if (r < 0 || r > 1) return "specular r must be between 0 and 1 (on material with ID = " + materialID + ")";
+            else if (isNaN(r)) return "specular r is non numeric value";
+            specular.push(r);
+            // G //
+            g = this.reader.getFloat(materialSpecs[specularIndex], 'g');
+            if (g == null) return "unable to parse g value of specular for material with ID = " + materialID;
+            else if (g < 0 || g > 1) return "specular g must be between 0 and 1 (on material with ID = " + materialID + ")";
+            else if (isNaN(g)) return "specular g is non numeric value"; 
+            specular.push(g);
+            // B //
+            b = this.reader.getFloat(materialSpecs[specularIndex], 'b');
+            if (b == null) return "unable to parse b value of specular for material with ID = " + materialID;
+            else if (b < 0 || b > 1) return "specular b must be between 0 and 1 (on material with ID = " + materialID + ")";
+            else if (isNaN(b)) return "specular b is non numeric value";
+            specular.push(b);
+            // A //
+            a = this.reader.getFloat(materialSpecs[specularIndex], 'a');
+            if (a == null) return "unable to parse a value of specular for material with ID = " + materialID;
+            else if (a < 0 || a > 1) return "specular a must be between 0 and 1 (on material with ID = " + materialID + ")";
+            else if (isNaN(a)) return "specular a is non numeric value";
+            specular.push(a);
+            /**/
+            /**/
+            // Emissive
+            let emissiveIndex = nodeNames.indexOf("emissive");
+            if (emissiveIndex == -1) return "no emissive value defined for material with ID = " + materialID;
+
+            let emissive = [];
+            // R //
+            r = this.reader.getFloat(materialSpecs[emissiveIndex], 'r');
+            if (r == null) return "unable to parse r value of emissive for material with ID = " + materialID;
+            else if (r < 0 || r > 1) return "emissive r must be between 0 and 1 (on material with ID = " + materialID + ")";
+            else if (isNaN(r)) return "emissive r is non numeric value";
+            emissive.push(r);
+            // G //
+            g = this.reader.getFloat(materialSpecs[emissiveIndex], 'g');
+            if (g == null) return "unable to parse g value of emissive for material with ID = " + materialID;
+            else if (g < 0 || g > 1) return "emissive g must be between 0 and 1 (on material with ID = " + materialID + ")";
+            else if (isNaN(g)) return "emissive g is non numeric value"; 
+            emissive.push(g);
+            // B //
+            b = this.reader.getFloat(materialSpecs[emissiveIndex], 'b');
+            if (b == null) return "unable to parse b value of emissive for material with ID = " + materialID;
+            else if (b < 0 || b > 1) return "emissive b must be between 0 and 1 (on material with ID = " + materialID + ")";
+            else if (isNaN(b)) return "emissive b is non numeric value";
+            emissive.push(b);
+            // A //
+            a = this.reader.getFloat(materialSpecs[emissiveIndex], 'a');
+            if (a == null) return "unable to parse a value of emissive for material with ID = " + materialID;
+            else if (a < 0 || a > 1) return "emissive a must be between 0 and 1 (on material with ID = " + materialID + ")";
+            else if (isNaN(a)) return "emissive a is non numeric value";
+            emissive.push(a);
+            /**/
+
+            var result = new CGFappearance(this.scene);
+            result.setShininess(shininess);
+            result.setAmbient(ambient[0], ambient[1], ambient[2], ambient[3]);
+            result.setDiffuse(diffuse[0], diffuse[1], diffuse[2], diffuse[3]);
+            result.setSpecular(specular[0], specular[1], specular[2], specular[3]);
+            result.setEmission(emissive[0], emissive[1], emissive[2], emissive[3]);
+            this.materials[materialID] = result;
+            atLeastOne = true;
         }
 
-        //this.log("Parsed materials");
-        return null;
+        if (!atLeastOne) return "at least one material must be defined on the materials block";
+
+        this.log("Parsed materials");
     }
 
     /**
@@ -561,7 +720,7 @@ class MySceneGraph {
             var textureIndex = nodeNames.indexOf("texture");
             var descendantsIndex = nodeNames.indexOf("descendants");
 
-            this.onXMLMinorError("To do: Parse nodes.");
+            //this.onXMLMinorError("To do: Parse nodes.");
             
             // Transformations
             if (transformationsIndex == -1) {
@@ -575,8 +734,6 @@ class MySceneGraph {
             let scaleX, scaleY, scaleZ;
 
             for (let k = 0; k < nodeTransformations.length; k++) {
-                console.log("Transformation " + k + ": ");
-                console.log(nodeTransformations[k].nodeName);
 
                 switch (nodeTransformations[k].nodeName) {
                     case "translation":
@@ -619,6 +776,11 @@ class MySceneGraph {
 
 
             // Material
+            var materialID = this.reader.getString(grandChildren[materialIndex], 'id');
+                if (materialID == null) console.log("Coulnd't parse material");
+                if (materialID != "null" && this.materials[materialID] == null) console.log("Material id " + materialID + " doesn't exist");
+
+            this.nodes[nodeID].materialID = materialID;
 
             // Texture
 
@@ -636,16 +798,13 @@ class MySceneGraph {
             for (let k = 0; k < nodeDescendants.length; k++) {
                 
                 if (nodeDescendants[k].nodeName == "noderef") {
-                    // console.log("It's an intermediate node!");
 
                     let noderefElement = this.reader.getString(nodeDescendants[k], "id");
-                    // console.log("HEY " + noderefElement);
 
                     this.nodes[nodeID].addChildNode(noderefElement);
                 }
 
                 else if (nodeDescendants[k].nodeName == "leaf") {
-                    // console.log("It's a leaf!");
                     let primType = this.reader.getItem(nodeDescendants[k], "type", ["rectangle", "triangle", "torus", "cylinder", "sphere"]);
 
                     if (primType == null) {
@@ -654,22 +813,12 @@ class MySceneGraph {
 
                     let newLeaf = new MyPrimitive(primType, this, nodeDescendants[k]);
                     this.nodes[nodeID].addLeaf(newLeaf);
-                    // console.log(newLeaf);
-                    
-                    //console.log(this.nodes[nodeID].leaves[0]);
-                    
                 }
 
                 else {
                     this.onXMLError("Unknown descendant type!");
                 }
             }
-
-            // this.nodes.push(nodeID);
-
-            // console.log(grandChildren[descendantsIndex].children[0].nodeName);
-            
-            // console.log(nodeDescendants[descendantsIndex].children);
 
         }
     }
@@ -799,6 +948,14 @@ class MySceneGraph {
         this.scene.multMatrix(nodeToDisplay.transformMatrix);
 
         for (let leaf = 0; leaf < nodeToDisplay.leaves.length; leaf++) {
+            // Material
+            if (this.materials[nodeToDisplay.materialID] != null) {
+                console.log("I GET UPP " + nodeToDisplay.materialID);
+                this.materials[nodeToDisplay.materialID].apply();
+            }
+            // Texture
+
+            // Display
             nodeToDisplay.leaves[leaf].aPrimitive.display();
         }
         

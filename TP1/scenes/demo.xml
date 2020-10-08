@@ -47,27 +47,27 @@
         <!-- NOTE: this block "TEXTURE" must be repeated as necessary with different "id" -->
 
         <!-- Tie Fighter Textures-->
-        <texture id="tieGreyTexture" path="images/tieGrey.jpg" />
-        <texture id="tieWindowsTexture" path="images/tieWings.jpg" /> <!-- Temporary -->
-        <texture id="tieWingTexture" path="images/tieWings.jpg" />
+        <texture id="tieGreyTexture" path="./scenes/images/tieGrey.jpg" />
+        <texture id="tieWindowsTexture" path="./scenes/images/tieWings.jpg" /> <!-- Temporary -->
+        <texture id="tieWingTexture" path="./scenes/images/tieWings.jpg" />
 
         <!-- X-Wing Textures -->
-        <texture id="xWingFullTexture" path="images/tieGrey.jpg" />
-        <texture id="xWingCabineTexture" path="images/metal_gray1.jpg" />
-        <texture id="xWingWingMotorDefaultTexture" path="images/metal_gray2.jpg" />
-        <texture id="xWingWingGunDefaultAttachedBigPartTexture" path="images/metal_gray1.jpg" />
+        <texture id="xWingFullTexture" path="./scenes/images/tieGrey.jpg" />
+        <texture id="xWingCabineTexture" path="./scenes/images/metal_gray1.jpg" />
+        <texture id="xWingWingMotorDefaultTexture" path="./scenes/images/metal_gray2.jpg" />
+        <texture id="xWingWingGunDefaultAttachedBigPartTexture" path="./scenes/images/metal_gray1.jpg" />
 
         <!-- Explosion Textures -->
-        <texture id="explosionWhiteTexture" path="images/explosionWhite.jpg" />
-        <texture id="explosionTexture" path="images/explosion.jpg" />
+        <texture id="explosionWhiteTexture" path="./scenes/images/explosionWhite.jpg" />
+        <texture id="explosionTexture" path="./scenes/images/explosion.jpg" />
 
         <!-- Sky Box Textures -->
-        <texture id="spaceTop" path="images/spaceTop.jpg" />
-        <texture id="spaceBottom" path="images/spaceBottom.jpg" />
-        <texture id="spaceNorth" path="images/spaceNorth.jpg" />
-        <texture id="spaceSouth" path="images/spaceSouth.jpg" />
-        <texture id="spaceEast" path="images/spaceEast.jpg" />
-        <texture id="spaceWest" path="images/spaceWest.jpg" />
+        <texture id="spaceTop" path="./scenes/images/spaceTop.jpg" />
+        <texture id="spaceBottom" path="./scenes/images/spaceBottom.jpg" />
+        <texture id="spaceNorth" path="./scenes/images/spaceNorth.jpg" />
+        <texture id="spaceSouth" path="./scenes/images/spaceSouth.jpg" />
+        <texture id="spaceEast" path="./scenes/images/spaceEast.jpg" />
+        <texture id="spaceWest" path="./scenes/images/spaceWest.jpg" />
         
     </textures>
 
@@ -131,14 +131,13 @@
             <specular r="0.4" g="0.4" b="0.4" a="0.4" />
             <emissive r="1.0" g="1.0" b="1.0" a="1.0" />
         </material>
-
         
         <material id="skyBoxMaterial">
-            <shininess value="1.0" />
-            <ambient r="0.1" g="0.1" b="0.1" a="1.0" />
-            <diffuse r="0.1" g="1.0" b="0.1" a="1.0" />
-            <specular r="0.4" g="0.4" b="0.4" a="0.4" />
-            <emissive r="1.0" g="1.0" b="1.0" a="1.0" />
+            <shininess value="0.2" />
+            <ambient r="0.7" g="0.8" b="0.69" a="1.0" />
+            <diffuse r="0.7" g="0.8" b="0.69" a="1.0" />
+            <specular r="0.7" g="0.8" b="0.69" a="1.0" />
+            <emissive r="0.7" g="0.8" b="0.69" a="1.0" />
         </material>
 
     </materials>
@@ -160,7 +159,7 @@
             <!-- declaring descendants, at least one node or one leaf must be present
              descendants may be mixed, nodes and leafs -->
             <descendants>
-                <!-- <noderef id="skyBoxFinal" /> -->
+                <noderef id="skyBoxFinal" />
                 <noderef id="xWingFull" />
                 <noderef id="tieFinalShape" />
                 <!-- <noderef id="explosionFinal" /> -->
