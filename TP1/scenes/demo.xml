@@ -131,14 +131,13 @@
             <specular r="0.4" g="0.4" b="0.4" a="0.4" />
             <emissive r="1.0" g="1.0" b="1.0" a="1.0" />
         </material>
-
         
         <material id="skyBoxMaterial">
-            <shininess value="1.0" />
-            <ambient r="0.1" g="0.1" b="0.1" a="1.0" />
-            <diffuse r="0.1" g="1.0" b="0.1" a="1.0" />
-            <specular r="0.4" g="0.4" b="0.4" a="0.4" />
-            <emissive r="1.0" g="1.0" b="1.0" a="1.0" />
+            <shininess value="0.2" />
+            <ambient r="0.7" g="0.8" b="0.69" a="1.0" />
+            <diffuse r="0.7" g="0.8" b="0.69" a="1.0" />
+            <specular r="0.7" g="0.8" b="0.69" a="1.0" />
+            <emissive r="0.7" g="0.8" b="0.69" a="1.0" />
         </material>
 
     </materials>
@@ -160,7 +159,7 @@
             <!-- declaring descendants, at least one node or one leaf must be present
              descendants may be mixed, nodes and leafs -->
             <descendants>
-                <!-- <noderef id="skyBoxFinal" /> -->
+                <noderef id="skyBoxFinal" />
                 <noderef id="xWingFull" />
                 <noderef id="tieFinalShape" />
                 <!-- <noderef id="explosionFinal" /> -->
