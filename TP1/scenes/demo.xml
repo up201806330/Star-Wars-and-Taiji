@@ -456,37 +456,6 @@
             </descendants>
         </node>
 
-        <!-- Back Motors of X-Wing -->
-        <!-- <node id="xWingBackRightMotor">
-            <material id="null" />
-            <texture id="null">
-                <amplification afs="1.0" aft="1.0" />
-            </texture>
-
-            <transformations>
-                <translation x="-2.0" y="6.5" z="0.0" />
-            </transformations>
-
-            <descendants>
-                <noderef id="xWingBackMotorDefault" />
-            </descendants>
-        </node>
-
-        <node id="xWingBackLeftMotor">
-            <material id="null" />
-            <texture id="null">
-                <amplification afs="1.0" aft="1.0" />
-            </texture>
-
-            <transformations>
-                <translation x="1.0" y="3.0" z="0.0" />
-            </transformations>
-
-            <descendants>
-                <noderef id="xWingBackMotorDefault" />
-            </descendants>
-        </node> -->
-
         <node id="xWingBackBodyParallelepiped">
             <material id="null" />
             <texture id="null">
