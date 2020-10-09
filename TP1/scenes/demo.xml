@@ -159,7 +159,7 @@
             <!-- declaring descendants, at least one node or one leaf must be present
              descendants may be mixed, nodes and leafs -->
             <descendants>
-                <noderef id="skyBoxFinal" />
+                <!-- <noderef id="skyBoxFinal" /> -->
                 <noderef id="xWingFull" />
                 <noderef id="tieFinalShape" />
                 <!-- <noderef id="explosionFinal" /> -->
@@ -288,7 +288,7 @@
             </transformations>
 
             <descendants>
-                <leaf type="cylinder" height="1.5" topRadius="0.1" bottomRadius="0.1" stacks="4" slices="8"/>
+                <leaf type="cylinder" height="1.5" topRadius="0.1" bottomRadius="0.1" stacks="4" slices="12"/>
             </descendants>
         </node>
 
@@ -320,7 +320,7 @@
             </transformations>
 
             <descendants>
-                <leaf type="cylinder" height="1.6" topRadius="0.2" bottomRadius="0.2" stacks="4" slices="16"/>
+                <leaf type="cylinder" height="1.6" topRadius="0.2" bottomRadius="0.2" stacks="4" slices="8"/>
             </descendants>
         </node>
 
@@ -463,8 +463,8 @@
             </texture>
 
             <transformations>
-                <!-- <translation x="-2.0" y="0.0" z="0.0" /> -->
-                <scale sx="1.3" sy="1.3" sz="1.7" />
+                <translation x="0.0" y="0.0" z="-0.35" />
+                <scale sx="1.3" sy="1.3" sz="2.05" />
             </transformations>
 
             <descendants>
@@ -521,40 +521,6 @@
 
             <descendants>
                 <noderef id="xWingTriangleDefault2" />
-            </descendants>
-        </node>
-
-        <!-- Front Body section -->
-        <node id="xWingFrontBodyParallelepiped">
-            <material id="null" />
-            <texture id="null">
-                <amplification afs="1.0" aft="1.0" />
-            </texture>
-
-            <transformations>
-                <translation x="0.0" y="0.0" z="1.7" />
-                <scale sx="1.3" sy="0.75" sz="2.7" />
-            </transformations>
-
-            <descendants>
-                <noderef id="xWingParallelepipedDefault" />
-            </descendants>
-        </node>
-
-        <!-- Front Edge of the X-Wing section -->
-        <node id="xWingFrontEdgeParallelepiped">
-            <material id="null" />
-            <texture id="null">
-                <amplification afs="1.0" aft="1.0" />
-            </texture>
-
-            <transformations>
-                <translation x="0.0" y="0.0" z="4.0" />
-                <scale sx="1.28" sy="0.6" sz="1.5" />
-            </transformations>
-
-            <descendants>
-                <noderef id="xWingParallelepipedDefault" />
             </descendants>
         </node>
 
@@ -940,10 +906,9 @@
             </texture>
 
             <transformations>
-                <translation x="0.245" y="-0.05" z="3.0" />
-
-                <rotation axis="x" angle="89.7" />
-                <scale sx="0.805" sy="5.0" sz="1.0" />
+                <translation x="0.245" y="-0.035" z="1.5" />
+                <rotation axis="x" angle="89.9" />
+                <scale sx="0.805" sy="6.5" sz="1.0" />
             </transformations>
 
             <descendants>
@@ -951,6 +916,24 @@
             </descendants>
         </node>
 
+        <node id="xWingFrontBodyParallelepipedUndeCabine">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0.0" y="0.4" z="3.0" />
+                <!-- <rotation axis="z" angle="-120" /> -->
+                <rotation axis="y" angle="90" />
+                <scale sx="1.3" sy="0.35" sz="1.3" />
+            </transformations>
+
+            <descendants>
+                <!-- <leaf type="rectangle" x1="0" y1="0" x2="1" y2="1" /> -->
+                <noderef id="xWingParallelepipedDefault" />
+            </descendants>
+        </node>
 
 
         <!-- Front Body (Body between Front Edge and Back Body) -->
@@ -970,9 +953,60 @@
                 <noderef id="xWingFrontBodyRightSideUpperTriangle" />
                 <noderef id="xWingFrontBodyRightSideLowerRectangle" />
                 <noderef id="xWingFrontBodyBottomRectangle" />
-                <!-- <noderef id="xWingFrontBodyParallelepiped" /> -->
+                <noderef id="xWingFrontBodyParallelepipedUndeCabine" />
             </descendants>
         </node>
+
+        <!-- Front Edge Parts section -->
+        <node id="xWingFrontEdgeLeftTriangle">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="1.05" y="-0.032" z="8" />
+                <scale sx="0.705" sy="0.435" sz="1" />
+            </transformations>
+
+            <descendants>
+                <leaf type="triangle" x1="0" y1="0" x2="0.36" y2="1" x3="0" y3="1" />
+            </descendants>
+        </node>
+
+        <node id="xWingFrontEdgeRightTriangle">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0.25" y="-0.032" z="8" />
+                <scale sx="0.705" sy="0.435" sz="1" />
+            </transformations>
+
+            <descendants>
+                <leaf type="triangle" x1="0" y1="0" x2="0.0" y2="1" x3="-0.36" y3="1" />
+            </descendants>
+        </node>
+
+        <node id="xWingFrontEdgeMiddleRectangle">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0.25" y="-0.0269" z="8" />
+                <scale sx="0.8" sy="0.43" sz="1" />
+            </transformations>
+
+            <descendants>
+                <noderef id="xWingRectangleDefault" />
+            </descendants>
+        </node>
+
+
 
         <!-- Front Edge of the X-Wing -->
         <node id="xWingFrontEdge">
@@ -985,7 +1019,9 @@
             </transformations>
 
             <descendants>
-                <noderef id="xWingFrontEdgeParallelepiped" />
+                <noderef id="xWingFrontEdgeLeftTriangle" />
+                <noderef id="xWingFrontEdgeRightTriangle" />
+                <noderef id="xWingFrontEdgeMiddleRectangle" />
             </descendants>
         </node>
 
@@ -1073,7 +1109,7 @@
             </transformations>
 
             <descendants>
-                <!-- <noderef id="xWingFrontEdge" /> -->
+                <noderef id="xWingFrontEdge" />
                 <noderef id="xWingFrontBody" />
                 <noderef id="xWingCabine" />
                 <noderef id="xWingBackBody" />
