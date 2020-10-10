@@ -28,7 +28,7 @@ class CylinderLid extends CGFobject
         for(var i = 0; i < this.slices; i++){
              this.vertices.push(Math.cos(this.angle*i), Math.sin(this.angle*i),0);
              this.normals.push(0,0,1);
-            // Texs!!
+             this.texCoords.push(1-(Math.cos(this.angle*i)+1)/2, (Math.sin(this.angle*i)+1)/2);
         }
 
         for(var j = 0; j < this.slices; j++){

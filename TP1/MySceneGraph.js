@@ -27,6 +27,8 @@ class MySceneGraph {
         scene.graph = this;
 
         this.nodes = [];
+        this.materialStack = [];
+        // Texs!!
 
         this.idRoot = null; // The id of the root element.
 
@@ -581,7 +583,7 @@ class MySceneGraph {
             if (g == null) return "unable to parse g value of diffuse for material with ID = " + materialID;
             else if (g < 0 || g > 1) return "diffuse g must be between 0 and 1 (on material with ID = " + materialID + ")";
             else if (isNaN(g)) return "diffuse g is non numeric value"; 
-            diffuse.push(b);
+            diffuse.push(g);
             // B //
             b = this.reader.getFloat(materialSpecs[diffuseIndex], 'b');
             if (b == null) return "unable to parse b value of diffuse for material with ID = " + materialID;
@@ -938,6 +940,7 @@ class MySceneGraph {
 
         //console.log("ROOT: ");
         // console.log(this.nodes[this.idRoot]);
+        this.materialStack.push(this.defaultMaterialID);
         this.displayNode(this.idRoot);
 
     }
@@ -947,11 +950,13 @@ class MySceneGraph {
 
         this.scene.multMatrix(nodeToDisplay.transformMatrix);
 
+        if (nodeToDisplay.materialID != "null") this.materialStack.push(nodeToDisplay.materialID);
+        let topOfMatStack = this.materialStack[this.materialStack.length - 1];
+        
         for (let leaf = 0; leaf < nodeToDisplay.leaves.length; leaf++) {
             // Material
-            if (this.materials[nodeToDisplay.materialID] != null) {
-                console.log("I GET UPP " + nodeToDisplay.materialID);
-                this.materials[nodeToDisplay.materialID].apply();
+            if (this.materials[topOfMatStack] != null) {
+                this.materials[topOfMatStack].apply();
             }
             // Texture
 
@@ -964,5 +969,7 @@ class MySceneGraph {
             this.displayNode(nodeToDisplay.childNodes[i]);
             this.scene.popMatrix();
         }
+
+        if (nodeToDisplay.materialID != "null") this.materialStack.pop();
     }
 }

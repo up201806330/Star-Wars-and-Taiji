@@ -41,7 +41,7 @@ class HalfTorus extends CGFobject {
 			for (let i = 0; i < this.slices; i++) {
 				this.vertices.push(Math.sin(this.fi) * Math.cos(this.theta), Math.sin(this.fi) * Math.sin(this.theta), Math.cos(this.zeta));
 				this.normals.push(Math.sin(this.fi) * Math.cos(this.theta), Math.sin(this.fi) * Math.sin(this.theta), Math.cos(this.zeta));
-				// Texs!!
+				this.texCoords.push(1-(Math.sin(this.fi)*Math.cos(this.theta)+1)/2, (Math.sin(this.fi)*Math.sin(this.theta)+1)/2);
 
 				this.fi -= this.dFi;
 				if (this.direction) this.zeta -= this.dFi;
@@ -49,8 +49,8 @@ class HalfTorus extends CGFobject {
 
 				this.vertices.push(Math.sin(this.fi) * Math.cos(this.theta), Math.sin(this.fi) * Math.sin(this.theta), Math.cos(this.zeta));
 				this.normals.push(Math.sin(this.fi) * Math.cos(this.theta), Math.sin(this.fi) * Math.sin(this.theta), Math.cos(this.zeta));
-				// Texs!!
-
+				this.texCoords.push(1-(Math.sin(this.fi)*Math.cos(this.theta)+1)/2, (Math.sin(this.fi)*Math.sin(this.theta)+1)/2);
+				
 				this.theta += this.dTheta;
 				this.fi += this.dFi;
 				if (this.direction) this.zeta += this.dFi;

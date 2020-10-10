@@ -76,7 +76,7 @@
     <materials>
         <!-- NOTE: the "MATERIAL" block may be repeated as required. Each defined material
          requires a distinct "id". At least one material should be present. -->
-        <material id="tieGreyMaterial">
+        <material id="defaultGreyMaterial">
             <shininess value="1.0" />
             <ambient r="0.1" g="0.1" b="0.1" a="1.0" />
             <diffuse r="0.4" g="0.4" b="0.4" a="1.0" />
@@ -88,7 +88,7 @@
             <shininess value="1.0" />
             <ambient r="0.1" g="0.1" b="0.1" a="1.0" />
             <diffuse r="0.4" g="0.4" b="0.4" a="1.0" />
-            <specular r="0.1" g="0.1" b="0.1" a="1.0" />
+            <specular r="0.5" g="0.5" b="0.5" a="1.0" />
             <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
         </material>
         
@@ -1137,7 +1137,7 @@
         <!-- Complete X-Wing Starship -->
         <node id="xWingFull">
 
-            <material id="null" />
+            <material id="defaultGreyMaterial" />
             <texture id="xWingFullTexture">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
@@ -1537,7 +1537,7 @@
         </node>
 
         <!-- Tie body windows-->
-        <node id="tieWingBodyWindows">
+        <node id="tieBodyWindows">
             <material id="tieWindowsMaterial" />
             <texture id="tieWindowsTexture">
                 <amplification afs="1.0" aft="1.0" />
@@ -1553,7 +1553,7 @@
         </node>
 
         <!-- Tie body-->
-        <node id="tieWingBody">
+        <node id="tieBody">
             <material id="null" />
             <texture id="null">
                 <amplification afs="1.0" aft="1.0" />
@@ -1563,13 +1563,13 @@
 
             <descendants>
                 <leaf type="sphere" radius="1" stacks="30" slices="30" /> 
-                <noderef id="tieWingBodyWindows" />
+                <noderef id="tieBodyWindows" />
             </descendants>
         </node>
 
         <!-- Tie Final Shape -->
         <node id="tieFinalShape">
-            <material id="tieGreyMaterial" />
+            <material id="defaultGreyMaterial" />
             <texture id="tieGreyTexture">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
@@ -1579,7 +1579,7 @@
             </transformations>
 
             <descendants>
-                <noderef id="tieWingBody" />
+                <noderef id="tieBody" />
                 <noderef id="tieRightWing" />
                 <noderef id="tieLeftWing" />
             </descendants>
