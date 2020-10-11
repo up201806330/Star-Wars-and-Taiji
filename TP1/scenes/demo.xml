@@ -1741,8 +1741,8 @@
 
         <!-- Sky Box Top-->
         <node id="skyBoxTop">
-            <material id="skyBoxMaterial" />
-            <texture id="skyBoxTop">
+            <material id="null" />
+            <texture id="spaceTop">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -1758,8 +1758,8 @@
 
         <!-- Sky Box Bottom-->
         <node id="skyBoxBottom">
-            <material id="skyBoxMaterial" />
-            <texture id="skyBoxBottom">
+            <material id="null" />
+            <texture id="spaceBottom">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -1775,8 +1775,8 @@
 
         <!-- Sky Box North-->
         <node id="skyBoxNorth">
-            <material id="skyBoxMaterial" />
-            <texture id="skyBoxNorth">
+            <material id="null" />
+            <texture id="spaceNorth">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -1791,8 +1791,8 @@
 
         <!-- Sky Box South-->
         <node id="skyBoxSouth">
-            <material id="skyBoxMaterial" />
-            <texture id="skyBoxSouth">
+            <material id="null" />
+            <texture id="spaceSouth">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -1808,8 +1808,8 @@
 
         <!-- Sky Box East-->
         <node id="skyBoxEast">
-            <material id="skyBoxMaterial" />
-            <texture id="skyBoxEast">
+            <material id="null" />
+            <texture id="spaceEast">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -1825,8 +1825,8 @@
 
         <!-- Sky Box West-->
         <node id="skyBoxWest">
-            <material id="skyBoxMaterial" />
-            <texture id="skyBoxWest">
+            <material id="null" />
+            <texture id="spaceWest">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -1843,7 +1843,7 @@
         <!-- Sky Box Final -->
         <node id="skyBoxFinal">
             <material id="skyBoxMaterial" />
-            <texture id="skyBoxWest">
+            <texture id="null">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
