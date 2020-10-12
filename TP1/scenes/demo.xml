@@ -49,6 +49,7 @@
         <!-- Tie Fighter Textures-->
         <texture id="tieGreyTexture" path="./scenes/images/tieGrey.jpg" />
         <texture id="tieWingTexture" path="./scenes/images/tieWings.jpg" />
+        <texture id="tieTurbineTexture" path="./scenes/images/tieTurbine.jpg" />
 
         <!-- X-Wing Textures -->
         <texture id="xWingFullTexture" path="./scenes/images/tieGrey.jpg" />
@@ -67,6 +68,9 @@
         <texture id="spaceSouth" path="./scenes/images/spaceSouth.jpg" />
         <texture id="spaceEast" path="./scenes/images/spaceEast.jpg" />
         <texture id="spaceWest" path="./scenes/images/spaceWest.jpg" />
+
+        <!-- Test -->
+        <texture id="abc" path="./scenes/images/abc.jpg" />
         
     </textures>
 
@@ -77,9 +81,9 @@
          requires a distinct "id". At least one material should be present. -->
         <material id="defaultGreyMaterial">
             <shininess value="1.0" />
-            <ambient r="0.1" g="0.1" b="0.1" a="1.0" />
-            <diffuse r="0.4" g="0.4" b="0.4" a="1.0" />
-            <specular r="0.1" g="0.1" b="0.1" a="1.0" />
+            <ambient r="0.1" g="0.1" b="0.135" a="1.0" />
+            <diffuse r="0.4" g="0.4" b="0.435" a="1.0" />
+            <specular r="0.1" g="0.1" b="0.135" a="1.0" />
             <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
         </material>
         
@@ -440,6 +444,23 @@
             </descendants>
         </node>
 
+        <!-- Wing Motor Turbine piece-->
+        <node id="xWingtieTurbine">
+            <material id="null" />
+            <texture id="tieTurbineTexture">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <rotation axis="z" angle="70" />
+            </transformations>
+
+            <descendants>
+                <leaf type="cylinder" height="1.61" topRadius="0.422" bottomRadius="0.422" stacks="30" slices="30"/>
+            </descendants>
+        </node>
+        
+
         <!-- Wing Motor Default -->
         <node id="xWingWingMotorDefault">
             <material id="null" />
@@ -451,7 +472,8 @@
             </transformations>
 
             <descendants>
-                <leaf type="cylinder" height="1.6" topRadius="0.425" bottomRadius="0.425" stacks="4" slices="16"/>
+                <leaf type="cylinder" height="1.6" topRadius="0.425" bottomRadius="0.425" stacks="30" slices="30"/>
+                <noderef id="xWingtieTurbine" />
             </descendants>
         </node>
 
@@ -579,6 +601,7 @@
 
             <transformations>
                 <translation x="-1.07" y="0.05" z="0.1" />
+                <rotation axis="z" angle="180" />
             </transformations>
 
             <descendants>
@@ -642,6 +665,7 @@
 
             <transformations>
                 <translation x="-1.07" y="1.24" z="0.0" />
+                <rotation axis="z" angle="-30" />
             </transformations>
 
             <descendants>
@@ -704,6 +728,7 @@
 
             <transformations>
                 <translation x="1.07" y="0.05" z="0.1" />
+                <rotation axis="z" angle="150" />
             </transformations>
 
             <descendants>
@@ -1595,7 +1620,7 @@
             </transformations>
 
             <descendants>
-                <leaf type="sphere" radius="5" stacks="4" slices="8" /> <!-- temporary value for stacks / slices -->
+                <leaf type="sphere" radius="5" stacks="30" slices="30" /> <!-- temporary value for stacks / slices -->
             </descendants>
         </node>
 
