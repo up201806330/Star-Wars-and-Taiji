@@ -1026,7 +1026,7 @@ class MySceneGraph {
 
             // Texture
             if (this.textures[topofTexStack] != null) {
-                //nodeToDisplay.leaves[leaf].aPrimitive.updateTexCoords(nodeToDisplay.afs, nodeToDisplay.aft);
+                nodeToDisplay.leaves[leaf].aPrimitive.updateTexCoords(nodeToDisplay.afs, nodeToDisplay.aft);
                 this.textures[topofTexStack].bind();
             }
 

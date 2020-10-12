@@ -23,11 +23,11 @@ class HalfSphere extends CGFobject {
         let theta = 2 * Math.PI / this.slices;
         let fi = 0.5 * Math.PI / this.stacks;
 
-        for (let i = 0; i <= this.stacks; i++) {
-            for (let j = 0; j <= this.slices; j++) {
-                this.vertices.push(Math.cos(theta * j) * Math.cos(fi * i), Math.sin(theta * j) * Math.cos(fi * i), Math.sin(fi * i));
-                this.normals.push(Math.cos(theta * j) * Math.cos(fi * i), Math.sin(theta * j) * Math.cos(fi * i), Math.sin(fi * i));
-                this.texCoords.push(i * 1 / this.slices, j * 1 / this.stacks);
+        for (let j = 0; j <= this.stacks; j++) {
+            for (let i = 0; i <= this.slices; i++) {
+                this.vertices.push(Math.cos(theta * i) * Math.cos(fi * j), Math.sin(theta * i) * Math.cos(fi * j), Math.sin(fi * j));
+                this.normals.push(Math.cos(theta * i) * Math.cos(fi * j), Math.sin(theta * i) * Math.cos(fi * j), Math.sin(fi * j));
+                this.texCoords.push(j / this.stacks, i / this.slices);
             }
         }
 
