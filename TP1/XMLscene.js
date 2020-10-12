@@ -10,6 +10,8 @@ class XMLscene extends CGFscene {
         super();
 
         this.interface = myinterface;
+
+        this.lightsStatus = [];
     }
 
     /**
@@ -91,7 +93,34 @@ class XMLscene extends CGFscene {
 
         this.initLights();
 
+        // After graph has loaded, add each light source to the interface
+        this.interface.initLightsInterface(this.graph.lights);
+
         this.sceneInited = true;
+    }
+
+    /**
+     * Updates lights enabled status
+     */
+    lightsUpdate() {
+        let i = 0;
+
+        // for each light id
+        for (let lightId in this.lightsStatus) {
+            
+            // checks its status (true -> enabled, false -> disabled)
+            if (this.lightsStatus[lightId]) {
+                this.lights[i].enable();
+                this.lights[i].setVisible(true);
+            }
+            else {
+                this.lights[i].disable();
+                this.lights[i].setVisible(false);
+            }
+
+            this.lights[i].update();
+            i++;
+        }
     }
 
     /**
@@ -113,10 +142,12 @@ class XMLscene extends CGFscene {
 
         this.pushMatrix();
 
-        for (var i = 0; i < this.lights.length; i++) {
-            this.lights[i].setVisible(true);
-            this.lights[i].enable();
-        }
+        // for (var i = 0; i < this.lights.length; i++) {
+        //     this.lights[i].setVisible(true);
+        //     this.lights[i].enable();
+        // }
+
+        this.lightsUpdate();
 
         if (this.sceneInited) {
             // Draw axis
