@@ -48,8 +48,8 @@
 
         <!-- Tie Fighter Textures-->
         <texture id="tieGreyTexture" path="./scenes/images/tieGrey.jpg" />
-        <texture id="tieWindowsTexture" path="./scenes/images/tieWings.jpg" /> <!-- Temporary -->
         <texture id="tieWingTexture" path="./scenes/images/tieWings.jpg" />
+        <texture id="tieTurbineTexture" path="./scenes/images/tieTurbine.jpg" />
 
         <!-- X-Wing Textures -->
         <texture id="xWingFullTexture" path="./scenes/images/tieGrey.jpg" />
@@ -68,6 +68,9 @@
         <texture id="spaceSouth" path="./scenes/images/spaceSouth.jpg" />
         <texture id="spaceEast" path="./scenes/images/spaceEast.jpg" />
         <texture id="spaceWest" path="./scenes/images/spaceWest.jpg" />
+
+        <!-- Test -->
+        <texture id="abc" path="./scenes/images/abc.jpg" />
         
     </textures>
 
@@ -78,17 +81,17 @@
          requires a distinct "id". At least one material should be present. -->
         <material id="defaultGreyMaterial">
             <shininess value="1.0" />
-            <ambient r="0.1" g="0.1" b="0.1" a="1.0" />
-            <diffuse r="0.4" g="0.4" b="0.4" a="1.0" />
-            <specular r="0.1" g="0.1" b="0.1" a="1.0" />
+            <ambient r="0.1" g="0.1" b="0.135" a="1.0" />
+            <diffuse r="0.4" g="0.4" b="0.435" a="1.0" />
+            <specular r="0.1" g="0.1" b="0.135" a="1.0" />
             <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
         </material>
         
         <material id="tieWindowsMaterial">
             <shininess value="1.0" />
-            <ambient r="0.1" g="0.1" b="0.1" a="1.0" />
-            <diffuse r="0.4" g="0.4" b="0.4" a="1.0" />
-            <specular r="0.5" g="0.5" b="0.5" a="1.0" />
+            <ambient r="0" g="0" b="0" a="1.0" />
+            <diffuse r="0" g="0" b="0" a="1.0" />
+            <specular r="0.45" g="0.45" b="0.45" a="1.0" />
             <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
         </material>
         
@@ -126,17 +129,17 @@
 
         <material id="laserMaterial">
             <shininess value="1.0" />
-            <ambient r="0.1" g="0.1" b="0.1" a="1.0" />
-            <diffuse r="0.1" g="1.0" b="0.1" a="1.0" />
-            <specular r="0.4" g="0.4" b="0.4" a="0.4" />
-            <emissive r="1.0" g="1.0" b="1.0" a="1.0" />
+            <ambient r="0" g="1" b="0" a="1.0" />
+            <diffuse r="0" g="1" b="0" a="1.0" />
+            <specular r="0" g="1" b="0" a="0.4" />
+            <emissive r="0" g="1.0" b="0" a="1.0" />
         </material>
         
         <material id="skyBoxMaterial">
             <shininess value="0.2" />
-            <ambient r="0.7" g="0.8" b="0.69" a="1.0" />
-            <diffuse r="0.7" g="0.8" b="0.69" a="1.0" />
-            <specular r="0.7" g="0.8" b="0.69" a="1.0" />
+            <ambient r="0" g="0" b="0" a="1.0" />
+            <diffuse r="0" g="0" b="0" a="1.0" />
+            <specular r="0" g="0" b="0" a="1.0" />
             <emissive r="0.7" g="0.8" b="0.69" a="1.0" />
         </material>
 
@@ -441,6 +444,23 @@
             </descendants>
         </node>
 
+        <!-- Wing Motor Turbine piece-->
+        <node id="xWingtieTurbine">
+            <material id="null" />
+            <texture id="tieTurbineTexture">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <rotation axis="z" angle="70" />
+            </transformations>
+
+            <descendants>
+                <leaf type="cylinder" height="1.61" topRadius="0.422" bottomRadius="0.422" stacks="30" slices="30"/>
+            </descendants>
+        </node>
+        
+
         <!-- Wing Motor Default -->
         <node id="xWingWingMotorDefault">
             <material id="null" />
@@ -452,7 +472,8 @@
             </transformations>
 
             <descendants>
-                <leaf type="cylinder" height="1.6" topRadius="0.425" bottomRadius="0.425" stacks="4" slices="16"/>
+                <leaf type="cylinder" height="1.6" topRadius="0.425" bottomRadius="0.425" stacks="30" slices="30"/>
+                <noderef id="xWingtieTurbine" />
             </descendants>
         </node>
 
@@ -580,6 +601,7 @@
 
             <transformations>
                 <translation x="-1.07" y="0.05" z="0.1" />
+                <rotation axis="z" angle="180" />
             </transformations>
 
             <descendants>
@@ -643,6 +665,7 @@
 
             <transformations>
                 <translation x="-1.07" y="1.24" z="0.0" />
+                <rotation axis="z" angle="-30" />
             </transformations>
 
             <descendants>
@@ -705,6 +728,7 @@
 
             <transformations>
                 <translation x="1.07" y="0.05" z="0.1" />
+                <rotation axis="z" angle="150" />
             </transformations>
 
             <descendants>
@@ -1539,7 +1563,7 @@
         <!-- Tie body windows-->
         <node id="tieBodyWindows">
             <material id="tieWindowsMaterial" />
-            <texture id="tieWindowsTexture">
+            <texture id="clear">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
@@ -1596,7 +1620,7 @@
             </transformations>
 
             <descendants>
-                <leaf type="sphere" radius="5" stacks="4" slices="8" /> <!-- temporary value for stacks / slices -->
+                <leaf type="sphere" radius="5" stacks="30" slices="30" /> <!-- temporary value for stacks / slices -->
             </descendants>
         </node>
 
@@ -1665,6 +1689,7 @@
                 <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
+                <rotation axis="x" angle="45" />
             </transformations>
 
             <descendants>
@@ -1680,7 +1705,7 @@
             </texture>
             <transformations>
                 <translation x="0" y="10" z="0" />
-                <scale sx="0.5" sy="0.5" sz="0.5" />
+                <scale sx="0.75" sy="0.75" sz="0.75" />
             </transformations>
 
             <descendants>
@@ -1741,8 +1766,8 @@
 
         <!-- Sky Box Top-->
         <node id="skyBoxTop">
-            <material id="skyBoxMaterial" />
-            <texture id="skyBoxTop">
+            <material id="null" />
+            <texture id="spaceTop">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -1758,8 +1783,8 @@
 
         <!-- Sky Box Bottom-->
         <node id="skyBoxBottom">
-            <material id="skyBoxMaterial" />
-            <texture id="skyBoxBottom">
+            <material id="null" />
+            <texture id="spaceBottom">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -1775,8 +1800,8 @@
 
         <!-- Sky Box North-->
         <node id="skyBoxNorth">
-            <material id="skyBoxMaterial" />
-            <texture id="skyBoxNorth">
+            <material id="null" />
+            <texture id="spaceNorth">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -1791,8 +1816,8 @@
 
         <!-- Sky Box South-->
         <node id="skyBoxSouth">
-            <material id="skyBoxMaterial" />
-            <texture id="skyBoxSouth">
+            <material id="null" />
+            <texture id="spaceSouth">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -1808,8 +1833,8 @@
 
         <!-- Sky Box East-->
         <node id="skyBoxEast">
-            <material id="skyBoxMaterial" />
-            <texture id="skyBoxEast">
+            <material id="null" />
+            <texture id="spaceEast">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -1825,8 +1850,8 @@
 
         <!-- Sky Box West-->
         <node id="skyBoxWest">
-            <material id="skyBoxMaterial" />
-            <texture id="skyBoxWest">
+            <material id="null" />
+            <texture id="spaceWest">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -1843,7 +1868,7 @@
         <!-- Sky Box Final -->
         <node id="skyBoxFinal">
             <material id="skyBoxMaterial" />
-            <texture id="skyBoxWest">
+            <texture id="null">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 

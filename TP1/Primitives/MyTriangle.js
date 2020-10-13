@@ -78,8 +78,28 @@ class MyTriangle extends CGFobject {
 	 * Updates the list of texture coordinates of the rectangle
 	 * @param {Array} coords - Array of texture coordinates
 	 */
-	updateTexCoords(coords) {
-		this.texCoords = [...coords];
+	updateTexCoords(afs, aft) {
+		//		v3
+		//	  c    b
+		//   v1	 a v2
+
+		// let distA = Math.sqrt(Math.pow(this.v2[0] - this.v1[0], 2) + Math.pow(this.v2[1] - this.v1[1], 2) + Math.pow(this.v2[2] - this.v1[2], 2));
+		// let distB = Math.sqrt(Math.pow(this.v3[0] - this.v2[0], 2) + Math.pow(this.v3[1] - this.v2[1], 2) + Math.pow(this.v3[2] - this.v2[2], 2));
+		// let distC = Math.sqrt(Math.pow(this.v1[0] - this.v3[0], 2) + Math.pow(this.v1[1] - this.v3[1], 2) + Math.pow(this.v1[2] - this.v3[2], 2));
+
+		// let cosAlpha = (Math.pow(distA, 2) - Math.pow(distB, 2) + Math.pow(distC, 2)) / (2 * distA * distC);
+		// let sinAlpha = Math.sqrt(1 - Math.pow(cosAlpha, 2));
+		// let alpha = Math.acos(cosAlpha);
+
+		// let T3x = distC * cosAlpha / afs;
+		// let T3y = distC * sinAlpha / aft;
+	
+		// this.texCoords = [
+		// 	0, 0,
+		// 	alpha / afs, 0,
+		// 	T3x, T3y
+		// ];
+
 		this.updateTexCoordsGLBuffers();
 	}
 }
