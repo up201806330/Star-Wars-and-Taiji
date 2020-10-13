@@ -162,13 +162,34 @@
             <!-- declaring descendants, at least one node or one leaf must be present
              descendants may be mixed, nodes and leafs -->
             <descendants>
-                <noderef id="skyBoxFinal" />
+                <!--<noderef id="skyBoxFinal" />
                 <noderef id="xWingFull" />
                 <noderef id="tieFinalShape" />
                 <noderef id="explosionFinal" />
-                <noderef id="laser" />
+                <noderef id="laser" /> -->
+                <noderef id="jeff"/>
             </descendants>
         </node>
+
+
+        <node id="jeff">
+            <material id="null" />
+            <texture id="abc">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <leaf type="triangle" x1="0" y1="0" x2="1" y2="0" x3="0" y3="1" />
+            </descendants>
+        </node>
+
+
+
+
+
 
         <!-- X-Wing "Rectangle" Default (1 x 1) -->
         <node id="xWingRectangleDefault">
@@ -1693,7 +1714,7 @@
             </transformations>
 
             <descendants>
-                <leaf type="torus" inner="0.5" outer="8" slices="30" loops="30" />  <!-- slices and loops numbers are super temporary -->
+                <leaf type="torus" inner="0.5" outer="8" slices="60" loops="60" />
             </descendants>
         </node>
 
