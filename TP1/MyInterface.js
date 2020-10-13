@@ -58,8 +58,8 @@ class MyInterface extends CGFinterface {
 
             // if the light source has parameters associated
             if (lights[lightId] !== undefined) {
-                console.log(lights[lightId]);
-                console.log(lights[lightId][0]); // ---> if enable="0" returns "1" !?!?!?
+                // console.log(lights[lightId]);
+                // console.log(lights[lightId][0]); // ---> if enable="0" returns "1" !?!?!?
 
                 // true -> light enabled, false -> light disabled
                 this.scene.lightsStatus[lightId] = (lights[lightId][0] !== true) ? false : true;
@@ -70,6 +70,22 @@ class MyInterface extends CGFinterface {
             }
         }
     };
+
+    initCamerasInterface(graph) {
+
+        // let cameraKey = {};
+        // let keys = Object.keys(graph.views);
+        // for (let key of keys) {
+        //     cameraKey[key] = key;
+        // }
+        // this.gui.add(graph, 'activeView', cameraKey).name("Camera").onChange(console.log("HI"));
+        
+        this.gui.add(this.scene, 'curView', Object.keys(this.scene.graph.views)).name("View Points").onChange((val) => {
+            this.scene.camera = this.scene.graph.views[val];
+            this.setActiveCamera(this.scene.camera);
+        });
+    
+    }
 
 
 }

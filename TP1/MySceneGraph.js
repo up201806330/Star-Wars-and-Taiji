@@ -27,6 +27,12 @@ class MySceneGraph {
         scene.graph = this;
 
         this.nodes = [];
+        this.views = [];
+
+        
+        // this.activeView = '';
+
+
         this.materialStack = [];
         // Texs!!
 
@@ -269,6 +275,7 @@ class MySceneGraph {
         if (views.length == 0) {
             this.onXMLError("No views are defined!");
         }
+
         for (let view of views) {
             i = 0;
             viewsChildren = view.children;
@@ -348,6 +355,26 @@ class MySceneGraph {
             }
 
         }
+
+        let defaultID = this.reader.getString(viewsNode, "default");
+        console.log("Default: " + defaultID);
+        if (defaultID == null) {
+            this.onXMLError("Missing default view id in scene views.");
+        }
+
+        if (this.views[defaultID] == null) {
+            return "Non existant view ID for default view: " + defaultID;
+        }
+
+        this.scene.camera = this.views[defaultID];
+        // this.activeView = defaultID;
+        this.scene.interface.curView = defaultID;
+        this.scene.interface.setActiveCamera(this.scene.camera);
+
+        // for (let view in this.views) {
+        //     console.log("VIEW");
+        //     console.log(view);
+        // }
 
         return null;
     }

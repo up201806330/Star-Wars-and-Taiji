@@ -12,6 +12,7 @@ class XMLscene extends CGFscene {
         this.interface = myinterface;
 
         this.lightsStatus = [];
+        this.curView = "";
     }
 
     /**
@@ -93,8 +94,11 @@ class XMLscene extends CGFscene {
 
         this.initLights();
 
-        // After graph has loaded, add each light source to the interface
+        // After graph has loaded, add each light source / camera to the interface
         this.interface.initLightsInterface(this.graph.lights);
+
+        this.interface.initCamerasInterface(this.graph);
+        
 
         this.sceneInited = true;
     }
