@@ -49,14 +49,23 @@
         <!-- Tie Fighter Textures-->
         <texture id="tieGreyTexture" path="./scenes/images/tieGrey.jpg" />
         <texture id="tieWingTexture" path="./scenes/images/tieWings.jpg" />
-        <texture id="tieTurbineTexture" path="./scenes/images/tieTurbine.jpg" />
+        <texture id="turbineTexture" path="./scenes/images/turbine.jpg" />
 
         <!-- X-Wing Textures -->
         <texture id="xWingFullTexture" path="./scenes/images/tieGrey.jpg" />
         <texture id="xWingCabineTexture" path="./scenes/images/metal_gray1.jpg" />
-        <texture id="xWingWingMotorDefaultTexture" path="./scenes/images/metal_gray2.jpg" />
-        <texture id="xWingWingGunDefaultAttachedBigPartTexture" path="./scenes/images/metal_gray1.jpg" />
-
+        <texture id="xWingEngineTexture" path="./scenes/images/engine.jpg" />
+        <texture id="xWingWingGunBigTexture" path="./scenes/images/gun.jpg" />
+        <texture id="xWingWingGunTexture" path="./scenes/images/gun2.jpg" />
+        <texture id="xWingBackEngineTexture" path="./scenes/images/backEngine.jpg" />
+        <texture id="xWingWingTexture" path="./scenes/images/wing.jpg" />
+        <texture id="xWingBackTexture" path="./scenes/images/back.png" />
+        <texture id="xWingFrontUnderRTexture" path="./scenes/images/frontUnderR.png" />
+        <texture id="xWingFrontUnderLTexture" path="./scenes/images/frontUnderL.png" />
+        <texture id="xWingFrontTriangleLTexture" path="./scenes/images/frontTriangleL.png" />
+        <texture id="xWingFrontTriangleRTexture" path="./scenes/images/frontTriangleR.png" />
+        <texture id="xWingFrontTopTexture" path="./scenes/images/frontTop.png" />
+        
         <!-- Explosion Textures -->
         <texture id="explosionWhiteTexture" path="./scenes/images/explosionWhite.jpg" />
         <texture id="explosionTexture" path="./scenes/images/explosion.jpg" />
@@ -69,8 +78,9 @@
         <texture id="spaceEast" path="./scenes/images/spaceEast.jpg" />
         <texture id="spaceWest" path="./scenes/images/spaceWest.jpg" />
 
-        <!-- Test -->
+        <!-- Test 
         <texture id="abc" path="./scenes/images/abc.jpg" />
+        <texture id="feup" path="./scenes/images/feup.jpg" />-->
         
     </textures>
 
@@ -87,26 +97,26 @@
             <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
         </material>
         
-        <material id="tieWindowsMaterial">
+        <material id="windowsMaterial">
             <shininess value="1.0" />
             <ambient r="0" g="0" b="0" a="1.0" />
             <diffuse r="0" g="0" b="0" a="1.0" />
-            <specular r="0.45" g="0.45" b="0.45" a="1.0" />
+            <specular r="0.3" g="0.3" b="0.3" a="1.0" />
             <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
         </material>
         
         <material id="tieWingMaterial">
             <shininess value="1.0" />
             <ambient r="0.1" g="0.1" b="0.1" a="1.0" />
-            <diffuse r="0.4" g="0.4" b="0.4" a="1.0" />
-            <specular r="0.1" g="0.1" b="0.1" a="1.0" />
+            <diffuse r="0.2" g="0.2" b="0.2" a="1.0" />
+            <specular r="0.2" g="0.2" b="0.2" a="1.0" />
             <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
         </material>
 
         <material id="xWingBackMotorDefaultMaterial">
             <shininess value="1.0" />
             <ambient r="0.1" g="0.1" b="0.1" a="1.0" />
-            <diffuse r="0.4" g="0.4" b="0.4" a="1.0" />
+            <diffuse r="0.2" g="0.2" b="0.2" a="1.0" />
             <specular r="0.1" g="0.1" b="0.1" a="1.0" />
             <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
         </material>
@@ -142,6 +152,14 @@
             <specular r="0" g="0" b="0" a="1.0" />
             <emissive r="0.7" g="0.8" b="0.69" a="1.0" />
         </material>
+        
+        <material id="glowMaterial">
+            <shininess value="0.5" />
+            <ambient r="0" g="0" b="0" a="1.0" />
+            <diffuse r="0.5" g="0.375" b="0.450" a="1.0" />
+            <specular r="0" g="0" b="0" a="1.0" />
+            <emissive r="0.5" g="0.375" b="0.450" a="1.0" />
+        </material>
 
     </materials>
 
@@ -166,9 +184,31 @@
                 <noderef id="xWingFull" />
                 <noderef id="tieFinalShape" />
                 <noderef id="explosionFinal" />
-                <noderef id="laser" />
+                <noderef id="laser" /> 
+                <!--<noderef id="jeff"/>-->
             </descendants>
         </node>
+
+
+        <node id="jeff">
+            <material id="skyBoxMaterial" />
+            <texture id="feup">
+                <amplification afs="2" aft="2" />
+            </texture>
+
+            <transformations>
+                <!--<rotation axis="z" angle="60" />-->
+            </transformations>
+
+            <descendants>
+                <leaf type="triangle" x1="0" y1="0" x2="2" y2="0" x3="1" y3="1.73" />
+            </descendants>
+        </node>
+
+
+
+
+
 
         <!-- X-Wing "Rectangle" Default (1 x 1) -->
         <node id="xWingRectangleDefault">
@@ -314,7 +354,7 @@
         <!-- X-Wing Gun Big cylinder (in the wing) -->
         <node id="xWingWingGunDefaultAttachedBigPart">
             <material id="null" />
-            <texture id="xWingWingGunDefaultAttachedBigPartTexture">
+            <texture id="xWingWingGunBigTexture">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -323,14 +363,29 @@
             </transformations>
 
             <descendants>
-                <leaf type="cylinder" height="1.6" topRadius="0.2" bottomRadius="0.2" stacks="4" slices="8"/>
+                <leaf type="cylinder" height="1.6" topRadius="0.2" bottomRadius="0.2" stacks="30" slices="30"/>
+            </descendants>
+        </node>
+
+        <!-- Motor Glow -->
+         <node id="xWingGlow">
+            <material id="glowMaterial" />
+            <texture id="clear">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <leaf type="sphere" radius="0.25" stacks="30" slices="30" /> 
             </descendants>
         </node>
 
         <!-- Back Body Motor Default -->
         <node id="xWingBackMotorDefault">
             <material id="xWingBackMotorDefaultMaterial" />
-            <texture id="null">
+            <texture id="xWingBackEngineTexture">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -339,6 +394,7 @@
 
             <descendants>
                 <leaf type="cylinder" height="1.7" topRadius="0.30" bottomRadius="0.30" stacks="4" slices="16"/>
+                <noderef id="xWingGlow" />
             </descendants>
         </node>
 
@@ -402,7 +458,7 @@
 
             <transformations>
                 <rotation axis="y" angle="-180" />
-                <scale sx="4.5" sy="0.15" sz="1.5" />
+                <scale sx="4.5" sy="0.05" sz="1.5" />
             </transformations>
 
             <descendants>
@@ -419,7 +475,7 @@
 
             <transformations>
                 <!-- <rotation axis="x" angle="90" /> -->
-                <scale sx="4.5" sy="0.15" sz="1.5" />
+                <scale sx="4.5" sy="0.05" sz="1.5" />
             </transformations>
 
             <descendants>
@@ -430,7 +486,7 @@
         <!-- X-Wing Wing Gun Default -->
         <node id="xWingWingGunDefault">
             <material id="null" />
-            <texture id="null">
+            <texture id="xWingWingGunTexture">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -445,9 +501,9 @@
         </node>
 
         <!-- Wing Motor Turbine piece-->
-        <node id="xWingtieTurbine">
+        <node id="xWingTurbine">
             <material id="null" />
-            <texture id="tieTurbineTexture">
+            <texture id="turbineTexture">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -464,7 +520,7 @@
         <!-- Wing Motor Default -->
         <node id="xWingWingMotorDefault">
             <material id="null" />
-            <texture id="xWingWingMotorDefaultTexture">
+            <texture id="xWingEngineTexture">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -473,13 +529,13 @@
 
             <descendants>
                 <leaf type="cylinder" height="1.6" topRadius="0.425" bottomRadius="0.425" stacks="30" slices="30"/>
-                <noderef id="xWingtieTurbine" />
+                <noderef id="xWingTurbine" />
             </descendants>
         </node>
 
         <node id="xWingBackBodyParallelepiped">
             <material id="null" />
-            <texture id="null">
+            <texture id="xWingBackTexture">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -815,8 +871,8 @@
 
         <!-- X-Wing Cabine (sits on top of the Front Body) -->
         <node id="xWingCabine">
-            <material id="null" />
-            <texture id="xWingCabineTexture">
+            <material id="windowsMaterial" />
+            <texture id="clear">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -835,7 +891,7 @@
         <!-- Front Body parts section -->
         <node id="xWingFrontBodyTopRectangle">
             <material id="null" />
-            <texture id="null">
+            <texture id="xWingFrontTopTexture">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -853,7 +909,7 @@
 
         <node id="xWingFrontBodyLeftSideLowerRectangle">
             <material id="null" />
-            <texture id="null">
+            <texture id="xWingFrontUnderLTexture">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -871,7 +927,7 @@
 
         <node id="xWingFrontBodyRightSideLowerRectangle">
             <material id="null" />
-            <texture id="null">
+            <texture id="xWingFrontUnderRTexture">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -889,7 +945,7 @@
 
         <node id="xWingFrontBodyLeftSideUpperTriangle">
             <material id="null" />
-            <texture id="null">
+            <texture id="xWingFrontTriangleLTexture">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -907,7 +963,7 @@
 
                 <node id="xWingFrontBodyRightSideUpperTriangle">
             <material id="null" />
-            <texture id="null">
+            <texture id="xWingFrontTriangleRTexture">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -925,7 +981,7 @@
 
         <node id="xWingFrontBodyBottomRectangle">
             <material id="null" />
-            <texture id="null">
+            <texture id="xWingFrontTopTexture">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -942,7 +998,7 @@
 
         <node id="xWingFrontBodyParallelepipedUndeCabine">
             <material id="null" />
-            <texture id="null">
+            <texture id="xWingFrontTopTexture">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -969,7 +1025,7 @@
 
             <transformations>
             </transformations>
-
+jeff
             <descendants>
                 <noderef id="xWingFrontBodyTopRectangle" />
                 <noderef id="xWingFrontBodyLeftSideUpperTriangle" />
@@ -1035,8 +1091,8 @@
         <!-- Front Edge of the X-Wing -->
         <node id="xWingFrontEdge">
             <material id="null" />
-            <texture id="null">
-                <amplification afs="1.0" aft="1.0" />
+            <texture id="xWingFrontTopTexture">
+                <amplification afs="2.0" aft="2.0" />
             </texture>
 
             <transformations>
@@ -1143,7 +1199,7 @@
         <!-- All Wings -->
         <node id="xWingWings">
             <material id="null" />
-            <texture id="null">
+            <texture id="xWingWingTexture">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -1412,7 +1468,7 @@
         <node id="tieWingPanels">
             <material id="tieWingMaterial" />
             <texture id="tieWingTexture">
-                <amplification afs="1.0" aft="1.0" />
+                <amplification afs="1.5" aft="2" />
             </texture>
             <transformations>
             </transformations>
@@ -1562,7 +1618,7 @@
 
         <!-- Tie body windows-->
         <node id="tieBodyWindows">
-            <material id="tieWindowsMaterial" />
+            <material id="windowsMaterial" />
             <texture id="clear">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
@@ -1693,7 +1749,7 @@
             </transformations>
 
             <descendants>
-                <leaf type="torus" inner="0.5" outer="8" slices="30" loops="30" />  <!-- slices and loops numbers are super temporary -->
+                <leaf type="torus" inner="0.5" outer="8" slices="60" loops="60" />
             </descendants>
         </node>
 

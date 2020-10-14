@@ -831,7 +831,7 @@ class MySceneGraph {
             // Texture
             var textureID = this.reader.getString(grandChildren[textureIndex], 'id');
             if (textureID == null) console.log("Coulnd't parse texture");
-            if (textureID != "null" && this.textures[textureID] == null) console.log("Texture id " + textureID + " doesn't exist");
+            if (textureID != "null" && textureID != "clear" && this.textures[textureID] == null) console.log("Texture id " + textureID + " doesn't exist");
 
             this.nodes[nodeID].textureID = textureID;
 
@@ -1052,7 +1052,7 @@ class MySceneGraph {
             else this.materials[this.defaultMaterialID].apply();
 
             // Texture
-            if (this.textures[topofTexStack] != null) {
+            if (this.textures[topofTexStack] != null && this.textures[topofTexStack] != "clear") {
                 nodeToDisplay.leaves[leaf].aPrimitive.updateTexCoords(nodeToDisplay.afs, nodeToDisplay.aft);
                 this.textures[topofTexStack].bind();
             }
