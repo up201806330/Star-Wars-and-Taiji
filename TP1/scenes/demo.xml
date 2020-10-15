@@ -190,10 +190,12 @@
             <descendants>
                 <noderef id="skyBoxFinal" />
                 <noderef id="xWingFull" />
+                <noderef id="xWingFull2" />
                 <noderef id="tieFinalShape" />
                 <noderef id="explosionFinal" />
                 <noderef id="laserGroup" />
                 <noderef id="tieFinalShape2" />
+                <noderef id="tieFinalShape3" />
                 <!--<noderef id="jeff"/>-->
             </descendants>
         </node>
@@ -1232,10 +1234,31 @@
             </texture>
 
             <transformations>
-                <translation x="-6" y="4" z="-8" />
+                <translation x="-6" y="4" z="-7" />
                 <rotation axis="y" angle="-20" />
                 <rotation axis="x" angle="13" />
                 <rotation axis="z" angle="-30" />
+            </transformations>
+
+            <descendants>
+                <noderef id="xWingMainBody" />
+                <noderef id="xWingWings" />
+            </descendants>            
+        </node>
+
+        <node id="xWingFull2">
+
+            <material id="defaultGreyMaterial" />
+            <texture id="xWingFullTexture">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-9" y="11" z="-20" />
+                <rotation axis="y" angle="-90" />
+                <rotation axis="x" angle="13" />
+                <rotation axis="z" angle="-30" />
+                <scale sx="0.7" sy="0.7" sz="0.7" />
             </transformations>
 
             <descendants>
@@ -1684,11 +1707,33 @@
                 <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
-                <translation x="14" y="7.5" z="-14"/>
+                <translation x="14" y="12" z="-18"/>
 
-                <rotation axis="y" angle="195" />
+                <rotation axis="y" angle="180" />
                 <rotation axis="x" angle="-18" />
                 <rotation axis="z" angle="-10" />
+                <scale sx="0.7" sy="0.7" sz="0.7" />
+            </transformations>
+
+            <descendants>
+                <noderef id="tieBody" />
+                <noderef id="tieRightWing" />
+                <noderef id="tieLeftWing" />
+            </descendants>
+        </node>
+
+        <node id="tieFinalShape3">
+            <material id="defaultGreyMaterial" />
+            <texture id="tieGreyTexture">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+            <transformations>
+                <translation x="14" y="17" z="-14"/>
+
+                <rotation axis="y" angle="170" />
+                <rotation axis="x" angle="18" />
+                <rotation axis="z" angle="-20" />
+                <scale sx="0.7" sy="0.7" sz="0.7" />
             </transformations>
 
             <descendants>
@@ -1794,7 +1839,7 @@
             </texture>
             <transformations>
                 <translation x="-14.5" y="1" z="14" />
-                <scale sx="0.9" sy="0.9" sz="0.9" />
+                <scale sx="0.8" sy="0.8" sz="0.8" />
             </transformations>
 
             <descendants>
@@ -1831,10 +1876,6 @@
                 <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
-                <rotation axis="y" angle="-80" />
-                <rotation axis="z" angle="12" />
-                <rotation axis="x" angle="8" />
-
                 <scale sx="0.05" sy="0.05" sz="0.5" />
             </transformations>
 
@@ -1852,7 +1893,7 @@
 
             <transformations>
                 <translation x="3.5" y="1.1" z="10" />
-                <translation x="-8" y="0" z="-8" />
+                <translation x="-8" y="0" z="-7" />
             </transformations>
 
             <descendants>
@@ -1868,7 +1909,7 @@
 
             <transformations>
                 <translation x="-7.8" y="1.9" z="14" />
-                <translation x="-8" y="0" z="-8" />
+                <translation x="-8" y="0" z="-7" />
             </transformations>
 
             <descendants>
@@ -1883,7 +1924,10 @@
             </texture>
 
             <transformations>
-                <translation x="10" y="6" z="-13" />
+                <translation x="-7" y="-2" z="-0.8"/>
+                <translation x="14" y="12" z="-18"/>
+                <rotation axis="z" angle="10" />
+                <rotation axis="y" angle="-91" />
             </transformations>
 
             <descendants>
@@ -1898,7 +1942,29 @@
             </texture>
 
             <transformations>
-                <translation x="0" y="5" z="-12" />
+                <translation x="-15" y="-2" z="-0.3"/>
+                <translation x="14" y="12" z="-18"/>
+                <rotation axis="z" angle="10" />
+                <rotation axis="y" angle="-91" />
+            </transformations>
+
+            <descendants>
+                <noderef id="redlaserCylinder" />
+            </descendants>
+        </node> 
+
+        <node id="tieLaser3">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-10" y="-2.8" z="-2.2"/>
+                <translation x="14" y="17" z="-14"/>
+                
+                <rotation axis="y" angle="-101" />
+                <rotation axis="x" angle="15" />
             </transformations>
 
             <descendants>
@@ -1920,6 +1986,7 @@
                 <noderef id="xWingLaser2" />
                 <noderef id="tieLaser1" />
                 <noderef id="tieLaser2" />
+                <noderef id="tieLaser3" />
             </descendants>
         </node>
 
