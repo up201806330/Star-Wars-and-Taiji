@@ -137,12 +137,20 @@
             <emissive r="1.0" g="1.0" b="1.0" a="1.0" />
         </material>
 
-        <material id="laserMaterial">
+        <material id="greenLaserMaterial">
             <shininess value="1.0" />
             <ambient r="0" g="1" b="0" a="1.0" />
             <diffuse r="0" g="1" b="0" a="1.0" />
             <specular r="0" g="1" b="0" a="0.4" />
-            <emissive r="0" g="1.0" b="0" a="1.0" />
+            <emissive r="0" g="0.0" b="0" a="1.0" />
+        </material>
+
+        <material id="redLaserMaterial">
+            <shininess value="1.0" />
+            <ambient r="1" g="0" b="0" a="1.0" />
+            <diffuse r="1" g="0" b="0" a="1.0" />
+            <specular r="1" g="0" b="0" a="0.4" />
+            <emissive r="0" g="0.0" b="0" a="1.0" />
         </material>
         
         <material id="skyBoxMaterial">
@@ -184,7 +192,8 @@
                 <noderef id="xWingFull" />
                 <noderef id="tieFinalShape" />
                 <noderef id="explosionFinal" />
-                <noderef id="laser" /> 
+                <noderef id="laserGroup" />
+                <noderef id="tieFinalShape2" />
                 <!--<noderef id="jeff"/>-->
             </descendants>
         </node>
@@ -368,7 +377,7 @@
         </node>
 
         <!-- Motor Glow -->
-         <node id="xWingGlow">
+        <node id="xWingGlow">
             <material id="glowMaterial" />
             <texture id="clear">
                 <amplification afs="1.0" aft="1.0" />
@@ -961,7 +970,7 @@
             </descendants>
         </node>
 
-                <node id="xWingFrontBodyRightSideUpperTriangle">
+        <node id="xWingFrontBodyRightSideUpperTriangle">
             <material id="null" />
             <texture id="xWingFrontTriangleRTexture">
                 <amplification afs="1.0" aft="1.0" />
@@ -1025,7 +1034,7 @@
 
             <transformations>
             </transformations>
-jeff
+
             <descendants>
                 <noderef id="xWingFrontBodyTopRectangle" />
                 <noderef id="xWingFrontBodyLeftSideUpperTriangle" />
@@ -1223,7 +1232,10 @@ jeff
             </texture>
 
             <transformations>
-                <translation x="0" y="0" z="0" />
+                <translation x="-6" y="4" z="-8" />
+                <rotation axis="y" angle="-20" />
+                <rotation axis="x" angle="13" />
+                <rotation axis="z" angle="-30" />
             </transformations>
 
             <descendants>
@@ -1654,8 +1666,29 @@ jeff
                 <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
-                <translation x="9" y="0" z="0"/>
+                <translation x="-11" y="0" z="15.5"/>
+                <rotation axis="z" angle="15" />
                 <rotation axis="y" angle="-90" />
+            </transformations>
+
+            <descendants>
+                <noderef id="tieBody" />
+                <noderef id="tieRightWing" />
+                <noderef id="tieLeftWing" />
+            </descendants>
+        </node>
+
+        <node id="tieFinalShape2">
+            <material id="defaultGreyMaterial" />
+            <texture id="tieGreyTexture">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+            <transformations>
+                <translation x="14" y="7.5" z="-14"/>
+
+                <rotation axis="y" angle="195" />
+                <rotation axis="x" angle="-18" />
+                <rotation axis="z" angle="-10" />
             </transformations>
 
             <descendants>
@@ -1760,7 +1793,7 @@ jeff
                 <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
-                <translation x="0" y="10" z="0" />
+                <translation x="-14" y="1" z="14" />
                 <scale sx="0.75" sy="0.75" sz="0.75" />
             </transformations>
 
@@ -1773,13 +1806,35 @@ jeff
             </descendants>
         </node>
 
-        <!-- Generic Laser Cylinder (created to be used in case of many lasers) -->
+        <!-- Generic Laser Cylinders -->
         <node id="greenlaserCylinder">
-            <material id="laserMaterial" />
+            <material id="greenLaserMaterial" />
             <texture id="null">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
+                <rotation axis="y" angle="-20" />
+                <rotation axis="x" angle="13" />
+                <rotation axis="z" angle="-30" />
+
+                <scale sx="0.05" sy="0.05" sz="0.5" />
+            </transformations>
+
+            <descendants>
+                <leaf type="cylinder" height="3.0" topRadius="1.0" bottomRadius="1.0" stacks="4" slices="8"/>
+            </descendants>
+        </node>
+
+        <node id="redlaserCylinder">
+            <material id="redLaserMaterial" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+            <transformations>
+                <rotation axis="y" angle="-80" />
+                <rotation axis="z" angle="12" />
+                <rotation axis="x" angle="8" />
+
                 <scale sx="0.05" sy="0.05" sz="0.5" />
             </transformations>
 
@@ -1789,18 +1844,82 @@ jeff
         </node>
 
         <!-- Laser instance -->
-        <node id="laser">
+        <node id="xWingLaser1">
             <material id="null" />
             <texture id="null">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
             <transformations>
-                <translation x="0" y="8" z="5" />
+                <translation x="3.5" y="1.1" z="10" />
+                <translation x="-8" y="0" z="-8" />
             </transformations>
 
             <descendants>
                 <noderef id="greenlaserCylinder" />
+            </descendants>
+        </node>
+
+        <node id="xWingLaser2">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-7.8" y="1.9" z="14" />
+                <translation x="-8" y="0" z="-8" />
+            </transformations>
+
+            <descendants>
+                <noderef id="greenlaserCylinder" />
+            </descendants>
+        </node>
+
+        <node id="tieLaser1">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="10" y="6" z="-13" />
+            </transformations>
+
+            <descendants>
+                <noderef id="redlaserCylinder" />
+            </descendants>
+        </node> 
+
+        <node id="tieLaser2">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="5" z="-12" />
+            </transformations>
+
+            <descendants>
+                <noderef id="redlaserCylinder" />
+            </descendants>
+        </node> 
+
+        <node id="laserGroup">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <noderef id="xWingLaser1" />
+                <noderef id="xWingLaser2" />
+                <noderef id="tieLaser1" />
+                <noderef id="tieLaser2" />
             </descendants>
         </node>
 
