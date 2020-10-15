@@ -30,7 +30,7 @@ class MySceneGraph {
         this.views = [];
 
         
-        // this.activeView = '';
+        this.curView = '';
 
 
         this.materialStack = [];
@@ -368,13 +368,8 @@ class MySceneGraph {
 
         this.scene.camera = this.views[defaultID];
         // this.activeView = defaultID;
-        this.scene.interface.curView = defaultID;
+        this.scene.curView = defaultID;
         this.scene.interface.setActiveCamera(this.scene.camera);
-
-        // for (let view in this.views) {
-        //     console.log("VIEW");
-        //     console.log(view);
-        // }
 
         return null;
     }

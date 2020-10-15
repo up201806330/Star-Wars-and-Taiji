@@ -25,6 +25,8 @@ class MyInterface extends CGFinterface {
         this.lightsFolder = this.gui.addFolder("Lights");
         this.lightsFolder.open();
 
+        //this.curView = '';
+
         this.initKeys();
 
         return true;
