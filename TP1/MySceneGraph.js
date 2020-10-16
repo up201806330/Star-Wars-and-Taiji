@@ -29,7 +29,7 @@ class MySceneGraph {
         this.nodes = [];
         this.views = [];
 
-        
+
         // this.activeView = '';
 
 
@@ -222,7 +222,7 @@ class MySceneGraph {
         var referenceIndex = nodeNames.indexOf("reference");
 
         // Get root of the scene.
-        if(rootIndex == -1)
+        if (rootIndex == -1)
             return "No root id defined for scene.";
 
         var rootNode = children[rootIndex];
@@ -234,7 +234,7 @@ class MySceneGraph {
         // console.log("\t\t\t\t\t\t\tidRoot: " + this.idRoot);
 
         // Get axis length        
-        if(referenceIndex == -1)
+        if (referenceIndex == -1)
             this.onXMLMinorError("no axis_length defined for scene; assuming 'length = 1'");
 
         var refNode = children[referenceIndex];
@@ -283,11 +283,11 @@ class MySceneGraph {
             // https://www.w3schools.com/xml/dom_nodes_info.asp
             if (view.nodeName == "perspective") {
                 // console.log("Found a Perspective View!");
-                
+
                 // main parameters
-                id    = this.reader.getString(view, perspectiveParameters[i++], nonexistentParameter);
-                near  = this.reader.getFloat(view, perspectiveParameters[i++], nonexistentParameter);
-                far   = this.reader.getFloat(view, perspectiveParameters[i++], nonexistentParameter);
+                id = this.reader.getString(view, perspectiveParameters[i++], nonexistentParameter);
+                near = this.reader.getFloat(view, perspectiveParameters[i++], nonexistentParameter);
+                far = this.reader.getFloat(view, perspectiveParameters[i++], nonexistentParameter);
                 angle = this.reader.getFloat(view, perspectiveParameters[i++], nonexistentParameter);
 
                 // coords
@@ -302,12 +302,12 @@ class MySceneGraph {
                 xTo = this.reader.getFloat(viewsChildren[1], "x", nonexistentParameter);
                 yTo = this.reader.getFloat(viewsChildren[1], "y", nonexistentParameter);
                 zTo = this.reader.getFloat(viewsChildren[1], "z", nonexistentParameter);
-                
+
                 from = vec3.fromValues(xFrom, yFrom, zFrom);
-                to   = vec3.fromValues(xTo, yTo, zTo);
+                to = vec3.fromValues(xTo, yTo, zTo);
 
                 this.views[id] = new CGFcamera(angle, near, far, from, to);
-                
+
                 // console.log(this.views["defaultCamera"]);
             }
 
@@ -315,13 +315,13 @@ class MySceneGraph {
                 // console.log("Found an Ortho View!");
 
                 // main parameters
-                id    = this.reader.getString(view, orthoParameters[i++], nonexistentParameter);
-                near  = this.reader.getFloat(view, orthoParameters[i++], nonexistentParameter);
-                far   = this.reader.getFloat(view, orthoParameters[i++], nonexistentParameter);
-                left  = this.reader.getFloat(view, orthoParameters[i++], nonexistentParameter);
+                id = this.reader.getString(view, orthoParameters[i++], nonexistentParameter);
+                near = this.reader.getFloat(view, orthoParameters[i++], nonexistentParameter);
+                far = this.reader.getFloat(view, orthoParameters[i++], nonexistentParameter);
+                left = this.reader.getFloat(view, orthoParameters[i++], nonexistentParameter);
                 right = this.reader.getFloat(view, orthoParameters[i++], nonexistentParameter);
-                top   = this.reader.getFloat(view, orthoParameters[i++], nonexistentParameter);
-                bottom= this.reader.getFloat(view, orthoParameters[i++], nonexistentParameter);
+                top = this.reader.getFloat(view, orthoParameters[i++], nonexistentParameter);
+                bottom = this.reader.getFloat(view, orthoParameters[i++], nonexistentParameter);
 
                 // coords
                 if (viewsChildren.length != 3 && viewsChildren.length != 2) {
@@ -343,14 +343,14 @@ class MySceneGraph {
                     xUp = this.reader.getFloat(viewsChildren[2], "x", nonexistentParameter);
                     yUp = this.reader.getFloat(viewsChildren[2], "y", nonexistentParameter);
                     zUp = this.reader.getFloat(viewsChildren[2], "z", nonexistentParameter);
-                    up   = vec3.fromValues(xUp, yUp, zUp);
+                    up = vec3.fromValues(xUp, yUp, zUp);
                 }
 
                 from = vec3.fromValues(xFrom, yFrom, zFrom);    // from "=" position
-                to   = vec3.fromValues(xTo, yTo, zTo);          // to "=" target
+                to = vec3.fromValues(xTo, yTo, zTo);          // to "=" target
 
                 this.views[id] = new CGFcameraOrtho(left, right, bottom, top, near, far, from, to, up);
-                
+
                 // console.log(this.views["demoOrtho"]);
             }
 
@@ -443,7 +443,7 @@ class MySceneGraph {
             }
             else {
                 attributeNames.push(...["enable", "position", "ambient", "diffuse", "specular"]);
-                attributeTypes.push(...["boolean","position", "color", "color", "color"]);
+                attributeTypes.push(...["boolean", "position", "color", "color", "color"]);
             }
 
             // Get id of the current light.
@@ -506,7 +506,7 @@ class MySceneGraph {
         this.textures = [];
 
         let atLeastOne = false;
-        for (let i = 0 ; i < children.length ; i++){
+        for (let i = 0; i < children.length; i++) {
             if (children[i].nodeName != "texture") {
                 this.onXMLMinorError("unknown tag <" + children[i].nodeName + ">");
                 continue;
@@ -526,7 +526,7 @@ class MySceneGraph {
             if (path == null) return "unable to parse path for texture with ID: " + textureID;
 
             var texture = new CGFtexture(this.scene, path);
-            this.textures[textureID] = texture;   
+            this.textures[textureID] = texture;
             atLeastOne = true;
         }
 
@@ -541,14 +541,14 @@ class MySceneGraph {
     generateDefaultMaterial() {
         var materialDefault = new CGFappearance(this.scene);
         materialDefault.setShininess(1);
-        materialDefault.setSpecular(1,0.078,0.576, 1); // Hot pink, so its noticeable
-        materialDefault.setDiffuse(1,0.078,0.576, 1);
-        materialDefault.setAmbient(1,0.078,0.576, 1);
-        materialDefault.setEmission(1,0.078,0.576, 1);
-    
+        materialDefault.setSpecular(1, 0.078, 0.576, 1); // Hot pink, so its noticeable
+        materialDefault.setDiffuse(1, 0.078, 0.576, 1);
+        materialDefault.setAmbient(1, 0.078, 0.576, 1);
+        materialDefault.setEmission(1, 0.078, 0.576, 1);
+
         // Generates random material ID not currently in use.
-        this.defaultMaterialID = "defaultMaterial"; 
-    
+        this.defaultMaterialID = "defaultMaterial";
+
         this.materials[this.defaultMaterialID] = materialDefault;
     }
 
@@ -561,7 +561,7 @@ class MySceneGraph {
 
         this.materials = [];
         this.generateDefaultMaterial();
-        
+
         let atLeastOne = false;
         for (let i = 0; i < children.length; i++) {
             if (children[i].nodeName != "material") {
@@ -579,13 +579,13 @@ class MySceneGraph {
                 return "ID must be unique for each material (conflict: ID: " + materialID + ")";
 
             var materialArgs = children[i].children;
-            var nodeNames = []; 
-            for (let j = 0 ; j < materialArgs.length ; j++) nodeNames.push(materialArgs[j].nodeName);
+            var nodeNames = [];
+            for (let j = 0; j < materialArgs.length; j++) nodeNames.push(materialArgs[j].nodeName);
             /**/
             // Shininess
             let shininessIndex = nodeNames.indexOf("shininess");
             if (shininessIndex == -1) return "no shininess value defined for material with ID: " + materialID;
-            
+
             let shininess = this.reader.getFloat(materialArgs[shininessIndex], 'value');
             if (shininess == null) return "unable to parse shininess value for material with ID: " + materialID;
             else if (shininess <= 0) return "shininess must be positive (on material with ID: " + materialID + ")";
@@ -607,7 +607,7 @@ class MySceneGraph {
             let g = this.reader.getFloat(materialArgs[ambientIndex], 'g');
             if (g == null) return "unable to parse g value of ambient for material with ID: " + materialID;
             else if (g < 0 || g > 1) return "ambient g must be between 0 and 1 (on material with ID: " + materialID + ")";
-            else if (isNaN(g)) return "ambient g is non numeric value";   
+            else if (isNaN(g)) return "ambient g is non numeric value";
             ambient.push(g);
             // B //
             let b = this.reader.getFloat(materialArgs[ambientIndex], 'b');
@@ -625,7 +625,7 @@ class MySceneGraph {
             // Diffuse
             let diffuseIndex = nodeNames.indexOf("diffuse");
             if (diffuseIndex == -1) return "no diffuse value defined for material with ID: " + materialID;
-            
+
             let diffuse = [];
             // R //
             r = this.reader.getFloat(materialArgs[diffuseIndex], 'r');
@@ -637,7 +637,7 @@ class MySceneGraph {
             g = this.reader.getFloat(materialArgs[diffuseIndex], 'g');
             if (g == null) return "unable to parse g value of diffuse for material with ID: " + materialID;
             else if (g < 0 || g > 1) return "diffuse g must be between 0 and 1 (on material with ID: " + materialID + ")";
-            else if (isNaN(g)) return "diffuse g is non numeric value"; 
+            else if (isNaN(g)) return "diffuse g is non numeric value";
             diffuse.push(g);
             // B //
             b = this.reader.getFloat(materialArgs[diffuseIndex], 'b');
@@ -656,7 +656,7 @@ class MySceneGraph {
             // Specular
             let specularIndex = nodeNames.indexOf("specular");
             if (specularIndex == -1) return "no specular value defined for material with ID: " + materialID;
-            
+
             let specular = [];
             // R //
             r = this.reader.getFloat(materialArgs[specularIndex], 'r');
@@ -668,7 +668,7 @@ class MySceneGraph {
             g = this.reader.getFloat(materialArgs[specularIndex], 'g');
             if (g == null) return "unable to parse g value of specular for material with ID: " + materialID;
             else if (g < 0 || g > 1) return "specular g must be between 0 and 1 (on material with ID: " + materialID + ")";
-            else if (isNaN(g)) return "specular g is non numeric value"; 
+            else if (isNaN(g)) return "specular g is non numeric value";
             specular.push(g);
             // B //
             b = this.reader.getFloat(materialArgs[specularIndex], 'b');
@@ -699,7 +699,7 @@ class MySceneGraph {
             g = this.reader.getFloat(materialArgs[emissiveIndex], 'g');
             if (g == null) return "unable to parse g value of emissive for material with ID: " + materialID;
             else if (g < 0 || g > 1) return "emissive g must be between 0 and 1 (on material with ID: " + materialID + ")";
-            else if (isNaN(g)) return "emissive g is non numeric value"; 
+            else if (isNaN(g)) return "emissive g is non numeric value";
             emissive.push(g);
             // B //
             b = this.reader.getFloat(materialArgs[emissiveIndex], 'b');
@@ -734,10 +734,10 @@ class MySceneGraph {
    * Parses the <nodes> block.
    * @param {nodes block element} nodesNode
    */
-  parseNodes(nodesNode) {
+    parseNodes(nodesNode) {
 
         var children = nodesNode.children;
-        
+
         this.nodes = [];
 
         var grandChildren = [];
@@ -775,7 +775,7 @@ class MySceneGraph {
             var materialIndex = nodeNames.indexOf("material");
             var textureIndex = nodeNames.indexOf("texture");
             var descendantsIndex = nodeNames.indexOf("descendants");
-            
+
             // Transformations
             if (transformationsIndex == -1) {
                 this.onXMLMinorError("There isn't a transformations tag");
@@ -802,7 +802,7 @@ class MySceneGraph {
                         mat4.translate(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, [translX, translY, translZ]);
                         // console.log(this.nodes[nodeID].transformMatrix);
                         break;
-                    
+
                     case "rotation":
                         rotAxis = this.reader.getString(nodeTransformations[k], 'axis');
                         rotDegree = this.reader.getFloat(nodeTransformations[k], 'angle') * DEGREE_TO_RAD;
@@ -811,7 +811,7 @@ class MySceneGraph {
                         mat4.rotate(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, rotDegree, this.axisCoords[rotAxis]);
                         // console.log("AXIS: " + rotAxis);
                         break;
-                    
+
                     case "scale":
                         scaleX = this.reader.getFloat(nodeTransformations[k], "sx");
                         scaleY = this.reader.getFloat(nodeTransformations[k], "sy");
@@ -820,14 +820,14 @@ class MySceneGraph {
                         // mat4.scale(dest, dest, vec);
                         mat4.scale(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, [scaleX, scaleY, scaleZ]);
                         break;
-                        
+
                     default:
                         console.log(nodeTransformations[k].nodeName);
                         break;
 
                 }
             }
-            
+
             // Texture
             var textureID = this.reader.getString(grandChildren[textureIndex], 'id');
             if (textureID == null) console.log("Coulnd't parse texture");
@@ -836,8 +836,8 @@ class MySceneGraph {
             this.nodes[nodeID].textureID = textureID;
 
             var texParams = [];
-            for (let l = 0 ; l < grandChildren[textureIndex].children.length; l++) texParams.push(grandChildren[textureIndex].children[l].nodeName);
-            
+            for (let l = 0; l < grandChildren[textureIndex].children.length; l++) texParams.push(grandChildren[textureIndex].children[l].nodeName);
+
             let afs, aft;
             let amplificationIndex = texParams.indexOf('amplification');
             if (amplificationIndex == -1) {
@@ -851,7 +851,7 @@ class MySceneGraph {
                     this.onXMLMinorError("Amplification afs is non numeric value. Using default values. (ID: " + textureID + ")");
                     afs = 1;
                 }
-                if (afs <= 0){
+                if (afs <= 0) {
                     this.onXMLMinorError("Amplification afs must be positive. Using default values. (ID: " + textureID + ")");
                     afs = 1;
                 }
@@ -861,7 +861,7 @@ class MySceneGraph {
                     this.onXMLMinorError("Amplification aft is non numeric value. Using default values. (ID: " + textureID + ")");
                     aft = 1;
                 }
-                if (aft <= 0){
+                if (aft <= 0) {
                     this.onXMLMinorError("Amplification aft must be positive. Using default values. (ID: " + textureID + ")");
                     aft = 1;
                 }
@@ -887,7 +887,7 @@ class MySceneGraph {
             }
 
             for (let k = 0; k < nodeDescendants.length; k++) {
-                
+
                 if (nodeDescendants[k].nodeName == "noderef") {
 
                     let noderefElement = this.reader.getString(nodeDescendants[k], "id");
@@ -915,159 +915,170 @@ class MySceneGraph {
     }
 
 
-    parseBoolean(node, name, messageError){
-        var boolVal = true;
-        boolVal = this.reader.getBoolean(node, name);
-        if (!(boolVal != null && !isNaN(boolVal) && (boolVal == true || boolVal == false)))
-            this.onXMLMinorError("unable to parse value component " + messageError + "; assuming 'value = 1'");
+    parseBoolean(node, name, messageError) {
+        var boolVal = this.reader.getBoolean(node, name);
+        if (!(
+            boolVal != null &&
+            !isNaN(boolVal) &&
+            (boolVal == true || boolVal == false)
+        )
+        ) {
+            this.onXMLMinorError(
+                "unable to parse value component " +
+                messageError +
+                "; assuming 'value = 1'"
+            );
+            return true;
 
-        return boolVal || 1;
+
+            return boolVal;
+        }
     }
-    /**
-     * Parse the coordinates from a node with ID: id
-     * @param {block element} node
-     * @param {message to be displayed in case of error} messageError
-     */
-    parseCoordinates3D(node, messageError) {
-        var position = [];
+        /**
+         * Parse the coordinates from a node with ID: id
+         * @param {block element} node
+         * @param {message to be displayed in case of error} messageError
+         */
+        parseCoordinates3D(node, messageError) {
+            var position = [];
 
-        // x
-        var x = this.reader.getFloat(node, 'x');
-        if (!(x != null && !isNaN(x)))
-            return "unable to parse x-coordinate of the " + messageError;
+            // x
+            var x = this.reader.getFloat(node, 'x');
+            if (!(x != null && !isNaN(x)))
+                return "unable to parse x-coordinate of the " + messageError;
 
-        // y
-        var y = this.reader.getFloat(node, 'y');
-        if (!(y != null && !isNaN(y)))
-            return "unable to parse y-coordinate of the " + messageError;
+            // y
+            var y = this.reader.getFloat(node, 'y');
+            if (!(y != null && !isNaN(y)))
+                return "unable to parse y-coordinate of the " + messageError;
 
-        // z
-        var z = this.reader.getFloat(node, 'z');
-        if (!(z != null && !isNaN(z)))
-            return "unable to parse z-coordinate of the " + messageError;
+            // z
+            var z = this.reader.getFloat(node, 'z');
+            if (!(z != null && !isNaN(z)))
+                return "unable to parse z-coordinate of the " + messageError;
 
-        position.push(...[x, y, z]);
+            position.push(...[x, y, z]);
 
-        return position;
-    }
-
-    /**
-     * Parse the coordinates from a node with ID: id
-     * @param {block element} node
-     * @param {message to be displayed in case of error} messageError
-     */
-    parseCoordinates4D(node, messageError) {
-        var position = [];
-
-        //Get x, y, z
-        position = this.parseCoordinates3D(node, messageError);
-
-        if (!Array.isArray(position))
             return position;
-
-
-        // w
-        var w = this.reader.getFloat(node, 'w');
-        if (!(w != null && !isNaN(w)))
-            return "unable to parse w-coordinate of the " + messageError;
-
-        position.push(w);
-
-        return position;
-    }
-
-    /**
-     * Parse the color components from a node
-     * @param {block element} node
-     * @param {message to be displayed in case of error} messageError
-     */
-    parseColor(node, messageError) {
-        var color = [];
-
-        // R
-        var r = this.reader.getFloat(node, 'r');
-        if (!(r != null && !isNaN(r) && r >= 0 && r <= 1))
-            return "unable to parse R component of the " + messageError;
-
-        // G
-        var g = this.reader.getFloat(node, 'g');
-        if (!(g != null && !isNaN(g) && g >= 0 && g <= 1))
-            return "unable to parse G component of the " + messageError;
-
-        // B
-        var b = this.reader.getFloat(node, 'b');
-        if (!(b != null && !isNaN(b) && b >= 0 && b <= 1))
-            return "unable to parse B component of the " + messageError;
-
-        // A
-        var a = this.reader.getFloat(node, 'a');
-        if (!(a != null && !isNaN(a) && a >= 0 && a <= 1))
-            return "unable to parse A component of the " + messageError;
-
-        color.push(...[r, g, b, a]);
-
-        return color;
-    }
-
-    /**
-     * Displays the scene, processing each node, starting in the root node.
-     */
-    displayScene() {
-        //To do: Create display loop for transversing the scene graph, calling the root node's display function
-       
-        // HOW TO TEST:
-        // - Erase all of the nodes in the xml files except the "xWingRectangleDefault"
-        // - Put it as the root
-        // - Uncomment the following 2 lines and a rectangle (square) should appear
-        // var currNode = this.nodes["xWingRectangleDefault"]; 
-        // currNode.leaves[0].aPrimitive.display();
-
-        // this.nodes[this.idRoot].display();
-
-        // var currNode = this.nodes["rootNode"]; 
-        // currNode.leaves[0].aPrimitive.display();
-
-        //console.log("ROOT: ");
-        // console.log(this.nodes[this.idRoot]);
-        this.displayNode(this.idRoot);
-
-    }
-
-    displayNode(nodeToDisplayID) {
-        let nodeToDisplay = this.nodes[nodeToDisplayID];
-
-        this.scene.multMatrix(nodeToDisplay.transformMatrix);
-
-        if (nodeToDisplay.materialID != "null") this.materialStack.push(nodeToDisplay.materialID);
-        let topOfMatStack = this.materialStack[this.materialStack.length - 1];
-        
-        if (nodeToDisplay.textureID != "null") this.textureStack.push(nodeToDisplay.textureID);
-        let topofTexStack = this.textureStack[this.textureStack.length - 1];
-
-        for (let leaf = 0; leaf < nodeToDisplay.leaves.length; leaf++) {
-            // Material
-            if (this.materials[topOfMatStack] != null) {
-                this.materials[topOfMatStack].apply();
-            }
-            else this.materials[this.defaultMaterialID].apply();
-
-            // Texture
-            if (this.textures[topofTexStack] != null && this.textures[topofTexStack] != "clear") {
-                nodeToDisplay.leaves[leaf].aPrimitive.updateTexCoords(nodeToDisplay.afs, nodeToDisplay.aft);
-                this.textures[topofTexStack].bind();
-            }
-
-            // Display
-            nodeToDisplay.leaves[leaf].aPrimitive.display();
-        }
-        
-        for (let i = 0; i < nodeToDisplay.childNodes.length; i++) {
-            this.scene.pushMatrix();
-            this.displayNode(nodeToDisplay.childNodes[i]);
-            this.scene.popMatrix();
         }
 
-        if (nodeToDisplay.materialID != "null") this.materialStack.pop();
-        if (nodeToDisplay.textureID != "null") this.textureStack.pop();
+        /**
+         * Parse the coordinates from a node with ID: id
+         * @param {block element} node
+         * @param {message to be displayed in case of error} messageError
+         */
+        parseCoordinates4D(node, messageError) {
+            var position = [];
+
+            //Get x, y, z
+            position = this.parseCoordinates3D(node, messageError);
+
+            if (!Array.isArray(position))
+                return position;
+
+
+            // w
+            var w = this.reader.getFloat(node, 'w');
+            if (!(w != null && !isNaN(w)))
+                return "unable to parse w-coordinate of the " + messageError;
+
+            position.push(w);
+
+            return position;
+        }
+
+        /**
+         * Parse the color components from a node
+         * @param {block element} node
+         * @param {message to be displayed in case of error} messageError
+         */
+        parseColor(node, messageError) {
+            var color = [];
+
+            // R
+            var r = this.reader.getFloat(node, 'r');
+            if (!(r != null && !isNaN(r) && r >= 0 && r <= 1))
+                return "unable to parse R component of the " + messageError;
+
+            // G
+            var g = this.reader.getFloat(node, 'g');
+            if (!(g != null && !isNaN(g) && g >= 0 && g <= 1))
+                return "unable to parse G component of the " + messageError;
+
+            // B
+            var b = this.reader.getFloat(node, 'b');
+            if (!(b != null && !isNaN(b) && b >= 0 && b <= 1))
+                return "unable to parse B component of the " + messageError;
+
+            // A
+            var a = this.reader.getFloat(node, 'a');
+            if (!(a != null && !isNaN(a) && a >= 0 && a <= 1))
+                return "unable to parse A component of the " + messageError;
+
+            color.push(...[r, g, b, a]);
+
+            return color;
+        }
+
+        /**
+         * Displays the scene, processing each node, starting in the root node.
+         */
+        displayScene() {
+            //To do: Create display loop for transversing the scene graph, calling the root node's display function
+
+            // HOW TO TEST:
+            // - Erase all of the nodes in the xml files except the "xWingRectangleDefault"
+            // - Put it as the root
+            // - Uncomment the following 2 lines and a rectangle (square) should appear
+            // var currNode = this.nodes["xWingRectangleDefault"]; 
+            // currNode.leaves[0].aPrimitive.display();
+
+            // this.nodes[this.idRoot].display();
+
+            // var currNode = this.nodes["rootNode"]; 
+            // currNode.leaves[0].aPrimitive.display();
+
+            //console.log("ROOT: ");
+            // console.log(this.nodes[this.idRoot]);
+            this.displayNode(this.idRoot);
+
+        }
+
+        displayNode(nodeToDisplayID) {
+            let nodeToDisplay = this.nodes[nodeToDisplayID];
+
+            this.scene.multMatrix(nodeToDisplay.transformMatrix);
+
+            if (nodeToDisplay.materialID != "null") this.materialStack.push(nodeToDisplay.materialID);
+            let topOfMatStack = this.materialStack[this.materialStack.length - 1];
+
+            if (nodeToDisplay.textureID != "null") this.textureStack.push(nodeToDisplay.textureID);
+            let topofTexStack = this.textureStack[this.textureStack.length - 1];
+
+            for (let leaf = 0; leaf < nodeToDisplay.leaves.length; leaf++) {
+                // Material
+                if (this.materials[topOfMatStack] != null) {
+                    this.materials[topOfMatStack].apply();
+                }
+                else this.materials[this.defaultMaterialID].apply();
+
+                // Texture
+                if (this.textures[topofTexStack] != null && this.textures[topofTexStack] != "clear") {
+                    nodeToDisplay.leaves[leaf].aPrimitive.updateTexCoords(nodeToDisplay.afs, nodeToDisplay.aft);
+                    this.textures[topofTexStack].bind();
+                }
+
+                // Display
+                nodeToDisplay.leaves[leaf].aPrimitive.display();
+            }
+
+            for (let i = 0; i < nodeToDisplay.childNodes.length; i++) {
+                this.scene.pushMatrix();
+                this.displayNode(nodeToDisplay.childNodes[i]);
+                this.scene.popMatrix();
+            }
+
+            if (nodeToDisplay.materialID != "null") this.materialStack.pop();
+            if (nodeToDisplay.textureID != "null") this.textureStack.pop();
+        }
     }
-}

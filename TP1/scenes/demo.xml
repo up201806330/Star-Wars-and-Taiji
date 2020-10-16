@@ -142,7 +142,7 @@
             <ambient r="0" g="1" b="0" a="1.0" />
             <diffuse r="0" g="1" b="0" a="1.0" />
             <specular r="0" g="1" b="0" a="0.4" />
-            <emissive r="0" g="0.0" b="0" a="1.0" />
+            <emissive r="0" g="1" b="0" a="1.0" />
         </material>
 
         <material id="redLaserMaterial">
@@ -150,7 +150,7 @@
             <ambient r="1" g="0" b="0" a="1.0" />
             <diffuse r="1" g="0" b="0" a="1.0" />
             <specular r="1" g="0" b="0" a="0.4" />
-            <emissive r="0" g="0.0" b="0" a="1.0" />
+            <emissive r="1" g="0.0" b="0" a="1.0" />
         </material>
         
         <material id="skyBoxMaterial">
@@ -188,22 +188,22 @@
             <!-- declaring descendants, at least one node or one leaf must be present
              descendants may be mixed, nodes and leafs -->
             <descendants>
-                <!--<noderef id="skyBoxFinal" />
+                <noderef id="skyBoxFinal" />
                 <noderef id="xWingFull" />
                 <noderef id="xWingFull2" />
                 <noderef id="tieFinalShape" />
                 <noderef id="explosionFinal" />
                 <noderef id="laserGroup" />
                 <noderef id="tieFinalShape2" />
-                <noderef id="tieFinalShape3" />-->
-                <noderef id="jeff"/>
+                <noderef id="tieFinalShape3" />
+                <!--<noderef id="jeff"/>-->
             </descendants>
         </node>
 
 
         <node id="jeff">
-            <material id="null" />
-            <texture id="null">
+            <material id="skyBoxMaterial" />
+            <texture id="feup">
                 <amplification afs="2" aft="2" />
             </texture>
 
@@ -212,7 +212,7 @@
             </transformations>
 
             <descendants>
-                <leaf type="torus" inner="3" outer="8" slices="60" loops="60" />
+                <leaf type="triangle" x1="0" y1="0" x2="2" y2="0" x3="1" y3="1.73" />
             </descendants>
         </node>
 
