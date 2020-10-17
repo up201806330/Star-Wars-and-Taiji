@@ -925,9 +925,8 @@ class MySceneGraph {
             );
             return true;
 
-
-            return boolVal;
         }
+        return boolVal;
     }
         /**
          * Parse the coordinates from a node with ID: id
