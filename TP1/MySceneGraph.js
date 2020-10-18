@@ -231,7 +231,6 @@ class MySceneGraph {
             return "No root id defined for scene.";
 
         this.idRoot = id;
-        // console.log("\t\t\t\t\t\t\tidRoot: " + this.idRoot);
 
         // Get axis length        
         if (referenceIndex == -1)
@@ -357,7 +356,6 @@ class MySceneGraph {
         }
 
         let defaultID = this.reader.getString(viewsNode, "default");
-        console.log("Default: " + defaultID);
         if (defaultID == null) {
             this.onXMLError("Missing default view id in scene views.");
         }
@@ -743,19 +741,23 @@ class MySceneGraph {
         for (var i = 0; i < children.length; i++) {
 
             if (children[i].nodeName != "node") {
-                this.onXMLMinorError("unknown tag <" + children[i].nodeName + ">");
+                this.onXMLError("unknown tag <" + children[i].nodeName + ">" + ". Ignoring node");
                 continue;
             }
 
             // Get id of the current node.
             var nodeID = this.reader.getString(children[i], 'id');
 
-            if (nodeID == null)
-                return "no ID defined for nodeID";
+            if (nodeID == null){
+                this.onXMLError("no ID defined for nodeID. Ignoring node");
+                continue;
+            }
 
             // Checks for repeated IDs.
-            if (this.nodes[nodeID] != null)
-                return "ID must be unique for each node (conflict: ID: " + nodeID + ")";
+            if (this.nodes[nodeID] != null){
+                this.onXMLError("ID must be unique for each node (conflict: ID: " + nodeID + "). Ignoring node.");
+                continue;
+            }
 
             grandChildren = children[i].children;
 
@@ -789,22 +791,17 @@ class MySceneGraph {
                         translX = this.reader.getFloat(nodeTransformations[k], 'x');
                         translY = this.reader.getFloat(nodeTransformations[k], 'y');
                         translZ = this.reader.getFloat(nodeTransformations[k], 'z');
-                        // console.log(translZ);
-                        // console.log(this.nodes[nodeID].transformMatrix);
 
                         // syntax: translate(out, a, v) -> out: the receiving matrix, a: the matrix to translate, v: vector to translate by
                         // http://glmatrix.net/docs/module-mat4.html
                         mat4.translate(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, [translX, translY, translZ]);
-                        // console.log(this.nodes[nodeID].transformMatrix);
                         break;
 
                     case "rotation":
                         rotAxis = this.reader.getString(nodeTransformations[k], 'axis');
                         rotDegree = this.reader.getFloat(nodeTransformations[k], 'angle') * DEGREE_TO_RAD;
 
-                        // mat4.rotate(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, rotDegree, rotAxis);
                         mat4.rotate(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, rotDegree, this.axisCoords[rotAxis]);
-                        // console.log("AXIS: " + rotAxis);
                         break;
 
                     case "scale":
@@ -812,12 +809,10 @@ class MySceneGraph {
                         scaleY = this.reader.getFloat(nodeTransformations[k], "sy");
                         scaleZ = this.reader.getFloat(nodeTransformations[k], "sz");
 
-                        // mat4.scale(dest, dest, vec);
                         mat4.scale(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, [scaleX, scaleY, scaleZ]);
                         break;
 
                     default:
-                        console.log(nodeTransformations[k].nodeName);
                         break;
 
                 }
@@ -825,8 +820,8 @@ class MySceneGraph {
 
             // Texture
             var textureID = this.reader.getString(grandChildren[textureIndex], 'id');
-            if (textureID == null) console.log("Coulnd't parse texture");
-            if (textureID != "null" && textureID != "clear" && this.textures[textureID] == null) console.log("Texture id " + textureID + " doesn't exist");
+            if (textureID == null) this.onXMLMinorError("Coulnd't parse texture");
+            if (textureID != "null" && textureID != "clear" && this.textures[textureID] == null) this.onXMLMinorError("Texture id " + textureID + " doesn't exist");
 
             this.nodes[nodeID].textureID = textureID;
 
@@ -866,8 +861,8 @@ class MySceneGraph {
 
             // Material
             var materialID = this.reader.getString(grandChildren[materialIndex], 'id');
-            if (materialID == null) console.log("Coulnd't parse material");
-            if (materialID != "null" && this.materials[materialID] == null) console.log("Material id " + materialID + " doesn't exist");
+            if (materialID == null) this.onXMLMinorError("Coulnd't parse material");
+            if (materialID != "null" && this.materials[materialID] == null) this.onXMLMinorError("Material id " + materialID + " doesn't exist");
 
             this.nodes[nodeID].materialID = materialID;
 
@@ -1018,24 +1013,7 @@ class MySceneGraph {
          * Displays the scene, processing each node, starting in the root node.
          */
         displayScene() {
-            //To do: Create display loop for transversing the scene graph, calling the root node's display function
-
-            // HOW TO TEST:
-            // - Erase all of the nodes in the xml files except the "xWingRectangleDefault"
-            // - Put it as the root
-            // - Uncomment the following 2 lines and a rectangle (square) should appear
-            // var currNode = this.nodes["xWingRectangleDefault"]; 
-            // currNode.leaves[0].aPrimitive.display();
-
-            // this.nodes[this.idRoot].display();
-
-            // var currNode = this.nodes["rootNode"]; 
-            // currNode.leaves[0].aPrimitive.display();
-
-            //console.log("ROOT: ");
-            // console.log(this.nodes[this.idRoot]);
             this.displayNode(this.idRoot);
-
         }
 
         displayNode(nodeToDisplayID) {
