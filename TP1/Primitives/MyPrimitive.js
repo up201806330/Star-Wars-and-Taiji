@@ -59,7 +59,7 @@ class MyPrimitive {
         }
 
         else {
-            console.log("Not Implemented!");
+            this.graph.onXMLMinorError("Primitive Not Implemented!");
         }
 
     }
