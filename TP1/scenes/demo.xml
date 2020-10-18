@@ -228,30 +228,8 @@
                 <noderef id="laserGroup" />
                 <noderef id="tieFinalShape2" />
                 <noderef id="tieFinalShape3" />
-                <!--<noderef id="jeff"/>-->
             </descendants>
         </node>
-
-
-        <node id="jeff">
-            <material id="skyBoxMaterial" />
-            <texture id="feup">
-                <amplification afs="2" aft="2" />
-            </texture>
-
-            <transformations>
-                <!--<rotation axis="z" angle="60" />-->
-            </transformations>
-
-            <descendants>
-                <leaf type="triangle" x1="0" y1="0" x2="2" y2="0" x3="1" y3="1.73" />
-            </descendants>
-        </node>
-
-
-
-
-
 
         <!-- X-Wing "Rectangle" Default (1 x 1) -->
         <node id="xWingRectangleDefault">

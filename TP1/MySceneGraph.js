@@ -501,29 +501,33 @@ class MySceneGraph {
         let atLeastOne = false;
         for (let i = 0; i < children.length; i++) {
             if (children[i].nodeName != "texture") {
-                this.onXMLMinorError("unknown tag <" + children[i].nodeName + ">");
+                this.onXMLMinorError("unknown tag <" + children[i].nodeName + ">. Ignoring texture");
                 continue;
             }
 
             // Get id of the current material.
             var textureID = this.reader.getString(children[i], 'id');
-            if (textureID == null)
-                return "no ID defined for texture";
+            if (textureID == null) {
+                this.onXMLError("no ID defined for texture. Ignoring texture");
+                continue;
+            }
 
             // Checks for repeated IDs.
-            if (this.textures[textureID] != null)
-                return "ID must be unique for each texture (conflict: ID: " + textureID + ")";
+            if (this.textures[textureID] != null) {
+                this.onXMLError("ID must be unique for each texture (conflict: ID: " + textureID + "). Ignoring texture");
+                continue;
+            }
 
             // Get path            
             let path = this.reader.getString(children[i], 'path');
-            if (path == null) return "unable to parse path for texture with ID: " + textureID;
+            if (path == null) this.onXMLError("unable to parse path for texture with ID: " + textureID + ". Ignoring texture");
 
             var texture = new CGFtexture(this.scene, path);
             this.textures[textureID] = texture;
             atLeastOne = true;
         }
 
-        if (!atLeastOne) return "at least one texture must be defined on the materials block";
+        if (!atLeastOne) return "at least one texture must be defined on the materials block"; //TODO VERIFICAR AQUI TB ERROS
 
         console.log("Parsed textures");
     }
@@ -564,12 +568,16 @@ class MySceneGraph {
 
             // Get id of the current material.
             var materialID = this.reader.getString(children[i], 'id');
-            if (materialID == null)
-                return "no ID defined for material";
+            if (materialID == null){
+                this.onXMLError("no ID defined for material. Ignoring material");
+                continue;
+            }
 
             // Checks for repeated IDs.
-            if (this.materials[materialID] != null)
-                return "ID must be unique for each material (conflict: ID: " + materialID + ")";
+            if (this.materials[materialID] != null){
+                this.onXMLError("ID must be unique for each material (conflict: ID: " + materialID + "). Ignoring material");
+                continue;
+            }
 
             var materialArgs = children[i].children;
             var nodeNames = [];
@@ -577,135 +585,60 @@ class MySceneGraph {
             /**/
             // Shininess
             let shininessIndex = nodeNames.indexOf("shininess");
-            if (shininessIndex == -1) return "no shininess value defined for material with ID: " + materialID;
-
+            if (shininessIndex == -1) {
+                this.onXMLError("no shininess value defined for material with ID: " + materialID + ". Ignoring material");
+                continue;
+            }
             let shininess = this.reader.getFloat(materialArgs[shininessIndex], 'value');
-            if (shininess == null) return "unable to parse shininess value for material with ID: " + materialID;
-            else if (shininess <= 0) return "shininess must be positive (on material with ID: " + materialID + ")";
-            else if (isNaN(shininess)) return "shininess is non numeric value";
+            if (shininess == null){
+                this.onXMLMinorError("unable to parse shininess value for material with ID: " + materialID + ". Ignoring material");
+                continue;
+            } 
+            else if (shininess <= 0) {
+                this.onXMLMinorError("shininess must be positive for material with ID: " + materialID + ". Ignoring material");
+                continue;
+            }
+            else if (isNaN(shininess)) {
+                this.onXMLMinorError("shininess is non numeric value" + ". Ignoring material");
+                continue;
+            }
             /**/
             /**/
             // Ambient
             let ambientIndex = nodeNames.indexOf("ambient");
-            if (ambientIndex == -1) return "no ambient value defined for material with ID: " + materialID;
+            if (ambientIndex == -1) {
+                this.onXMLError("no ambient value defined for material with ID: " + materialID + ". Ignoring material");
+                continue;
+            }
 
-            let ambient = [];
-            // R //
-            let r = this.reader.getFloat(materialArgs[ambientIndex], 'r');
-            if (r == null) return "unable to parse r value of ambient for material with ID: " + materialID;
-            else if (r < 0 || r > 1) return "ambient r must be between 0 and 1 (on material with ID: " + materialID + ")";
-            else if (isNaN(r)) return "ambient r is non numeric value";
-            ambient.push(r);
-            // G //
-            let g = this.reader.getFloat(materialArgs[ambientIndex], 'g');
-            if (g == null) return "unable to parse g value of ambient for material with ID: " + materialID;
-            else if (g < 0 || g > 1) return "ambient g must be between 0 and 1 (on material with ID: " + materialID + ")";
-            else if (isNaN(g)) return "ambient g is non numeric value";
-            ambient.push(g);
-            // B //
-            let b = this.reader.getFloat(materialArgs[ambientIndex], 'b');
-            if (b == null) return "unable to parse b value of ambient for material with ID: " + materialID;
-            else if (b < 0 || b > 1) return "ambient b must be between 0 and 1 (on material with ID: " + materialID + ")";
-            else if (isNaN(b)) return "ambient b is non numeric value";
-            ambient.push(b);
-            let a = this.reader.getFloat(materialArgs[ambientIndex], 'a');
-            if (a == null) return "unable to parse a value of ambient for material with ID: " + materialID;
-            else if (a < 0 || a > 1) return "ambient a must be between 0 and 1 (on material with ID: " + materialID + ")";
-            else if (isNaN(a)) return "ambient a is non numeric value";
-            ambient.push(a);
+            let ambient = this.parseColor(materialArgs[ambientIndex], "material ambient: " + materialID);
             /**/
             /**/
             // Diffuse
             let diffuseIndex = nodeNames.indexOf("diffuse");
-            if (diffuseIndex == -1) return "no diffuse value defined for material with ID: " + materialID;
+            if (diffuseIndex == -1) this.onXMLError("no diffuse value defined for material with ID: " + materialID + ". Ignoring material");
 
-            let diffuse = [];
-            // R //
-            r = this.reader.getFloat(materialArgs[diffuseIndex], 'r');
-            if (r == null) return "unable to parse r value of diffuse for material with ID: " + materialID;
-            else if (r < 0 || r > 1) return "diffuse r must be between 0 and 1 (on material with ID: " + materialID + ")";
-            else if (isNaN(r)) return "diffuse r is non numeric value";
-            diffuse.push(r);
-            // G //
-            g = this.reader.getFloat(materialArgs[diffuseIndex], 'g');
-            if (g == null) return "unable to parse g value of diffuse for material with ID: " + materialID;
-            else if (g < 0 || g > 1) return "diffuse g must be between 0 and 1 (on material with ID: " + materialID + ")";
-            else if (isNaN(g)) return "diffuse g is non numeric value";
-            diffuse.push(g);
-            // B //
-            b = this.reader.getFloat(materialArgs[diffuseIndex], 'b');
-            if (b == null) return "unable to parse b value of diffuse for material with ID: " + materialID;
-            else if (b < 0 || b > 1) return "diffuse b must be between 0 and 1 (on material with ID: " + materialID + ")";
-            else if (isNaN(b)) return "diffuse b is non numeric value";
-            diffuse.push(b);
-            // A //
-            a = this.reader.getFloat(materialArgs[diffuseIndex], 'a');
-            if (a == null) return "unable to parse a value of diffuse for material with ID: " + materialID;
-            else if (a < 0 || a > 1) return "diffuse a must be between 0 and 1 (on material with ID: " + materialID + ")";
-            else if (isNaN(a)) return "diffuse a is non numeric value";
-            diffuse.push(a);
+            let diffuse = this.parseColor(materialArgs[diffuseIndex], "material diffuse: " + materialID);
             /**/
             /**/
             // Specular
             let specularIndex = nodeNames.indexOf("specular");
-            if (specularIndex == -1) return "no specular value defined for material with ID: " + materialID;
+            if (specularIndex == -1) {
+                this.onXMLError("no specular value defined for material with ID: " + materialID + ". Ignoring material");
+                continue;
+            }
 
-            let specular = [];
-            // R //
-            r = this.reader.getFloat(materialArgs[specularIndex], 'r');
-            if (r == null) return "unable to parse r value of specular for material with ID: " + materialID;
-            else if (r < 0 || r > 1) return "specular r must be between 0 and 1 (on material with ID: " + materialID + ")";
-            else if (isNaN(r)) return "specular r is non numeric value";
-            specular.push(r);
-            // G //
-            g = this.reader.getFloat(materialArgs[specularIndex], 'g');
-            if (g == null) return "unable to parse g value of specular for material with ID: " + materialID;
-            else if (g < 0 || g > 1) return "specular g must be between 0 and 1 (on material with ID: " + materialID + ")";
-            else if (isNaN(g)) return "specular g is non numeric value";
-            specular.push(g);
-            // B //
-            b = this.reader.getFloat(materialArgs[specularIndex], 'b');
-            if (b == null) return "unable to parse b value of specular for material with ID: " + materialID;
-            else if (b < 0 || b > 1) return "specular b must be between 0 and 1 (on material with ID: " + materialID + ")";
-            else if (isNaN(b)) return "specular b is non numeric value";
-            specular.push(b);
-            // A //
-            a = this.reader.getFloat(materialArgs[specularIndex], 'a');
-            if (a == null) return "unable to parse a value of specular for material with ID: " + materialID;
-            else if (a < 0 || a > 1) return "specular a must be between 0 and 1 (on material with ID: " + materialID + ")";
-            else if (isNaN(a)) return "specular a is non numeric value";
-            specular.push(a);
+            let specular = this.parseColor(materialArgs[specularIndex], "material specular: " + materialID);
             /**/
             /**/
             // Emissive
             let emissiveIndex = nodeNames.indexOf("emissive");
-            if (emissiveIndex == -1) return "no emissive value defined for material with ID: " + materialID;
+            if (emissiveIndex == -1) {
+                this.onXMLError("no emissive value defined for material with ID: " + materialID + ". Ignoring material");
+                continue;
+            }
 
-            let emissive = [];
-            // R //
-            r = this.reader.getFloat(materialArgs[emissiveIndex], 'r');
-            if (r == null) return "unable to parse r value of emissive for material with ID: " + materialID;
-            else if (r < 0 || r > 1) return "emissive r must be between 0 and 1 (on material with ID: " + materialID + ")";
-            else if (isNaN(r)) return "emissive r is non numeric value";
-            emissive.push(r);
-            // G //
-            g = this.reader.getFloat(materialArgs[emissiveIndex], 'g');
-            if (g == null) return "unable to parse g value of emissive for material with ID: " + materialID;
-            else if (g < 0 || g > 1) return "emissive g must be between 0 and 1 (on material with ID: " + materialID + ")";
-            else if (isNaN(g)) return "emissive g is non numeric value";
-            emissive.push(g);
-            // B //
-            b = this.reader.getFloat(materialArgs[emissiveIndex], 'b');
-            if (b == null) return "unable to parse b value of emissive for material with ID: " + materialID;
-            else if (b < 0 || b > 1) return "emissive b must be between 0 and 1 (on material with ID: " + materialID + ")";
-            else if (isNaN(b)) return "emissive b is non numeric value";
-            emissive.push(b);
-            // A //
-            a = this.reader.getFloat(materialArgs[emissiveIndex], 'a');
-            if (a == null) return "unable to parse a value of emissive for material with ID: " + materialID;
-            else if (a < 0 || a > 1) return "emissive a must be between 0 and 1 (on material with ID: " + materialID + ")";
-            else if (isNaN(a)) return "emissive a is non numeric value";
-            emissive.push(a);
+            let emissive = this.parseColor(materialArgs[emissiveIndex], "material emissive: " + materialID);
             /**/
 
             var result = new CGFappearance(this.scene);
@@ -718,7 +651,7 @@ class MySceneGraph {
             atLeastOne = true;
         }
 
-        if (!atLeastOne) return "at least one material must be defined on the materials block";
+        if (!atLeastOne) return "at least one material must be defined on the materials block"; //TODO VERIFICAR SE È MINOR, ERROR OU RETURN ^^^^
 
         this.log("Parsed materials");
     }
@@ -777,47 +710,48 @@ class MySceneGraph {
             if (transformationsIndex == -1) {
                 this.onXMLMinorError("There isn't a transformations tag");
             }
+            else { 
+                let nodeTransformations = grandChildren[transformationsIndex].children;
 
-            let nodeTransformations = grandChildren[transformationsIndex].children;
+                let translX, translY, translZ;
+                let rotAxis, rotDegree;
+                let scaleX, scaleY, scaleZ;
 
-            let translX, translY, translZ;
-            let rotAxis, rotDegree;
-            let scaleX, scaleY, scaleZ;
+                for (let k = 0; k < nodeTransformations.length; k++) {
 
-            for (let k = 0; k < nodeTransformations.length; k++) {
+                    switch (nodeTransformations[k].nodeName) {
+                        case "translation":
+                            translX = this.reader.getFloat(nodeTransformations[k], 'x');
+                            translY = this.reader.getFloat(nodeTransformations[k], 'y');
+                            translZ = this.reader.getFloat(nodeTransformations[k], 'z');
 
-                switch (nodeTransformations[k].nodeName) {
-                    case "translation":
-                        translX = this.reader.getFloat(nodeTransformations[k], 'x');
-                        translY = this.reader.getFloat(nodeTransformations[k], 'y');
-                        translZ = this.reader.getFloat(nodeTransformations[k], 'z');
+                            // syntax: translate(out, a, v) -> out: the receiving matrix, a: the matrix to translate, v: vector to translate by
+                            // http://glmatrix.net/docs/module-mat4.html
+                            mat4.translate(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, [translX, translY, translZ]);
+                            break;
 
-                        // syntax: translate(out, a, v) -> out: the receiving matrix, a: the matrix to translate, v: vector to translate by
-                        // http://glmatrix.net/docs/module-mat4.html
-                        mat4.translate(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, [translX, translY, translZ]);
-                        break;
+                        case "rotation":
+                            rotAxis = this.reader.getString(nodeTransformations[k], 'axis');
+                            rotDegree = this.reader.getFloat(nodeTransformations[k], 'angle') * DEGREE_TO_RAD;
 
-                    case "rotation":
-                        rotAxis = this.reader.getString(nodeTransformations[k], 'axis');
-                        rotDegree = this.reader.getFloat(nodeTransformations[k], 'angle') * DEGREE_TO_RAD;
+                            mat4.rotate(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, rotDegree, this.axisCoords[rotAxis]);
+                            break;
 
-                        mat4.rotate(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, rotDegree, this.axisCoords[rotAxis]);
-                        break;
+                        case "scale":
+                            scaleX = this.reader.getFloat(nodeTransformations[k], "sx");
+                            scaleY = this.reader.getFloat(nodeTransformations[k], "sy");
+                            scaleZ = this.reader.getFloat(nodeTransformations[k], "sz");
 
-                    case "scale":
-                        scaleX = this.reader.getFloat(nodeTransformations[k], "sx");
-                        scaleY = this.reader.getFloat(nodeTransformations[k], "sy");
-                        scaleZ = this.reader.getFloat(nodeTransformations[k], "sz");
+                            mat4.scale(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, [scaleX, scaleY, scaleZ]);
+                            break;
 
-                        mat4.scale(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, [scaleX, scaleY, scaleZ]);
-                        break;
+                        default:
+                            break;
 
-                    default:
-                        break;
-
+                    }
                 }
             }
-
+            
             // Texture
             var textureID = this.reader.getString(grandChildren[textureIndex], 'id');
             if (textureID == null) this.onXMLMinorError("Coulnd't parse texture");
