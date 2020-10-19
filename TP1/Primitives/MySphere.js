@@ -11,23 +11,50 @@ class MySphere extends CGFobject {
     constructor(scene, radius, stacks, slices) {
         super(scene);
         this.radius = radius;
-        this.topHalf = new HalfSphere(scene, stacks, slices);
-        this.bottomHalf = new HalfSphere(scene, stacks, slices);
+        this.stacks = stacks;
+        this.slices = slices;
+
+        this.initBuffers();
     }
 
-    display(){
-        // Scale to radius, display half
-        this.scene.pushMatrix();
-        this.scene.scale(this.radius, this.radius, this.radius);
-        this.topHalf.display();
-        this.scene.popMatrix();
+    initBuffers(){
+        this.vertices = [];
+        this.indices = [];
+        this.normals = [];
+        this.texCoords = [];
 
-        // Scale to radius, flip,  display half
-        this.scene.pushMatrix();
-        this.scene.scale(this.radius, this.radius, this.radius);
-        this.scene.rotate(Math.PI, 0, 1, 0);
-        this.bottomHalf.display();
-        this.scene.popMatrix();
+        for (let i = 0; i <= this.slices; i++) {
+            let phi = 2* i * Math.PI / this.slices;
+            let sinPhi = Math.sin(phi);
+            let cosPhi = Math.cos(phi);
+
+            for (let j = 0; j <= this.stacks; j++) {
+                let theta = j * Math.PI / this.stacks;
+                let sinTheta = Math.sin(theta);
+                let cosTheta = Math.cos(theta);
+
+                let x = this.radius * cosPhi * sinTheta;
+                let y = this.radius *  sinPhi * sinTheta;
+                let z = this.radius * cosTheta;
+
+                this.vertices.push(x, y, z);
+                this.normals.push(x, y, z);
+                this.texCoords.push(1 - (i / this.slices), 1 - (j / this.stacks));
+            }
+        }
+
+        for (let j = 0; j < this.stacks; j++) {
+            for (let i = 0; i < this.slices; i++) {
+                let first = (j * (this.slices + 1)) + i;
+                let second = first + this.slices + 1;
+
+                this.indices.push(first, second + 1, second);
+                this.indices.push(first, first + 1, second + 1);
+            }
+        }
+
+        this.primitiveType = this.scene.gl.TRIANGLES;
+        this.initGLBuffers();
     }
 
     /**
