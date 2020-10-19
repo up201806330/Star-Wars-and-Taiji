@@ -96,7 +96,7 @@ class MyTriangle extends CGFobject {
 		let T3y = distC * sinAlpha / aft;
 		this.texCoords = [
 			0, 0,
-			distA / afs/2, 0,
+			distA / afs, 0,
 			T3x, T3y
 		];
 

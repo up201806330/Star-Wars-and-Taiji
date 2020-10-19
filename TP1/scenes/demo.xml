@@ -8,8 +8,8 @@
     <views default="completeScene">
         <!-- at least one of the following type of cameras must be declared -->
         <perspective id="completeScene" near="0.1" far="500" angle="45">
-            <from x="30" y="15" z="30" />
-            <to x="0" y="-2" z="0" />
+            <from x="20" y="15" z="20" />
+            <to x="0" y="5" z="0" />
         </perspective>
 
         <perspective id="frontChase" near="0.1" far="500" angle="45">
@@ -51,10 +51,10 @@
         
         <light id="frontTieFighterLight">
             <enable value="0" />                            <!-- enable/disable -->
-            <position x="-4" y="-2" z="20" w="1.0" />       <!-- light position; w=1: point light; w=0: directional light -->
+            <position x="-10" y="4" z="10" w="1.0" />       <!-- light position; w=1: point light; w=0: directional light -->
             <ambient r="0" g="0" b="0" a="1.0" />           <!-- ambient component -->
-            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />     <!-- diffuse component -->
-            <specular r="1.0" g="1.0" b="1.0" a="1.0" />    <!-- specular component -->
+            <diffuse r="1.0" g="0.5" b="0" a="1.0" />     <!-- diffuse component -->
+            <specular r="1.0" g="0.5" b="0" a="1.0" />    <!-- specular component -->
         </light>
 
         <light id="mainXWingLight">                         <!-- light identifier -->
@@ -111,8 +111,8 @@
         <texture id="spaceWest" path="./scenes/images/spaceWest.jpg" />
 
         <!-- Test 
-        <texture id="abc" path="./scenes/images/abc.jpg" />
-        <texture id="feup" path="./scenes/images/feup.jpg" />-->
+        <texture id="abc" path="./scenes/images/abc.jpg" />-->
+        <texture id="feup" path="./scenes/images/feup.jpg" />
         
     </textures>
 
@@ -220,14 +220,30 @@
             <!-- declaring descendants, at least one node or one leaf must be present
              descendants may be mixed, nodes and leafs -->
             <descendants>
-                <noderef id="skyBoxFinal" />
+                <!--<noderef id="skyBoxFinal" />
                 <noderef id="xWingFull" />
                 <noderef id="xWingFull2" />
                 <noderef id="tieFinalShape" />
                 <noderef id="explosionFinal" />
                 <noderef id="laserGroup" />
                 <noderef id="tieFinalShape2" />
-                <noderef id="tieFinalShape3" />
+                <noderef id="tieFinalShape3" />-->
+                <noderef id="jeff" />
+            </descendants>
+        </node>
+
+        <!-- X-Wing "Rectangle" Default (1 x 1) -->
+        <node id="jeff">
+            <material id="defaultGreyMaterial" />
+            <texture id="feup">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <leaf type="triangle" x1="0" y1="0" x2="1" y2="0" x3="0" y3="1" />
             </descendants>
         </node>
 
@@ -1778,7 +1794,7 @@
             </transformations>
 
             <descendants>
-                <leaf type="sphere" radius="2" stacks="4" slices="8" /> <!-- temporary value for stacks / slices -->
+                <leaf type="sphere" radius="2" stacks="10" slices="10" /> <!-- temporary value for stacks / slices -->
             </descendants>
         </node>
 
@@ -1833,7 +1849,6 @@
                 <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
-                <rotation axis="x" angle="45" />
             </transformations>
 
             <descendants>
@@ -1848,8 +1863,10 @@
                 <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
-                <translation x="-14.5" y="1" z="14" />
+                <translation x="-12.5" y="1" z="14" />
                 <scale sx="0.8" sy="0.8" sz="0.8" />
+                <rotation axis="z" angle="30"/>
+                <rotation axis="y" angle="90"/>
             </transformations>
 
             <descendants>
@@ -2008,11 +2025,10 @@
             </texture>
 
             <transformations>
-                <scale sx="50" sy="50" sz="0" />
             </transformations>
 
             <descendants>
-                <leaf type="rectangle" x1="-0.5" y1="-0.5" x2="0.5" y2="0.5" />
+                <leaf type="rectangle" x1="-25" y1="-25" x2="25" y2="25" />
             </descendants>
         </node>
 
