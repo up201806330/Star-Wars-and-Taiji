@@ -89,11 +89,11 @@ class MyTriangle extends CGFobject {
 		let cosAlpha = (Math.pow(distA, 2) - Math.pow(distB, 2) + Math.pow(distC, 2)) / (2 * distA * distC);
 		let sinAlpha = Math.sqrt(1 - Math.pow(cosAlpha, 2));
 		let alpha = Math.acos(cosAlpha);
-		let T3x = 1 / afs;
-		let T3y = 1 / aft;
+		let T3x = distC * cosAlpha / afs;
+		let T3y = distC * sinAlpha / aft;
 		this.texCoords = [
 			0, 0,
-			1 / afs, 0,
+			distA / afs, 0,
 			T3x, T3y
 		];
 

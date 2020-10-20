@@ -964,6 +964,7 @@ class MySceneGraph {
             for (let leaf = 0; leaf < nodeToDisplay.leaves.length; leaf++) {
                 // Material
                 if (this.materials[topOfMatStack] != null) {
+                    this.materials[topOfMatStack].setTextureWrap("REPEAT", "REPEAT");
                     this.materials[topOfMatStack].apply();
                 }
                 else this.materials[this.defaultMaterialID].apply();

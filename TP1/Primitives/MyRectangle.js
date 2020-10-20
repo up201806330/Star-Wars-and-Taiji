@@ -68,8 +68,8 @@ class MyRectangle extends CGFobject {
 	updateTexCoords(afs, aft) {
 		var minS = 0;
 		var minT = 0;
-		var maxS = 1 / afs;
-		var maxT = 1 / aft;
+		var maxS = Math.abs(this.x2 - this.x1) / afs;
+		var maxT = Math.abs(this.y1 - this.y2) / aft;
 
 		this.texCoords = [
 			minS, maxT,
