@@ -253,8 +253,6 @@ class MySceneGraph {
      * @param {view block element} viewsNode
      */
     parseViews(viewsNode) {
-        // this.onXMLMinorError("To do: Parse views and create cameras.");
-
         this.views = [];
 
         let i;
@@ -501,7 +499,7 @@ class MySceneGraph {
         let atLeastOne = false;
         for (let i = 0; i < children.length; i++) {
             if (children[i].nodeName != "texture") {
-                this.onXMLMinorError("unknown tag <" + children[i].nodeName + ">. Ignoring texture");
+                this.onXMLError("unknown tag <" + children[i].nodeName + ">. Ignoring texture");
                 continue;
             }
 
@@ -562,7 +560,7 @@ class MySceneGraph {
         let atLeastOne = false;
         for (let i = 0; i < children.length; i++) {
             if (children[i].nodeName != "material") {
-                this.onXMLMinorError("unknown tag <" + children[i].nodeName + ">");
+                this.onXMLError("unknown tag <" + children[i].nodeName + ">");
                 continue;
             }
 
@@ -591,15 +589,15 @@ class MySceneGraph {
             }
             let shininess = this.reader.getFloat(materialArgs[shininessIndex], 'value');
             if (shininess == null){
-                this.onXMLMinorError("unable to parse shininess value for material with ID: " + materialID + ". Ignoring material");
+                this.onXMLError("unable to parse shininess value for material with ID: " + materialID + ". Ignoring material");
                 continue;
             } 
             else if (shininess <= 0) {
-                this.onXMLMinorError("shininess must be positive for material with ID: " + materialID + ". Ignoring material");
+                this.onXMLError("shininess must be positive for material with ID: " + materialID + ". Ignoring material");
                 continue;
             }
             else if (isNaN(shininess)) {
-                this.onXMLMinorError("shininess is non numeric value" + ". Ignoring material");
+                this.onXMLError("shininess is non numeric value" + ". Ignoring material");
                 continue;
             }
             /**/
@@ -754,8 +752,8 @@ class MySceneGraph {
             
             // Texture
             var textureID = this.reader.getString(grandChildren[textureIndex], 'id');
-            if (textureID == null) this.onXMLMinorError("Coulnd't parse texture");
-            if (textureID != "null" && textureID != "clear" && this.textures[textureID] == null) this.onXMLMinorError("Texture id " + textureID + " doesn't exist");
+            if (textureID == null) this.onXMLError("Coulnd't parse texture");
+            if (textureID != "null" && textureID != "clear" && this.textures[textureID] == null) this.onXMLError("Texture id " + textureID + " doesn't exist");
 
             this.nodes[nodeID].textureID = textureID;
 
@@ -795,8 +793,8 @@ class MySceneGraph {
 
             // Material
             var materialID = this.reader.getString(grandChildren[materialIndex], 'id');
-            if (materialID == null) this.onXMLMinorError("Coulnd't parse material");
-            if (materialID != "null" && this.materials[materialID] == null) this.onXMLMinorError("Material id " + materialID + " doesn't exist");
+            if (materialID == null) this.onXMLError("Coulnd't parse material");
+            if (materialID != "null" && this.materials[materialID] == null) this.onXMLError("Material id " + materialID + " doesn't exist");
 
             this.nodes[nodeID].materialID = materialID;
 
@@ -823,7 +821,7 @@ class MySceneGraph {
                     let primType = this.reader.getItem(nodeDescendants[k], "type", ["rectangle", "triangle", "torus", "cylinder", "sphere"]);
 
                     if (primType == null) {
-                        this.onXMLMinorError("Unknown primitive type!");
+                        this.onXMLError("Unknown primitive type!");
                     }
 
                     let newLeaf = new MyPrimitive(primType, this, nodeDescendants[k]);
@@ -918,25 +916,33 @@ class MySceneGraph {
         parseColor(node, messageError) {
             var color = [];
 
-            // R
+            // R    1, 0.078, 0.576, 1
             var r = this.reader.getFloat(node, 'r');
-            if (!(r != null && !isNaN(r) && r >= 0 && r <= 1))
-                return "unable to parse R component of the " + messageError;
+            if (!(r != null && !isNaN(r) && r >= 0 && r <= 1)){
+                this.onXMLMinorError("unable to parse R component of the " + messageError + ". Using default value (1)");
+                r = 1;
+            }
 
             // G
             var g = this.reader.getFloat(node, 'g');
-            if (!(g != null && !isNaN(g) && g >= 0 && g <= 1))
-                return "unable to parse G component of the " + messageError;
+            if (!(g != null && !isNaN(g) && g >= 0 && g <= 1)){
+                this.onXMLMinorError("unable to parse G component of the " + messageError + ". Using default value (0.078)");
+                g = 0.078;
+            }
 
             // B
             var b = this.reader.getFloat(node, 'b');
-            if (!(b != null && !isNaN(b) && b >= 0 && b <= 1))
-                return "unable to parse B component of the " + messageError;
+            if (!(b != null && !isNaN(b) && b >= 0 && b <= 1)){
+                this.onXMLMinorError("unable to parse B component of the " + messageError + ". Using default value (0.576)");
+                b = 0.576;
+            }
 
             // A
             var a = this.reader.getFloat(node, 'a');
-            if (!(a != null && !isNaN(a) && a >= 0 && a <= 1))
-                return "unable to parse A component of the " + messageError;
+            if (!(a != null && !isNaN(a) && a >= 0 && a <= 1)){
+                this.onXMLMinorError("unable to parse A component of the " + messageError + ". Using default value (1)");
+                a = 1;
+            }
 
             color.push(...[r, g, b, a]);
 
