@@ -98,7 +98,6 @@
 
         <!-- X-Wing Textures -->
         <texture id="xWingFullTexture" path="./scenes/images/tieGrey.jpg" />
-        <texture id="xWingCabineTexture" path="./scenes/images/metal_gray1.jpg" />
         <texture id="xWingEngineTexture" path="./scenes/images/engine.jpg" />
         <texture id="xWingWingGunBigTexture" path="./scenes/images/gun.jpg" />
         <texture id="xWingWingGunTexture" path="./scenes/images/gun2.jpg" />
