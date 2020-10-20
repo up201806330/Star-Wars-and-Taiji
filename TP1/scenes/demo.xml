@@ -220,15 +220,15 @@
             <!-- declaring descendants, at least one node or one leaf must be present
              descendants may be mixed, nodes and leafs -->
             <descendants>
-                <!--<noderef id="skyBoxFinal" />
+                <noderef id="skyBoxFinal" />
                 <noderef id="xWingFull" />
                 <noderef id="xWingFull2" />
                 <noderef id="tieFinalShape" />
                 <noderef id="explosionFinal" />
                 <noderef id="laserGroup" />
                 <noderef id="tieFinalShape2" />
-                <noderef id="tieFinalShape3" />-->
-                <noderef id="jeff" />
+                <noderef id="tieFinalShape3" />
+                <!--<noderef id="jeff" />-->
             </descendants>
         </node>
 
