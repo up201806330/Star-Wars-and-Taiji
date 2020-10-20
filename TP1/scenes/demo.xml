@@ -198,11 +198,11 @@
         </material>
         
         <material id="skyBoxMaterial">
-            <shininess value="0.2" />
+            <shininess value="1" />
             <ambient r="0" g="0" b="0" a="1.0" />
             <diffuse r="0" g="0" b="0" a="1.0" />
             <specular r="0" g="0" b="0" a="1.0" />
-            <emissive r="0.7" g="0.8" b="0.69" a="1.0" />
+            <emissive r="1" g="1" b="1" a="1.0" />
         </material>
         
         <material id="glowMaterial">
