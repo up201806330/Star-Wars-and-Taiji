@@ -121,10 +121,6 @@
         <texture id="spaceSouth" path="./scenes/images/spaceSouth.jpg" />
         <texture id="spaceEast" path="./scenes/images/spaceEast.jpg" />
         <texture id="spaceWest" path="./scenes/images/spaceWest.jpg" />
-
-        <!-- Test 
-        <texture id="abc" path="./scenes/images/abc.jpg" />-->
-        <texture id="feup" path="./scenes/images/feup.jpg" />
         
     </textures>
 
@@ -216,7 +212,7 @@
     </materials>
 
     <nodes>
-        <node id="rootNode">            <!-- defines one intermediate node; may be repeated as necessary -->
+        <node id="rootNode"> <!-- defines one intermediate node; may be repeated as necessary -->
             <!-- next two lines are mandatory -->
             <material id="null" /><!-- this superimposes the material received from parent node id="null" maintains material from parent node -->
 
@@ -226,7 +222,6 @@
 
             <!-- geom. transf. are optional and may be repeated, in any order, as necessary: -->
             <transformations>
-               
             </transformations>
 
             <!-- declaring descendants, at least one node or one leaf must be present
@@ -241,21 +236,6 @@
                 <noderef id="tieFinalShape2" />
                 <noderef id="tieFinalShape3" />
                 <!--<noderef id="jeff" />-->
-            </descendants>
-        </node>
-
-        <!-- X-Wing "Rectangle" Default (1 x 1) -->
-        <node id="jeff">
-            <material id="defaultGreyMaterial" />
-            <texture id="feup">
-                <amplification afs="1.0" aft="1.0" />
-            </texture>
-
-            <transformations>
-            </transformations>
-
-            <descendants>
-                <leaf type="triangle" x1="0" y1="0" x2="1" y2="0" x3="0" y3="1" />
             </descendants>
         </node>
 
