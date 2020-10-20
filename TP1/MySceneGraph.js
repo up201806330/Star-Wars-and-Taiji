@@ -535,11 +535,12 @@ class MySceneGraph {
      */
     generateDefaultMaterial() {
         var materialDefault = new CGFappearance(this.scene);
+        this.defaultColor = [1, 0.078, 0.576, 1]; // Hot pink, so its noticeable
         materialDefault.setShininess(1);
-        materialDefault.setSpecular(1, 0.078, 0.576, 1); // Hot pink, so its noticeable
-        materialDefault.setDiffuse(1, 0.078, 0.576, 1);
-        materialDefault.setAmbient(1, 0.078, 0.576, 1);
-        materialDefault.setEmission(1, 0.078, 0.576, 1);
+        materialDefault.setSpecular(this.defaultColor); 
+        materialDefault.setDiffuse(this.defaultColor);
+        materialDefault.setAmbient(this.defaultColor);
+        materialDefault.setEmission(this.defaultColor);
 
         // Generates random material ID not currently in use.
         this.defaultMaterialID = "defaultMaterial";
@@ -583,60 +584,66 @@ class MySceneGraph {
             /**/
             // Shininess
             let shininessIndex = nodeNames.indexOf("shininess");
+            let shininess;
             if (shininessIndex == -1) {
-                this.onXMLError("no shininess value defined for material with ID: " + materialID + ". Ignoring material");
-                continue;
+                this.onXMLMinorError("no shininess value defined for material with ID: " + materialID + ". Using default value (1)");
+                shininess = 1;
             }
-            let shininess = this.reader.getFloat(materialArgs[shininessIndex], 'value');
-            if (shininess == null){
-                this.onXMLError("unable to parse shininess value for material with ID: " + materialID + ". Ignoring material");
-                continue;
-            } 
-            else if (shininess <= 0) {
-                this.onXMLError("shininess must be positive for material with ID: " + materialID + ". Ignoring material");
-                continue;
-            }
-            else if (isNaN(shininess)) {
-                this.onXMLError("shininess is non numeric value" + ". Ignoring material");
-                continue;
+            else {
+                shininess = this.reader.getFloat(materialArgs[shininessIndex], 'value');
+                if (shininess == null){
+                    this.onXMLMinorError("unable to parse shininess value for material with ID: " + materialID + ". Using default value (1)");
+                    shininess = 1;
+                } 
+                else if (shininess <= 0) {
+                    this.onXMLMinorError("shininess must be positive for material with ID: " + materialID + ". Using default value (1)");
+                    shininess = 1;
+                }
+                else if (isNaN(shininess)) {
+                    this.onXMLMinorError("shininess is non numeric value" + ". Using default value (1)");
+                    shininess = 1;
+                }
             }
             /**/
             /**/
             // Ambient
             let ambientIndex = nodeNames.indexOf("ambient");
+            let ambient;
             if (ambientIndex == -1) {
-                this.onXMLError("no ambient value defined for material with ID: " + materialID + ". Ignoring material");
-                continue;
+                this.onXMLMinorError("no ambient value defined for material with ID: " + materialID + ". Using default values (hot pink)");
+                ambient = this.defaultColor;
             }
-
-            let ambient = this.parseColor(materialArgs[ambientIndex], "material ambient: " + materialID);
+            else ambient = this.parseColor(materialArgs[ambientIndex], "material ambient: " + materialID);
             /**/
             /**/
             // Diffuse
             let diffuseIndex = nodeNames.indexOf("diffuse");
-            if (diffuseIndex == -1) this.onXMLError("no diffuse value defined for material with ID: " + materialID + ". Ignoring material");
-
-            let diffuse = this.parseColor(materialArgs[diffuseIndex], "material diffuse: " + materialID);
+            let diffuse;
+            if (diffuseIndex == -1) {
+                this.onXMLMinorError("no diffuse value defined for material with ID: " + materialID + ". Using default values (hot pink)");
+                diffuse = this.defaultColor;
+            }
+            else diffuse = this.parseColor(materialArgs[diffuseIndex], "material diffuse: " + materialID);
             /**/
             /**/
             // Specular
             let specularIndex = nodeNames.indexOf("specular");
+            let specular;
             if (specularIndex == -1) {
-                this.onXMLError("no specular value defined for material with ID: " + materialID + ". Ignoring material");
-                continue;
+                this.onXMLMinorError("no specular value defined for material with ID: " + materialID + ". Using default values (hot pink)");
+                specular = this.defaultColor;
             }
-
-            let specular = this.parseColor(materialArgs[specularIndex], "material specular: " + materialID);
+            else specular = this.parseColor(materialArgs[specularIndex], "material specular: " + materialID);
             /**/
             /**/
             // Emissive
             let emissiveIndex = nodeNames.indexOf("emissive");
+            let emissive;
             if (emissiveIndex == -1) {
-                this.onXMLError("no emissive value defined for material with ID: " + materialID + ". Ignoring material");
-                continue;
+                this.onXMLMinorError("no emissive value defined for material with ID: " + materialID + ". Using default values (hot pink)");
+                emissive = this.defaultColor;
             }
-
-            let emissive = this.parseColor(materialArgs[emissiveIndex], "material emissive: " + materialID);
+            else emissive = this.parseColor(materialArgs[emissiveIndex], "material emissive: " + materialID);
             /**/
 
             var result = new CGFappearance(this.scene);
