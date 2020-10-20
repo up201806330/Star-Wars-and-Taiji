@@ -27,6 +27,11 @@
             <to x="-15" y="15" z="-30" />
         </perspective>
 
+        <perspective id="frontTieFighters" near="0.1" far="500" angle="45">
+            <from x="0" y="15" z="-18"/>
+            <to x="22" y="15" z="-10" />
+        </perspective>
+
         <ortho id="frontChaseOrtho" near="1" far="500" left="-10" right="10" top="10" bottom="-10">
             <from x="0" y="8" z="40" />
             <to x="-10" y="3" z="0" />
@@ -71,6 +76,14 @@
             <ambient r="0" g="0" b="0" a="1.0" />           <!-- ambient component -->
             <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />     <!-- diffuse component -->
             <specular r="1.0" g="1.0" b="1.0" a="1.0" />    <!-- specular component -->
+        </light>
+
+        <light id="frontTieFightersLight">
+            <enable value="0" />                            <!-- enable/disable -->
+            <position x="5" y="14" z="-16" w="1.0" />      <!-- light position; w=1: point light; w=0: directional light -->
+            <ambient r="0" g="0" b="0" a="1.0" />           <!-- ambient component -->
+            <diffuse r="0.2" g="0" b="0" a="1.0" />     <!-- diffuse component -->
+            <specular r="1.0" g="0" b="0" a="1.0" />    <!-- specular component -->
         </light>
     </lights>
 
@@ -130,7 +143,7 @@
         </material>
         
         <material id="windowsMaterial">
-            <shininess value="1.0" />
+            <shininess value="10" />
             <ambient r="0" g="0" b="0" a="1.0" />
             <diffuse r="0" g="0" b="0" a="1.0" />
             <specular r="0.3" g="0.3" b="0.3" a="1.0" />
@@ -1689,7 +1702,7 @@
             </transformations>
 
             <descendants>
-                <leaf type="sphere" radius="1" stacks="3" slices="30" /> 
+                <leaf type="sphere" radius="1" stacks="30" slices="30" /> 
             </descendants>
         </node>
 
