@@ -525,7 +525,7 @@ class MySceneGraph {
             atLeastOne = true;
         }
 
-        if (!atLeastOne) return "at least one texture must be defined on the materials block"; //TODO VERIFICAR AQUI TB ERROS
+        if (!atLeastOne) return "at least one texture must be defined on the materials block"; 
 
         console.log("Parsed textures");
     }
@@ -656,7 +656,7 @@ class MySceneGraph {
             atLeastOne = true;
         }
 
-        if (!atLeastOne) return "at least one material must be defined on the materials block"; //TODO VERIFICAR SE È MINOR, ERROR OU RETURN ^^^^
+        if (!atLeastOne) return "at least one material must be defined on the materials block"; 
 
         this.log("Parsed materials");
     }
@@ -767,37 +767,38 @@ class MySceneGraph {
             var texParams = [];
             for (let l = 0; l < grandChildren[textureIndex].children.length; l++) texParams.push(grandChildren[textureIndex].children[l].nodeName);
 
-            let afs, aft;
-            let amplificationIndex = texParams.indexOf('amplification');
-            if (amplificationIndex == -1) {
-                this.onXMLMinorError("Each texture block must indicate amplification; Using default values. (ID: " + textureID + ")");
-                afs = 1;
-                aft = 1;
-            }
-            else {
-                afs = this.reader.getFloat(grandChildren[textureIndex].children[amplificationIndex], 'afs');
-                if (isNaN(afs)) {
-                    this.onXMLMinorError("Amplification afs is non numeric value. Using default values. (ID: " + textureID + ")");
+                if (textureID != "clear"){
+                let afs, aft;
+                let amplificationIndex = texParams.indexOf('amplification');
+                if (amplificationIndex == -1) {
+                    this.onXMLMinorError("Each texture block must indicate amplification; Using default values. (ID: " + textureID + ")");
                     afs = 1;
-                }
-                if (afs <= 0) {
-                    this.onXMLMinorError("Amplification afs must be positive. Using default values. (ID: " + textureID + ")");
-                    afs = 1;
-                }
-
-                aft = this.reader.getFloat(grandChildren[textureIndex].children[amplificationIndex], 'aft');
-                if (isNaN(aft)) {
-                    this.onXMLMinorError("Amplification aft is non numeric value. Using default values. (ID: " + textureID + ")");
                     aft = 1;
                 }
-                if (aft <= 0) {
-                    this.onXMLMinorError("Amplification aft must be positive. Using default values. (ID: " + textureID + ")");
-                    aft = 1;
-                }
-            }
-            this.nodes[nodeID].afs = afs;
-            this.nodes[nodeID].aft = aft;
+                else {
+                    afs = this.reader.getFloat(grandChildren[textureIndex].children[amplificationIndex], 'afs');
+                    if (isNaN(afs)) {
+                        this.onXMLMinorError("Amplification afs is non numeric value. Using default values. (ID: " + textureID + ")");
+                        afs = 1;
+                    }
+                    if (afs <= 0) {
+                        this.onXMLMinorError("Amplification afs must be positive. Using default values. (ID: " + textureID + ")");
+                        afs = 1;
+                    }
 
+                    aft = this.reader.getFloat(grandChildren[textureIndex].children[amplificationIndex], 'aft');
+                    if (isNaN(aft)) {
+                        this.onXMLMinorError("Amplification aft is non numeric value. Using default values. (ID: " + textureID + ")");
+                        aft = 1;
+                    }
+                    if (aft <= 0) {
+                        this.onXMLMinorError("Amplification aft must be positive. Using default values. (ID: " + textureID + ")");
+                        aft = 1;
+                    }
+                }
+                this.nodes[nodeID].afs = afs;
+                this.nodes[nodeID].aft = aft;
+            }
             // Material
             var materialID = this.reader.getString(grandChildren[materialIndex], 'id');
             if (materialID == null) this.onXMLError("Coulnd't parse material");

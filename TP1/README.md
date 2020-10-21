@@ -10,11 +10,15 @@
 ----
 ## Project information
 
-- (items describing main strong points)
-- Scene
-  - (Brief description of the created scene)
+- X-Wing / Tie Fighter Chase
+  - The scene features an x-wing shooting down a tie fighter in the forefront, with two other tie fighters chasing down another rebel ship in the back.
   - (relative link to the scene)
+
+## Features
+- Robust error detection on XML parser.
+- Visual queue for missing material errors (Hot pink material).
+
 ----
 ## Issues/Problems
 
-- (items describing unimplemented features, bugs, problems, etc.)
+- There are no major issues that we know of.
