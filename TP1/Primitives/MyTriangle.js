@@ -92,9 +92,9 @@ class MyTriangle extends CGFobject {
 		let T3x = distC * cosAlpha / afs;
 		let T3y = distC * sinAlpha / aft;
 		this.texCoords = [
-			T3x, T3y,
+			0, 1,
 			distA / afs, 1,
-			0, 0
+			T3x, 1-T3y
 		];
 
 		this.updateTexCoordsGLBuffers();
