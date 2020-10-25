@@ -303,7 +303,7 @@ class MySceneGraph {
                 from = vec3.fromValues(xFrom, yFrom, zFrom);
                 to = vec3.fromValues(xTo, yTo, zTo);
 
-                this.views[id] = new CGFcamera(angle, near, far, from, to);
+                this.views[id] = new CGFcamera(angle * DEGREE_TO_RAD, near, far, from, to);
 
                 // console.log(this.views["defaultCamera"]);
             }
@@ -543,7 +543,7 @@ class MySceneGraph {
         materialDefault.setEmission(this.defaultColor);
 
         // Generates random material ID not currently in use.
-        this.defaultMaterialID = "defaultMaterial";
+        this.defaultMaterialID = "defaultMaterialR4nd0mID123";
 
         this.materials[this.defaultMaterialID] = materialDefault;
     }
