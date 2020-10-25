@@ -12,7 +12,7 @@
 
 - X-Wing / Tie Fighter Chase
   - The scene features an x-wing shooting down a tie fighter in the forefront, with two other tie fighters chasing down another rebel ship in the back.
-  - (relative link to the scene)
+  - ./scenes/LAIG_TP1_T5_G01
 
 ## Features
 - Robust error detection on XML parser.
