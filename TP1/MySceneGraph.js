@@ -543,7 +543,7 @@ class MySceneGraph {
         materialDefault.setEmission(this.defaultColor);
 
         // Generates random material ID not currently in use.
-        this.defaultMaterialID = "defaultMaterialR4nd0mID123";
+        this.defaultMaterialID = "laAIJbskAIn1knSF)82nASdnakj2q"; // Randomly generated sequence to avoid name conflicts
 
         this.materials[this.defaultMaterialID] = materialDefault;
     }
@@ -976,18 +976,14 @@ class MySceneGraph {
             let topofTexStack = this.textureStack[this.textureStack.length - 1];
 
             for (let leaf = 0; leaf < nodeToDisplay.leaves.length; leaf++) {
-                // Material
-                if (this.materials[topOfMatStack] != null) {
+                // Material and Texture
+                if (this.materials[topOfMatStack] != null && this.textures[topofTexStack] != null && this.textures[topofTexStack] != "clear") {
+                    nodeToDisplay.leaves[leaf].aPrimitive.updateTexCoords(nodeToDisplay.afs, nodeToDisplay.aft);
                     this.materials[topOfMatStack].setTextureWrap("REPEAT", "REPEAT");
+                    this.materials[topOfMatStack].setTexture(this.textures[topofTexStack]);
                     this.materials[topOfMatStack].apply();
                 }
                 else this.materials[this.defaultMaterialID].apply();
-
-                // Texture
-                if (this.textures[topofTexStack] != null && this.textures[topofTexStack] != "clear") {
-                    nodeToDisplay.leaves[leaf].aPrimitive.updateTexCoords(nodeToDisplay.afs, nodeToDisplay.aft);
-                    this.textures[topofTexStack].bind();
-                }
 
                 // Display
                 nodeToDisplay.leaves[leaf].aPrimitive.display();
