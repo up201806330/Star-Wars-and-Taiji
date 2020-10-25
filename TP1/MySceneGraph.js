@@ -976,16 +976,17 @@ class MySceneGraph {
 
             for (let leaf = 0; leaf < nodeToDisplay.leaves.length; leaf++) {
                 // Material and Texture
-                if (this.materials[topOfMatStack] != null) {
-                    nodeToDisplay.leaves[leaf].aPrimitive.updateTexCoords(nodeToDisplay.afs, nodeToDisplay.aft);
-                    this.materials[topOfMatStack].setTextureWrap("REPEAT", "REPEAT");
+                let thisMaterial;
+                if (this.materials[topOfMatStack] == null)  thisMaterial = this.materials[this.defaultMaterialID];
+                else                                        thisMaterial = this.materials[topOfMatStack];
 
-                    if (this.textures[topofTexStack] != null && this.textures[topofTexStack] != "clear") 
-                        this.materials[topOfMatStack].setTexture(this.textures[topofTexStack]);
-                        
-                    this.materials[topOfMatStack].apply();
-                }
-                else if (this.materials[topOfMatStack] == null) this.materials[this.defaultMaterialID].apply();
+                nodeToDisplay.leaves[leaf].aPrimitive.updateTexCoords(nodeToDisplay.afs, nodeToDisplay.aft);
+                thisMaterial.setTextureWrap("REPEAT", "REPEAT");
+
+                if (this.textures[topofTexStack] != null && this.textures[topofTexStack] != "clear") 
+                    thisMaterial.setTexture(this.textures[topofTexStack]);
+                    
+                thisMaterial.apply();
 
                 // Display
                 nodeToDisplay.leaves[leaf].aPrimitive.display();
