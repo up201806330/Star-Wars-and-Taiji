@@ -535,12 +535,11 @@ class MySceneGraph {
      */
     generateDefaultMaterial() {
         var materialDefault = new CGFappearance(this.scene);
-        this.defaultColor = [1, 0.078, 0.576, 1]; // Hot pink, so its noticeable
         materialDefault.setShininess(1);
-        materialDefault.setSpecular(this.defaultColor); 
-        materialDefault.setDiffuse(this.defaultColor);
-        materialDefault.setAmbient(this.defaultColor);
-        materialDefault.setEmission(this.defaultColor);
+        materialDefault.setSpecular(1, 0.078, 0.576, 1); // Hot pink, so its noticeable
+        materialDefault.setDiffuse(1, 0.078, 0.576, 1);
+        materialDefault.setAmbient(1, 0.078, 0.576, 1);
+        materialDefault.setEmission(1, 0.078, 0.576, 1);
 
         // Generates random material ID not currently in use.
         this.defaultMaterialID = "laAIJbskAIn1knSF)82nASdnakj2q"; // Randomly generated sequence to avoid name conflicts
@@ -802,7 +801,7 @@ class MySceneGraph {
             // Material
             var materialID = this.reader.getString(grandChildren[materialIndex], 'id');
             if (materialID == null) this.onXMLError("Coulnd't parse material");
-            if (materialID != "null" && this.materials[materialID] == null) this.onXMLError("Material id " + materialID + " doesn't exist");
+            if (materialID != "null" && this.materials[materialID] == null) this.onXMLError("Material id " + materialID + " doesn't exist");            
 
             this.nodes[nodeID].materialID = materialID;
 
@@ -977,13 +976,16 @@ class MySceneGraph {
 
             for (let leaf = 0; leaf < nodeToDisplay.leaves.length; leaf++) {
                 // Material and Texture
-                if (this.materials[topOfMatStack] != null && this.textures[topofTexStack] != null && this.textures[topofTexStack] != "clear") {
+                if (this.materials[topOfMatStack] != null) {
                     nodeToDisplay.leaves[leaf].aPrimitive.updateTexCoords(nodeToDisplay.afs, nodeToDisplay.aft);
                     this.materials[topOfMatStack].setTextureWrap("REPEAT", "REPEAT");
-                    this.materials[topOfMatStack].setTexture(this.textures[topofTexStack]);
+
+                    if (this.textures[topofTexStack] != null && this.textures[topofTexStack] != "clear") 
+                        this.materials[topOfMatStack].setTexture(this.textures[topofTexStack]);
+                        
                     this.materials[topOfMatStack].apply();
                 }
-                else this.materials[this.defaultMaterialID].apply();
+                else if (this.materials[topOfMatStack] == null) this.materials[this.defaultMaterialID].apply();
 
                 // Display
                 nodeToDisplay.leaves[leaf].aPrimitive.display();
