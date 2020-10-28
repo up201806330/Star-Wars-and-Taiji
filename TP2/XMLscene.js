@@ -101,6 +101,8 @@ class XMLscene extends CGFscene {
         
 
         this.sceneInited = true;
+
+        this.setUpdatePeriod(100);
     }
 
     /**
