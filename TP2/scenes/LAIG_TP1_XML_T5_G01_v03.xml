@@ -173,9 +173,9 @@
             
             <keyframe instant="5">
                 <translation x="0" y="0" z="0" />
-                <rotation axis="x" angle="120" />
+                <rotation axis="x" angle="0" />
                 <rotation axis="y" angle="0" />
-                <rotation axis="z" angle="3" />
+                <rotation axis="z" angle="0" />
                 <scale sx="2" sy="2" sz="2" />
             </keyframe>
             
@@ -193,6 +193,26 @@
 
         <animation id="tieFighter">
         </animation>
+
+        <animation id="default">
+            <keyframe instant="0">
+                <translation x="0" y="0" z="0" />
+                <rotation axis="x" angle="0" />
+                <rotation axis="y" angle="0" />
+                <rotation axis="z" angle="0" />
+                <scale sx="1" sy="1" sz="1" />
+            </keyframe>
+        </animation>
+
+        <animation id="skyBox">
+            <keyframe instant="0">
+                <translation x="0" y="0" z="0" />
+                <rotation axis="x" angle="0" />
+                <rotation axis="y" angle="0" />
+                <rotation axis="z" angle="0" />
+                <scale sx="25" sy="25" sz="1" />
+            </keyframe>
+        </animation>
     </animations>
 
     <nodes>
@@ -207,6 +227,8 @@
             <!-- geom. transf. are optional and may be repeated, in any order, as necessary: -->
             <transformations>
             </transformations>
+
+            <animationref id="default" />
 
             <!-- declaring descendants, at least one node or one leaf must be present
              descendants may be mixed, nodes and leafs -->
@@ -1777,6 +1799,8 @@
                 <rotation axis="y" angle="90"/>
             </transformations>
 
+            <animationref id="explosionMain" />
+
             <descendants>
                 <noderef id="explosionWhiteRing" />
                 <noderef id="explosionSecondarySphere1" />
@@ -1978,6 +2002,8 @@
 
             <transformations>
             </transformations>
+
+            <animationref id="skyBox" />
 
             <descendants>
                 <noderef id="skyBoxWest" />

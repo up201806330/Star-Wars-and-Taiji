@@ -703,9 +703,14 @@ class MySceneGraph {
             }
 
             var keyframes = [];
-            let newAnim = new Animation(this, keyframes);
 
             var keyframesXML = children[i].children;
+
+            if (keyframesXML.length < 1){
+                this.onXMLError("Animation must have at least one keyframe. Ignoring animation");
+                continue;
+            }
+            
             for (let j = 0; j < keyframesXML.length; j++){
                 // Get instant of the current keyframe.
                 var instant = this.reader.getFloat(keyframesXML[j], 'instant');
@@ -716,12 +721,14 @@ class MySceneGraph {
                 }
     
                 // Checks for repeated IDs.
-                if (keyframes[instant] != null){
-                    this.onXMLError("There mustn't be keyframes at the same instant in an animation (conflict: instant: " + instant + "). Ignoring keyframe.");
-                    continue;
+                for (var x in keyframes){
+                    if (x.instant == instant){
+                        this.onXMLError("There mustn't be keyframes at the same instant in an animation (conflict: instant: " + instant + "). Ignoring keyframe.");
+                        continue;
+                    }
                 }
 
-                if (instant <= 0) {
+                if (instant < 0) {
                     this.onXMLMinorError("instant must be positive. Ignoring keyframe");
                     continue;
                 }
@@ -730,16 +737,16 @@ class MySceneGraph {
                     continue;
                 }
 
-                var translation = [];
+                var translation;
                 var rotation = [];
-                var scale = [];
+                var scale;
                 var keyframeArgs = keyframesXML[j].children;
                 if (keyframeArgs.length != 5){
                     this.onXMLError("Animation keyframe doesn't have right number of transformations (instant = " +  + ")");
                 }
                 for (let k = 0; k < keyframeArgs.length; k++){
                     if (keyframeArgs[k].nodeName == "translation"){
-                        translation = this.parseCoordinates3D(keyframeArgs[k], "translation");
+                        translation = vec3.fromValues(...this.parseCoordinates3D(keyframeArgs[k], "translation"));
                     }
                     else if (keyframeArgs[k].nodeName == "rotation"){
                         let axis = this.reader.getString(keyframeArgs[k], 'axis');
@@ -760,13 +767,17 @@ class MySceneGraph {
                         }
                     }
                     else if (keyframeArgs[k].nodeName == "scale"){
-                        scale = this.parseCoordinates3DScale(keyframeArgs[k], "scale");
+                        scale = vec3.fromValues(...this.parseCoordinates3DScale(keyframeArgs[k], "scale"));
                     }
                 }
-
+                rotation = vec3.fromValues(...rotation);
                 let newKeyframe = new KeyFrame(instant, translation, rotation, scale);
-                keyframes[instant] = newKeyframe;
+                keyframes[j] = newKeyframe;
             }
+            // Hedge case for when there is only one keyframe
+            if (keyframes.length == 1) keyframes[1] = keyframes[0];
+            
+            var newAnim = new Animation(this.scene, keyframes);
             this.animations[animID] = newAnim;
         }
         console.log("Parsed animations");
@@ -821,6 +832,7 @@ class MySceneGraph {
             var materialIndex = nodeNames.indexOf("material");
             var textureIndex = nodeNames.indexOf("texture");
             var descendantsIndex = nodeNames.indexOf("descendants");
+            var animationsIndex = nodeNames.indexOf("animationref");
 
             // Transformations
             if (transformationsIndex == -1) {
@@ -916,6 +928,16 @@ class MySceneGraph {
             if (materialID != "null" && this.materials[materialID] == null) this.onXMLError("Material id " + materialID + " doesn't exist");            
 
             this.nodes[nodeID].materialID = materialID;
+
+            // Animations
+            if (animationsIndex > 0) {
+                var animID = this.reader.getString(grandChildren[animationsIndex], 'id');
+                if (animID == null) this.onXMLError("Coulnd't parse animation");
+                if (animID != "null" && this.animations[animID] == null) this.onXMLError("Animation id " + animID + " doesn't exist");            
+            }
+
+            this.nodes[nodeID].animID = animID;
+            
 
             // Descendants
             if (descendantsIndex == -1) {
@@ -1107,6 +1129,10 @@ class MySceneGraph {
             let nodeToDisplay = this.nodes[nodeToDisplayID];
 
             this.scene.multMatrix(nodeToDisplay.transformMatrix);
+
+            // Animations
+            if (nodeToDisplay.animID != null) this.animations[nodeToDisplay.animID].apply();
+            if (!this.animations[nodeToDisplay.animID].active) return;
 
             if (nodeToDisplay.materialID != "null") this.materialStack.push(nodeToDisplay.materialID);
             let topOfMatStack = this.materialStack[this.materialStack.length - 1];
