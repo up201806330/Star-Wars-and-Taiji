@@ -324,7 +324,7 @@
                 <rotation axis="x" angle="0" />
                 <rotation axis="y" angle="60" />
                 <rotation axis="z" angle="-35" />
-                <scale sx="1" sy="1" sz="1" />
+                <scale sx="2" sy="2" sz="2" />
             </keyframe>
             
             <keyframe instant="3">
@@ -332,7 +332,7 @@
                 <rotation axis="x" angle="0" />
                 <rotation axis="y" angle="60" />
                 <rotation axis="z" angle="-35" />
-                <scale sx="1" sy="1" sz="1" />
+                <scale sx="2" sy="2" sz="2" />
             </keyframe>
 
             <keyframe instant="3.1">
@@ -350,7 +350,7 @@
                 <rotation axis="x" angle="0" />
                 <rotation axis="y" angle="60" />
                 <rotation axis="z" angle="-35" />
-                <scale sx="1" sy="1" sz="1" />
+                <scale sx="2" sy="2" sz="2" />
             </keyframe>
             
             <keyframe instant="3.1">
@@ -358,7 +358,7 @@
                 <rotation axis="x" angle="0" />
                 <rotation axis="y" angle="60" />
                 <rotation axis="z" angle="-35" />
-                <scale sx="1" sy="1" sz="1" />
+                <scale sx="2" sy="2" sz="2" />
             </keyframe>
 
             <keyframe instant="3.2">
