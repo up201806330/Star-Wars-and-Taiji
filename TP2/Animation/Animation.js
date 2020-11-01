@@ -26,7 +26,7 @@ class Animation{
         }
         else if (this.currentFrame >= 0){ // Has started
             if (this.currentFrame == this.keyframes.length - 2) { // Has ended, won't update anything from here on
-                return;
+                
             }
             else {
                 if (this.elapsedTime >= this.keyframes[this.currentFrame + 1].instant){ // Has to switch to next frame
@@ -40,6 +40,11 @@ class Animation{
         let percentage;
         if (this.currentFrameDuration != 0) percentage = (this.elapsedTime - this.keyframes[this.currentFrame].instant) / (this.currentFrameDuration); 
         else percentage = 1;
+        
+        // Capping percentage
+        if (percentage < 0) percentage = 0;
+        else if (percentage > 1) percentage = 1;
+
         var translation = vec3.create(); 
         vec3.lerp(translation, this.keyframes[this.currentFrame].translation, this.keyframes[this.currentFrame + 1].translation, percentage);
         var rotation = vec3.create();   
@@ -47,6 +52,7 @@ class Animation{
         var scale = vec3.create();    
         vec3.lerp(scale, this.keyframes[this.currentFrame].scale,             this.keyframes[this.currentFrame + 1].scale, percentage);
 
+        this.transformMatrix = mat4.create();
         mat4.translate(this.transformMatrix, this.transformMatrix, translation);
         mat4.rotate(this.transformMatrix, this.transformMatrix, rotation[0] * DEGREE_TO_RAD, [1,0,0]);
         mat4.rotate(this.transformMatrix, this.transformMatrix, rotation[1] * DEGREE_TO_RAD, [0,1,0]);

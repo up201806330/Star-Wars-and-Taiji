@@ -38,7 +38,7 @@
         <!-- NOTE: this block "light" must be repeated as necessary with different "id". At least one light should be present, and a maximum of eight lights is accepted. -->
         <light id="completeSceneLight">                     <!-- light identifier -->
             <enable value="1" />                            <!-- enable/disable -->
-            <position x="20" y="12" z="9.5" w="1.0" />      <!-- light position; w=1: point light; w=0: directional light -->
+            <position x="20" y="15" z="20" w="1.0" />      <!-- light position; w=1: point light; w=0: directional light -->
             <ambient r="0" g="0" b="0" a="1.0" />           <!-- ambient component -->
             <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />     <!-- diffuse component -->
             <specular r="1.0" g="1.0" b="1.0" a="1.0" />    <!-- specular component -->
@@ -168,51 +168,208 @@
                 <rotation axis="x" angle="0" />
                 <rotation axis="y" angle="0" />
                 <rotation axis="z" angle="0" />
-                <scale sx="0.1" sy="0.1" sz="0.1" />
+                <scale sx="0" sy="0" sz="0" />
             </keyframe>
             
-            <keyframe instant="5">
+            <keyframe instant="4.5">
                 <translation x="0" y="0" z="0" />
-                <rotation axis="x" angle="0" />
-                <rotation axis="y" angle="0" />
-                <rotation axis="z" angle="0" />
-                <scale sx="2" sy="2" sz="2" />
+                <rotation axis="x" angle="45" />
+                <rotation axis="y" angle="45" />
+                <rotation axis="z" angle="45" />
+                <scale sx="1" sy="1" sz="1" />
             </keyframe>
             
-            <keyframe instant="7">
+            <keyframe instant="5.5">
+                <translation x="0" y="0" z="0" />
+                <rotation axis="x" angle="90" />
+                <rotation axis="y" angle="90" />
+                <rotation axis="z" angle="90" />
+                <scale sx="0" sy="0" sz="0" />
+            </keyframe>
+        </animation>
+
+        <animation id="explosionSecond1">
+            <keyframe instant="4.2">
                 <translation x="0" y="0" z="0" />
                 <rotation axis="x" angle="0" />
                 <rotation axis="y" angle="0" />
                 <rotation axis="z" angle="0" />
                 <scale sx="0" sy="0" sz="0" />
             </keyframe>
+            
+            <keyframe instant="4.3">
+                <translation x="0" y="0" z="0" />
+                <rotation axis="x" angle="23" />
+                <rotation axis="y" angle="23" />
+                <rotation axis="z" angle="23" />
+                <scale sx="1" sy="1" sz="1" />
+            </keyframe>
+            
+            <keyframe instant="5.7">
+                <translation x="0" y="0" z="0" />
+                <rotation axis="x" angle="45" />
+                <rotation axis="y" angle="45" />
+                <rotation axis="z" angle="45" />
+                <scale sx="0" sy="0" sz="0" />
+            </keyframe>
         </animation>
         
-        <animation id="xWing">
-        </animation>
-
-        <animation id="tieFighter">
-        </animation>
-
-        <animation id="default">
-            <keyframe instant="0">
+        <animation id="explosionSecond2">
+            <keyframe instant="3.9">
                 <translation x="0" y="0" z="0" />
                 <rotation axis="x" angle="0" />
                 <rotation axis="y" angle="0" />
+                <rotation axis="z" angle="0" />
+                <scale sx="0" sy="0" sz="0" />
+            </keyframe>
+            
+            <keyframe instant="4.8">
+                <translation x="0" y="0" z="0" />
+                <rotation axis="x" angle="23" />
+                <rotation axis="y" angle="23" />
+                <rotation axis="z" angle="23" />
+                <scale sx="1" sy="1" sz="1" />
+            </keyframe>
+            
+            <keyframe instant="5.4">
+                <translation x="0" y="0" z="0" />
+                <rotation axis="x" angle="45" />
+                <rotation axis="y" angle="45" />
+                <rotation axis="z" angle="45" />
+                <scale sx="0" sy="0" sz="0" />
+            </keyframe>
+        </animation>
+        
+        <animation id="explosionRing">
+            <keyframe instant="3">
+                <translation x="0" y="0" z="0" />
+                <rotation axis="x" angle="0" />
+                <rotation axis="y" angle="0" />
+                <rotation axis="z" angle="0" />
+                <scale sx="0" sy="0" sz="0" />
+            </keyframe>
+            
+            <keyframe instant="6">
+                <translation x="0" y="0" z="0" />
+                <rotation axis="x" angle="0" />
+                <rotation axis="y" angle="0" />
+                <rotation axis="z" angle="180" />
+                <scale sx="5" sy="5" sz="5" />
+            </keyframe>
+        </animation>
+        
+        <animation id="xWing">
+            <keyframe instant="0">
+                <translation x="-10" y="10" z="-40" />
+                <rotation axis="x" angle="0" />
+                <rotation axis="y" angle="-45" />
+                <rotation axis="z" angle="15" />
+                <scale sx="1" sy="1" sz="1" />
+            </keyframe>
+            
+            <keyframe instant="2.7">
+                <translation x="-35" y="4" z="-6" />
+                <rotation axis="x" angle="0" />
+                <rotation axis="y" angle="45" />
+                <rotation axis="z" angle="-35" />
+                <scale sx="1" sy="1" sz="1" />
+            </keyframe>
+
+            <keyframe instant="3">
+                <translation x="-30" y="3" z="-5" />
+                <rotation axis="x" angle="0" />
+                <rotation axis="y" angle="50" />
+                <rotation axis="z" angle="-40" />
+                <scale sx="1" sy="1" sz="1" />
+            </keyframe>
+
+            <keyframe instant="5">
+                <translation x="8" y="7" z="8" />
+                <rotation axis="x" angle="-30" />
+                <rotation axis="y" angle="90" />
                 <rotation axis="z" angle="0" />
                 <scale sx="1" sy="1" sz="1" />
             </keyframe>
         </animation>
 
-        <animation id="skyBox">
+        <animation id="tieFighter">
             <keyframe instant="0">
-                <translation x="0" y="0" z="0" />
+                <translation x="-50" y="14" z="-14" />
+                <rotation axis="x" angle="-10" />
+                <rotation axis="y" angle="-50" />
+                <rotation axis="z" angle="-35" />
+                <scale sx="1" sy="1" sz="1" />
+            </keyframe>
+
+            <keyframe instant="3.2">
+                <translation x="-12.5" y="1" z="14" />
+                <rotation axis="x" angle="-45" />
+                <rotation axis="y" angle="-10" />
+                <rotation axis="z" angle="0" />
+                <scale sx="1" sy="1" sz="1" />
+            </keyframe>
+
+            <keyframe instant="3.4">
+                <translation x="-12.5" y="1" z="14" />
                 <rotation axis="x" angle="0" />
                 <rotation axis="y" angle="0" />
                 <rotation axis="z" angle="0" />
-                <scale sx="25" sy="25" sz="1" />
+                <scale sx="0" sy="0" sz="0" />
             </keyframe>
         </animation>
+
+        <animation id="laser1">
+            <keyframe instant="2.6">
+                <translation x="-5" y="5" z="-5" />
+                <rotation axis="x" angle="0" />
+                <rotation axis="y" angle="60" />
+                <rotation axis="z" angle="-35" />
+                <scale sx="1" sy="1" sz="1" />
+            </keyframe>
+            
+            <keyframe instant="3">
+                <translation x="-5" y="5" z="-5" />
+                <rotation axis="x" angle="0" />
+                <rotation axis="y" angle="60" />
+                <rotation axis="z" angle="-35" />
+                <scale sx="1" sy="1" sz="1" />
+            </keyframe>
+
+            <keyframe instant="3.1">
+                <translation x="-5" y="5" z="-5" />
+                <rotation axis="x" angle="0" />
+                <rotation axis="y" angle="60" />
+                <rotation axis="z" angle="-35" />
+                <scale sx="0" sy="0" sz="0" />
+            </keyframe>
+        </animation>
+
+        <animation id="laser2">
+            <keyframe instant="2.7">
+                <translation x="-5" y="5" z="-5" />
+                <rotation axis="x" angle="0" />
+                <rotation axis="y" angle="60" />
+                <rotation axis="z" angle="-35" />
+                <scale sx="1" sy="1" sz="1" />
+            </keyframe>
+            
+            <keyframe instant="3.1">
+                <translation x="-5" y="5" z="-5" />
+                <rotation axis="x" angle="0" />
+                <rotation axis="y" angle="60" />
+                <rotation axis="z" angle="-35" />
+                <scale sx="1" sy="1" sz="1" />
+            </keyframe>
+
+            <keyframe instant="3.2">
+                <translation x="-5" y="5" z="-5" />
+                <rotation axis="x" angle="0" />
+                <rotation axis="y" angle="60" />
+                <rotation axis="z" angle="-35" />
+                <scale sx="0" sy="0" sz="0" />
+            </keyframe>
+        </animation>
+
     </animations>
 
     <nodes>
@@ -227,8 +384,6 @@
             <!-- geom. transf. are optional and may be repeated, in any order, as necessary: -->
             <transformations>
             </transformations>
-
-            <animationref id="default" />
 
             <!-- declaring descendants, at least one node or one leaf must be present
              descendants may be mixed, nodes and leafs -->
@@ -1254,11 +1409,9 @@
             </texture>
 
             <transformations>
-                <translation x="-6" y="4" z="-7" />
-                <rotation axis="y" angle="-20" />
-                <rotation axis="x" angle="13" />
-                <rotation axis="z" angle="-30" />
             </transformations>
+
+            <animationref id="xWing" />
 
             <descendants>
                 <noderef id="xWingMainBody" />
@@ -1687,10 +1840,9 @@
                 <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
-                <translation x="-11" y="0" z="15.5"/>
-                <rotation axis="z" angle="15" />
-                <rotation axis="y" angle="-90" />
             </transformations>
+
+            <animationref id="tieFighter" />
 
             <descendants>
                 <noderef id="tieBody" />
@@ -1708,6 +1860,8 @@
             </texture>
             <transformations>
             </transformations>
+
+            <animationref id="explosionMain" />
 
             <descendants>
                 <leaf type="sphere" radius="5" stacks="30" slices="30" /> <!-- temporary value for stacks / slices -->
@@ -1738,6 +1892,8 @@
                 <translation x="3" y="2" z="3" />
             </transformations>
 
+            <animationref id="explosionSecond1" />
+
             <descendants>
                 <noderef id="explosionSecondarySphere" />
             </descendants>
@@ -1751,6 +1907,8 @@
             <transformations>
                 <translation x="-3" y="-2" z="2" />
             </transformations>
+            
+            <animationref id="explosionSecond2" />
 
             <descendants>
                 <noderef id="explosionSecondarySphere" />
@@ -1766,6 +1924,8 @@
                 <translation x="3" y="-4" z="-2" />
             </transformations>
 
+            <animationref id="explosionSecond1" />
+            
             <descendants>
                 <noderef id="explosionSecondarySphere" />
             </descendants>
@@ -1781,6 +1941,8 @@
             <transformations>
             </transformations>
 
+            <animationref id="explosionRing" />
+
             <descendants>
                 <leaf type="torus" inner="0.5" outer="8" slices="60" loops="60" />
             </descendants>
@@ -1794,12 +1956,10 @@
             </texture>
             <transformations>
                 <translation x="-12.5" y="1" z="14" />
-                <scale sx="0.8" sy="0.8" sz="0.8" />
+                <scale sx="2.5" sy="2.5" sz="2.5" />
                 <rotation axis="z" angle="30"/>
                 <rotation axis="y" angle="90"/>
             </transformations>
-
-            <animationref id="explosionMain" />
 
             <descendants>
                 <noderef id="explosionWhiteRing" />
@@ -1841,6 +2001,8 @@
                 <translation x="-8" y="0" z="-7" />
             </transformations>
 
+            <animationref id="laser1" />
+
             <descendants>
                 <noderef id="greenlaserCylinder" />
             </descendants>
@@ -1856,6 +2018,8 @@
                 <translation x="-7.8" y="1.9" z="14" />
                 <translation x="-8" y="0" z="-7" />
             </transformations>
+
+            <animationref id="laser2" />
 
             <descendants>
                 <noderef id="greenlaserCylinder" />
@@ -1881,14 +2045,14 @@
         <node id="skyBoxFace">
             <material id="null" />
             <texture id="null">
-                <amplification afs="50" aft="50" />
+                <amplification afs="100" aft="100" />
             </texture>
 
             <transformations>
             </transformations>
 
             <descendants>
-                <leaf type="rectangle" x1="-25" y1="-25" x2="25" y2="25" />
+                <leaf type="rectangle" x1="-50" y1="-50" x2="50" y2="50" />
             </descendants>
         </node>
 
@@ -1900,7 +2064,7 @@
             </texture>
 
             <transformations>
-                <translation x="0" y="25" z="0" />
+                <translation x="0" y="50" z="0" />
                 <rotation axis="x" angle="90" />
             </transformations>
 
@@ -1917,7 +2081,7 @@
             </texture>
 
             <transformations>
-                <translation x="0" y="-25" z="0" />
+                <translation x="0" y="-50" z="0" />
                 <rotation axis="x" angle="-90" />
             </transformations>
 
@@ -1934,7 +2098,7 @@
             </texture>
 
             <transformations>
-                <translation x="0" y="0" z="-25" />
+                <translation x="0" y="0" z="-50" />
             </transformations>
 
             <descendants>
@@ -1950,7 +2114,7 @@
             </texture>
 
             <transformations>
-                <translation x="0" y="0" z="25" />
+                <translation x="0" y="0" z="50" />
                 <rotation axis="y" angle="180" />
             </transformations>
 
@@ -1967,7 +2131,7 @@
             </texture>
 
             <transformations>
-                <translation x="25" y="0" z="0" />
+                <translation x="50" y="0" z="0" />
                 <rotation axis="y" angle="-90" />
             </transformations>
 
@@ -1984,7 +2148,7 @@
             </texture>
 
             <transformations>
-                <translation x="-25" y="0" z="0" />
+                <translation x="-50" y="0" z="0" />
                 <rotation axis="y" angle="90" />
             </transformations>
 
@@ -2002,8 +2166,6 @@
 
             <transformations>
             </transformations>
-
-            <animationref id="skyBox" />
 
             <descendants>
                 <noderef id="skyBoxWest" />

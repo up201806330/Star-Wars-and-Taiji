@@ -711,6 +711,7 @@ class MySceneGraph {
                 continue;
             }
             
+            var previousInstant = null;
             for (let j = 0; j < keyframesXML.length; j++){
                 // Get instant of the current keyframe.
                 var instant = this.reader.getFloat(keyframesXML[j], 'instant');
@@ -734,6 +735,10 @@ class MySceneGraph {
                 }
                 else if (isNaN(instant)) {
                     this.onXMLMinorError("instant is non numeric value. Ignoring keyframe");
+                    continue;
+                }
+                else if (previousInstant != null && instant < previousInstant){
+                    this.onXMLMinorError("instant out of order. Ignoring keyframe");
                     continue;
                 }
 
@@ -933,10 +938,10 @@ class MySceneGraph {
             if (animationsIndex > 0) {
                 var animID = this.reader.getString(grandChildren[animationsIndex], 'id');
                 if (animID == null) this.onXMLError("Coulnd't parse animation");
-                if (animID != "null" && this.animations[animID] == null) this.onXMLError("Animation id " + animID + " doesn't exist");            
+                if (animID != "null" && this.animations[animID] == null) this.onXMLError("Animation id " + animID + " doesn't exist"); 
+                this.nodes[nodeID].animID = animID;           
             }
 
-            this.nodes[nodeID].animID = animID;
             
 
             // Descendants
@@ -1131,8 +1136,10 @@ class MySceneGraph {
             this.scene.multMatrix(nodeToDisplay.transformMatrix);
 
             // Animations
-            if (nodeToDisplay.animID != null) this.animations[nodeToDisplay.animID].apply();
-            if (!this.animations[nodeToDisplay.animID].active) return;
+            if (nodeToDisplay.animID != null) {
+                if (!this.animations[nodeToDisplay.animID].active) return;
+                this.animations[nodeToDisplay.animID].apply();
+            }
 
             if (nodeToDisplay.materialID != "null") this.materialStack.push(nodeToDisplay.materialID);
             let topOfMatStack = this.materialStack[this.materialStack.length - 1];
