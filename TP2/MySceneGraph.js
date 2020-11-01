@@ -7,7 +7,8 @@ var ILLUMINATION_INDEX = 2;
 var LIGHTS_INDEX = 3;
 var TEXTURES_INDEX = 4;
 var MATERIALS_INDEX = 5;
-var NODES_INDEX = 6;
+var ANIMATIONS_INDEX = 6;
+var NODES_INDEX = 7;
 
 /**
  * MySceneGraph class, representing the scene graph.
@@ -190,6 +191,18 @@ class MySceneGraph {
 
             //Parse materials block
             if ((error = this.parseMaterials(nodes[index])) != null)
+                return error;
+        }
+
+        // <animations>
+        if ((index = nodeNames.indexOf("animations")) == -1)
+            console.log("tag <animations> missing");
+        else {
+            if (index != ANIMATIONS_INDEX)
+                this.onXMLMinorError("tag <animations> out of order");
+
+            //Parse nodes block
+            if ((error = this.parseAnimations(nodes[index])) != null)
                 return error;
         }
 
@@ -661,6 +674,105 @@ class MySceneGraph {
     }
 
     /**
+     * Parses the <animations> block.
+     * @param {animations block element} animationsNode 
+     */
+    parseAnimations(animationsNode) {
+        var children = animationsNode.children;
+
+        this.animations = [];
+
+        for (let i = 0; i < children.length; i++) {
+            if (children[i].nodeName != "animation") {
+                this.onXMLError("unknown tag <" + children[i].nodeName + ">" + ". Ignoring node");
+                continue;
+            }
+
+            // Get id of the current animation.
+            var animID = this.reader.getString(children[i], 'id');
+            
+            if (animID == null){
+                this.onXMLError("no ID defined for animID. Ignoring animation");
+                continue;
+            }
+
+            // Checks for repeated IDs.
+            if (this.animations[animID] != null){
+                this.onXMLError("ID must be unique for each animation (conflict: ID: " + animID + "). Ignoring animation.");
+                continue;
+            }
+
+            var keyframes = [];
+            let newAnim = new Animation(this, keyframes);
+
+            var keyframesXML = children[i].children;
+            for (let j = 0; j < keyframesXML.length; j++){
+                // Get instant of the current keyframe.
+                var instant = this.reader.getFloat(keyframesXML[j], 'instant');
+
+                if (instant == null){
+                    this.onXMLError("no instant defined for keyframe. Ignoring keyframe");
+                    continue;
+                }
+    
+                // Checks for repeated IDs.
+                if (keyframes[instant] != null){
+                    this.onXMLError("There mustn't be keyframes at the same instant in an animation (conflict: instant: " + instant + "). Ignoring keyframe.");
+                    continue;
+                }
+
+                if (instant <= 0) {
+                    this.onXMLMinorError("instant must be positive. Ignoring keyframe");
+                    continue;
+                }
+                else if (isNaN(instant)) {
+                    this.onXMLMinorError("instant is non numeric value. Ignoring keyframe");
+                    continue;
+                }
+
+                var translation = [];
+                var rotation = [];
+                var scale = [];
+                var keyframeArgs = keyframesXML[j].children;
+                if (keyframeArgs.length != 5){
+                    this.onXMLError("Animation keyframe doesn't have right number of transformations (instant = " +  + ")");
+                }
+                for (let k = 0; k < keyframeArgs.length; k++){
+                    if (keyframeArgs[k].nodeName == "translation"){
+                        translation = this.parseCoordinates3D(keyframeArgs[k], "translation");
+                    }
+                    else if (keyframeArgs[k].nodeName == "rotation"){
+                        let axis = this.reader.getString(keyframeArgs[k], 'axis');
+                        let angle = this.reader.getFloat(keyframeArgs[k], 'angle');
+                        switch(axis){
+                            case 'x':
+                                rotation[0] = angle;
+                                break;
+                            case 'y':
+                                rotation[1] = angle;
+                                break;
+                            case 'z':
+                                rotation[2] = angle;
+                                break;
+                            default:
+                                this.onXMLError("Invalid axis on rotation. Ignoring keyframe");
+                                continue;
+                        }
+                    }
+                    else if (keyframeArgs[k].nodeName == "scale"){
+                        scale = this.parseCoordinates3DScale(keyframeArgs[k], "scale");
+                    }
+                }
+
+                let newKeyframe = new KeyFrame(instant, translation, rotation, scale);
+                keyframes[instant] = newKeyframe;
+            }
+            this.animations[animID] = newAnim;
+        }
+        console.log("Parsed animations");
+    }
+
+    /**
    * Parses the <nodes> block.
    * @param {nodes block element} nodesNode
    */
@@ -873,17 +985,45 @@ class MySceneGraph {
             // x
             var x = this.reader.getFloat(node, 'x');
             if (!(x != null && !isNaN(x)))
-                return "unable to parse x-coordinate of the " + messageError;
+            this.onXMLMinorError("unable to parse x-coordinate of the " + messageError);
 
             // y
             var y = this.reader.getFloat(node, 'y');
             if (!(y != null && !isNaN(y)))
-                return "unable to parse y-coordinate of the " + messageError;
+            this.onXMLMinorError("unable to parse y-coordinate of the " + messageError);
 
             // z
             var z = this.reader.getFloat(node, 'z');
             if (!(z != null && !isNaN(z)))
-                return "unable to parse z-coordinate of the " + messageError;
+            this.onXMLMinorError("unable to parse z-coordinate of the " + messageError);
+
+            position.push(...[x, y, z]);
+
+            return position;
+        }
+
+        /**
+         * Exactly the same but for scale vector parameters
+         * @param {block element} node
+         * @param {message to be displayed in case of error} messageError
+         */
+        parseCoordinates3DScale(node, messageError) {
+            var position = [];
+
+            // x
+            var x = this.reader.getFloat(node, 'sx');
+            if (!(x != null && !isNaN(x)))
+            this.onXMLMinorError("unable to parse x-coordinate of the " + messageError);
+
+            // y
+            var y = this.reader.getFloat(node, 'sy');
+            if (!(y != null && !isNaN(y)))
+            this.onXMLMinorError("unable to parse y-coordinate of the " + messageError);
+
+            // z
+            var z = this.reader.getFloat(node, 'sz');
+            if (!(z != null && !isNaN(z)))
+            this.onXMLMinorError("unable to parse z-coordinate of the " + messageError);
 
             position.push(...[x, y, z]);
 
