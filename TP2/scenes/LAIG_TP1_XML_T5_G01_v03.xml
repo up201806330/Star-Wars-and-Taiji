@@ -392,7 +392,6 @@
                 <noderef id="xWingFull" />
                 <noderef id="tieFinalShape" />
                 <noderef id="explosionFinal" />
-                <noderef id="laserGroup" />
             </descendants>
         </node>
 
@@ -1416,6 +1415,9 @@
             <descendants>
                 <noderef id="xWingMainBody" />
                 <noderef id="xWingWings" />
+
+                
+                <noderef id="laserGroup" />
             </descendants>            
         </node>
 
@@ -1997,8 +1999,8 @@
             </texture>
 
             <transformations>
-                <translation x="3.5" y="1.1" z="10" />
-                <translation x="-8" y="0" z="-7" />
+                <translation x="-4.5" y="2" z="6"/>
+                <rotation axis="y" angle="-45" />
             </transformations>
 
             <animationref id="laser1" />
@@ -2015,8 +2017,8 @@
             </texture>
 
             <transformations>
-                <translation x="-7.8" y="1.9" z="14" />
-                <translation x="-8" y="0" z="-7" />
+                <translation x="4.65" y="2" z="6"/>
+                <rotation axis="y" angle="-45" />
             </transformations>
 
             <animationref id="laser2" />
