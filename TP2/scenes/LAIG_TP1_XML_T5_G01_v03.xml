@@ -319,53 +319,53 @@
         </animation>
 
         <animation id="laser1">
-            <keyframe instant="2.6">
-                <translation x="-5" y="5" z="-5" />
+            <keyframe instant="2.5">
+                <translation x="-38" y="7" z="-2" />
                 <rotation axis="x" angle="0" />
-                <rotation axis="y" angle="60" />
-                <rotation axis="z" angle="-35" />
+                <rotation axis="y" angle="45" />
+                <rotation axis="z" angle="10" />
                 <scale sx="2" sy="2" sz="2" />
             </keyframe>
             
             <keyframe instant="3">
-                <translation x="-5" y="5" z="-5" />
+                <translation x="-12.5" y="1" z="14" />
                 <rotation axis="x" angle="0" />
-                <rotation axis="y" angle="60" />
-                <rotation axis="z" angle="-35" />
+                <rotation axis="y" angle="45" />
+                <rotation axis="z" angle="10" />
                 <scale sx="2" sy="2" sz="2" />
             </keyframe>
 
             <keyframe instant="3.1">
-                <translation x="-5" y="5" z="-5" />
+                <translation x="-12.5" y="1" z="14" />
                 <rotation axis="x" angle="0" />
-                <rotation axis="y" angle="60" />
-                <rotation axis="z" angle="-35" />
+                <rotation axis="y" angle="45" />
+                <rotation axis="z" angle="10" />
                 <scale sx="0" sy="0" sz="0" />
             </keyframe>
         </animation>
 
         <animation id="laser2">
-            <keyframe instant="2.7">
-                <translation x="-5" y="5" z="-5" />
+            <keyframe instant="2.6">
+                <translation x="-28" y="3" z="-6" />
                 <rotation axis="x" angle="0" />
-                <rotation axis="y" angle="60" />
-                <rotation axis="z" angle="-35" />
+                <rotation axis="y" angle="45" />
+                <rotation axis="z" angle="10" />
                 <scale sx="2" sy="2" sz="2" />
             </keyframe>
             
             <keyframe instant="3.1">
-                <translation x="-5" y="5" z="-5" />
+                <translation x="-12.5" y="1" z="14" />
                 <rotation axis="x" angle="0" />
-                <rotation axis="y" angle="60" />
-                <rotation axis="z" angle="-35" />
+                <rotation axis="y" angle="45" />
+                <rotation axis="z" angle="10" />
                 <scale sx="2" sy="2" sz="2" />
             </keyframe>
 
             <keyframe instant="3.2">
-                <translation x="-5" y="5" z="-5" />
+                <translation x="-12.5" y="1" z="14" />
                 <rotation axis="x" angle="0" />
-                <rotation axis="y" angle="60" />
-                <rotation axis="z" angle="-35" />
+                <rotation axis="y" angle="45" />
+                <rotation axis="z" angle="10" />
                 <scale sx="0" sy="0" sz="0" />
             </keyframe>
         </animation>
@@ -392,6 +392,7 @@
                 <noderef id="xWingFull" />
                 <noderef id="tieFinalShape" />
                 <noderef id="explosionFinal" />
+                <noderef id="laserGroup" />
             </descendants>
         </node>
 
@@ -1415,9 +1416,6 @@
             <descendants>
                 <noderef id="xWingMainBody" />
                 <noderef id="xWingWings" />
-
-                
-                <noderef id="laserGroup" />
             </descendants>            
         </node>
 
@@ -1999,8 +1997,6 @@
             </texture>
 
             <transformations>
-                <translation x="-4.5" y="2" z="6"/>
-                <rotation axis="y" angle="-45" />
             </transformations>
 
             <animationref id="laser1" />
@@ -2017,8 +2013,6 @@
             </texture>
 
             <transformations>
-                <translation x="4.65" y="2" z="6"/>
-                <rotation axis="y" angle="-45" />
             </transformations>
 
             <animationref id="laser2" />
