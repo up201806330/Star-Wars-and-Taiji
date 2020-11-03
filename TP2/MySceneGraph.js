@@ -782,7 +782,7 @@ class MySceneGraph {
             // Hedge case for when there is only one keyframe
             if (keyframes.length == 1) keyframes[1] = keyframes[0];
             
-            var newAnim = new KeyframeAnimation(this.scene, keyframes);
+            var newAnim = new MyKeyframeAnimation(this.scene, keyframes);
             this.animations[animID] = newAnim;
         }
         console.log("Parsed animations");

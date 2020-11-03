@@ -1,4 +1,4 @@
-class KeyframeAnimation extends Animation{
+class MyKeyframeAnimation extends MyAnimation{
     constructor(scene, keyframes) {
         super(scene);
         this.keyframes = keyframes;
