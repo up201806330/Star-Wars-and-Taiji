@@ -5,5 +5,4 @@ class KeyFrame {
         this.rotation = rotation;
         this.scale = scale;
     }
-    
 }

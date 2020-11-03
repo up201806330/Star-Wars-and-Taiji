@@ -275,7 +275,7 @@
                 <scale sx="1" sy="1" sz="1" />
             </keyframe>
 
-            <keyframe instant="3">
+            <keyframe instant="3.3">
                 <translation x="-30" y="3" z="-5" />
                 <rotation axis="x" angle="0" />
                 <rotation axis="y" angle="50" />

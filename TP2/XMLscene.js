@@ -13,9 +13,6 @@ class XMLscene extends CGFscene {
 
         this.lightsStatus = [];
         this.curView = "";
-
-        this.deltaT = null;
-        this.lastT = null;
     }
 
     /**
@@ -138,12 +135,10 @@ class XMLscene extends CGFscene {
      */
     update(t) {
         var now  = t/1000.0;
-        if(this.lastT != null) this.deltaT = now- this.lastT;
-        
-        this.lastT = now;
+
         if (this.sceneInited) {
             for(var animation in this.graph.animations){
-                this.graph.animations[animation].updateAnimation(this.deltaT);
+                this.graph.animations[animation].updateAnimation(now);
             }
         }
     }
