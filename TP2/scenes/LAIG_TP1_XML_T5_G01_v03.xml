@@ -82,6 +82,11 @@
         
     </textures>
 
+    <!-- Spritesheets -->
+    <spritesheets>
+        <spritesheet id="starFoxSheet" path="./scenes/images/spritesheet.png" sizeM="4" sizeN="2" />
+    </spritesheets>
+
     <!-- Materials -->
     <!-- Valores entre 0 e 1 exceto emissive -->
     <materials>

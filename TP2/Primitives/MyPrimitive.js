@@ -8,7 +8,7 @@ class MyPrimitive {
         
         // console.log("Leaf is: " + type);
         
-        if (type == "rectangle") {
+        if (type == "rectangle"){
 
             let x1 = this.graph.reader.getFloat(element, "x1", true);
             let y1 = this.graph.reader.getFloat(element, "y1", true);
@@ -39,7 +39,7 @@ class MyPrimitive {
             this.aPrimitive = new MySphere(this.graph.scene, radius, stacks, slices);
         }
 
-        else if (type == "cylinder") {
+        else if (type == "cylinder"){
             let height = this.graph.reader.getFloat(element, "height", true);
             let topRadius = this.graph.reader.getFloat(element, "topRadius", true);
             let bottomRadius = this.graph.reader.getFloat(element, "bottomRadius", true);
@@ -56,6 +56,23 @@ class MyPrimitive {
             let loops = this.graph.reader.getFloat(element, "loops", true);
 
             this.aPrimitive = new MyTorus(this.graph.scene, inner, outer, slices, loops);
+        }
+
+        else if (type == "spritetext"){
+            let text = this.graph.reader.getString(element, "text", true);
+
+            this.aPrimitive = new MySpriteText(this.graph.scene, text);
+        }
+
+        else if (type == "spriteanim"){
+            let ssid = this.graph.reader.getString(element, "ssid", true);
+            if (this.graph.scene.spritesheets[ssid] == null) this.onXMLError("Spritesheet id " + ssid + " doesn't exist");            
+
+            let startCell = this.graph.reader.getInteger(element, "startCell", true);
+            let endCell = this.graph.reader.getInteger(element, "endCell", true);
+            let duration = this.graph.reader.getFloat(element, "duration", true);
+
+            this.aPrimitive = new MySpriteAnimation(this.graph.scene, ssid, duration, startCell, endCell);
         }
 
         else {

@@ -11,6 +11,7 @@ function getUrlVars() {
     return vars;
 }	 
 //Include additional files here
+serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js', 'MyInterface.js', 'Primitives/MyTriangle.js', 'Primitives/MyRectangle.js', 'Primitives/MySphere.js', 'Primitives/MyTorus.js',  'Primitives/MyCylinder.js', 'Primitives/CylinderLid.js', 'Primitives/CylinderBody.js',  'Primitives/MyPrimitive.js', 'MyNode.js', 'Animation/Animation.js', 'Animation/KeyframeAnimation.js', 'Animation/KeyFrame.js', 'Spritesheet/MySpriteSheet.js', 'Spritesheet/MySpriteText.js', 'Spritesheet/MySpriteAnimation.js',
 
 main=function()
 {
@@ -29,7 +30,7 @@ main=function()
 	// get file name provided in URL, e.g. http://localhost/myproj/?file=myfile.xml 
 	// or use "demo.xml" as default (assumes files in subfolder "scenes", check MySceneGraph constructor) 
 	
-    var filename=getUrlVars()['file'] || "LAIG_TP1_XML_T5_G01_v03.xml";
+    var filename=getUrlVars()['file'] || "test.xml";
 
 	// create and load graph, and associate it to scene. 
 	// Check console for loading errors
@@ -38,6 +39,4 @@ main=function()
 	// start
     app.run();
 }
-
-serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js', 'MyInterface.js', 'Primitives/MyTriangle.js', 'Primitives/MyRectangle.js', 'Primitives/MySphere.js', 'Primitives/MyTorus.js',  'Primitives/MyCylinder.js', 'Primitives/CylinderLid.js', 'Primitives/CylinderBody.js',  'Primitives/MyPrimitive.js', 'MyNode.js', 'Animation/Animation.js', 'Animation/KeyframeAnimation.js', 'Animation/KeyFrame.js', 'Spritesheet/MySpriteSheet.js', 'Spritesheet/MySpriteText.js', 'Spritesheet/MySpriteAnimation.js',
 ]);

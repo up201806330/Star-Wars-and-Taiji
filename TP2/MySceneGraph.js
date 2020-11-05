@@ -6,9 +6,10 @@ var VIEWS_INDEX = 1;
 var ILLUMINATION_INDEX = 2;
 var LIGHTS_INDEX = 3;
 var TEXTURES_INDEX = 4;
-var MATERIALS_INDEX = 5;
-var ANIMATIONS_INDEX = 6;
-var NODES_INDEX = 7;
+var SPRITESHEETS_INDEX = 5;
+var MATERIALS_INDEX = 6;
+var ANIMATIONS_INDEX = 7;
+var NODES_INDEX = 8;
 
 /**
  * MySceneGraph class, representing the scene graph.
@@ -170,6 +171,7 @@ class MySceneGraph {
             if ((error = this.parseLights(nodes[index])) != null)
                 return error;
         }
+
         // <textures>
         if ((index = nodeNames.indexOf("textures")) == -1)
             return "tag <textures> missing";
@@ -179,6 +181,18 @@ class MySceneGraph {
 
             //Parse textures block
             if ((error = this.parseTextures(nodes[index])) != null)
+                return error;
+        }
+
+        // <spritesheets>
+        if ((index = nodeNames.indexOf("spritesheets")) == -1)
+            return "tag <spritesheets> missing";
+        else {
+            if (index != SPRITESHEETS_INDEX)
+                this.onXMLMinorError("tag <spritesheets> out of order");
+
+            //Parse textures block
+            if ((error = this.parseSpritesheets(nodes[index])) != null)
                 return error;
         }
 
@@ -542,6 +556,52 @@ class MySceneGraph {
 
         console.log("Parsed textures");
     }
+    
+    /**
+     * Parses the <spritesheets> block. 
+     * @param {spritesheets block element} spritesheetsNode
+     */
+    parseSpritesheets(spritesheetsNode){
+        var children = spritesheetsNode.children;
+
+        this.spritesheets = [];
+        for (let i = 0; i < children.length; i++) {
+            if (children[i].nodeName != "spritesheet") {
+                this.onXMLError("unknown tag <" + children[i].nodeName + ">. Ignoring spritesheet");
+                continue;
+            }
+
+            // Get id of the current spritesheet.
+            var spritesheetID = this.reader.getString(children[i], 'id');
+            if (spritesheetID == null) {
+                this.onXMLError("no ID defined for spritesheet . Ignoring spritesheet ");
+                continue;
+            }
+
+            // Checks for repeated IDs.
+            if (this.spritesheets[spritesheetID] != null) {
+                this.onXMLError("ID must be unique for each spritesheet  (conflict: ID: " + spritesheetID + "). Ignoring spritesheet ");
+                continue;
+            }
+
+            // Get path            
+            let path = this.reader.getString(children[i], 'path');
+            if (path == null) this.onXMLError("unable to parse path for spritesheet with ID: " + spritesheetID + ". Ignoring spritesheet");
+
+            // Get sizeM            
+            let sizeM = this.reader.getString(children[i], 'sizeM');
+            if (sizeM == null) this.onXMLError("unable to parse sizeM for spritesheet with ID: " + spritesheetID + ". Ignoring spritesheet");
+
+            // Get sizeN            
+            let sizeN = this.reader.getString(children[i], 'sizeN');
+            if (sizeN == null) this.onXMLError("unable to parse sizeN for spritesheet with ID: " + spritesheetID + ". Ignoring spritesheet");
+
+
+            var spritesheet = new MySpriteSheet(this.scene, new CGFtexture(this.scene, path), sizeM, sizeN);
+            this.spritesheets[spritesheetID] = spritesheet;
+        }
+        console.log("Parsed spritesheets");
+    }
 
     /**
      * Create fallback default material (hot pink so error is noticeable)
@@ -782,6 +842,7 @@ class MySceneGraph {
             // Hedge case for when there is only one keyframe
             if (keyframes.length == 1) keyframes[1] = keyframes[0];
             
+            var newAnim = new KeyframeAnimation(this.scene, keyframes);
             this.animations[animID] = newAnim;
         }
         console.log("Parsed animations");
@@ -926,6 +987,7 @@ class MySceneGraph {
                 this.nodes[nodeID].afs = afs;
                 this.nodes[nodeID].aft = aft;
             }
+            
             // Material
             var materialID = this.reader.getString(grandChildren[materialIndex], 'id');
             if (materialID == null) this.onXMLError("Coulnd't parse material");
@@ -940,8 +1002,6 @@ class MySceneGraph {
                 if (animID != "null" && this.animations[animID] == null) this.onXMLError("Animation id " + animID + " doesn't exist"); 
                 this.nodes[nodeID].animID = animID;           
             }
-
-            
 
             // Descendants
             if (descendantsIndex == -1) {
@@ -963,7 +1023,7 @@ class MySceneGraph {
                 }
 
                 else if (nodeDescendants[k].nodeName == "leaf") {
-                    let primType = this.reader.getItem(nodeDescendants[k], "type", ["rectangle", "triangle", "torus", "cylinder", "sphere"]);
+                    let primType = this.reader.getItem(nodeDescendants[k], "type", ["rectangle", "triangle", "torus", "cylinder", "sphere", "spritetext", "spriteanim"]);
 
                     if (primType == null) {
                         this.onXMLError("Unknown primitive type!");
@@ -980,7 +1040,6 @@ class MySceneGraph {
 
         }
     }
-
 
     parseBoolean(node, name, messageError) {
         var boolVal = this.reader.getBoolean(node, name);
@@ -1000,178 +1059,178 @@ class MySceneGraph {
         }
         return boolVal;
     }
-        /**
-         * Parse the coordinates from a node with ID: id
-         * @param {block element} node
-         * @param {message to be displayed in case of error} messageError
-         */
-        parseCoordinates3D(node, messageError) {
-            var position = [];
+    
+    /**
+     * Parse the coordinates from a node with ID: id
+     * @param {block element} node
+     * @param {message to be displayed in case of error} messageError
+     */
+    parseCoordinates3D(node, messageError) {
+        var position = [];
 
-            // x
-            var x = this.reader.getFloat(node, 'x');
-            if (!(x != null && !isNaN(x)))
-            this.onXMLMinorError("unable to parse x-coordinate of the " + messageError);
+        // x
+        var x = this.reader.getFloat(node, 'x');
+        if (!(x != null && !isNaN(x)))
+        this.onXMLMinorError("unable to parse x-coordinate of the " + messageError);
 
-            // y
-            var y = this.reader.getFloat(node, 'y');
-            if (!(y != null && !isNaN(y)))
-            this.onXMLMinorError("unable to parse y-coordinate of the " + messageError);
+        // y
+        var y = this.reader.getFloat(node, 'y');
+        if (!(y != null && !isNaN(y)))
+        this.onXMLMinorError("unable to parse y-coordinate of the " + messageError);
 
-            // z
-            var z = this.reader.getFloat(node, 'z');
-            if (!(z != null && !isNaN(z)))
-            this.onXMLMinorError("unable to parse z-coordinate of the " + messageError);
+        // z
+        var z = this.reader.getFloat(node, 'z');
+        if (!(z != null && !isNaN(z)))
+        this.onXMLMinorError("unable to parse z-coordinate of the " + messageError);
 
-            position.push(...[x, y, z]);
+        position.push(...[x, y, z]);
 
-            return position;
-        }
-
-        /**
-         * Exactly the same but for scale vector parameters
-         * @param {block element} node
-         * @param {message to be displayed in case of error} messageError
-         */
-        parseCoordinates3DScale(node, messageError) {
-            var position = [];
-
-            // x
-            var x = this.reader.getFloat(node, 'sx');
-            if (!(x != null && !isNaN(x)))
-            this.onXMLMinorError("unable to parse x-coordinate of the " + messageError);
-
-            // y
-            var y = this.reader.getFloat(node, 'sy');
-            if (!(y != null && !isNaN(y)))
-            this.onXMLMinorError("unable to parse y-coordinate of the " + messageError);
-
-            // z
-            var z = this.reader.getFloat(node, 'sz');
-            if (!(z != null && !isNaN(z)))
-            this.onXMLMinorError("unable to parse z-coordinate of the " + messageError);
-
-            position.push(...[x, y, z]);
-
-            return position;
-        }
-
-        /**
-         * Parse the coordinates from a node with ID: id
-         * @param {block element} node
-         * @param {message to be displayed in case of error} messageError
-         */
-        parseCoordinates4D(node, messageError) {
-            var position = [];
-
-            //Get x, y, z
-            position = this.parseCoordinates3D(node, messageError);
-
-            if (!Array.isArray(position))
-                return position;
-
-
-            // w
-            var w = this.reader.getFloat(node, 'w');
-            if (!(w != null && !isNaN(w)))
-                return "unable to parse w-coordinate of the " + messageError;
-
-            position.push(w);
-
-            return position;
-        }
-
-        /**
-         * Parse the color components from a node
-         * @param {block element} node
-         * @param {message to be displayed in case of error} messageError
-         */
-        parseColor(node, messageError) {
-            var color = [];
-
-            // R    1, 0.078, 0.576, 1
-            var r = this.reader.getFloat(node, 'r');
-            if (!(r != null && !isNaN(r) && r >= 0 && r <= 1)){
-                this.onXMLMinorError("unable to parse R component of the " + messageError + ". Using default value (1)");
-                r = 1;
-            }
-
-            // G
-            var g = this.reader.getFloat(node, 'g');
-            if (!(g != null && !isNaN(g) && g >= 0 && g <= 1)){
-                this.onXMLMinorError("unable to parse G component of the " + messageError + ". Using default value (0.078)");
-                g = 0.078;
-            }
-
-            // B
-            var b = this.reader.getFloat(node, 'b');
-            if (!(b != null && !isNaN(b) && b >= 0 && b <= 1)){
-                this.onXMLMinorError("unable to parse B component of the " + messageError + ". Using default value (0.576)");
-                b = 0.576;
-            }
-
-            // A
-            var a = this.reader.getFloat(node, 'a');
-            if (!(a != null && !isNaN(a) && a >= 0 && a <= 1)){
-                this.onXMLMinorError("unable to parse A component of the " + messageError + ". Using default value (1)");
-                a = 1;
-            }
-
-            color.push(...[r, g, b, a]);
-
-            return color;
-        }
-
-        /**
-         * Displays the scene, processing each node, starting in the root node.
-         */
-        displayScene() {
-            this.displayNode(this.idRoot);
-        }
-
-        displayNode(nodeToDisplayID) {
-            let nodeToDisplay = this.nodes[nodeToDisplayID];
-
-            this.scene.multMatrix(nodeToDisplay.transformMatrix);
-
-            // Animations
-            if (nodeToDisplay.animID != null) {
-                if (!this.animations[nodeToDisplay.animID].active) return;
-                this.animations[nodeToDisplay.animID].apply();
-            }
-
-            if (nodeToDisplay.materialID != "null") this.materialStack.push(nodeToDisplay.materialID);
-            let topOfMatStack = this.materialStack[this.materialStack.length - 1];
-
-            if (nodeToDisplay.textureID != "null") this.textureStack.push(nodeToDisplay.textureID);
-            let topofTexStack = this.textureStack[this.textureStack.length - 1];
-
-            for (let leaf = 0; leaf < nodeToDisplay.leaves.length; leaf++) {
-                // Material and Texture
-                let thisMaterial;
-                if (this.materials[topOfMatStack] == null)  thisMaterial = this.materials[this.defaultMaterialID];
-                else                                        thisMaterial = this.materials[topOfMatStack];
-
-                nodeToDisplay.leaves[leaf].aPrimitive.updateTexCoords(nodeToDisplay.afs, nodeToDisplay.aft);
-                thisMaterial.setTextureWrap("REPEAT", "REPEAT");
-
-                if (this.textures[topofTexStack] != null && this.textures[topofTexStack] != "clear") 
-                    thisMaterial.setTexture(this.textures[topofTexStack]);
-                    
-                thisMaterial.apply();
-
-                // Display
-                nodeToDisplay.leaves[leaf].aPrimitive.display();
-            }
-
-            for (let i = 0; i < nodeToDisplay.childNodes.length; i++) {
-                this.scene.pushMatrix();
-                this.displayNode(nodeToDisplay.childNodes[i]);
-                this.scene.popMatrix();
-            }
-
-            if (nodeToDisplay.materialID != "null") this.materialStack.pop();
-            if (nodeToDisplay.textureID != "null") this.textureStack.pop();
-        }
-            var newAnim = new KeyframeAnimation(this.scene, keyframes);
+        return position;
     }
+
+    /**
+     * Exactly the same but for scale vector parameters
+     * @param {block element} node
+     * @param {message to be displayed in case of error} messageError
+     */
+    parseCoordinates3DScale(node, messageError) {
+        var position = [];
+
+        // x
+        var x = this.reader.getFloat(node, 'sx');
+        if (!(x != null && !isNaN(x)))
+        this.onXMLMinorError("unable to parse x-coordinate of the " + messageError);
+
+        // y
+        var y = this.reader.getFloat(node, 'sy');
+        if (!(y != null && !isNaN(y)))
+        this.onXMLMinorError("unable to parse y-coordinate of the " + messageError);
+
+        // z
+        var z = this.reader.getFloat(node, 'sz');
+        if (!(z != null && !isNaN(z)))
+        this.onXMLMinorError("unable to parse z-coordinate of the " + messageError);
+
+        position.push(...[x, y, z]);
+
+        return position;
+    }
+
+    /**
+     * Parse the coordinates from a node with ID: id
+     * @param {block element} node
+     * @param {message to be displayed in case of error} messageError
+     */
+    parseCoordinates4D(node, messageError) {
+        var position = [];
+
+        //Get x, y, z
+        position = this.parseCoordinates3D(node, messageError);
+
+        if (!Array.isArray(position))
+            return position;
+
+
+        // w
+        var w = this.reader.getFloat(node, 'w');
+        if (!(w != null && !isNaN(w)))
+            return "unable to parse w-coordinate of the " + messageError;
+
+        position.push(w);
+
+        return position;
+    }
+
+    /**
+     * Parse the color components from a node
+     * @param {block element} node
+     * @param {message to be displayed in case of error} messageError
+     */
+    parseColor(node, messageError) {
+        var color = [];
+
+        // R    1, 0.078, 0.576, 1
+        var r = this.reader.getFloat(node, 'r');
+        if (!(r != null && !isNaN(r) && r >= 0 && r <= 1)){
+            this.onXMLMinorError("unable to parse R component of the " + messageError + ". Using default value (1)");
+            r = 1;
+        }
+
+        // G
+        var g = this.reader.getFloat(node, 'g');
+        if (!(g != null && !isNaN(g) && g >= 0 && g <= 1)){
+            this.onXMLMinorError("unable to parse G component of the " + messageError + ". Using default value (0.078)");
+            g = 0.078;
+        }
+
+        // B
+        var b = this.reader.getFloat(node, 'b');
+        if (!(b != null && !isNaN(b) && b >= 0 && b <= 1)){
+            this.onXMLMinorError("unable to parse B component of the " + messageError + ". Using default value (0.576)");
+            b = 0.576;
+        }
+
+        // A
+        var a = this.reader.getFloat(node, 'a');
+        if (!(a != null && !isNaN(a) && a >= 0 && a <= 1)){
+            this.onXMLMinorError("unable to parse A component of the " + messageError + ". Using default value (1)");
+            a = 1;
+        }
+
+        color.push(...[r, g, b, a]);
+
+        return color;
+    }
+
+    /**
+     * Displays the scene, processing each node, starting in the root node.
+     */
+    displayScene() {
+        this.displayNode(this.idRoot);
+    }
+
+    displayNode(nodeToDisplayID) {
+        let nodeToDisplay = this.nodes[nodeToDisplayID];
+
+        this.scene.multMatrix(nodeToDisplay.transformMatrix);
+
+        // Animations
+        if (nodeToDisplay.animID != null) {
+            if (!this.animations[nodeToDisplay.animID].active) return;
+            this.animations[nodeToDisplay.animID].apply();
+        }
+
+        if (nodeToDisplay.materialID != "null") this.materialStack.push(nodeToDisplay.materialID);
+        let topOfMatStack = this.materialStack[this.materialStack.length - 1];
+
+        if (nodeToDisplay.textureID != "null") this.textureStack.push(nodeToDisplay.textureID);
+        let topofTexStack = this.textureStack[this.textureStack.length - 1];
+
+        for (let leaf = 0; leaf < nodeToDisplay.leaves.length; leaf++) {
+            // Material and Texture
+            let thisMaterial;
+            if (this.materials[topOfMatStack] == null)  thisMaterial = this.materials[this.defaultMaterialID];
+            else                                        thisMaterial = this.materials[topOfMatStack];
+
+            nodeToDisplay.leaves[leaf].aPrimitive.updateTexCoords(nodeToDisplay.afs, nodeToDisplay.aft);
+            thisMaterial.setTextureWrap("REPEAT", "REPEAT");
+
+            if (this.textures[topofTexStack] != null && this.textures[topofTexStack] != "clear") 
+                thisMaterial.setTexture(this.textures[topofTexStack]);
+                
+            thisMaterial.apply();
+
+            // Display
+            nodeToDisplay.leaves[leaf].aPrimitive.display();
+        }
+
+        for (let i = 0; i < nodeToDisplay.childNodes.length; i++) {
+            this.scene.pushMatrix();
+            this.displayNode(nodeToDisplay.childNodes[i]);
+            this.scene.popMatrix();
+        }
+
+        if (nodeToDisplay.materialID != "null") this.materialStack.pop();
+        if (nodeToDisplay.textureID != "null") this.textureStack.pop();
+    }
+}
