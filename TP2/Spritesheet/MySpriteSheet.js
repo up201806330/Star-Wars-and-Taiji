@@ -9,10 +9,12 @@ class MySpriteSheet{
     }
 
     activateCellMN(m, n){
-        console.log("X: " + m + " ; Y: " + n);
+        //console.log(m + " ; " + n);
         let coords = vec2.fromValues(m, n);
-        this.shader.setUniformValues({texCoords: coords});
+        this.shader.setUniformsValues({texCoords: coords});
+        this.shader.setUniformsValues({u_texture: this.texture});
         this.scene.setActiveShader(this.shader);
+        this.texture.bind();
     }
 
     activateCellP(p){
