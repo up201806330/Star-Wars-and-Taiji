@@ -8,6 +8,6 @@ uniform mat4 uNMatrix;
 varying vec2 vTextureCoord;
 
 void main(){
-    vTextureCoord = aTextureCoord * 1.0;
-    gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+    vTextureCoord = aTextureCoord;
+    gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.);
 }

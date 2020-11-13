@@ -1233,4 +1233,10 @@ class MySceneGraph {
         if (nodeToDisplay.materialID != "null") this.materialStack.pop();
         if (nodeToDisplay.textureID != "null") this.textureStack.pop();
     }
+        this.scene.fontTexture = new CGFtexture(this.scene, "./scenes/images/font.png");
+
+
+                    if (primType == "spriteanim"){
+                        this.animations[newLeaf.aPrimitive] = newLeaf.aPrimitive;
+                    }
 }

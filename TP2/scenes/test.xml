@@ -38,7 +38,7 @@
 
     <!-- Spritesheets -->
     <spritesheets>
-        <spritesheet id="starFoxSheet" path="./scenes/images/spritesheet.png" sizeM="4" sizeN="2" />
+        <spritesheet id="starFoxSheet" path="./scenes/images/akbar.png" sizeM="4" sizeN="2" />
     </spritesheets>
 
     <!-- Materials -->
@@ -75,12 +75,13 @@
             <!-- declaring descendants, at least one node or one leaf must be present
              descendants may be mixed, nodes and leafs -->
             <descendants>
+                <!--<noderef id="jeff" />-->
                 <noderef id="jeff" />
             </descendants>
         </node>
 
         <node id="jeff">
-            <material id="defaultMaterial" />
+            <material id="null" />
             <texture id="null">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
@@ -89,7 +90,36 @@
             </transformations>
 
             <descendants>
-                <leaf type="spritetext" text="It works :]" />
+                <leaf type="spritetext" text="It works" />
+            </descendants>
+        </node>
+
+        <node id="jeff1">
+            <material id="defaultMaterial" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="2" z="0" />
+            </transformations>
+
+            <descendants>
+                <leaf type="spritetext" text="sss" />
+            </descendants>
+        </node>
+        
+        <node id="bruh">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <leaf type="spriteanim" ssid="starFoxSheet" duration="1.4" startCell="0" endCell="7" />
             </descendants>
         </node>
     </nodes>

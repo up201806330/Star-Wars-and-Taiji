@@ -12,7 +12,7 @@
             <to x="0" y="5" z="0" />
         </perspective>
 
-        <perspective id="frontChase" near="0.1" far="500" angle="45">
+        <!--<perspective id="frontChase" near="0.1" far="500" angle="45">
             <from x="-6" y="5" z="25" />
             <to x="-12" y="-2" z="0" />
         </perspective>
@@ -25,8 +25,8 @@
         <ortho id="frontChaseOrtho" near="1" far="500" left="-10" right="10" top="10" bottom="-10">
             <from x="0" y="8" z="40" />
             <to x="-10" y="3" z="0" />
-            <up x="0" y="1" z="0" />    <!-- optional, default 0,1,0 -->
-        </ortho>
+            <up x="0" y="1" z="0" /> 
+        </ortho>-->
     </views>
 
     <illumination>
@@ -84,7 +84,7 @@
 
     <!-- Spritesheets -->
     <spritesheets>
-        <spritesheet id="starFoxSheet" path="./scenes/images/spritesheet.png" sizeM="4" sizeN="2" />
+        <spritesheet id="akbarSheet" path="./scenes/images/akbar.png" sizeM="4" sizeN="2" />
     </spritesheets>
 
     <!-- Materials -->
@@ -162,6 +162,14 @@
             <diffuse r="0.5" g="0.375" b="0.450" a="1.0" />
             <specular r="0" g="0" b="0" a="1.0" />
             <emissive r="0.5" g="0.375" b="0.450" a="1.0" />
+        </material>
+
+        <material id="blackMaterial">
+            <shininess value="10" />
+            <ambient r="0" g="0" b="0" a="1.0" />
+            <diffuse r="0" g="0" b="0" a="1.0" />
+            <specular r="0" g="0" b="0" a="1.0" />
+            <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
         </material>
 
     </materials>
@@ -289,7 +297,7 @@
             </keyframe>
 
             <keyframe instant="5">
-                <translation x="8" y="7" z="8" />
+                <translation x="25" y="7" z="9" />
                 <rotation axis="x" angle="-30" />
                 <rotation axis="y" angle="90" />
                 <rotation axis="z" angle="400" />
@@ -406,6 +414,95 @@
                 <noderef id="tieFinalShape" />
                 <noderef id="explosionFinal" />
                 <noderef id="laserGroup" />
+                <noderef id="dialogue" />
+            </descendants>
+        </node>
+
+        <!-- Dialogue -->
+        <node id="dialogue">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="16" y="9" z="12" />
+                <rotation axis="y" angle="45" />
+                <rotation axis="x" angle="-20" />
+                <scale sx="0.4" sy="0.4" sz="1" />
+            </transformations>
+
+            <descendants>
+                <noderef id="akbar" />
+                <noderef id="dialogueBox" />
+                <!--<noderef id="name" />
+                <noderef id="text" />-->
+            </descendants>
+        </node>
+
+        <!-- Dialogue box  -->
+        <node id="dialogueBox">
+            <material id="blackMaterial" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="0" z="-0.1" />
+            </transformations>
+
+            <descendants>
+                <leaf type="rectangle" x1="-17" y1="-3" x2="3" y2="3" />
+            </descendants>
+        </node>
+
+        <!-- Name sprite -->
+        <node id="name">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-10" y="1.7" z="0" />
+                <scale sx="0.9" sy="0.9" sz="1" />
+            </transformations>
+
+            <descendants>
+                <leaf type="spritetext" text="Admiral Ackbar" />
+            </descendants>
+        </node>
+
+        <!-- Text sprite -->
+        <node id="text">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-10" y="-1" z="0" />
+                <scale sx="0.7" sy="0.7" sz="1" />
+            </transformations>
+
+            <descendants>
+                <leaf type="spritetext" text="It's a trap!" />
+            </descendants>
+        </node>
+
+        <!-- Akbar sprite -->
+        <node id="akbar">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <scale sx="5" sy="5" sz="1" />
+            </transformations>
+
+            <descendants>
+                <leaf type="spriteanim" ssid="akbarSheet" duration="1.4" startCell="0" endCell="7" />
             </descendants>
         </node>
 

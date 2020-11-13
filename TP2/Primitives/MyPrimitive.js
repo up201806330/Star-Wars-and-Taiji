@@ -66,13 +66,22 @@ class MyPrimitive {
 
         else if (type == "spriteanim"){
             let ssid = this.graph.reader.getString(element, "ssid", true);
-            if (this.graph.scene.spritesheets[ssid] == null) this.onXMLError("Spritesheet id " + ssid + " doesn't exist");            
+            let spritesheet = this.graph.spritesheets[ssid];
+            if (spritesheet == null) {
+                this.graph.onXMLError("Spritesheet id " + ssid + " doesn't exist. Default spritesheet assigned");
+                let texture = new CGFtexture(this.graph.scene, "./scenes/images/missing.jpg");
+                let spritesheet = new MySpriteSheet(this.graph.scene, texture, 2, 1);
 
-            let startCell = this.graph.reader.getInteger(element, "startCell", true);
-            let endCell = this.graph.reader.getInteger(element, "endCell", true);
-            let duration = this.graph.reader.getFloat(element, "duration", true);
-
-            this.aPrimitive = new MySpriteAnimation(this.graph.scene, ssid, duration, startCell, endCell);
+                this.aPrimitive = new MySpriteAnimation(this.graph.scene, spritesheet, 1, 0, 1);
+                return;
+            }
+            else {
+                let startCell = this.graph.reader.getInteger(element, "startCell", true);
+                let endCell = this.graph.reader.getInteger(element, "endCell", true);
+                let duration = this.graph.reader.getFloat(element, "duration", true);
+                
+                this.aPrimitive = new MySpriteAnimation(this.graph.scene, spritesheet, duration, startCell, endCell);
+            }
         }
 
         else {

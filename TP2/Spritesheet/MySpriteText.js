@@ -2,9 +2,8 @@ class MySpriteText{
     constructor(scene, text){
         this.scene = scene;
         this.text = text;
-        this.texture = new CGFtexture(scene, "./scenes/images/font.png");
         // Cenas da spritesheet default da font, hardcoded aqui
-        this.spritesheet = new MySpriteSheet(scene, this.texture, 16, 16);
+        this.spritesheet = new MySpriteSheet(scene, scene.fontTexture, 16, 6);
         this.geometries = [];
         let initialX = -text.length / 2;
         for (let i = 0 ; i < text.length ; i++){
@@ -13,10 +12,10 @@ class MySpriteText{
     }
 
     getCharacterPosition(character){
-        if (character.charCodeAt() >= 32 && character.charCodeAt() <= 239){
-            return character.charCodeAt();
+        if (character.charCodeAt() >= 32 && character.charCodeAt() <= 127){
+            return (character.charCodeAt() - 32);
         }
-        else return 32;
+        else return 0;
     }
 
     display(){
@@ -27,14 +26,5 @@ class MySpriteText{
         }
     }
 
-    updateTexCoords(afs, aft) {
-        // this.geometry.texCoords = [
-		// 	0, 1/16,
-		// 	this.text.length * 1/16, 1/16,
-		// 	0, 0,
-		// 	this.text.length * 1/16, 0
-		// ];
-
-		// this.geometry.updateTexCoordsGLBuffers();
-    }
+    updateTexCoords(afs, aft) {}
 }
