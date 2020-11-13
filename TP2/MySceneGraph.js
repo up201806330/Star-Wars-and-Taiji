@@ -564,6 +564,8 @@ class MySceneGraph {
     parseSpritesheets(spritesheetsNode){
         var children = spritesheetsNode.children;
 
+        this.scene.fontTexture = new CGFtexture(this.scene, "./scenes/images/font.png");
+
         this.spritesheets = [];
         for (let i = 0; i < children.length; i++) {
             if (children[i].nodeName != "spritesheet") {
@@ -1031,6 +1033,10 @@ class MySceneGraph {
 
                     let newLeaf = new MyPrimitive(primType, this, nodeDescendants[k]);
                     this.nodes[nodeID].addLeaf(newLeaf);
+
+                    if (primType == "spriteanim"){
+                        this.animations[newLeaf.aPrimitive] = newLeaf.aPrimitive;
+                    }
                 }
 
                 else {
@@ -1233,10 +1239,4 @@ class MySceneGraph {
         if (nodeToDisplay.materialID != "null") this.materialStack.pop();
         if (nodeToDisplay.textureID != "null") this.textureStack.pop();
     }
-        this.scene.fontTexture = new CGFtexture(this.scene, "./scenes/images/font.png");
-
-
-                    if (primType == "spriteanim"){
-                        this.animations[newLeaf.aPrimitive] = newLeaf.aPrimitive;
-                    }
 }
