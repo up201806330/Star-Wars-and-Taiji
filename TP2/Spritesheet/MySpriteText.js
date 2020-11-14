@@ -3,12 +3,9 @@ class MySpriteText{
         this.scene = scene;
         this.text = text;
         // Cenas da spritesheet default da font, hardcoded aqui
+        this.initialX = -text.length / 2;
         this.spritesheet = new MySpriteSheet(scene, scene.fontTexture, 16, 6);
-        this.geometries = [];
-        let initialX = -text.length / 2;
-        for (let i = 0 ; i < text.length ; i++){
-            this.geometries[i] = new MyRectangle(scene, initialX + i, -0.5, initialX + i + 1, 0.5);
-        }
+        this.geometry = new MyRectangle(scene, this.initialX, -0.5, this.initialX + 1, 0.5);
     }
 
     getCharacterPosition(character){
@@ -21,7 +18,10 @@ class MySpriteText{
     display(){
         for (let i = 0 ; i < this.text.length ; i++) {
             this.spritesheet.activateCellP(this.getCharacterPosition(this.text[i]));
-            this.geometries[i].display();
+            this.scene.pushMatrix();
+            this.scene.translate(this.initialX + i, 0, 0);
+            this.geometry.display();
+            this.scene.popMatrix();
             this.scene.setActiveShader(this.scene.defaultShader)
         }
     }

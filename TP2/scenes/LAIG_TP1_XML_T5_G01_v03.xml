@@ -435,8 +435,8 @@
             <descendants>
                 <noderef id="akbar" />
                 <noderef id="dialogueBox" />
-                <!--<noderef id="name" />
-                <noderef id="text" />-->
+                <noderef id="name" />
+                <noderef id="text" />
             </descendants>
         </node>
 
@@ -464,8 +464,8 @@
             </texture>
 
             <transformations>
-                <translation x="-10" y="1.7" z="0" />
-                <scale sx="0.9" sy="0.9" sz="1" />
+                <translation x="-3" y="1.9" z="0" />
+                <scale sx="0.6" sy="0.6" sz="1" />
             </transformations>
 
             <descendants>
@@ -481,8 +481,7 @@
             </texture>
 
             <transformations>
-                <translation x="-10" y="-1" z="0" />
-                <scale sx="0.7" sy="0.7" sz="1" />
+                <translation x="-4" y="-1" z="0" />
             </transformations>
 
             <descendants>
