@@ -16,7 +16,7 @@ class MySpriteSheet{
         this.shader.setUniformsValues({texCoords: coords});
         this.shader.setUniformsValues({u_texture: this.texture});
         this.shader.setUniformsValues({size: mn});
-        this.scene.setActiveShader(this.shader);
+        this.scene.setActiveShaderSimple(this.shader);
         this.texture.bind();
     }
 

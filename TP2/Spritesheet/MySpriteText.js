@@ -22,7 +22,7 @@ class MySpriteText{
             this.scene.translate(this.initialX + i, 0, 0);
             this.geometry.display();
             this.scene.popMatrix();
-            this.scene.setActiveShader(this.scene.defaultShader)
+            this.scene.setActiveShaderSimple(this.scene.defaultShader)
         }
     }
 
