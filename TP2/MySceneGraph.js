@@ -1025,7 +1025,7 @@ class MySceneGraph {
                 }
 
                 else if (nodeDescendants[k].nodeName == "leaf") {
-                    let primType = this.reader.getItem(nodeDescendants[k], "type", ["rectangle", "triangle", "torus", "cylinder", "sphere", "spritetext", "spriteanim"]);
+                    let primType = this.reader.getItem(nodeDescendants[k], "type", ["rectangle", "triangle", "torus", "cylinder", "sphere", "plane", "patch", "defbarrel", "spritetext", "spriteanim"]);
 
                     if (primType == null) {
                         this.onXMLError("Unknown primitive type!");
@@ -1114,6 +1114,34 @@ class MySceneGraph {
 
         // z
         var z = this.reader.getFloat(node, 'sz');
+        if (!(z != null && !isNaN(z)))
+        this.onXMLMinorError("unable to parse z-coordinate of the " + messageError);
+
+        position.push(...[x, y, z]);
+
+        return position;
+    }
+
+    /**
+     * Exactly the same but for patch control points parameters
+     * @param {block element} node
+     * @param {message to be displayed in case of error} messageError
+     */
+    parseCoordinates3DControl(node, messageError) {
+        var position = [];
+
+        // x
+        var x = this.reader.getFloat(node, 'xx');
+        if (!(x != null && !isNaN(x)))
+        this.onXMLMinorError("unable to parse x-coordinate of the " + messageError);
+
+        // y
+        var y = this.reader.getFloat(node, 'yy');
+        if (!(y != null && !isNaN(y)))
+        this.onXMLMinorError("unable to parse y-coordinate of the " + messageError);
+
+        // z
+        var z = this.reader.getFloat(node, 'zz');
         if (!(z != null && !isNaN(z)))
         this.onXMLMinorError("unable to parse z-coordinate of the " + messageError);
 

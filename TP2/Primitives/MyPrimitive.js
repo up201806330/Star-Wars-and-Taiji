@@ -84,6 +84,54 @@ class MyPrimitive {
             }
         }
 
+        else if (type == "plane"){
+            let npartsU = this.graph.reader.getInteger(element, "npartsU", true);
+            let npartsV = this.graph.reader.getInteger(element, "npartsV", true);
+
+            this.aPrimitive = new Plane(this.graph.scene, npartsU, npartsV);
+        }
+
+        else if (type == "patch"){
+            let npointsU = this.graph.reader.getInteger(element, "npointsU", true);
+            let npointsV = this.graph.reader.getInteger(element, "npointsV", true);
+            let npartsU = this.graph.reader.getInteger(element, "npartsU", true);
+            let npartsV = this.graph.reader.getInteger(element, "npartsV", true);
+
+            let pointsElement = element.children;
+            let allPoints = [];
+            for (let i = 0 ; i < pointsElement.length ; i++){
+                if (pointsElement[i].nodeName == "controlpoint")
+                    allPoints.push([...this.graph.parseCoordinates3DControl(pointsElement[i], "patch control point n" + i), 1]);     
+            }
+
+            if (npointsU * npointsV != allPoints.length){
+                this.graph.onXMLError("Patch doesnt have correct number of points or nPoint variables (npointsU:" + npointsU + " ; npointsV:" + npointsV + " ; Number of control points: " + allPoints.length);
+                this.aPrimitive = new MyRectangle(this.graph.scene, -0.5, -0.5, 0.5, 0.5);
+                return;
+            }
+
+            let pointIndex = 0;
+            let organizedPoints = [];
+            for (let u = 0 ; u < npointsU ; u++){
+                var set = [];
+                for (let v = 0 ; v < npointsV ; v++){
+                    set.push(allPoints[pointIndex++]);
+                }
+                organizedPoints.push(set);
+            }
+            
+            this.aPrimitive = new Patch(this.graph.scene, npointsU, npointsV, npartsU, npartsV, organizedPoints)
+        }
+
+        else if (type == "defbarrel"){
+            let base = this.graph.reader.getFloat(element, "base", true);
+            let middle = this.graph.reader.getFloat(element, "middle", true);
+            let height = this.graph.reader.getFloat(element, "height", true);
+            let slices = this.graph.reader.getInteger(element, "slices", true);
+            let stacks = this.graph.reader.getInteger(element, "stacks", true);
+            
+        }
+
         else {
             this.graph.onXMLMinorError("Primitive Not Implemented!");
         }
