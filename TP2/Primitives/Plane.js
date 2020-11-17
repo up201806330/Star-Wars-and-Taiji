@@ -28,5 +28,8 @@ class Plane extends CGFobject {
         this.nurbsObject = new CGFnurbsObject(this.scene, this.uDivisions, this.vDivisions, this.nurbsSurface);
     }
 
+    updateTexCoords(afs, aft) {}
+
+    display() { this.nurbsObject.display(); }
 
 }
