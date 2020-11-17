@@ -24,6 +24,8 @@ class MySpriteAnimation extends Animation{
 
     display(){
         this.spritesheet.activateCellP(this.currentCell);
+        this.scene.setActiveShaderSimple(this.spritesheet.shader);
+        this.spritesheet.texture.bind();
         this.geometry.display();
         this.scene.setActiveShaderSimple(this.scene.defaultShader)
     }

@@ -16,14 +16,16 @@ class MySpriteText{
     }
 
     display(){
+        this.scene.setActiveShaderSimple(this.spritesheet.shader);
+        this.spritesheet.texture.bind();
         for (let i = 0 ; i < this.text.length ; i++) {
             this.spritesheet.activateCellP(this.getCharacterPosition(this.text[i]));
             this.scene.pushMatrix();
             this.scene.translate(this.initialX + i, 0, 0);
             this.geometry.display();
             this.scene.popMatrix();
-            this.scene.setActiveShaderSimple(this.scene.defaultShader)
         }
+        this.scene.setActiveShaderSimple(this.scene.defaultShader)
     }
 
     updateTexCoords(afs, aft) {}

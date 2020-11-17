@@ -176,85 +176,7 @@
 
     <animations>
         <animation id="explosionMain">
-            <keyframe instant="3">
-                <translation x="0" y="0" z="0" />
-                <rotation axis="x" angle="0" />
-                <rotation axis="y" angle="0" />
-                <rotation axis="z" angle="0" />
-                <scale sx="0" sy="0" sz="0" />
-            </keyframe>
-            
             <keyframe instant="4.5">
-                <translation x="0" y="0" z="0" />
-                <rotation axis="x" angle="45" />
-                <rotation axis="y" angle="45" />
-                <rotation axis="z" angle="45" />
-                <scale sx="1" sy="1" sz="1" />
-            </keyframe>
-            
-            <keyframe instant="5.5">
-                <translation x="0" y="0" z="0" />
-                <rotation axis="x" angle="90" />
-                <rotation axis="y" angle="90" />
-                <rotation axis="z" angle="90" />
-                <scale sx="0" sy="0" sz="0" />
-            </keyframe>
-        </animation>
-
-        <animation id="explosionSecond1">
-            <keyframe instant="4.2">
-                <translation x="0" y="0" z="0" />
-                <rotation axis="x" angle="0" />
-                <rotation axis="y" angle="0" />
-                <rotation axis="z" angle="0" />
-                <scale sx="0" sy="0" sz="0" />
-            </keyframe>
-            
-            <keyframe instant="4.3">
-                <translation x="0" y="0" z="0" />
-                <rotation axis="x" angle="23" />
-                <rotation axis="y" angle="23" />
-                <rotation axis="z" angle="23" />
-                <scale sx="1" sy="1" sz="1" />
-            </keyframe>
-            
-            <keyframe instant="5.7">
-                <translation x="0" y="0" z="0" />
-                <rotation axis="x" angle="45" />
-                <rotation axis="y" angle="45" />
-                <rotation axis="z" angle="45" />
-                <scale sx="0" sy="0" sz="0" />
-            </keyframe>
-        </animation>
-        
-        <animation id="explosionSecond2">
-            <keyframe instant="3.9">
-                <translation x="0" y="0" z="0" />
-                <rotation axis="x" angle="0" />
-                <rotation axis="y" angle="0" />
-                <rotation axis="z" angle="0" />
-                <scale sx="0" sy="0" sz="0" />
-            </keyframe>
-            
-            <keyframe instant="4.8">
-                <translation x="0" y="0" z="0" />
-                <rotation axis="x" angle="23" />
-                <rotation axis="y" angle="23" />
-                <rotation axis="z" angle="23" />
-                <scale sx="1" sy="1" sz="1" />
-            </keyframe>
-            
-            <keyframe instant="5.4">
-                <translation x="0" y="0" z="0" />
-                <rotation axis="x" angle="45" />
-                <rotation axis="y" angle="45" />
-                <rotation axis="z" angle="45" />
-                <scale sx="0" sy="0" sz="0" />
-            </keyframe>
-        </animation>
-        
-        <animation id="explosionRing">
-            <keyframe instant="3">
                 <translation x="0" y="0" z="0" />
                 <rotation axis="x" angle="0" />
                 <rotation axis="y" angle="0" />
@@ -264,6 +186,84 @@
             
             <keyframe instant="6">
                 <translation x="0" y="0" z="0" />
+                <rotation axis="x" angle="45" />
+                <rotation axis="y" angle="45" />
+                <rotation axis="z" angle="45" />
+                <scale sx="1" sy="1" sz="1" />
+            </keyframe>
+            
+            <keyframe instant="7">
+                <translation x="0" y="0" z="0" />
+                <rotation axis="x" angle="90" />
+                <rotation axis="y" angle="90" />
+                <rotation axis="z" angle="90" />
+                <scale sx="0" sy="0" sz="0" />
+            </keyframe>
+        </animation>
+
+        <animation id="explosionSecond1">
+            <keyframe instant="5.7">
+                <translation x="0" y="0" z="0" />
+                <rotation axis="x" angle="0" />
+                <rotation axis="y" angle="0" />
+                <rotation axis="z" angle="0" />
+                <scale sx="0" sy="0" sz="0" />
+            </keyframe>
+            
+            <keyframe instant="5.8">
+                <translation x="0" y="0" z="0" />
+                <rotation axis="x" angle="23" />
+                <rotation axis="y" angle="23" />
+                <rotation axis="z" angle="23" />
+                <scale sx="1" sy="1" sz="1" />
+            </keyframe>
+            
+            <keyframe instant="7.2">
+                <translation x="0" y="0" z="0" />
+                <rotation axis="x" angle="45" />
+                <rotation axis="y" angle="45" />
+                <rotation axis="z" angle="45" />
+                <scale sx="0" sy="0" sz="0" />
+            </keyframe>
+        </animation>
+        
+        <animation id="explosionSecond2">
+            <keyframe instant="5.4">
+                <translation x="0" y="0" z="0" />
+                <rotation axis="x" angle="0" />
+                <rotation axis="y" angle="0" />
+                <rotation axis="z" angle="0" />
+                <scale sx="0" sy="0" sz="0" />
+            </keyframe>
+            
+            <keyframe instant="6.3">
+                <translation x="0" y="0" z="0" />
+                <rotation axis="x" angle="23" />
+                <rotation axis="y" angle="23" />
+                <rotation axis="z" angle="23" />
+                <scale sx="1" sy="1" sz="1" />
+            </keyframe>
+            
+            <keyframe instant="6.9">
+                <translation x="0" y="0" z="0" />
+                <rotation axis="x" angle="45" />
+                <rotation axis="y" angle="45" />
+                <rotation axis="z" angle="45" />
+                <scale sx="0" sy="0" sz="0" />
+            </keyframe>
+        </animation>
+        
+        <animation id="explosionRing">
+            <keyframe instant="4.5">
+                <translation x="0" y="0" z="0" />
+                <rotation axis="x" angle="0" />
+                <rotation axis="y" angle="0" />
+                <rotation axis="z" angle="0" />
+                <scale sx="0" sy="0" sz="0" />
+            </keyframe>
+            
+            <keyframe instant="7.5">
+                <translation x="0" y="0" z="0" />
                 <rotation axis="x" angle="0" />
                 <rotation axis="y" angle="0" />
                 <rotation axis="z" angle="180" />
@@ -272,7 +272,7 @@
         </animation>
         
         <animation id="xWing">
-            <keyframe instant="0">
+            <keyframe instant="1.5">
                 <translation x="-10" y="10" z="-40" />
                 <rotation axis="x" angle="0" />
                 <rotation axis="y" angle="-45" />
@@ -280,7 +280,7 @@
                 <scale sx="1" sy="1" sz="1" />
             </keyframe>
             
-            <keyframe instant="2.7">
+            <keyframe instant="4.2">
                 <translation x="-35" y="4" z="-6" />
                 <rotation axis="x" angle="0" />
                 <rotation axis="y" angle="45" />
@@ -288,7 +288,7 @@
                 <scale sx="1" sy="1" sz="1" />
             </keyframe>
 
-            <keyframe instant="3.3">
+            <keyframe instant="4.8">
                 <translation x="-30" y="3" z="-5" />
                 <rotation axis="x" angle="0" />
                 <rotation axis="y" angle="50" />
@@ -296,7 +296,7 @@
                 <scale sx="1" sy="1" sz="1" />
             </keyframe>
 
-            <keyframe instant="5">
+            <keyframe instant="6.5">
                 <translation x="25" y="7" z="9" />
                 <rotation axis="x" angle="-30" />
                 <rotation axis="y" angle="90" />
@@ -306,7 +306,7 @@
         </animation>
 
         <animation id="tieFighter">
-            <keyframe instant="0">
+            <keyframe instant="1.5">
                 <translation x="-50" y="14" z="-14" />
                 <rotation axis="x" angle="-10" />
                 <rotation axis="y" angle="-50" />
@@ -314,7 +314,7 @@
                 <scale sx="1" sy="1" sz="1" />
             </keyframe>
 
-            <keyframe instant="2">
+            <keyframe instant="3.5">
                 <translation x="-20" y="3" z="10" />
                 <rotation axis="x" angle="-60" />
                 <rotation axis="y" angle="0" />
@@ -322,7 +322,7 @@
                 <scale sx="1" sy="1" sz="1" />
             </keyframe>
 
-            <keyframe instant="3.2">
+            <keyframe instant="4.7">
                 <translation x="-12.5" y="1" z="14" />
                 <rotation axis="x" angle="-45" />
                 <rotation axis="y" angle="10" />
@@ -330,7 +330,7 @@
                 <scale sx="1" sy="1" sz="1" />
             </keyframe>
 
-            <keyframe instant="3.4">
+            <keyframe instant="4.9">
                 <translation x="-12.5" y="1" z="14" />
                 <rotation axis="x" angle="0" />
                 <rotation axis="y" angle="0" />
@@ -340,7 +340,7 @@
         </animation>
 
         <animation id="laser1">
-            <keyframe instant="2.5">
+            <keyframe instant="4">
                 <translation x="-38" y="7" z="-2" />
                 <rotation axis="x" angle="0" />
                 <rotation axis="y" angle="45" />
@@ -348,7 +348,7 @@
                 <scale sx="2" sy="2" sz="2" />
             </keyframe>
             
-            <keyframe instant="3">
+            <keyframe instant="4.5">
                 <translation x="-12.5" y="1" z="14" />
                 <rotation axis="x" angle="0" />
                 <rotation axis="y" angle="45" />
@@ -356,7 +356,7 @@
                 <scale sx="2" sy="2" sz="2" />
             </keyframe>
 
-            <keyframe instant="3.1">
+            <keyframe instant="4.6">
                 <translation x="-12.5" y="1" z="14" />
                 <rotation axis="x" angle="0" />
                 <rotation axis="y" angle="45" />
@@ -366,7 +366,7 @@
         </animation>
 
         <animation id="laser2">
-            <keyframe instant="2.6">
+            <keyframe instant="4.1">
                 <translation x="-28" y="3" z="-6" />
                 <rotation axis="x" angle="0" />
                 <rotation axis="y" angle="45" />
@@ -374,7 +374,7 @@
                 <scale sx="2" sy="2" sz="2" />
             </keyframe>
             
-            <keyframe instant="3.1">
+            <keyframe instant="4.6">
                 <translation x="-12.5" y="1" z="14" />
                 <rotation axis="x" angle="0" />
                 <rotation axis="y" angle="45" />
@@ -382,7 +382,7 @@
                 <scale sx="2" sy="2" sz="2" />
             </keyframe>
 
-            <keyframe instant="3.2">
+            <keyframe instant="4.7">
                 <translation x="-12.5" y="1" z="14" />
                 <rotation axis="x" angle="0" />
                 <rotation axis="y" angle="45" />

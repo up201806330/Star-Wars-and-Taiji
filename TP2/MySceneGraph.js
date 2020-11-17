@@ -841,7 +841,7 @@ class MySceneGraph {
                 let newKeyframe = new KeyFrame(instant, translation, rotation, scale);
                 keyframes[j] = newKeyframe;
             }
-            // Hedge case for when there is only one keyframe
+            // Edge case for when there is only one keyframe
             if (keyframes.length == 1) keyframes[1] = keyframes[0];
             
             var newAnim = new KeyframeAnimation(this.scene, keyframes);
