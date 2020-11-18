@@ -67,6 +67,7 @@
         <texture id="xWingFrontTriangleLTexture" path="./scenes/images/frontTriangleL.png" />
         <texture id="xWingFrontTriangleRTexture" path="./scenes/images/frontTriangleR.png" />
         <texture id="xWingFrontTopTexture" path="./scenes/images/frontTop.png" />
+        <texture id="r2d2Tex" path="./scenes/images/r2d2.png" />
         
         <!-- Explosion Textures -->
         <texture id="explosionWhiteTexture" path="./scenes/images/explosionWhite.jpg" />
@@ -513,10 +514,12 @@
             </texture>
 
             <transformations>
+                <translation x="0.5" y="0.5" z="0" />
+                <rotation axis="x" angle="90" />
             </transformations>
 
             <descendants>
-                <leaf type="rectangle" x1="0" y1="0" x2="1" y2="1" />
+                <leaf type="plane" npartsU="30" npartsV="30" />
             </descendants>
         </node>
 
@@ -670,6 +673,7 @@
             </texture>
 
             <transformations>
+                <translation x="0.0" y="0.0" z="0.1" />
             </transformations>
 
             <descendants>
@@ -685,10 +689,11 @@
             </texture>
 
             <transformations>
+                <translation x="0.0" y="0.0" z="1" />
             </transformations>
 
             <descendants>
-                <leaf type="cylinder" height="1.7" topRadius="0.30" bottomRadius="0.30" stacks="4" slices="16"/>
+                <leaf type="defbarrel"  base="0.15" middle="0.4" height="1.3" slices="20" stacks="20" />
                 <noderef id="xWingGlow" />
             </descendants>
         </node>
@@ -1149,6 +1154,34 @@
             </descendants>
         </node>
 
+        <node id="r2d2Patch">
+            <material id="null" />
+            <texture id="r2d2Tex">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0.6" y="1.24" z="0.7" />
+                <scale sx="0.6" sy="0.6" sz="0.6" />
+            </transformations>
+
+            <descendants>
+                <leaf type="patch" npointsU="3" npointsV="3" npartsU="10" npartsV="10" >
+                    <controlpoint xx="-1.5" yy="0" zz="0" />
+                    <controlpoint xx="0" yy="0" zz="-3" />
+                    <controlpoint xx="1.5" yy="0" zz="0" />
+
+                    <controlpoint xx="-1.5" yy="0" zz="0" />
+                    <controlpoint xx="0" yy="4" zz="0" />
+                    <controlpoint xx="1.5" yy="0" zz="0" />
+
+                    <controlpoint xx="-1.5" yy="0" zz="0" />
+                    <controlpoint xx="0" yy="0" zz="3" />
+                    <controlpoint xx="1.5" yy="0" zz="0" />
+                </leaf>
+            </descendants>
+        </node>
+
         <!-- Back Body of the X-Wing -->
         <node id="xWingBackBody">
             <material id="null" />
@@ -1161,6 +1194,7 @@
 
             <descendants>
                 <noderef id="xWingBackBodyParallelepiped" />
+                <noderef id="r2d2Patch" />
             </descendants>
         </node>
 
@@ -1911,6 +1945,22 @@
             </descendants>
         </node>
 
+        <!-- Tie body fire-->
+        <node id="tieBodyFire">
+            <material id="explosionMaterial" />
+            <texture id="explosionTexture">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+            <transformations>
+                <translation x="0" y="0" z="0.1" />
+                <scale sx="0.45" sy="0.45" sz="0.50" />
+            </transformations>
+
+            <descendants>
+                <leaf type="sphere" radius="1" stacks="30" slices="30" /> 
+            </descendants>
+        </node>
+
         <!-- Tie body windows-->
         <node id="tieBodyWindows">
             <material id="windowsMaterial" />
@@ -1918,7 +1968,7 @@
                 <amplification afs="1.0" aft="1.0" />
             </texture>
             <transformations>
-                <translation x="0.45" y="0" z="0" />
+                <translation x="0" y="0" z="1.45" />
                 <scale sx="0.75" sy="0.75" sz="0.75" />
             </transformations>
 
@@ -1933,12 +1983,16 @@
             <texture id="null">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
+            
             <transformations>
+                <rotation axis="y" angle="90"/>
+                <translation x="0" y="0" z="-1" />
             </transformations>
 
             <descendants>
-                <leaf type="sphere" radius="1" stacks="30" slices="30" /> 
+                <leaf type="defbarrel"  base="0.5" middle="1" height="2" slices="20" stacks="20" />
                 <noderef id="tieBodyWindows" />
+                <noderef id="tieBodyFire" />
             </descendants>
         </node>
 

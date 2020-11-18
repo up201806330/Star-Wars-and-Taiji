@@ -75,7 +75,7 @@
             <!-- declaring descendants, at least one node or one leaf must be present
              descendants may be mixed, nodes and leafs -->
             <descendants>
-                <noderef id="yomama3" />
+                <noderef id="yomama2" />
             </descendants>
         </node>
 
@@ -87,6 +87,8 @@
             </texture>
 
             <transformations>
+                <translation x="0.5" y="0.5" z="0" />
+                <rotation axis="x" angle="90" />
             </transformations>
 
             <descendants>
@@ -104,13 +106,18 @@
             </transformations>
 
             <descendants>
-                <leaf type="patch" npointsU="3" npointsV="2" npartsU="10" npartsV="10" >
-                    <controlpoint xx="-1.5" yy="-1.5" zz="0" />
-                    <controlpoint xx="-1.5" yy="1.5" zz="0" />
-                    <controlpoint xx="0" yy="-1.5" zz="3" />
-                    <controlpoint xx="0" yy="1.5" zz="3" />
-                    <controlpoint xx="1.5" yy="-1.5" zz="0" />
-                    <controlpoint xx="1.5" yy="1.5" zz="0" />
+                <leaf type="patch" npointsU="3" npointsV="3" npartsU="10" npartsV="10" >
+                    <controlpoint xx="-1.5" yy="0" zz="0" />
+                    <controlpoint xx="0" yy="0" zz="-3" />
+                    <controlpoint xx="1.5" yy="0" zz="0" />
+
+                    <controlpoint xx="-1.5" yy="0" zz="0" />
+                    <controlpoint xx="0" yy="3" zz="0" />
+                    <controlpoint xx="1.5" yy="0" zz="0" />
+
+                    <controlpoint xx="-1.5" yy="0" zz="0" />
+                    <controlpoint xx="0" yy="0" zz="3" />
+                    <controlpoint xx="1.5" yy="0" zz="0" />
                 </leaf>
             </descendants>
         </node>
