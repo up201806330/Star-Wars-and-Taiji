@@ -130,6 +130,7 @@ class MyPrimitive {
             let slices = this.graph.reader.getInteger(element, "slices", true);
             let stacks = this.graph.reader.getInteger(element, "stacks", true);
             
+            this.aPrimitive = new Defbarrel(this.graph.scene, base, middle, height, slices, stacks);
         }
 
         else {

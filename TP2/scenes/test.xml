@@ -23,7 +23,7 @@
         <!-- NOTE: this block "light" must be repeated as necessary with different "id". At least one light should be present, and a maximum of eight lights is accepted. -->
         <light id="completeSceneLight">                     <!-- light identifier -->
             <enable value="1" />                            <!-- enable/disable -->
-            <position x="0" y="0" z="20" w="1.0" />      <!-- light position; w=1: point light; w=0: directional light -->
+            <position x="20" y="0" z="20" w="1.0" />      <!-- light position; w=1: point light; w=0: directional light -->
             <ambient r="0" g="0" b="0" a="1.0" />           <!-- ambient component -->
             <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />     <!-- diffuse component -->
             <specular r="1.0" g="1.0" b="1.0" a="1.0" />    <!-- specular component -->
@@ -75,7 +75,6 @@
             <!-- declaring descendants, at least one node or one leaf must be present
              descendants may be mixed, nodes and leafs -->
             <descendants>
-                <!--<noderef id="jeff" />-->
                 <noderef id="yomama3" />
             </descendants>
         </node>
@@ -117,8 +116,8 @@
         </node>
 
         <node id="yomama3">
-            <material id="null" />
-            <texture id="null">
+            <material id="defaultMaterial" />
+            <texture id="tieGreyTexture">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -126,7 +125,7 @@
             </transformations>
 
             <descendants>
-                <leaf type="defbarrel"  base="3" middle="5" height="3" slices="20" stacks="20" />
+                <leaf type="defbarrel"  base="1" middle="2" height="5" slices="20" stacks="20" />
             </descendants>
         </node>
 
@@ -137,25 +136,25 @@
             </texture>
 
             <transformations>
+                <translation x="0" y="0" z="2.5" />
             </transformations>
 
             <descendants>
-                <leaf type="spritetext" text="It works" />
+                <leaf type="rectangle" x1="0" y1="0" x2="2" y2="2" />
             </descendants>
         </node>
 
         <node id="jeff1">
-            <material id="defaultMaterial" />
+            <material id="null" />
             <texture id="null">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
             <transformations>
-                <translation x="0" y="2" z="0" />
             </transformations>
 
             <descendants>
-                <leaf type="spritetext" text="sss" />
+                <leaf type="rectangle" x1="0" y1="0" x2="-1" y2="1" />
             </descendants>
         </node>
         
