@@ -107,17 +107,17 @@
 
             <descendants>
                 <leaf type="patch" npointsU="3" npointsV="3" npartsU="10" npartsV="10" >
-                    <controlpoint xx="-1.5" yy="0" zz="0" />
-                    <controlpoint xx="0" yy="0" zz="-3" />
-                    <controlpoint xx="1.5" yy="0" zz="0" />
+                    <controlpoint x="-1.5" y="0" z="0" />
+                    <controlpoint x="0" y="0" z="-3" />
+                    <controlpoint x="1.5" y="0" z="0" />
 
-                    <controlpoint xx="-1.5" yy="0" zz="0" />
-                    <controlpoint xx="0" yy="3" zz="0" />
-                    <controlpoint xx="1.5" yy="0" zz="0" />
+                    <controlpoint x="-1.5" y="0" z="0" />
+                    <controlpoint x="0" y="3" z="0" />
+                    <controlpoint x="1.5" y="0" z="0" />
 
-                    <controlpoint xx="-1.5" yy="0" zz="0" />
-                    <controlpoint xx="0" yy="0" zz="3" />
-                    <controlpoint xx="1.5" yy="0" zz="0" />
+                    <controlpoint x="-1.5" y="0" z="0" />
+                    <controlpoint x="0" y="0" z="3" />
+                    <controlpoint x="1.5" y="0" z="0" />
                 </leaf>
             </descendants>
         </node>

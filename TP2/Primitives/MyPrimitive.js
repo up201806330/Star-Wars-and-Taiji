@@ -101,7 +101,7 @@ class MyPrimitive {
             let allPoints = [];
             for (let i = 0 ; i < pointsElement.length ; i++){
                 if (pointsElement[i].nodeName == "controlpoint")
-                    allPoints.push([...this.graph.parseCoordinates3DControl(pointsElement[i], "patch control point n" + i), 1]);     
+                    allPoints.push([...this.graph.parseCoordinates3D(pointsElement[i], "patch control point n" + i), 1]);     
             }
 
             if (npointsU * npointsV != allPoints.length){
