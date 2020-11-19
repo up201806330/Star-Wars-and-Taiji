@@ -465,7 +465,7 @@
             </texture>
 
             <transformations>
-                <translation x="-3" y="1.9" z="0" />
+                <translation x="-7" y="1.9" z="0" />
                 <scale sx="0.6" sy="0.6" sz="1" />
             </transformations>
 
@@ -482,7 +482,7 @@
             </texture>
 
             <transformations>
-                <translation x="-4" y="-1" z="0" />
+                <translation x="-10" y="-1" z="0" />
             </transformations>
 
             <descendants>
