@@ -1212,21 +1212,19 @@ class MySceneGraph {
         if (nodeToDisplay.textureID != "null") this.textureStack.push(nodeToDisplay.textureID);
         let topofTexStack = this.textureStack[this.textureStack.length - 1];
 
+        // Material and Texture
+        let thisMaterial;
+        if (this.materials[topOfMatStack] == null)  thisMaterial = this.materials[this.defaultMaterialID];
+        else                                        thisMaterial = this.materials[topOfMatStack];
+
+        if (this.textures[topofTexStack] != null && this.textures[topofTexStack] != "clear") 
+            thisMaterial.setTexture(this.textures[topofTexStack]);
+
+        thisMaterial.setTextureWrap("REPEAT", "REPEAT");
+
         for (let leaf = 0; leaf < nodeToDisplay.leaves.length; leaf++) {
-            // Material and Texture
-            let thisMaterial;
-            if (this.materials[topOfMatStack] == null)  thisMaterial = this.materials[this.defaultMaterialID];
-            else                                        thisMaterial = this.materials[topOfMatStack];
-
-            nodeToDisplay.leaves[leaf].aPrimitive.updateTexCoords(nodeToDisplay.afs, nodeToDisplay.aft);
-            thisMaterial.setTextureWrap("REPEAT", "REPEAT");
-
-            if (this.textures[topofTexStack] != null && this.textures[topofTexStack] != "clear") 
-                thisMaterial.setTexture(this.textures[topofTexStack]);
-                
+            nodeToDisplay.leaves[leaf].aPrimitive.updateTexCoords(nodeToDisplay.afs, nodeToDisplay.aft);     
             thisMaterial.apply();
-
-            // Display
             nodeToDisplay.leaves[leaf].aPrimitive.display();
         }
 
@@ -1237,6 +1235,9 @@ class MySceneGraph {
         }
 
         if (nodeToDisplay.materialID != "null") this.materialStack.pop();
-        if (nodeToDisplay.textureID != "null") this.textureStack.pop();
+        if (nodeToDisplay.textureID != "null") {
+            this.textureStack.pop();
+            thisMaterial.setTexture(null);
+        }
     }
 }
