@@ -129,8 +129,9 @@ class MyPrimitive {
             let height = this.graph.reader.getFloat(element, "height", true);
             let slices = this.graph.reader.getInteger(element, "slices", true);
             let stacks = this.graph.reader.getInteger(element, "stacks", true);
-            
-            this.aPrimitive = new Defbarrel(this.graph.scene, base, middle, height, slices, stacks);
+            let angle = this.graph.reader.getFloat(element, "angle", true);
+
+            this.aPrimitive = new Defbarrel(this.graph.scene, base, middle, height, slices, stacks, angle);
         }
 
         else {

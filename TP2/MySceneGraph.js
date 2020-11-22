@@ -1035,7 +1035,7 @@ class MySceneGraph {
                     this.nodes[nodeID].addLeaf(newLeaf);
 
                     if (primType == "spriteanim"){
-                        this.animations[newLeaf.aPrimitive] = newLeaf.aPrimitive;
+                        this.animations.push(newLeaf.aPrimitive);
                     }
                 }
 
