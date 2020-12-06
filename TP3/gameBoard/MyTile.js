@@ -3,11 +3,15 @@
  */
 class MyTile {
 
-    constructor(scene, gameboard) {
+    constructor(scene, gameboard, rowCoord, colCoord) {
         this.scene = scene;
         this.piece = null;
         this.gameboard = gameboard;
+        // console.log("MyTile constructor");
         this.tile = new MyCylinder(this.scene, 0.5, 0.5, 0.5, 2, 4);
+        this.rowCoord = rowCoord;
+        this.colCoord = colCoord;
+        // this.tile = new MyRectangle(scene, 0, 0, 2, 2);
     }
 
     setPiece(piece) { this.piece = piece; }
@@ -20,7 +24,13 @@ class MyTile {
         this.scene.pushMatrix();
 
         // Display Tile Itself
+        this.scene.translate(this.rowCoord, 0, this.colCoord);
+        this.scene.rotate(Math.PI/2, 1, 0, 0);
+        this.scene.rotate(Math.PI/4, 0, 0, 1);
+
         this.tile.display();
+
+        console.log("Tile display");
 
         // Display Piece
         if (this.piece != null) {

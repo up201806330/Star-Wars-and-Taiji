@@ -40,7 +40,6 @@ class XMLscene extends CGFscene {
         this.loadingProgress=0;
 
         this.defaultAppearance=new CGFappearance(this);
-
     }
 
     /**
@@ -99,8 +98,11 @@ class XMLscene extends CGFscene {
 
         this.interface.initCamerasInterface(this.graph);
         
-
         this.sceneInited = true;
+ 
+        this.gameboard = new MyGameBoard(this, 7);
+        
+        // this.gameboard.displayGameboard();
 
         this.setUpdatePeriod(100);
     }
@@ -174,6 +176,8 @@ class XMLscene extends CGFscene {
             this.axis.display();
  
             this.defaultAppearance.apply();
+
+            this.gameboard.displayGameboard();
 
             // Displays the scene (MySceneGraph function).
             this.graph.displayScene();

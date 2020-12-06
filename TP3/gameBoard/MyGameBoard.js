@@ -9,6 +9,12 @@ class MyGameBoard {
         this.scene = scene;
         this.tiles = []; // 1 list or list of lists ?
         this.sideBoardLength = sideBoardLength;
+
+        for(let i = 0; i < this.sideBoardLength; i++) {
+            for (let j = 0; j < this.sideBoardLength; j++) {
+                this.tiles.push(new MyTile(this.scene, this, j, i));
+            }
+        }
     }
 
     addPieceToTile(tile, piece) { tile.setPiece(piece); }
@@ -22,9 +28,10 @@ class MyGameBoard {
     movePiece(piece, startingTile, endingTile) {}  // not applicable
 
 
-    display() {
-        for (let tile in tiles) {
-            tile.displayTile();
+    displayGameboard() {
+        // console.log("Display Gameboard wut");
+        for (let i = 0; i < this.tiles.length; i++) {
+            this.tiles[i].displayTile();
         }
     }
 

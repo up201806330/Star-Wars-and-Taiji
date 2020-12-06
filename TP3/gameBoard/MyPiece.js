@@ -12,18 +12,12 @@ class MyPiece {
         this.holdingTile = holdingTile;
         this.piece = new MyCylinder(this.scene, 0.5, 0.5, 0.5, 2, 4);  // To change to parallelepiped
     }
-
     
-    getPiece() {
-        return this.piece; // or just "this" ?
+    getType() {
+        return this.type; // or just "this" ?
     }
 
-    setPiece(type, holdingTile) {
-        this.type = type;
-        this.holdingTile = holdingTile;
-    }
+    setType(type) { this.type = type; }
 
-    displayPiece() {
-        this.piece.display();
-    }
+    displayPiece() { this.piece.display(); }
 }
