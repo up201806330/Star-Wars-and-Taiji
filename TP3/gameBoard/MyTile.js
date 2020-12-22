@@ -30,7 +30,7 @@ class MyTile {
 
         this.tile.display();
 
-        console.log("Tile display");
+        // console.log("Tile display");
 
         // Display Piece
         if (this.piece != null) {

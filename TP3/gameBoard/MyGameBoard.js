@@ -29,8 +29,9 @@ class MyGameBoard {
 
 
     displayGameboard() {
-        // console.log("Display Gameboard wut");
+        
         for (let i = 0; i < this.tiles.length; i++) {
+            this.scene.registerForPick(i + 1, this.tiles[i]);
             this.tiles[i].displayTile();
         }
     }
