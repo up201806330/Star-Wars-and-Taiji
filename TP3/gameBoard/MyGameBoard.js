@@ -12,7 +12,8 @@ class MyGameBoard {
 
         for(let i = 0; i < this.sideBoardLength; i++) {
             for (let j = 0; j < this.sideBoardLength; j++) {
-                this.tiles.push(new MyTile(this.scene, this, j, i));
+                this.tiles.push(new MyTile(this.scene, this, {row: j, column: i}));
+                this.tiles[this.tiles.length - 1].piece = new MyPiece(this.scene, 'idk type', []);
             }
         }
     }
@@ -23,9 +24,23 @@ class MyGameBoard {
 
     getPieceFromTile(tile) { tile.getPiece(); }
 
-    getTileByBoardCoords(rowCoord, colCoord) { /* TODO based on this.tiles representation */ }
+    getTileByBoardCoords(coordinates) {
+        // console.log(this.tiles[0].coordinates);
+        
+        for (let i = 0; i < this.tiles.length; i++) {
+            
+            if (this.tiles[i].coordinates.row == coordinates.row && this.tiles[i].coordinates.column == coordinates.column) {
+                return this.tiles[i];
+            }
+            
+        }
+        console.log("No Tile with these coords:");
+        console.log(coordinates);
 
-    movePiece(piece, startingTile, endingTile) {}  // not applicable
+        return null;
+    }
+
+    // movePiece(piece, startingTile, endingTile) {}  // not applicable
 
 
     displayGameboard() {

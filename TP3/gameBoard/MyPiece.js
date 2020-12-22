@@ -3,19 +3,14 @@
  */
 class MyPiece {
     
-    // Ideas:
-    // type -> color
-    // tile -> index of tile list
-    constructor(scene, type, holdingTile) {
+
+    constructor(scene, type, holdingTiles) {
         this.scene = scene;
-        this.type = type;
-        this.holdingTile = holdingTile;
-        this.piece = new MyCylinder(this.scene, 0.5, 0.5, 0.5, 2, 4);  // To change to parallelepiped
+        this.holdingTiles = holdingTiles;
+        this.piece = new MyCylinder(this.scene, 0.2, 0.2, 0.2, 2, 4);  // To change to parallelepiped
     }
     
-    getType() {
-        return this.type; // or just "this" ?
-    }
+    getType() { return this.type; }
 
     setType(type) { this.type = type; }
 
