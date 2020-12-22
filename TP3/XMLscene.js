@@ -41,8 +41,7 @@ class XMLscene extends CGFscene {
 
         this.defaultAppearance=new CGFappearance(this);
 
-
-        // makeRequest("handshake");
+        this.setPickEnabled(true);
     }
 
     /**
@@ -114,6 +113,21 @@ class XMLscene extends CGFscene {
         this.setUpdatePeriod(100);
     }
 
+    logPicking() {
+		if (this.pickMode == false) {
+			if (this.pickResults != null && this.pickResults.length > 0) {
+				for (var i = 0; i < this.pickResults.length; i++) {
+					var obj = this.pickResults[i][0];
+					if (obj) {
+						var customId = this.pickResults[i][1];
+						console.log("Picked object: " + obj + ", with pick id " + customId);						
+					}
+				}
+				this.pickResults.splice(0, this.pickResults.length);
+			}
+		}
+	}
+
     /**
      * Updates lights enabled status
      */
@@ -156,6 +170,8 @@ class XMLscene extends CGFscene {
      * Displays the scene.
      */
     display() {
+        this.logPicking();
+		this.clearPickRegistration();
         // ---- BEGIN Background, camera and axis setup
 
         // Clear image and depth buffer everytime we update the scene
@@ -184,6 +200,9 @@ class XMLscene extends CGFscene {
  
             this.defaultAppearance.apply();
 
+            // for (let i = 0; i < this.gameboard.tiles.length; i++) {
+            //     this.registerForPick(i + 1, this.gameboard.tiles[i]);
+            // }
             this.gameboard.displayGameboard();
 
             // Displays the scene (MySceneGraph function).

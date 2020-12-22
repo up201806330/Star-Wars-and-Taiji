@@ -42,6 +42,7 @@ class MyTile {
 
         this.scene.popMatrix();
         this.scene.pushMatrix();
+        
         // Display Piece
         if (this.piece != null) {
             this.scene.translate(this.rowCoord * 0.75, 0.25, this.colCoord * 0.75);
