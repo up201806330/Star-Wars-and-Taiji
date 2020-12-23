@@ -104,9 +104,9 @@ class XMLscene extends CGFscene {
  
         this.gameboard = new MyGameBoard(this, 7);
 
-        let foundTile = this.gameboard.getTileByBoardCoords({row: 6, column: 7});
-        if (foundTile != null) console.log(foundTile.coordinates);
-        else console.log("Not Found!");
+        // let foundTile = this.gameboard.getTileByBoardCoords({row: 6, column: 7});
+        // if (foundTile != null) console.log(foundTile.coordinates);
+        // else console.log("Not Found!");
         
         // this.gameboard.displayGameboard();
 
@@ -120,7 +120,11 @@ class XMLscene extends CGFscene {
 					var obj = this.pickResults[i][0];
 					if (obj) {
 						var customId = this.pickResults[i][1];
-						console.log("Picked object: " + obj + ", with pick id " + customId);						
+                        console.log("Picked object: " + obj + ", with pick id " + customId);
+                        
+                        let row = Math.floor( (customId - 1) / 7);
+                        let col = (customId - 1) % 7;
+                        console.log("aka row: " + row + " col: " + col);						
 					}
 				}
 				this.pickResults.splice(0, this.pickResults.length);
@@ -222,31 +226,4 @@ class XMLscene extends CGFscene {
         this.popMatrix();
         // ---- END Background, camera and axis setup
     }
-}
-
-
-function getPrologRequest(requestString, onSuccess, onError, port) {
-  var requestPort = port || 8081;
-  var request = new XMLHttpRequest();
-  request.open("GET", "http://localhost:" + requestPort + "/" + requestString, true);
-
-  request.onload = onSuccess || function (data) { console.log("Request successful. Reply: " + data.target.response); };
-  request.onerror = onError || function () { console.log("Error waiting for response"); };
-
-  request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-  request.send();
-}
-
-function makeRequest() {
-  // Get Parameter Values
-  var requestString = document.querySelector("#query_field").value;
-
-  // Make Request
-  getPrologRequest(requestString, handleReply);
-}
-
-//Handle the Reply
-function handleReply(data) {
-  // document.querySelector("#query_result").innerHTML = data.target.response;
-  console.log(data.target.response);
 }

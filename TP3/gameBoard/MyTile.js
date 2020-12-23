@@ -37,12 +37,12 @@ class MyTile {
         this.scene.rotate(Math.PI/2, 1, 0, 0);
         this.scene.rotate(Math.PI/4, 0, 0, 1);
         
-
+        
         this.tile.display();
 
         this.scene.popMatrix();
         this.scene.pushMatrix();
-        
+
         // Display Piece
         if (this.piece != null) {
             this.scene.translate(this.rowCoord * 0.75, 0.25, this.colCoord * 0.75);

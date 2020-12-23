@@ -13,34 +13,26 @@ class MyGameBoard {
         for(let i = 0; i < this.sideBoardLength; i++) {
             for (let j = 0; j < this.sideBoardLength; j++) {
                 this.tiles.push(new MyTile(this.scene, this, {row: j, column: i}));
-                this.tiles[this.tiles.length - 1].piece = new MyPiece(this.scene, 'idk type', []);
+                // this.tiles[this.tiles.length - 1].piece = new MyPiece(this.scene, 'idk type', []);
             }
         }
     }
 
     addPieceToTile(tile, piece) { tile.setPiece(piece); }
 
-    removePieceFromTile(tile) { tile.unsetPiece(); }  // not applicable
-
     getPieceFromTile(tile) { tile.getPiece(); }
 
     getTileByBoardCoords(coordinates) {
-        // console.log(this.tiles[0].coordinates);
         
         for (let i = 0; i < this.tiles.length; i++) {
-            
-            if (this.tiles[i].coordinates.row == coordinates.row && this.tiles[i].coordinates.column == coordinates.column) {
-                return this.tiles[i];
-            }
-            
+            if (this.compareCoordinates(this.tiles[i].coordinates, coordinates)) return this.tiles[i];
         }
+        
         console.log("No Tile with these coords:");
         console.log(coordinates);
 
         return null;
     }
-
-    // movePiece(piece, startingTile, endingTile) {}  // not applicable
 
 
     displayGameboard() {
@@ -49,6 +41,10 @@ class MyGameBoard {
             this.scene.registerForPick(i + 1, this.tiles[i]);
             this.tiles[i].displayTile();
         }
+    }
+
+    compareCoordinates(coords1, coords2) {
+        return (coords1.row == coords2.row && coords1.column == coords2.column);
     }
 
 }
