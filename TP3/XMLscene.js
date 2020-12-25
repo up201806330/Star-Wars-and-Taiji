@@ -39,7 +39,9 @@ class XMLscene extends CGFscene {
         this.loadingProgressObject=new MyRectangle(this, -1, -.1, 1, .1);
         this.loadingProgress=0;
 
-        this.defaultAppearance=new CGFappearance(this);
+        this.defaultAppearance = new CGFappearance(this);
+
+        this.gameOrchestrator = new MyGameOrchestrator(this);
 
         this.setPickEnabled(true);
     }
@@ -101,36 +103,16 @@ class XMLscene extends CGFscene {
         this.interface.initCamerasInterface(this.graph);
         
         this.sceneInited = true;
- 
-        this.gameboard = new MyGameBoard(this, 7);
 
         // let foundTile = this.gameboard.getTileByBoardCoords({row: 6, column: 7});
         // if (foundTile != null) console.log(foundTile.coordinates);
         // else console.log("Not Found!");
         
-        // this.gameboard.displayGameboard();
+        // this.gameboard.display();
 
         this.setUpdatePeriod(100);
     }
 
-    logPicking() {
-		if (this.pickMode == false) {
-			if (this.pickResults != null && this.pickResults.length > 0) {
-				for (var i = 0; i < this.pickResults.length; i++) {
-					var obj = this.pickResults[i][0];
-					if (obj) {
-						var customId = this.pickResults[i][1];
-                        console.log("Picked object: " + obj + ", with pick id " + customId);
-                        
-                        let row = Math.floor( (customId - 1) / 7);
-                        let col = (customId - 1) % 7;
-                        console.log("aka row: " + row + " col: " + col);						
-					}
-				}
-				this.pickResults.splice(0, this.pickResults.length);
-			}
-		}
-	}
 
     /**
      * Updates lights enabled status
@@ -174,8 +156,9 @@ class XMLscene extends CGFscene {
      * Displays the scene.
      */
     display() {
-        this.logPicking();
-		this.clearPickRegistration();
+        this.gameOrchestrator.managePick(this.pickMode, this.pickResults);
+        this.clearPickRegistration();
+        
         // ---- BEGIN Background, camera and axis setup
 
         // Clear image and depth buffer everytime we update the scene
@@ -191,11 +174,6 @@ class XMLscene extends CGFscene {
 
         this.pushMatrix();
 
-        // for (var i = 0; i < this.lights.length; i++) {
-        //     this.lights[i].setVisible(true);
-        //     this.lights[i].enable();
-        // }
-
         this.lightsUpdate();
 
         if (this.sceneInited) {
@@ -203,17 +181,13 @@ class XMLscene extends CGFscene {
             this.axis.display();
  
             this.defaultAppearance.apply();
-
-            // for (let i = 0; i < this.gameboard.tiles.length; i++) {
-            //     this.registerForPick(i + 1, this.gameboard.tiles[i]);
-            // }
-            this.gameboard.displayGameboard();
+            
+            this.gameOrchestrator.display();
 
             // Displays the scene (MySceneGraph function).
-            this.graph.displayScene();
+            // this.graph.displayScene();
         }
-        else
-        {
+        else {
             // Show some "loading" visuals
             this.defaultAppearance.apply();
 

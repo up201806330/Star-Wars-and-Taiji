@@ -7,7 +7,8 @@ class MyGameBoard {
         // Create a gameboard instance
         // this.gameboard is unnecessary, right?
         this.scene = scene;
-        this.tiles = []; // 1 list or list of lists ?
+        this.tiles = [];
+        this.pieces = []; // <-- maybe use this instead of associating piece with tile?
         this.sideBoardLength = sideBoardLength;
 
         for(let i = 0; i < this.sideBoardLength; i++) {
@@ -35,11 +36,18 @@ class MyGameBoard {
     }
 
 
-    displayGameboard() {
+    display() {
+        // console.log("display gameboard");
         
         for (let i = 0; i < this.tiles.length; i++) {
             this.scene.registerForPick(i + 1, this.tiles[i]);
             this.tiles[i].displayTile();
+        }
+
+        this.scene.clearPickRegistration();
+
+        for (let i = 0; i < this.pieces.length; i++) {
+            this.pieces[i].displayPiece();
         }
     }
 
