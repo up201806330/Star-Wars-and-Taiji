@@ -24,6 +24,7 @@ class XMLscene extends CGFscene {
     init(application) {
         super.init(application);
 
+        this.first = true;
         this.sceneInited = false;
 
         this.initCameras();
@@ -100,11 +101,13 @@ class XMLscene extends CGFscene {
         this.initLights();
 
         // After graph has loaded, add each light source / camera to the interface
-        this.interface.initLightsInterface(this.graph.lights);
-
-        this.interface.initCamerasInterface(this.graph);
-
-        // this.interface.addScenesInterface();
+        
+        if (this.first) { // not to duplicate elements of the gui
+            this.first = false;
+            this.interface.addScenesInterface();
+            this.interface.initLightsInterface(this.graph.lights);
+            this.interface.initCamerasInterface(this.graph);
+        }
         
         this.sceneInited = true;
 
@@ -207,6 +210,11 @@ class XMLscene extends CGFscene {
 
     changeGraph(){
         this.sceneInited = false; // fixed error in console
+
+        // this.interface.gui.remove(this.interface.lightsFolder);
+        this.interface.lightsFolder.close();
+
+        this.first = false;
         this.graph = new MySceneGraph('space_skybox.xml', this);
       }
 }
