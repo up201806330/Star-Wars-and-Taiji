@@ -58,10 +58,10 @@ class MyGameOrchestrator {
 
     // vv All requests vv
     //   start_game
-    //   move
-    //   undo_move
-    //   choose_move
-    //   score_and_game_over
+    //   move(Gs, Move)
+    //   undo_move(Gs, Move)
+    //   choose_move(Gs, Color, Difficulty)
+    //   score_and_game_over(Gs)
 
     sendRequest(requestString){
         this.client.getPrologRequest(requestString, 
