@@ -21,11 +21,10 @@ class MyInterface extends CGFinterface {
         this.gui = new dat.GUI();
 
         // add a group of controls (and open/expand by defult)
+        this.addScenesInterface();
 
         this.lightsFolder = this.gui.addFolder("Lights");
         this.lightsFolder.open();
-
-        //this.curView = '';
 
         this.initKeys();
 
@@ -89,5 +88,9 @@ class MyInterface extends CGFinterface {
     
     }
 
+    addScenesInterface() {
+        // this.gui.add(this.scene.graph, "curScene", [ "skybox1", "skybox2"] ).name("Scene");
+        this.gui.add(this.scene, 'curScene', this.scene.sceneIds).name('Scene').onChange(() => {this.scene.changeGraph();});
+    }
 
 }

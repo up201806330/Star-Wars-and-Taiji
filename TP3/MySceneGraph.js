@@ -33,6 +33,8 @@ class MySceneGraph {
 
         
         this.curView = '';
+        // this.curScene = 'skybox1';
+        // this.sceneIds = { 'Earth': 0, 'Space': 1};
 
 
         this.materialStack = [];

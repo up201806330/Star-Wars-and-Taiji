@@ -13,6 +13,8 @@ class XMLscene extends CGFscene {
 
         this.lightsStatus = [];
         this.curView = "";
+        this.curScene = 0;
+        this.sceneIds = { 'Earth': 0, 'Space': 1};
     }
 
     /**
@@ -101,6 +103,8 @@ class XMLscene extends CGFscene {
         this.interface.initLightsInterface(this.graph.lights);
 
         this.interface.initCamerasInterface(this.graph);
+
+        // this.interface.addScenesInterface();
         
         this.sceneInited = true;
 
@@ -156,7 +160,7 @@ class XMLscene extends CGFscene {
      * Displays the scene.
      */
     display() {
-        this.gameOrchestrator.managePick(this.pickMode, this.pickResults);
+        
 
         
         // ---- BEGIN Background, camera and axis setup
@@ -177,6 +181,7 @@ class XMLscene extends CGFscene {
         this.lightsUpdate();
 
         if (this.sceneInited) {
+            this.gameOrchestrator.managePick(this.pickMode, this.pickResults);
             // Draw axis
             this.axis.display();
  
@@ -200,4 +205,8 @@ class XMLscene extends CGFscene {
         this.popMatrix();
         // ---- END Background, camera and axis setup
     }
+
+    changeGraph(){
+        this.graph = new MySceneGraph('space_skybox.xml', this);
+      }
 }
