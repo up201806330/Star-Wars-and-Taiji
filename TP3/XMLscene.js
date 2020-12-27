@@ -163,6 +163,7 @@ class XMLscene extends CGFscene {
      * Displays the scene.
      */
     display() {
+
         this.gameOrchestrator.managePick(this.pickMode, this.pickResults);
         
         // ---- BEGIN Background, camera and axis setup
@@ -183,7 +184,6 @@ class XMLscene extends CGFscene {
         this.lightsUpdate();
 
         if (this.sceneInited) {
-            
             // Draw axis
             this.axis.display();
  

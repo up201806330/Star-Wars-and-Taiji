@@ -7,8 +7,9 @@ class MyTile {
         this.scene = scene;
         this.piece = null;
         this.gameboard = gameboard;
-        this.tile = new MyCylinder(this.scene, 0.5, 0.5, 0.5, 2, 4);
+        // this.tile = new MyCylinder(this.scene, 0.5, 0.5, 0.5, 2, 4);
         // this.tile = new MyRectangle(this.scene, 0, 0, 1, 1);
+        this.tile = new MyUnitCubeQuad(this.scene);
         this.coordinates = coordinates;
         this.rowCoord = coordinates.row;
         this.colCoord = coordinates.column;
@@ -27,15 +28,14 @@ class MyTile {
         // Display Tile Itself
 
         // for the rectangle temporary representation
-        // this.scene.translate(this.rowCoord, 0, this.colCoord);
-        // this.scene.translate(0, 0, 1);
-        // this.scene.rotate(-Math.PI/2, 1, 0, 0);
-        // this.scene.scale(0.95, 0.95, 1);
+        this.scene.translate(this.rowCoord, 0, this.colCoord);
+        this.scene.translate(-3.0, -9.87, -3.0);
+        this.scene.scale(1.0, 0.25, 1.0);
 
 
-        this.scene.translate(this.coordinates.row * 0.75, 0, this.coordinates.column * 0.75);
-        this.scene.rotate(Math.PI/2, 1, 0, 0);
-        this.scene.rotate(Math.PI/4, 0, 0, 1);
+        // this.scene.translate(this.coordinates.row * 0.75, 0, this.coordinates.column * 0.75);
+        // this.scene.rotate(Math.PI/2, 1, 0, 0);
+        // this.scene.rotate(Math.PI/4, 0, 0, 1);
         
         
         this.tile.display();
