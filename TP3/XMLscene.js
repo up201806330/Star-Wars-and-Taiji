@@ -160,8 +160,7 @@ class XMLscene extends CGFscene {
      * Displays the scene.
      */
     display() {
-        
-
+        this.gameOrchestrator.managePick(this.pickMode, this.pickResults);
         
         // ---- BEGIN Background, camera and axis setup
 
@@ -181,7 +180,7 @@ class XMLscene extends CGFscene {
         this.lightsUpdate();
 
         if (this.sceneInited) {
-            this.gameOrchestrator.managePick(this.pickMode, this.pickResults);
+            
             // Draw axis
             this.axis.display();
  
@@ -207,6 +206,7 @@ class XMLscene extends CGFscene {
     }
 
     changeGraph(){
+        this.sceneInited = false; // fixed error in console
         this.graph = new MySceneGraph('space_skybox.xml', this);
       }
 }
