@@ -101,12 +101,17 @@ print_header_line(_).
 %%%%                                       Commands                                                  %%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Require your Prolog Files here
+:- ['src/myTaiji.pl'].
 
 parse_input(handshake, handshake).
-parse_input(test(C,N), Res) :- test(C,Res,N).
+
+parse_input(start_game, Res):- initial('2', Res).
+parse_input(move(Gs, Move), Res):- move(Gs, Move, Res).
+parse_input(undo_move(Gs, Move), Res):- undo_move(Gs, Move, Res).
+parse_input(choose_move(Gs, Color, Difficulty), Res):- choose_move(Gs, Color, Difficulty, Res).
+parse_input(score_and_game_over(Gs), Res):- score_and_game_over(Gs, Res).
+
 parse_input(quit, goodbye).
 
 test(_,[],N) :- N =< 0.
 test(A,[A|Bs],N) :- N1 is N-1, test(A,Bs,N1).
-	
