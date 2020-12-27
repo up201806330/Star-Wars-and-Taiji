@@ -13,8 +13,8 @@ class XMLscene extends CGFscene {
 
         this.lightsStatus = [];
         this.curView = "";
-        this.curScene = 0;
-        this.sceneIds = { 'Earth': 0, 'Space': 1};
+        this.curScene = 'roomScene';
+        this.sceneIds = { 'Room': 'roomScene', 'Space': 'spaceScene' };
     }
 
     /**
@@ -215,6 +215,6 @@ class XMLscene extends CGFscene {
         this.interface.lightsFolder.close();
 
         this.first = false;
-        this.graph = new MySceneGraph('space_skybox.xml', this);
+        this.graph = new MySceneGraph(this.curScene + '.xml', this);
       }
 }
