@@ -51,8 +51,8 @@ class MyGameOrchestrator {
         this.scene.defaultAppearance.apply();
         this.gameboard.display();
         this.scene.popMatrix();
+        
         // this.animator.display();
-
     }
 
 }

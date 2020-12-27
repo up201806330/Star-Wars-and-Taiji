@@ -1,0 +1,242 @@
+<lsf>
+    <initials>
+        <reference length="2" />
+        <!-- axis length; "0" means no axis displayed -->
+        <root id="demoRoot" />
+        <!-- identifier of root node of the scene graph; this node -->
+        <!-- must be defined in one of the following NODE declarations -->
+    </initials>
+    <views default="defaultCamera">
+        <!-- at least one of the following type of cameras must be declared -->
+        <perspective id="defaultCamera" near="0.1" far="500" angle="45">
+            <from x="30" y="15" z="30" />
+            <to x="0" y="-2" z="0" />
+        </perspective>
+        <ortho id="demoOrtho" near="0.2" far="100" left="-0.2" right="0.2" top="0.2" bottom="-0.2">
+            <from x="5" y="0" z="10" />
+            <to x="5" y="0" z="0" />
+            <up x="0" y="1" z="0" /><!-- optional, default 0,1,0 -->
+        </ortho>
+    </views>
+
+    <illumination>
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />           <!-- global ambient -->
+        <background r="0.1" g="0.7" b="1.0" a="1.0" />        <!-- background color -->
+    </illumination>
+
+
+    <lights>
+        <!-- NOTE: this block "light" must be repeated as necessary with different "id". At least one light should be present, and a maximum of eight lights is accepted. -->
+        <light id="demoLight">            <!-- light identifier -->
+            <enable value="1" />
+            <!-- enable/disable -->
+            <position x="10" y="12" z="9.5" w="1.0" /><!-- light position; w=1: point light; w=0: directional light -->
+            <ambient r="0" g="0" b="0" a="1.0" />                   <!-- ambient component -->
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />             <!-- diffuse component -->
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />            <!-- specular component -->
+        </light>
+    </lights>
+
+
+    <textures>
+        <!-- NOTE: this block "TEXTURE" must be repeated as necessary with different "id" -->
+        <!-- <texture id="demoTexture" path="./scenes/images/vidral.jpg" /> -->
+
+        <!-- Sky Box Textures -->
+        <texture id="spaceTop" path="./scenes/images/spaceTop.jpg" />
+        <texture id="spaceBottom" path="./scenes/images/spaceBottom.jpg" />
+        <texture id="spaceNorth" path="./scenes/images/spaceNorth.jpg" />
+        <texture id="spaceSouth" path="./scenes/images/spaceSouth.jpg" />
+        <texture id="spaceEast" path="./scenes/images/spaceEast.jpg" />
+        <texture id="spaceWest" path="./scenes/images/spaceWest.jpg" />
+    </textures>
+
+    <spritesheets>
+    </spritesheets>
+
+    <materials>
+        <!-- NOTE: the "MATERIAL" block may be repeated as required. Each defined material
+         requires a distinct "id". At least one material should be present. -->
+        <material id="defaultGreyMaterial">
+            <shininess value="1.0" />
+            <ambient r="0.1" g="0.1" b="0.135" a="1.0" />
+            <diffuse r="0.4" g="0.4" b="0.435" a="1.0" />
+            <specular r="0.1" g="0.1" b="0.135" a="1.0" />
+            <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
+        </material>
+
+        <material id="skyBoxMaterial">
+            <shininess value="1" />
+            <ambient r="0" g="0" b="0" a="1.0" />
+            <diffuse r="0" g="0" b="0" a="1.0" />
+            <specular r="0" g="0" b="0" a="1.0" />
+            <emissive r="1" g="1" b="1" a="1.0" />
+        </material>
+    </materials>
+
+    <nodes>
+        <node id="demoRoot">            <!-- defines one intermediate node; may be repeated as necessary -->
+            <!-- next two lines are mandatory -->
+            <material id="null" /><!-- this superimposes the material received from parent node id="null" maintains material from parent node -->
+
+            <texture id="null"><!-- declared texture superimposes the texture received from parent node id="null" maintains texture from parent node id="clear" clears texture declaration received from parent node -->
+                <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+            </texture>
+
+            <!-- geom. transf. are optional and may be repeated, in any order, as necessary: -->
+            <transformations>
+                <!-- <translation x="0" y="1.0" z="1.0" />
+                <rotation axis="y" angle="45" />
+                <scale sx="1" sy="1" sz="1" /> -->
+            </transformations>
+
+            <!-- declaring descendants, at least one node or one leaf must be present
+             descendants may be mixed, nodes and leafs -->
+            <descendants>
+                <noderef id="skyBoxFinal" />
+                <!-- "ss" is the identifier of a node or of leaf; -->
+                <!-- may be repeated as necessary. It can refer an -->
+                <!-- identifier of another node, before or later defined in the file. -->
+                <!-- next lines define nodes of type leaf; may be repeated, in any order, as necessary -->
+
+                <!-- 2D coordinates on the XY plane for left-top and right-bottom vertices. -->
+            </descendants>
+        </node>
+
+        <!-- Sky box face -->
+        <node id="skyBoxFace">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="100" aft="100" />
+            </texture>
+
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <leaf type="rectangle" x1="-30" y1="-30" x2="30" y2="30" />
+            </descendants>
+        </node>
+
+        <!-- Sky Box Top-->
+        <node id="skyBoxTop">
+            <material id="null" />
+            <texture id="spaceTop">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="30" z="0" />
+                <rotation axis="x" angle="90" />
+            </transformations>
+
+            <descendants>
+                <noderef id="skyBoxFace" />
+            </descendants>
+        </node>
+
+        <!-- Sky Box Bottom-->
+        <node id="skyBoxBottom">
+            <material id="null" />
+            <texture id="spaceBottom">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="-30" z="0" />
+                <rotation axis="x" angle="-90" />
+            </transformations>
+
+            <descendants>
+                <noderef id="skyBoxFace" />
+            </descendants>
+        </node>
+
+        <!-- Sky Box North-->
+        <node id="skyBoxNorth">
+            <material id="null" />
+            <texture id="spaceNorth">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="0" z="-30" />
+            </transformations>
+
+            <descendants>
+                <noderef id="skyBoxFace" />
+            </descendants>
+        </node>
+
+        <!-- Sky Box South-->
+        <node id="skyBoxSouth">
+            <material id="null" />
+            <texture id="spaceSouth">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="0" z="30" />
+                <rotation axis="y" angle="180" />
+            </transformations>
+
+            <descendants>
+                <noderef id="skyBoxFace" />
+            </descendants>
+        </node>
+
+        <!-- Sky Box East-->
+        <node id="skyBoxEast">
+            <material id="null" />
+            <texture id="spaceEast">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="30" y="0" z="0" />
+                <rotation axis="y" angle="-90" />
+            </transformations>
+
+            <descendants>
+                <noderef id="skyBoxFace" />
+            </descendants>
+        </node>
+
+        <!-- Sky Box West-->
+        <node id="skyBoxWest">
+            <material id="null" />
+            <texture id="spaceWest">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-30" y="0" z="0" />
+                <rotation axis="y" angle="90" />
+            </transformations>
+
+            <descendants>
+                <noderef id="skyBoxFace" />
+            </descendants>
+        </node>
+
+        <!-- Sky Box Final -->
+        <node id="skyBoxFinal">
+            <material id="skyBoxMaterial" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <noderef id="skyBoxWest" />
+                <noderef id="skyBoxEast" />
+                <noderef id="skyBoxNorth" />
+                <noderef id="skyBoxSouth" />
+                <noderef id="skyBoxTop" />
+                <noderef id="skyBoxBottom" />
+            </descendants>
+        </node>
+    </nodes>
+</lsf>

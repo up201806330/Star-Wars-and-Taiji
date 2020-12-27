@@ -157,7 +157,7 @@ class XMLscene extends CGFscene {
      */
     display() {
         this.gameOrchestrator.managePick(this.pickMode, this.pickResults);
-        this.clearPickRegistration();
+
         
         // ---- BEGIN Background, camera and axis setup
 
