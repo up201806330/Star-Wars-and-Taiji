@@ -9,7 +9,8 @@ class MyGameOrchestrator {
         // this.animator = new MyAnimator();
         this.gameboard = new MyGameBoard(scene, 7);
         // this.theme = new MyScenegraph(…);
-        // this.prolog = new MyPrologInterface(…);
+        this.client = new Client();
+        // this.gameState = ...;
     }
     
     update(time) {
@@ -55,4 +56,24 @@ class MyGameOrchestrator {
         // this.animator.display();
     }
 
+    // vv All requests vv
+    //   start_game
+    //   move(Gs, Move)
+    //   undo_move(Gs, Move)
+    //   choose_move(Gs, Color, Difficulty)
+    //   score_and_game_over(Gs)
+
+    sendRequest(requestString){
+        this.client.getPrologRequest(requestString, 
+            function(data){
+                handleReply(requestString, data.target.response);
+            },
+            function(data){
+                console.log("Error sending request to prolog");
+            });
+    }
+
+    handleReply(requestString, reply){
+        
+    }
 }
