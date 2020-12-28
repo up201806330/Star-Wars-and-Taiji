@@ -1,0 +1,1012 @@
+<lsf>
+    <initials>
+        <reference length="2" />
+        <!-- axis length; "0" means no axis displayed -->
+        <root id="demoRoot" />
+        <!-- identifier of root node of the scene graph; this node -->
+        <!-- must be defined in one of the following NODE declarations -->
+    </initials>
+    <views default="defaultCamera">
+        <!-- at least one of the following type of cameras must be declared -->
+        <perspective id="defaultCamera" near="0.1" far="500" angle="45">
+            <from x="30" y="15" z="30" />
+            <to x="0" y="-2" z="0" />
+        </perspective>
+        <ortho id="demoOrtho" near="0.2" far="100" left="-0.2" right="0.2" top="0.2" bottom="-0.2">
+            <from x="5" y="0" z="10" />
+            <to x="5" y="0" z="0" />
+            <up x="0" y="1" z="0" /><!-- optional, default 0,1,0 -->
+        </ortho>
+    </views>
+
+    <illumination>
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />           <!-- global ambient -->
+        <background r="0.1" g="0.7" b="1.0" a="1.0" />        <!-- background color -->
+    </illumination>
+
+
+    <lights>
+        <!-- NOTE: this block "light" must be repeated as necessary with different "id". At least one light should be present, and a maximum of eight lights is accepted. -->
+        <light id="demoLight">            <!-- light identifier -->
+            <enable value="1" />
+            <!-- enable/disable -->
+            <position x="30" y="30" z="9.5" w="1.0" /><!-- light position; w=1: point light; w=0: directional light -->
+            <ambient r="0.8" g="0.8" b="0.8" a="1.0" />                   <!-- ambient component -->
+            <diffuse r="0.9" g="0.9" b="0.9" a="1.0" />             <!-- diffuse component -->
+            <specular r="0.9" g="0.9" b="0.9" a="1.0" />            <!-- specular component -->
+        </light>
+    </lights>
+
+
+    <textures>
+        <!-- NOTE: this block "TEXTURE" must be repeated as necessary with different "id" -->
+        <!-- <texture id="demoTexture" path="./scenes/images/vidral.jpg" /> -->
+
+        <!-- Sky Box Textures -->
+        <texture id="forestTop" path="./scenes/images/forestTop.png" />
+        <texture id="forestBottom" path="./scenes/images/forestBottom.png" />
+        <texture id="forestNorth" path="./scenes/images/forestNorth.png" />
+        <texture id="forestSouth" path="./scenes/images/forestSouth.png" />
+        <texture id="forestEast" path="./scenes/images/forestEast.png" />
+        <texture id="forestWest" path="./scenes/images/forestWest.png" />
+
+        <texture id="rockTex" path="./scenes/images/rock.jpg" />
+        <texture id="rockTex2" path="./scenes/images/rock2.jpg" />
+        <texture id="rockTex3" path="./scenes/images/rock3.jpg" />
+        <texture id="sandTex" path="./scenes/images/sand1.jpg" />
+        
+    </textures>
+
+    <spritesheets>
+    </spritesheets>
+
+    <materials>
+        <!-- NOTE: the "MATERIAL" block may be repeated as required. Each defined material
+         requires a distinct "id". At least one material should be present. -->
+        <material id="defaultGreyMaterial">
+            <shininess value="1.0" />
+            <ambient r="0.1" g="0.1" b="0.135" a="1.0" />
+            <diffuse r="0.4" g="0.4" b="0.435" a="1.0" />
+            <specular r="0.1" g="0.1" b="0.135" a="1.0" />
+            <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
+        </material>
+
+        <material id="skyBoxMaterial">
+            <shininess value="1" />
+            <ambient r="0" g="0" b="0" a="1.0" />
+            <diffuse r="0" g="0" b="0" a="1.0" />
+            <specular r="0" g="0" b="0" a="1.0" />
+            <emissive r="1" g="1" b="1" a="1.0" />
+        </material>
+
+        <material id="rockMat">
+            <shininess value="1.0" />
+            <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+            <diffuse r="0.4" g="0.4" b="0.4" a="1.0" />
+            <specular r="0.4" g="0.4" b="0.4" a="1.0" />
+            <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
+        </material>
+
+        <material id="sandMat">
+            <shininess value="1.0" />
+            <ambient r="0.4" g="0.4" b="0.4" a="1.0" />
+            <diffuse r="0.4" g="0.4" b="0.435" a="1.0" />
+            <specular r="0.1" g="0.1" b="0.135" a="1.0" />
+            <emissive r="0.1" g="0.1" b="0.1" a="1.0" />
+        </material>
+
+    </materials>
+
+    <nodes>
+        <node id="demoRoot">            <!-- defines one intermediate node; may be repeated as necessary -->
+            <!-- next two lines are mandatory -->
+            <material id="null" /><!-- this superimposes the material received from parent node id="null" maintains material from parent node -->
+
+            <texture id="null"><!-- declared texture superimposes the texture received from parent node id="null" maintains texture from parent node id="clear" clears texture declaration received from parent node -->
+                <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+            </texture>
+
+            <!-- geom. transf. are optional and may be repeated, in any order, as necessary: -->
+            <transformations>
+                <!-- <translation x="0" y="1.0" z="1.0" />
+                <rotation axis="y" angle="45" />
+                <scale sx="1" sy="1" sz="1" /> -->
+            </transformations>
+
+            <!-- declaring descendants, at least one node or one leaf must be present
+             descendants may be mixed, nodes and leafs -->
+            <descendants>
+                <noderef id="skyBoxFinal" />
+                <noderef id="rockTable" />
+                <noderef id="sand" />
+                <noderef id="outlineSmallRocks" />
+                <noderef id="waterOutline" />
+
+
+                <!-- "ss" is the identifier of a node or of leaf; -->
+                <!-- may be repeated as necessary. It can refer an -->
+                <!-- identifier of another node, before or later defined in the file. -->
+                <!-- next lines define nodes of type leaf; may be repeated, in any order, as necessary -->
+
+                <!-- 2D coordinates on the XY plane for left-top and right-bottom vertices. -->
+            </descendants>
+        </node>
+
+        <!-- Sky box face -->
+        <node id="skyBoxFace">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="100" aft="100" />
+            </texture>
+
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <leaf type="rectangle" x1="-50" y1="-50" x2="50" y2="50" />
+            </descendants>
+        </node>
+
+        <!-- Sky Box Top-->
+        <node id="skyBoxTop">
+            <material id="null" />
+            <texture id="forestTop">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="50" z="0" />
+                <rotation axis="x" angle="90" />
+            </transformations>
+
+            <descendants>
+                <noderef id="skyBoxFace" />
+            </descendants>
+        </node>
+
+        <!-- Sky Box Bottom-->
+        <node id="skyBoxBottom">
+            <material id="null" />
+            <texture id="forestBottom">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="-50" z="0" />
+                <rotation axis="x" angle="-90" />
+            </transformations>
+
+            <descendants>
+                <noderef id="skyBoxFace" />
+            </descendants>
+        </node>
+
+        <!-- Sky Box North-->
+        <node id="skyBoxNorth">
+            <material id="null" />
+            <texture id="forestNorth">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="0" z="-50" />
+            </transformations>
+
+            <descendants>
+                <noderef id="skyBoxFace" />
+            </descendants>
+        </node>
+
+        <!-- Sky Box South-->
+        <node id="skyBoxSouth">
+            <material id="null" />
+            <texture id="forestSouth">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="0" z="50" />
+                <rotation axis="y" angle="180" />
+            </transformations>
+
+            <descendants>
+                <noderef id="skyBoxFace" />
+            </descendants>
+        </node>
+
+        <!-- Sky Box East-->
+        <node id="skyBoxEast">
+            <material id="null" />
+            <texture id="forestEast">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="50" y="0" z="0" />
+                <rotation axis="y" angle="-90" />
+            </transformations>
+
+            <descendants>
+                <noderef id="skyBoxFace" />
+            </descendants>
+        </node>
+
+        <!-- Sky Box West-->
+        <node id="skyBoxWest">
+            <material id="null" />
+            <texture id="forestWest">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-50" y="0" z="0" />
+                <rotation axis="y" angle="90" />
+            </transformations>
+
+            <descendants>
+                <noderef id="skyBoxFace" />
+            </descendants>
+        </node>
+
+        <!-- Sky Box Final -->
+        <node id="skyBoxFinal">
+            <material id="skyBoxMaterial" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <noderef id="skyBoxWest" />
+                <noderef id="skyBoxEast" />
+                <noderef id="skyBoxNorth" />
+                <noderef id="skyBoxSouth" />
+                <noderef id="skyBoxTop" />
+                <noderef id="skyBoxBottom" />
+            </descendants>
+        </node>
+
+        <node id="parallelepipedDefault">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <noderef id="parallelepipedSideFace1" />
+                <noderef id="parallelepipedSideFace2" />
+                <noderef id="parallelepipedSideFace3" />
+                <noderef id="parallelepipedSideFace4" />
+                <noderef id="parallelepipedBase1" />
+                <noderef id="parallelepipedBase2" />
+            </descendants>
+        </node>
+
+        <!-- "Rectangle" Default (1 x 1) -->
+        <node id="rectangleDefault">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0.5" y="0.5" z="0" />
+                <rotation axis="x" angle="90" />
+            </transformations>
+
+            <descendants>
+                <leaf type="plane" npartsU="30" npartsV="30" />
+            </descendants>
+        </node>
+
+        <!-- X-Wing Parallelepiped Default section -->
+        <node id="parallelepipedBase2">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="1" z="1" />
+                <rotation axis="x" angle="-90" />
+            </transformations>
+
+            <descendants>
+                <noderef id="rectangleDefault" />
+            </descendants>
+        </node>
+
+        <node id="parallelepipedBase1">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <rotation axis="x" angle="90" />
+            </transformations>
+
+            <descendants>
+                <noderef id="rectangleDefault" />
+            </descendants>
+        </node>
+
+        <node id="parallelepipedSideFace4">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <rotation axis="y" angle="-90" />
+            </transformations>
+
+            <descendants>
+                <noderef id="rectangleDefault" />
+            </descendants>
+        </node>
+
+        <node id="parallelepipedSideFace3">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="0" z="1" />
+            </transformations>
+
+            <descendants>
+                <noderef id="rectangleDefault" />
+            </descendants>
+        </node>
+
+        <node id="parallelepipedSideFace2">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="1" y="0" z="1" />
+                <rotation axis="y" angle="90" />
+            </transformations>
+
+            <descendants>
+                <noderef id="rectangleDefault" />
+            </descendants>
+        </node>
+
+        <node id="parallelepipedSideFace1">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="1" y="0" z="0" />
+                <rotation axis="y" angle="180" />
+            </transformations>
+
+            <descendants>
+                <noderef id="rectangleDefault" />
+            </descendants>
+        </node>
+
+        <node id="topTable">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-7.5" y="2.8" z="-7.5" />
+                <scale sx="15" sy="15" sz="15" />
+            </transformations>
+
+            <descendants>
+                <noderef id="parallelepipedDefault" />
+            </descendants>
+        </node>
+
+        <node id="rockTable">
+            <material id="rockMat" />
+            <texture id="rockTex">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="-27.8" z="0" />
+            </transformations>
+
+            <descendants>
+                <leaf type="sphere" radius="18" stacks="9" slices="9" /> 
+                <noderef id="topTable" />
+            </descendants>
+        </node>
+
+        <node id="sand">
+            <material id="sandMat" />
+            <texture id="sandTex">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="-17" z="0" />
+                <scale sx="100" sy="0" sz="100" />
+            </transformations>
+
+            <descendants>
+                <leaf type="plane" npartsU="10" npartsV="10" />
+            </descendants>
+        </node>
+
+        <node id="smallRock1">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <leaf type="sphere" radius="2" stacks="5" slices="5" /> 
+            </descendants>
+        </node>
+        <node id="smallRock2">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="3" y="0.3" z="0" />
+            </transformations>
+
+            <descendants>
+                <leaf type="sphere" radius="2" stacks="6" slices="6" /> 
+            </descendants>
+        </node>
+        <node id="smallRock3">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="1.3" y="-0.2" z="1" />
+            </transformations>
+
+            <descendants>
+                <leaf type="sphere" radius="2" stacks="6" slices="6" /> 
+            </descendants>
+        </node>
+        <node id="smallRock4">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="5" y="0" z="-0.3" />
+            </transformations>
+
+            <descendants>
+                <leaf type="sphere" radius="2" stacks="5" slices="5" /> 
+            </descendants>
+        </node>
+        <node id="smallRock5">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="7" y="-0.2" z="0" />
+            </transformations>
+
+            <descendants>
+                <leaf type="sphere" radius="2" stacks="7" slices="7" /> 
+            </descendants>
+        </node>
+        <node id="smallRocks">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <noderef id="smallRock1" />
+                <noderef id="smallRock2" />
+                <noderef id="smallRock3" />
+                <noderef id="smallRock4" />
+                <noderef id="smallRock5" />
+            </descendants>
+        </node>
+        <node id="smallRocks1">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-48" y="-19" z="0" />
+            </transformations>
+
+            <descendants>
+                <noderef id="smallRocks" />
+            </descendants>
+        </node>
+        <node id="smallRocks2">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-30" y="-19" z="0" />
+            </transformations>
+
+            <descendants>
+                <noderef id="smallRocks" />
+            </descendants>
+        </node>
+        <node id="smallRocks3">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-20" y="-19" z="0" />
+            </transformations>
+
+            <descendants>
+                <noderef id="smallRocks" />
+            </descendants>
+        </node>
+        <node id="smallRocks4">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-10" y="-19" z="0" />
+            </transformations>
+
+            <descendants>
+                <noderef id="smallRocks" />
+            </descendants>
+        </node>
+        <node id="smallRocks5">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="-19" z="0" />
+            </transformations>
+
+            <descendants>
+                <noderef id="smallRocks" />
+            </descendants>
+        </node>
+        <node id="smallRocks6">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="10" y="-19" z="0" />
+            </transformations>
+
+            <descendants>
+                <noderef id="smallRocks" />
+            </descendants>
+        </node>
+        <node id="smallRocks7">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="20" y="-19" z="0" />
+            </transformations>
+
+            <descendants>
+                <noderef id="smallRocks" />
+            </descendants>
+        </node>
+        <node id="smallRocks8">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="30" y="-19" z="0" />
+            </transformations>
+
+            <descendants>
+                <noderef id="smallRocks" />
+            </descendants>
+        </node>
+        <node id="smallRocks9">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="40" y="-19" z="0" />
+            </transformations>
+
+            <descendants>
+                <noderef id="smallRocks" />
+            </descendants>
+        </node>
+        <node id="smallRocks10">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-40" y="-19" z="0" />
+            </transformations>
+
+            <descendants>
+                <noderef id="smallRocks" />
+            </descendants>
+        </node>
+        <node id="lineSmallRocks">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <noderef id="smallRocks1" />
+                <noderef id="smallRocks2" />
+                <noderef id="smallRocks3" />
+                <noderef id="smallRocks4" />
+                <noderef id="smallRocks5" />
+                <noderef id="smallRocks6" />
+                <noderef id="smallRocks7" />
+                <noderef id="smallRocks8" />
+                <noderef id="smallRocks9" />
+                <noderef id="smallRocks10" />
+            </descendants>
+        </node>
+        <node id="lineSmallRocksNorth">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="0" z="-48" />
+            </transformations>
+
+            <descendants>
+            <noderef id="lineSmallRocks" />
+            </descendants>
+        </node>
+        <node id="lineSmallRocksSouth">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="0" z="48" />
+            </transformations>
+
+            <descendants>
+            <noderef id="lineSmallRocks" />
+            </descendants>
+        </node>
+        <node id="lineSmallRocksEast">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-48" y="0" z="0" />
+                <rotation axis="y" angle="90" />
+            </transformations>
+
+            <descendants>
+                <noderef id="lineSmallRocks" />
+            </descendants>
+        </node>
+        <node id="lineSmallRocksWest">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="48" y="0" z="0" />
+                <rotation axis="y" angle="90" />
+            </transformations>
+
+            <descendants>
+                <noderef id="lineSmallRocks" />
+            </descendants>
+        </node>
+        <node id="outlineSmallRocks">
+            <material id="rockMat" />
+            <texture id="rockTex3">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="3" z="0" />
+            </transformations>
+
+            <descendants>
+                <noderef id="lineSmallRocksNorth" />
+                <noderef id="lineSmallRocksSouth" />
+                <noderef id="lineSmallRocksEast" />
+                <noderef id="lineSmallRocksWest" />
+            </descendants>
+        </node>
+
+
+        <node id="smallRock6">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-39" y="-16" z="0" />
+                <scale sx="2" sy="2.4" sz="1.9" /> 
+                <rotation axis="y" angle="15" />
+            </transformations>
+
+            <descendants>
+                <leaf type="sphere" radius="2" stacks="5" slices="5" /> 
+            </descendants>
+        </node>
+        <node id="smallRock7">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-37" y="-16" z="-7" />
+                <scale sx="2.1" sy="1.9" sz="2.3" />
+                <rotation axis="y" angle="-10" /> 
+            </transformations>
+
+            <descendants>
+                <leaf type="sphere" radius="2" stacks="5" slices="5" /> 
+            </descendants>
+        </node>
+        <node id="smallRock8">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-34" y="-16" z="-14" />
+                <scale sx="2" sy="2.2" sz="1.8" /> 
+                <rotation axis="y" angle="8" />
+            </transformations>
+
+            <descendants>
+                <leaf type="sphere" radius="2" stacks="5" slices="5" /> 
+            </descendants>
+        </node>
+        <node id="smallRock9">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-31" y="-16" z="-22" />
+                <scale sx="2.9" sy="2.9" sz="2.9" /> 
+                <rotation axis="y" angle="20" />
+            </transformations>
+
+            <descendants>
+                <leaf type="sphere" radius="2" stacks="5" slices="5" /> 
+            </descendants>
+        </node>
+        <node id="smallRock10">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-28" y="-16" z="-28" />
+                <scale sx="1.5" sy="1.2" sz="1" /> 
+            </transformations>
+
+            <descendants>
+                <leaf type="sphere" radius="2" stacks="5" slices="5" /> 
+            </descendants>
+        </node>
+        <node id="smallRock11">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-23" y="-16" z="-31" />
+                <scale sx="2.2" sy="1.9" sz="2.1" /> 
+                <rotation axis="y" angle="-45" />
+            </transformations>
+
+            <descendants>
+                <leaf type="sphere" radius="2" stacks="5" slices="5" /> 
+            </descendants>
+        </node>
+        <node id="smallRock12">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-15" y="-16" z="-34" />
+                <scale sx="2.7" sy="2.4" sz="2" /> 
+                <rotation axis="y" angle="10" />
+            </transformations>
+
+            <descendants>
+                <leaf type="sphere" radius="2" stacks="5" slices="5" /> 
+            </descendants>
+        </node>
+        <node id="smallRock13">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-7" y="-16" z="-37" />
+                <scale sx="2" sy="2" sz="2" /> 
+                <rotation axis="y" angle="-30" />
+            </transformations>
+
+            <descendants>
+                <leaf type="sphere" radius="2" stacks="5" slices="5" /> 
+            </descendants>
+        </node>
+        <node id="smallRock14">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="-16" z="-39" />
+                <scale sx="2.4" sy="1.8" sz="2" /> 
+                <rotation axis="y" angle="15" />
+            </transformations>
+
+            <descendants>
+                <leaf type="sphere" radius="2" stacks="5" slices="5" /> 
+            </descendants>
+        </node>
+        <node id="quarterCircleSmallRocks">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <noderef id="smallRock6" />
+                <noderef id="smallRock7" />
+                <noderef id="smallRock8" />
+                <noderef id="smallRock9" />
+                <noderef id="smallRock10" />
+                <noderef id="smallRock11" />
+                <noderef id="smallRock12" />
+                <noderef id="smallRock13" />
+                <noderef id="smallRock14" />
+            </descendants>
+        </node>
+        <node id="quarterCircleSmallRocks1">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <noderef id="quarterCircleSmallRocks" />
+            </descendants>
+        </node>
+        <node id="quarterCircleSmallRocks2">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <rotation axis="y" angle="90" />
+            </transformations>
+
+            <descendants>
+                <noderef id="quarterCircleSmallRocks" />
+            </descendants>
+        </node>
+        <node id="quarterCircleSmallRocks3">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <rotation axis="y" angle="180" />
+            </transformations>
+
+            <descendants>
+                <noderef id="quarterCircleSmallRocks" />
+            </descendants>
+        </node>
+        <node id="quarterCircleSmallRocks4">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <rotation axis="y" angle="-90" />
+            </transformations>
+
+            <descendants>
+                <noderef id="quarterCircleSmallRocks" />
+            </descendants>
+        </node>
+        <node id="waterOutline">
+            <material id="rockMat" />
+            <texture id="rockTex2">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="-1" z="0" />
+            </transformations>
+
+            <descendants>
+                <noderef id="quarterCircleSmallRocks1" />
+                <noderef id="quarterCircleSmallRocks2" />
+                <noderef id="quarterCircleSmallRocks3" />
+                <noderef id="quarterCircleSmallRocks4" />
+            </descendants>
+        </node>
+
+    </nodes>
+</lsf>

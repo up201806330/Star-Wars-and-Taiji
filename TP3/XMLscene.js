@@ -13,8 +13,8 @@ class XMLscene extends CGFscene {
 
         this.lightsStatus = [];
         this.curView = "";
-        this.curScene = 'roomScene';
-        this.sceneIds = { 'Room': 'roomScene', 'Space': 'spaceScene' };
+        this.curScene = 'gardenScene';
+        this.sceneIds = { 'Room': 'roomScene', 'Garden': 'gardenScene' };
     }
 
     /**
@@ -45,6 +45,7 @@ class XMLscene extends CGFscene {
         this.defaultAppearance = new CGFappearance(this);
 
         this.gameOrchestrator = new MyGameOrchestrator(this);
+        this.water = new Water(this);
 
         this.setPickEnabled(true);
     }
@@ -156,6 +157,8 @@ class XMLscene extends CGFscene {
             for(var animation in this.graph.animations){
                 this.graph.animations[animation].updateAnimation(now);
             }
+            // Cuz of shaders, this primitive must be hardcoded here
+            this.water.updateShader(now);   
         }
     }
 
@@ -185,11 +188,14 @@ class XMLscene extends CGFscene {
 
         if (this.sceneInited) {
             // Draw axis
-            this.axis.display();
+            // this.axis.display();
  
             this.defaultAppearance.apply();
             
             this.gameOrchestrator.display();
+            if (this.curScene == "gardenScene"){ // Cuz of shaders, this primitive must be hardcoded here
+                this.water.display();
+            }
 
             // Displays the scene (MySceneGraph function).
             // this.graph.displayScene();

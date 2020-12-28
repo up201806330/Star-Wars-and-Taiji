@@ -11,7 +11,7 @@ function getUrlVars() {
     return vars;
 }	 
 //Include additional files here
-serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js', 'MyInterface.js', 'Primitives/MyTriangle.js', 'Primitives/MyRectangle.js', 'Primitives/MySphere.js', 'Primitives/MyTorus.js',  'Primitives/MyCylinder.js', 'Primitives/CylinderLid.js', 'Primitives/CylinderBody.js',  'Primitives/MyPrimitive.js', 'Primitives/Plane.js', 'Primitives/Patch.js', 'Primitives/Defbarrel.js', 'MyNode.js', 'Animation/Animation.js', 'Animation/KeyframeAnimation.js', 'Animation/KeyFrame.js', 'Spritesheet/MySpriteSheet.js', 'Spritesheet/MySpriteText.js', 'Spritesheet/MySpriteAnimation.js', 'gameBoard/MyPiece.js', 'gameBoard/MyTile.js', 'gameBoard/MyGameBoard.js', 'game/MyGameOrchestrator.js', 'gameBoard/MyUnitCubeQuad.js', 'gameBoard/MyQuad.js', 'game/Client.js',
+serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js', 'MyInterface.js', 'Primitives/MyTriangle.js', 'Primitives/MyRectangle.js', 'Primitives/MySphere.js', 'Primitives/MyTorus.js',  'Primitives/MyCylinder.js', 'Primitives/CylinderLid.js', 'Primitives/CylinderBody.js',  'Primitives/MyPrimitive.js', 'Primitives/Plane.js', 'Primitives/Patch.js', 'Primitives/Defbarrel.js', 'Primitives/Water.js', 'MyNode.js', 'Animation/Animation.js', 'Animation/KeyframeAnimation.js', 'Animation/KeyFrame.js', 'Spritesheet/MySpriteSheet.js', 'Spritesheet/MySpriteText.js', 'Spritesheet/MySpriteAnimation.js', 'gameBoard/MyPiece.js', 'gameBoard/MyTile.js', 'gameBoard/MyGameBoard.js', 'game/MyGameOrchestrator.js', 'gameBoard/MyUnitCubeQuad.js', 'gameBoard/MyQuad.js', 'game/Client.js',
 
 main=function()
 {
@@ -30,7 +30,7 @@ main=function()
 	// get file name provided in URL, e.g. http://localhost/myproj/?file=myfile.xml 
 	// or use "demo.xml" as default (assumes files in subfolder "scenes", check MySceneGraph constructor) 
 	
-    var filename=getUrlVars()['file'] || "roomScene.xml";
+    var filename=getUrlVars()['file'] || "gardenScene.xml";
 
 	// create and load graph, and associate it to scene. 
 	// Check console for loading errors
