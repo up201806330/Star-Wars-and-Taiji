@@ -92,7 +92,7 @@ class MyGameOrchestrator {
             }
             else {
                 console.log("Occupied Tile!"); 
-                this.selectedTiles[0].unsetOccupied();
+                if (this.selectedTiles.length != 0) this.selectedTiles[0].unsetOccupied();
                 this.selectedTiles = [];
                 this.clearAdjacentHighlights();
                  console.log("Resetting selection!");
