@@ -48,12 +48,10 @@ class MyGameOrchestrator {
     }
 
     onTileSelected(obj, customId, pickResults) {
-        this.clearAdjacentHighlights();
 
         if (obj instanceof MyTile) {
             
             if (obj.isEmpty()) {
-                // console.log("Empty Tile!");
 
                 switch (this.selectedTiles.length) {
                     case 0:
@@ -64,16 +62,30 @@ class MyGameOrchestrator {
 
                         this.empties = this.getEmptyAdjacents(customId, pickResults);
 
-                        for (let i = 0; i < this.empties.length; i++) { this.empties[i].tile.isSelected = true; }
+                        for (let i = 0; i < this.empties.length; i++) { this.empties[i].isSelected = true; }
                         break;
                     
                     case 1:
+                        if (this.containsObject(obj, this.empties)) {
+                            console.log("Selecting Second One!");
+                            this.selectedTiles[1] = obj;
+                            obj.setOccupied();
 
-                        console.log("Selecting Second One!");
-                        this.selectedTiles[1] = obj;
-                        obj.setOccupied();
+                            this.selectedTiles[0].isOccupied = true;
+                            this.selectedTiles[1].isOccupied = true;
 
-                        this.selectedTiles = [];
+                            let gameMove = new MyGameMove(this.selectedTiles);
+                            // process gameMove
+
+                            this.selectedTiles = [];
+                            this.clearAdjacentHighlights();
+                        }
+                        else {
+                            this.selectedTiles[0].unsetOccupied();
+                            this.selectedTiles = [];
+                            this.clearAdjacentHighlights();
+                            console.log("Resetting selection!"); }
+
                         break;
                 }
             }
@@ -82,9 +94,20 @@ class MyGameOrchestrator {
         }
     }
 
+    containsObject(obj, list) {
+        var i;
+        for (i = 0; i < list.length; i++) {
+            if (list[i] === obj) {
+                return true;
+            }
+        }
+    
+        return false;
+    }
+
     clearAdjacentHighlights() {
         for (let tileIndex = 0; tileIndex < this.gameboard.tiles.length; tileIndex++) {
-            this.gameboard.tiles[tileIndex].tile.isSelected = false;
+            this.gameboard.tiles[tileIndex].isSelected = false;
         }
     }
 
@@ -109,25 +132,25 @@ class MyGameOrchestrator {
         let checkUpId = indexId - 7;
         if (checkUpId >= 0) {
             foundTile = this.gameboard.getTileByBoardCoords({row: checkUpId % 7, column: Math.floor(checkUpId / 7)});
-            if (foundTile != null) emptyAdjacents.push(foundTile);
+            if (foundTile != null && foundTile.empty) emptyAdjacents.push(foundTile);
         }
 
         let checkDownId = indexId + 7;
         if (checkDownId < 49) {
             foundTile = this.gameboard.getTileByBoardCoords({row: checkDownId % 7, column: Math.floor(checkDownId / 7)});
-            if (foundTile != null) emptyAdjacents.push(foundTile);
+            if (foundTile != null && foundTile.empty) emptyAdjacents.push(foundTile);
         }
 
         let checkRightId = indexId + 1;
         if ( Math.floor(checkRightId / 7) == Math.floor(indexId / 7) ) {
             foundTile = this.gameboard.getTileByBoardCoords({row: checkRightId % 7, column: Math.floor(checkRightId / 7)});
-            if (foundTile != null) emptyAdjacents.push(foundTile);
+            if (foundTile != null && foundTile.empty) emptyAdjacents.push(foundTile);
         }
 
         let checkLeftId = indexId - 1;
         if ( Math.floor(checkLeftId / 7) == Math.floor(indexId / 7) ) {
             foundTile = this.gameboard.getTileByBoardCoords({row: checkLeftId % 7, column: Math.floor(checkLeftId / 7)});
-            if (foundTile != null) emptyAdjacents.push(foundTile);
+            if (foundTile != null && foundTile.empty) emptyAdjacents.push(foundTile);
         }
 
         console.log("Size: ", emptyAdjacents);
