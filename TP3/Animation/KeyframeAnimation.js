@@ -6,6 +6,7 @@ class KeyframeAnimation extends Animation{
         this.lastT = null;
         this.currentFrame = -1;
         this.currentFrameDuration = 0;
+        this.ended = false;
 
         this.transformMatrix = mat4.create();
     };
@@ -28,7 +29,7 @@ class KeyframeAnimation extends Animation{
         }
         else if (this.currentFrame >= 0){ // Has started
             if (this.currentFrame == this.keyframes.length - 2) { // Has ended, won't update anything from here on
-                
+                this.ended = true;
             }
             else {
                 if (this.elapsedTime >= this.keyframes[this.currentFrame + 1].instant){ // Has to switch to next frame

@@ -11,14 +11,16 @@ class MyGameOrchestrator {
         // this.theme = new MyScenegraph(…);
         this.client = new Client();
         // this.gameState = ...;
+
+        this.animator = new MyAnimator(scene);
     }
     
-    update(time) {
-        // this.animator.update(time);
+    update(now) {
+        this.animator.update(now);
     }
 
     orchestrate() { 
-
+        
     }
     
 
@@ -53,7 +55,7 @@ class MyGameOrchestrator {
         this.gameboard.display();
         this.scene.popMatrix();
         
-        // this.animator.display();
+        this.animator.display();
     }
 
     // vv All requests vv
