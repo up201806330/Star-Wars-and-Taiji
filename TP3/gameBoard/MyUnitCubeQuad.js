@@ -7,6 +7,8 @@ class MyUnitCubeQuad extends CGFobject {
     constructor(scene) {
         super(scene);
         this.quad = new MyQuad(this.scene);
+        
+        this.isSelected = false;
 
         this.initCubeMaterials();
     }
@@ -25,8 +27,16 @@ class MyUnitCubeQuad extends CGFobject {
         this.materialTop.setDiffuse(0.9, 0.9, 0.9, 1);
         this.materialTop.setSpecular(0.1, 0.1, 0.1, 1);
         this.materialTop.setShininess(10.0);
-        this.materialTop.loadTexture('./gameBoard/tile-border-3.png');
-        this.materialTop.setTextureWrap('REPEAT', 'REPEAT');
+        // this.materialTop.loadTexture('./gameBoard/tile-border-2.png');
+        // this.materialTop.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.materialTopSelected = new CGFappearance(this.scene);
+        this.materialTopSelected.setAmbient(0.1, 0.1, 0.1, 1);
+        this.materialTopSelected.setDiffuse(0.0, 0.9, 0.9, 1);
+        this.materialTopSelected.setSpecular(0.1, 0.1, 0.1, 1);
+        this.materialTopSelected.setShininess(10.0);
+        // this.materialTopSelected.loadTexture('./gameBoard/tile-border-3.png');
+        // this.materialTopSelected.setTextureWrap('REPEAT', 'REPEAT');
 
         this.materialSide = new CGFappearance(this.scene);
         this.materialSide.setAmbient(0.1, 0.1, 0.1, 1);
@@ -50,7 +60,8 @@ class MyUnitCubeQuad extends CGFobject {
         this.scene.translate(0, 0, -0.5);
         this.scene.scale(1, 1, -1); // Needed because texture was inside the cube
         this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
-        this.materialTop.apply();
+        if (this.isSelected) this.materialTopSelected.apply();
+        else { this.materialTop.apply(); }
         this.quad.display();
         this.scene.popMatrix();
 

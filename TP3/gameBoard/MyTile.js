@@ -5,52 +5,41 @@ class MyTile {
 
     constructor(scene, gameboard, coordinates) {
         this.scene = scene;
-        this.piece = null;
+        this.empty = true;
         this.gameboard = gameboard;
-        // this.tile = new MyCylinder(this.scene, 0.5, 0.5, 0.5, 2, 4);
-        // this.tile = new MyRectangle(this.scene, 0, 0, 1, 1);
         this.tile = new MyUnitCubeQuad(this.scene);
         this.coordinates = coordinates;
-        this.rowCoord = coordinates.row;
-        this.colCoord = coordinates.column;
-        // this.tile = new MyRectangle(scene, 0, 0, 2, 2);
+
     }
 
-    setPiece(piece) { this.piece = piece; }
+    setOccupied() { this.empty = false; }
 
-    unsetPiece() { this.piece = null; }
+    unsetOccupied() { this.empty = true; }
 
-    getPiece() { return this.piece; }
+    isEmpty() { return this.empty; }
 
     displayTile() {
         this.scene.pushMatrix();
 
-        // Display Tile Itself
-
-        // for the rectangle temporary representation
-        this.scene.translate(this.rowCoord, 0, this.colCoord);
+        this.scene.translate(this.coordinates.row, 0, this.coordinates.column);
         this.scene.translate(-3.0, -9.87, -3.0);
-        this.scene.scale(1.0, 0.25, 1.0);
-
-
-        // this.scene.translate(this.coordinates.row * 0.75, 0, this.coordinates.column * 0.75);
-        // this.scene.rotate(Math.PI/2, 1, 0, 0);
-        // this.scene.rotate(Math.PI/4, 0, 0, 1);
-        
+        this.scene.scale(0.95, 0.25, 0.95);     
         
         this.tile.display();
 
         this.scene.popMatrix();
-        this.scene.pushMatrix();
 
-        // Display Piece
-        if (this.piece != null) {
-            this.scene.translate(this.coordinates.row * 0.75, 0.25, this.coordinates.column * 0.75);
-            this.scene.rotate(Math.PI/2, 1, 0, 0);
-            this.scene.rotate(Math.PI/4, 0, 0, 1); // rotate because the cylinder base is defined in the XY axis
-            this.piece.displayPiece();
-        }
 
-        this.scene.popMatrix();
+        // this.scene.pushMatrix();
+
+        // // Display Piece
+        // if (this.piece != null) {
+        //     this.scene.translate(this.coordinates.row * 0.75, 0.25, this.coordinates.column * 0.75);
+        //     this.scene.rotate(Math.PI/2, 1, 0, 0);
+        //     this.scene.rotate(Math.PI/4, 0, 0, 1); // rotate because the cylinder base is defined in the XY axis
+        //     this.piece.displayPiece();
+        // }
+
+        // this.scene.popMatrix();
     }
 }
