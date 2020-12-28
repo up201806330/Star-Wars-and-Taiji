@@ -75,8 +75,8 @@ class MyGameOrchestrator {
                             this.selectedTiles[0].isOccupied = true;
                             this.selectedTiles[1].isOccupied = true;
 
-                            let gameMove = new MyGameMove(this.selectedTiles);
-                            // process gameMove
+                            var gameMove = new MyGameMove(this.selectedTiles, "white"); //TODO add playerColor here
+                            this.animator.animateMove(gameMove);
 
                             this.selectedTiles = [];
                             this.clearAdjacentHighlights();

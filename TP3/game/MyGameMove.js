@@ -1,22 +1,7 @@
 class MyGameMove {
-    // TODO change tile to geometry
-    constructor(tilesArray) {
-        this.tilesArray = tilesArray;
-        this.tileCoordsArray = [
-            [
-                tilesArray[0].coordinates.row,
-                tilesArray[0].coordinates.column
-            ],
-            [
-                tilesArray[1].coordinates.row,
-                tilesArray[1].coordinates.column
-            ],
-        ]
+    constructor(tileCoordsArray, playerColor) {
+        this.tileCoordsArray = tileCoordsArray;
+        this.playerColor = playerColor;
     }
-
-    getTileCoords() {
-        return this.tileCoordsArray;
-    }
-
 
 }
