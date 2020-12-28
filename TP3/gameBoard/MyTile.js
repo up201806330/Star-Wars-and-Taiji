@@ -26,7 +26,7 @@ class MyTile {
     displayTile() {
         this.scene.pushMatrix();
 
-        this.scene.translate(this.coordinates.row, 0, this.coordinates.column);
+        this.scene.translate(this.coordinates.column, 0, this.coordinates.row);
         this.scene.translate(-3.0, -9.87, -3.0);
         this.scene.scale(0.95, 0.25, 0.95);     
         

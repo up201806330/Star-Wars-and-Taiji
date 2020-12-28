@@ -72,7 +72,9 @@ class MyGameOrchestrator {
 
                             this.selectedTiles[0].isOccupied = true;
                             this.selectedTiles[1].isOccupied = true;
-
+                            
+                            console.log("Selected Tiles Array:");
+                            console.log(this.selectedTiles);
                             var gameMove = new MyGameMove(this.selectedTiles, "white"); //TODO add playerColor here
                             this.animator.animateMove(gameMove);
 
@@ -128,25 +130,25 @@ class MyGameOrchestrator {
         // check row up
         let checkUpId = indexId - 7;
         if (checkUpId >= 0) {
-            foundTile = this.gameboard.getTileByBoardCoords({row: checkUpId % 7, column: Math.floor(checkUpId / 7)});
+            foundTile = this.gameboard.getTileByBoardCoords({row: Math.floor(checkUpId / 7), column: checkUpId % 7});
             if (foundTile != null && foundTile.empty) emptyAdjacents.push(foundTile);
         }
 
         let checkDownId = indexId + 7;
         if (checkDownId < 49) {
-            foundTile = this.gameboard.getTileByBoardCoords({row: checkDownId % 7, column: Math.floor(checkDownId / 7)});
+            foundTile = this.gameboard.getTileByBoardCoords({row: Math.floor(checkDownId / 7), column: checkDownId % 7});
             if (foundTile != null && foundTile.empty) emptyAdjacents.push(foundTile);
         }
 
         let checkRightId = indexId + 1;
         if ( Math.floor(checkRightId / 7) == Math.floor(indexId / 7) ) {
-            foundTile = this.gameboard.getTileByBoardCoords({row: checkRightId % 7, column: Math.floor(checkRightId / 7)});
+            foundTile = this.gameboard.getTileByBoardCoords({row: Math.floor(checkRightId / 7), column: checkRightId % 7});
             if (foundTile != null && foundTile.empty) emptyAdjacents.push(foundTile);
         }
 
         let checkLeftId = indexId - 1;
         if ( Math.floor(checkLeftId / 7) == Math.floor(indexId / 7) ) {
-            foundTile = this.gameboard.getTileByBoardCoords({row: checkLeftId % 7, column: Math.floor(checkLeftId / 7)});
+            foundTile = this.gameboard.getTileByBoardCoords({row: Math.floor(checkLeftId / 7), column: checkLeftId % 7});
             if (foundTile != null && foundTile.empty) emptyAdjacents.push(foundTile);
         }
 

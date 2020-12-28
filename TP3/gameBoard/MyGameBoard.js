@@ -13,7 +13,9 @@ class MyGameBoard {
 
         for(let i = 0; i < this.sideBoardLength; i++) {
             for (let j = 0; j < this.sideBoardLength; j++) {
-                this.tiles.push(new MyTile(this.scene, this, {row: j, column: i}));
+                console.log("Row:", i);
+                console.log("Col:", j);
+                this.tiles.push(new MyTile(this.scene, this, {row: i, column: j}));
                 // this.tiles[this.tiles.length - 1].piece = new MyPiece(this.scene, 'idk type', []);
             }
         }
