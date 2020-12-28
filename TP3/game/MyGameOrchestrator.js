@@ -6,8 +6,6 @@ class MyGameOrchestrator {
     constructor(scene) {
         this.scene = scene;
 
-        // TODO state for statemachine
-
         this.selectedTiles = [];
         this.empties = [];
 
@@ -118,14 +116,6 @@ class MyGameOrchestrator {
         }
     }
 
-    // this.selectTiles = [[1,2],[2,3],[3,4]]
-    // onSelected(obj, customId) {
-
-    //     if(this.nSelected == 0) -> branco
-    //     else this.nSelected == 1 -> preto this.nSelected = 0
-
-    // }
-
     // function to get empty adjacents of 1st tile selected
     getEmptyAdjacents(customId, pickResults) {
         let emptyAdjacents = [];
@@ -162,20 +152,6 @@ class MyGameOrchestrator {
 
         console.log("Size: ", emptyAdjacents);
         return emptyAdjacents;
-    }
-
-    findObjUsingCustomId(checkUpId, pickResults) {
-        console.log(pickResults);
-        for (let i = 0; i < pickResults.length; i++) {
-            let obj = pickResults[i][0];
-            if (obj) {
-                let id = pickResults[i][1];
-                console.log("ids: ", id);
-
-                // if (id == checkUpId) return obj;
-            }
-        }
-        return null;
     }
 
     display() {

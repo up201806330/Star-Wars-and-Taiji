@@ -11,19 +11,24 @@ class MyPiece {
         this.rowB = rowB;
         this.colB = colB;
 
-        this.blackMaterial = new CGFappearance(scene);
+        this.initPieceMaterials();
+
+        this.blackPart = new MyUnitCubeQuad(scene, this.blackMaterial, this.blackMaterial);
+        this.whitePart = new MyUnitCubeQuad(scene, this.whiteMaterial, this.whiteMaterial);
+    }
+
+    initPieceMaterials() {
+        this.blackMaterial = new CGFappearance(this.scene);
         this.blackMaterial.setSpecular(1, 1, 1, 1);
         this.blackMaterial.setShininess(120);
         this.blackMaterial.setAmbient(0, 0, 0, 1);
         this.blackMaterial.setDiffuse(0.2, 0.2, 0.2, 1);
-        this.whiteMaterial = new CGFappearance(scene);
+
+        this.whiteMaterial = new CGFappearance(this.scene);
         this.whiteMaterial.setSpecular(1, 1, 1, 1);
         this.whiteMaterial.setShininess(120);
         this.whiteMaterial.setAmbient(0.8, 0.8, 0.8, 1);
         this.whiteMaterial.setDiffuse(1, 1, 1, 1);
-
-        this.blackPart = new MyUnitCubeQuad(scene, this.blackMaterial, this.blackMaterial);
-        this.whitePart = new MyUnitCubeQuad(scene, this.whiteMaterial, this.whiteMaterial);
     }
 
     display() { 
