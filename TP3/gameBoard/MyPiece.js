@@ -5,8 +5,6 @@ class MyPiece {
     
     constructor(scene, rowW, colW, rowB, colB) {
         this.scene = scene;
-        this.blackPart = new MyUnitCubeQuad(scene);
-        this.whitePart = new MyUnitCubeQuad(scene);
 
         this.rowW = rowW;
         this.colW = colW;
@@ -23,6 +21,9 @@ class MyPiece {
         this.whiteMaterial.setShininess(120);
         this.whiteMaterial.setAmbient(0.8, 0.8, 0.8, 1);
         this.whiteMaterial.setDiffuse(1, 1, 1, 1);
+
+        this.blackPart = new MyUnitCubeQuad(scene, this.blackMaterial, this.blackMaterial);
+        this.whitePart = new MyUnitCubeQuad(scene, this.whiteMaterial, this.whiteMaterial);
     }
 
     display() { 

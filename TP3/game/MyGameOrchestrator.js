@@ -85,12 +85,18 @@ class MyGameOrchestrator {
                             this.selectedTiles[0].unsetOccupied();
                             this.selectedTiles = [];
                             this.clearAdjacentHighlights();
-                            console.log("Resetting selection!"); }
-
+                            console.log("Resetting selection!");
+                        }
                         break;
                 }
             }
-            else { console.log("Occupied Tile!"); }
+            else {
+                console.log("Occupied Tile!"); 
+                this.selectedTiles[0].unsetOccupied();
+                this.selectedTiles = [];
+                this.clearAdjacentHighlights();
+                 console.log("Resetting selection!");
+            }
 
         }
     }
