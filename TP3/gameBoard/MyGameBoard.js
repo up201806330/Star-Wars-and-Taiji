@@ -11,9 +11,11 @@ class MyGameBoard {
         this.pieces = new Array();  for(let i = 0 ; i < 24 ; i++) this.pieces.push(new MyPiece(scene));
         this.sideBoardLength = sideBoardLength;
 
+        this.initTileMaterials();
+
         for(let i = 0; i < this.sideBoardLength; i++) {
             for (let j = 0; j < this.sideBoardLength; j++) {
-                this.tiles.push(new MyTile(this.scene, this, {row: i, column: j}));
+                this.tiles.push(new MyTile(this.scene, this, {row: i, column: j}, ((i+j)%2)?this.darkTile:this.lightTile));
                 // this.tiles[this.tiles.length - 1].piece = new MyPiece(this.scene, 'idk type', []);
             }
         }
@@ -35,9 +37,26 @@ class MyGameBoard {
         return null;
     }
 
+    initTileMaterials(){
+        this.darkTile = new CGFappearance(this.scene);
+        this.darkTile.setAmbient(0.1, 0.1, 0.1, 1);
+        this.darkTile.setDiffuse(0.4, 0.4, 0.4, 1);
+        this.darkTile.setSpecular(0.1, 0.1, 0.1, 1);
+        this.darkTile.setShininess(10.0);
+        this.darkTile.loadTexture('./scenes/images/plastic.jpg');
+        this.darkTile.setTextureWrap('REPEAT', 'REPEAT');
+        
+        this.lightTile = new CGFappearance(this.scene);
+        this.lightTile.setAmbient(0.2, 0.2, 0.2, 1);
+        this.lightTile.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.lightTile.setSpecular(0.1, 0.1, 0.1, 1);
+        this.lightTile.setShininess(10.0);
+        this.lightTile.loadTexture('./scenes/images/plastic.jpg');
+        this.lightTile.setTextureWrap('REPEAT', 'REPEAT');
+    }
 
     display() {
-        // console.log("display gameboard");
+        //console.log(this.tiles);
         
         for (var i = 0; i < this.tiles.length; i++) {
             this.scene.registerForPick(i + 1, this.tiles[i]);

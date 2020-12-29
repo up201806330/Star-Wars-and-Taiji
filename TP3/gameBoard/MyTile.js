@@ -3,7 +3,9 @@
  */
 class MyTile {
 
-    constructor(scene, gameboard, coordinates) {
+    static topMaterialSelected = null;
+    static sideMaterial = null;
+    constructor(scene, gameboard, coordinates, material) {
         this.scene = scene;
         this.empty = true;
         this.gameboard = gameboard;
@@ -13,8 +15,9 @@ class MyTile {
         this.isOccupied = false;
 
         this.initCubeMaterials();
+        this.material = material || this.sideMaterial;
 
-        this.geometry = new MyUnitCubeQuad(this.scene, this.sideMaterial, this.topMaterial);
+        this.geometry = new MyUnitCubeQuad(this.scene, this.material, this.material);
     }
 
     setOccupied() { this.empty = false; }
@@ -28,10 +31,10 @@ class MyTile {
 
         this.scene.translate(this.coordinates.column, 0, this.coordinates.row);
         this.scene.translate(-3.0, -9.87, -3.0);
-        this.scene.scale(0.95, 0.25, 0.95);     
+        this.scene.scale(0.98, 0.25, 0.98);     
         
-        if (this.isSelected) this.geometry.changeMaterial(this.topMaterialSelected);
-        else { this.geometry.changeMaterial(this.topMaterial); }
+        if (this.isSelected) this.geometry.changeMaterial(MyTile.topMaterialSelected);
+        else { this.geometry.changeMaterial(this.material); }
 
         this.geometry.display();
 
@@ -40,24 +43,22 @@ class MyTile {
     }
 
     initCubeMaterials(){
-        this.topMaterial = new CGFappearance(this.scene);
-        this.topMaterial.setAmbient(0.1, 0.1, 0.1, 1);
-        this.topMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.topMaterial.setSpecular(0.1, 0.1, 0.1, 1);
-        this.topMaterial.setShininess(10.0);
-        // this.materialTop.loadTexture('./gameBoard/tile-border-2.png');
-        // this.materialTop.setTextureWrap('REPEAT', 'REPEAT');
+        if (MyTile.topMaterialSelected == null){
+            MyTile.topMaterialSelected = new CGFappearance(this.scene);
+            MyTile.topMaterialSelected.setAmbient(0.1, 0.1, 0.1, 1);
+            MyTile.topMaterialSelected.setDiffuse(0.0, 0.9, 0.9, 1);
+            MyTile.topMaterialSelected.setSpecular(0.1, 0.1, 0.1, 1);
+            MyTile.topMaterialSelected.setShininess(10.0);
+            MyTile.topMaterialSelected.loadTexture('./scenes/images/plastic.jpg');
+            MyTile.topMaterialSelected.setTextureWrap('REPEAT', 'REPEAT');
+        }
 
-        this.topMaterialSelected = new CGFappearance(this.scene);
-        this.topMaterialSelected.setAmbient(0.1, 0.1, 0.1, 1);
-        this.topMaterialSelected.setDiffuse(0.0, 0.9, 0.9, 1);
-        this.topMaterialSelected.setSpecular(0.1, 0.1, 0.1, 1);
-        this.topMaterialSelected.setShininess(10.0);
-
-        this.sideMaterial = new CGFappearance(this.scene);
-        this.sideMaterial.setAmbient(0.1, 0.1, 0.1, 1);
-        this.sideMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.sideMaterial.setSpecular(0.1, 0.1, 0.1, 1);
-        this.sideMaterial.setShininess(10.0);
+        if (MyTile.sideMaterial == null){
+            MyTile.sideMaterial = new CGFappearance(this.scene);
+            MyTile.sideMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+            MyTile.sideMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
+            MyTile.sideMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+            MyTile.sideMaterial.setShininess(10.0);
+        }
     }
 }

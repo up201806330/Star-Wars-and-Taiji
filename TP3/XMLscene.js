@@ -13,7 +13,7 @@ class XMLscene extends CGFscene {
 
         this.lightsStatus = [];
         this.curView = "";
-        this.curScene = 'gardenScene';
+        this.curScene = 'roomScene';
         this.sceneIds = { 'Room': 'roomScene', 'Garden': 'gardenScene' };
     }
 
