@@ -20,8 +20,6 @@ class MyAnimator{
         let rowB = gameMove.tileCoordsArray[1].coordinates.row;
         let colB = gameMove.tileCoordsArray[1].coordinates.column
 
-        newPiece.setCoords(rowW, colW, rowB, colB);
-        this.primitives.push(newPiece);
         if (color == "black") {
             this.blackFish.row = rowW;
             this.animatingElements = new Array(this.blackFish, newPiece);
@@ -30,7 +28,10 @@ class MyAnimator{
             this.whiteFish.row = rowW;
             this.animatingElements = new Array(this.whiteFish, newPiece);
         }
-        console.log(this.animatingElements);
+        newPiece.setCoords(rowW, colW, rowB, colB);
+        this.primitives.push(newPiece);
+        
+        // console.log(this.animatingElements);
         //console.log(this.primitives);
     }
 
@@ -61,7 +62,7 @@ class MyAnimator{
     display(){
         //console.log(this.primitives);
         this.primitives.forEach (element => {
-            if (element.animation != null){
+            if (element.animation != null && element.animation.currentFrame != -1){
                 this.scene.pushMatrix();
                 //console.log(element.rowW, element.animation);
                 element.animation.apply(); 
