@@ -8,6 +8,12 @@ class Cannon extends PieceTransporter{
         this.appearance.setShininess(120);
         this.appearance.setAmbient(0.1, 0.1, 0.1, 1);
         this.appearance.setDiffuse(0.2, 0.2, 0.3, 1);
+
+        // So cannon starts out in scene
+        var keyframe = []; 
+        keyframe.push(new KeyFrame(0, vec3.fromValues(0,0,0), vec3.fromValues(0,0,0), vec3.fromValues(1,1,1)));
+        keyframe.push(new KeyFrame(0.1, vec3.fromValues(0,0,0), vec3.fromValues(0,0,0), vec3.fromValues(1,1,1)));
+        this.animation = new KeyframeAnimation(scene, keyframe);
     }
 
     startAnimation(scene){
@@ -17,10 +23,10 @@ class Cannon extends PieceTransporter{
 
     generateKeyframes(){
         this.keyframes = [];
-        this.keyframes.push(new KeyFrame(0,   vec3.fromValues(0,0,0), vec3.fromValues(0,0,0), vec3.fromValues(1,1,1)));
-        this.keyframes.push(new KeyFrame(0.2, vec3.fromValues(0,0,0), vec3.fromValues(0,0,0), vec3.fromValues(1,1,1)));
+        this.keyframes.push(new KeyFrame(0,    vec3.fromValues(0,0,0),   vec3.fromValues(0,0,0),  vec3.fromValues(1,1,1)));
+        this.keyframes.push(new KeyFrame(0.2,  vec3.fromValues(0,0,0),   vec3.fromValues(0,0,0),  vec3.fromValues(1,1,1)));
         this.keyframes.push(new KeyFrame(0.21, vec3.fromValues(-3,2,-3), vec3.fromValues(-4,0,4), vec3.fromValues(1,1,1)));
-        this.keyframes.push(new KeyFrame(0.9, vec3.fromValues(0,0,0), vec3.fromValues(0,0,0), vec3.fromValues(1,1,1)));
+        this.keyframes.push(new KeyFrame(0.9,  vec3.fromValues(0,0,0),   vec3.fromValues(0,0,0),  vec3.fromValues(1,1,1)));
     }
 
     display(){

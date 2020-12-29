@@ -2,7 +2,6 @@ class MyAnimator{
     constructor(scene){
         this.scene = scene;
 
-        this.animatingElements = null;
         this.started = false;
         
         this.primitives = []
@@ -11,6 +10,8 @@ class MyAnimator{
         
         this.cannon = new Cannon(scene);                    this.primitives.push(this.cannon);
         this.cannonExplosion = new CannonExplosion(scene);  this.primitives.push(this.cannonExplosion);
+
+        this.animatingElements = [this.cannon];
     }
 
     animateMove(gameMove, newPiece){
@@ -66,9 +67,10 @@ class MyAnimator{
     }
 
     display(){
-        //console.log(this.primitives);
+        console.log(this.primitives);
         this.primitives.forEach (element => {
-            if (element.animation != null && element.animation.currentFrame != -1){
+            if (element.animation != null){
+                if (element.animation.currentFrame == -1 && !(element instanceof Cannon)) return;
                 if (this.scene.curScene =='gardenScene' && element instanceof Cannon) return;
                 this.scene.pushMatrix();
                 //console.log(element.rowW, element.animation);
