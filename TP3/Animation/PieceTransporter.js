@@ -3,4 +3,6 @@ class PieceTransporter{
         this.scene=scene;
     }
     updateAnimation(now){};
+    generateKeyframes(){};
+    startAnimation(scene){};
 }

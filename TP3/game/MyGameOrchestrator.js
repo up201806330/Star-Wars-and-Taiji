@@ -15,7 +15,7 @@ class MyGameOrchestrator {
         this.client = new Client();
         // this.gameState = ...;
 
-        this.animator = new MyAnimator(scene, curScene);
+        this.animator = new MyAnimator(scene);
         // this.movesStack
     }
     

@@ -36,21 +36,30 @@ class MyPiece {
     }
 
     startAnimation(scene){
-        this.generateKeyframes();
+        this.generateKeyframes(scene.curScene);
         this.animation = new KeyframeAnimation(scene, this.keyframes);
     }
 
-    generateKeyframes(){
+    generateKeyframes(curScene){
         this.keyframes = [];
         let willRotateByX = (this.rowW == this.rowB)? 1:0;
         let willRotateByZ = (this.colW == this.colB)? 1:0;
-        this.keyframes.push(new KeyFrame(0,   vec3.fromValues(18,-20,this.rowW-3),           vec3.fromValues(0,0,-90),                               vec3.fromValues(1,1,1)));
-        this.keyframes.push(new KeyFrame(0.2, vec3.fromValues(8.5,-5,this.rowW-3),           vec3.fromValues(0,0,-45),                               vec3.fromValues(1,1,1)));
-        this.keyframes.push(new KeyFrame(0.8, vec3.fromValues(-5.4,-1,this.rowW-3),          vec3.fromValues(0,0,10),                                vec3.fromValues(1,1,1)));
-        this.keyframes.push(new KeyFrame(1.6, vec3.fromValues(this.colW-3,-9.7,this.rowW-3), vec3.fromValues(365*willRotateByX,0,365*willRotateByZ), vec3.fromValues(1,1,1)));
-        this.keyframes.push(new KeyFrame(1.7, vec3.fromValues(this.colW-3,-9.7,this.rowW-3), vec3.fromValues(-2*willRotateByX,0,-2*willRotateByZ),   vec3.fromValues(1,1,1)));
-        this.keyframes.push(new KeyFrame(1.8, vec3.fromValues(this.colW-3,-9.7,this.rowW-3), vec3.fromValues(2*willRotateByX,0,2*willRotateByZ),     vec3.fromValues(1,1,1)));
-        this.keyframes.push(new KeyFrame(1.9, vec3.fromValues(this.colW-3,-9.7,this.rowW-3), vec3.fromValues(0,0,0),                                 vec3.fromValues(1,1,1)));
+        if (curScene == 'roomScene'){
+            this.keyframes.push(new KeyFrame(0.2, vec3.fromValues(-11,-6,-11),                   vec3.fromValues(-90,0,-90),                             vec3.fromValues(1,1,1)));
+            this.keyframes.push(new KeyFrame(1.2, vec3.fromValues(this.colW-3,-9.7,this.rowW-3), vec3.fromValues(365*willRotateByX,0,365*willRotateByZ), vec3.fromValues(1,1,1)));
+            this.keyframes.push(new KeyFrame(1.3, vec3.fromValues(this.colW-3,-9.7,this.rowW-3), vec3.fromValues(-2*willRotateByX,0,-2*willRotateByZ),   vec3.fromValues(1,1,1)));
+            this.keyframes.push(new KeyFrame(1.4, vec3.fromValues(this.colW-3,-9.7,this.rowW-3), vec3.fromValues(2*willRotateByX,0,2*willRotateByZ),     vec3.fromValues(1,1,1)));
+            this.keyframes.push(new KeyFrame(1.5, vec3.fromValues(this.colW-3,-9.7,this.rowW-3), vec3.fromValues(0,0,0),                                 vec3.fromValues(1,1,1)));
+        }
+        else if (curScene == 'gardenScene'){
+            this.keyframes.push(new KeyFrame(0.0, vec3.fromValues(18,-20,this.rowW-3),           vec3.fromValues(0,0,-90),                               vec3.fromValues(1,1,1)));
+            this.keyframes.push(new KeyFrame(0.2, vec3.fromValues(8.5,-5,this.rowW-3),           vec3.fromValues(0,0,-45),                               vec3.fromValues(1,1,1)));
+            this.keyframes.push(new KeyFrame(0.8, vec3.fromValues(-5.4,-1,this.rowW-3),          vec3.fromValues(0,0,10),                                vec3.fromValues(1,1,1)));
+            this.keyframes.push(new KeyFrame(1.6, vec3.fromValues(this.colW-3,-9.7,this.rowW-3), vec3.fromValues(365*willRotateByX,0,365*willRotateByZ), vec3.fromValues(1,1,1)));
+            this.keyframes.push(new KeyFrame(1.7, vec3.fromValues(this.colW-3,-9.7,this.rowW-3), vec3.fromValues(-2*willRotateByX,0,-2*willRotateByZ),   vec3.fromValues(1,1,1)));
+            this.keyframes.push(new KeyFrame(1.8, vec3.fromValues(this.colW-3,-9.7,this.rowW-3), vec3.fromValues(2*willRotateByX,0,2*willRotateByZ),     vec3.fromValues(1,1,1)));
+            this.keyframes.push(new KeyFrame(1.9, vec3.fromValues(this.colW-3,-9.7,this.rowW-3), vec3.fromValues(0,0,0),                                 vec3.fromValues(1,1,1)));
+        }
     }
 
     display() { 
@@ -77,7 +86,6 @@ class MyPiece {
     }
 
     updateAnimation(now){
-        //if (!this.assigned) return;  //--------------------------------pro peixe tb???
         this.animation.updateAnimation(now);
     }
 }
