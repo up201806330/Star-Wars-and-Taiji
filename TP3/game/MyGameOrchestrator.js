@@ -3,20 +3,19 @@
  */
 class MyGameOrchestrator {
     
-    constructor(scene) {
+    constructor(scene, curScene) {
         this.scene = scene;
 
         this.selectedTiles = [];
         this.empties = [];
 
         // this.gameSequence = new MyGameSequence();
-        // this.animator = new MyAnimator();
         this.gameboard = new MyGameBoard(scene, 7);
         // this.theme = new MyScenegraph(…);
         this.client = new Client();
         // this.gameState = ...;
 
-        this.animator = new MyAnimator(scene);
+        this.animator = new MyAnimator(scene, curScene);
         // this.movesStack
     }
     

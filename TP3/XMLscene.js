@@ -44,7 +44,7 @@ class XMLscene extends CGFscene {
 
         this.defaultAppearance = new CGFappearance(this);
 
-        this.gameOrchestrator = new MyGameOrchestrator(this);
+        this.gameOrchestrator = new MyGameOrchestrator(this, this.curScene);
         this.water = new Water(this);
 
         this.setPickEnabled(true);
@@ -225,5 +225,6 @@ class XMLscene extends CGFscene {
 
         this.first = false;
         this.graph = new MySceneGraph(this.curScene + '.xml', this);
+        this.gameOrchestrator.animator.curScene = this.curScene;
       }
 }
