@@ -43,12 +43,6 @@
         <!-- <texture id="demoTexture" path="./scenes/images/vidral.jpg" /> -->
 
         <!-- Sky Box Textures -->
-        <texture id="spaceTop" path="./scenes/images/spaceTop.jpg" />
-        <texture id="spaceBottom" path="./scenes/images/spaceBottom.jpg" />
-        <texture id="spaceNorth" path="./scenes/images/spaceNorth.jpg" />
-        <texture id="spaceSouth" path="./scenes/images/spaceSouth.jpg" />
-        <texture id="spaceEast" path="./scenes/images/spaceEast.jpg" />
-        <texture id="spaceWest" path="./scenes/images/spaceWest.jpg" />
         <texture id="woodFloor" path="./scenes/images/woodFloor.jpg" />
         <texture id="whiteBrickWall" path="./scenes/images/whiteWall.jpg" />
         <texture id="border" path="./gameBoard/tile-border-2.png" />

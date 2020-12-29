@@ -10,8 +10,8 @@ class MyAnimator{
         this.whiteFish = new Fish(scene ,"white"); this.primitives.push(this.whiteFish);
         this.blackFish = new Fish(scene, "black"); this.primitives.push(this.blackFish);
         
-        // white ship
-        // black ship
+        this.cannon = new Cannon(scene);                    this.primitives.push(this.cannon);
+        this.cannonExplosion = new CannonExplosion(scene);  this.primitives.push(this.cannonExplosion);
     }
 
     animateMove(gameMove, newPiece){
@@ -21,23 +21,21 @@ class MyAnimator{
         let rowB = gameMove.tileCoordsArray[1].coordinates.row;
         let colB = gameMove.tileCoordsArray[1].coordinates.column
 
-        console.log(this.curScene);
-        if (color == "black") {
-            if (this.currScene == "gardenScene"){
+        
+        if (this.currScene == "gardenScene"){
+            if (color == "black") {
                 this.blackFish.row = rowW;
-                this.animatingElements = new Array(this.blackFish, newPiece);
+                this.animatingElements = new Array(newPiece, this.blackFish);
             }
-            else if (this.curScene == "roomScene"){
-            }
-        }
-        else {
-            if (this.curScene == "gardenScene"){
+            else if (color == "white"){
                 this.whiteFish.row = rowW;
-                this.animatingElements = new Array(this.whiteFish, newPiece);
-            }
-            else if (this.curScene == "roomScene"){
+                this.animatingElements = new Array(newPiece, this.whiteFish);
             }
         }
+        else if (this.curScene == "roomScene"){
+            this.animatingElements = new Array(newPiece, this.cannon, this.cannonExplosion);
+        }
+    
         newPiece.setCoords(rowW, colW, rowB, colB);
         this.primitives.push(newPiece);
         
@@ -56,7 +54,7 @@ class MyAnimator{
             console.log("started");
         } 
 
-        else if (this.animatingElements[1].animation.ended){
+        else if (this.animatingElements[0].animation.ended){
             console.log(this.animatingElements);
             this.animatingElements = null;
             this.started = false;
