@@ -45,7 +45,7 @@ class MyPiece {
         let willRotateByX = (this.rowW == this.rowB)? 1:0;
         let willRotateByZ = (this.colW == this.colB)? 1:0;
         if (curScene == 'roomScene'){
-            this.keyframes.push(new KeyFrame(0.2, vec3.fromValues(-11,-6,-11), vec3.fromValues(-90,0,-90), vec3.fromValues(1,1,1)));
+            this.keyframes.push(new KeyFrame(0.2, vec3.fromValues(-11,-6,-11),                   vec3.fromValues(-90,0,-90),                             vec3.fromValues(1,1,1)));
             this.keyframes.push(new KeyFrame(1.2, vec3.fromValues(this.colW-3,-9.7,this.rowW-3), vec3.fromValues(365*willRotateByX,0,365*willRotateByZ), vec3.fromValues(1,1,1)));
             this.keyframes.push(new KeyFrame(1.3, vec3.fromValues(this.colW-3,-9.7,this.rowW-3), vec3.fromValues(-2*willRotateByX,0,-2*willRotateByZ),   vec3.fromValues(1,1,1)));
             this.keyframes.push(new KeyFrame(1.4, vec3.fromValues(this.colW-3,-9.7,this.rowW-3), vec3.fromValues(2*willRotateByX,0,2*willRotateByZ),     vec3.fromValues(1,1,1)));

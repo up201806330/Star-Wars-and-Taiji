@@ -1,7 +1,6 @@
 class MyAnimator{
-    constructor(scene, curScene){
+    constructor(scene){
         this.scene = scene;
-        this.curScene = curScene;
 
         this.animatingElements = null;
         this.started = false;
@@ -21,8 +20,7 @@ class MyAnimator{
         let rowB = gameMove.tileCoordsArray[1].coordinates.row;
         let colB = gameMove.tileCoordsArray[1].coordinates.column
 
-        
-        if (this.currScene == "gardenScene"){
+        if (this.scene.curScene == "gardenScene"){
             if (color == "black") {
                 this.blackFish.row = rowW;
                 this.animatingElements = new Array(newPiece, this.blackFish);
@@ -32,7 +30,7 @@ class MyAnimator{
                 this.animatingElements = new Array(newPiece, this.whiteFish);
             }
         }
-        else if (this.curScene == "roomScene"){
+        else if (this.scene.curScene == "roomScene"){
             this.animatingElements = new Array(newPiece, this.cannon, this.cannonExplosion);
         }
     
@@ -71,6 +69,7 @@ class MyAnimator{
         //console.log(this.primitives);
         this.primitives.forEach (element => {
             if (element.animation != null && element.animation.currentFrame != -1){
+                if (this.scene.curScene =='gardenScene' && element instanceof Cannon) return;
                 this.scene.pushMatrix();
                 //console.log(element.rowW, element.animation);
                 element.animation.apply(); 
