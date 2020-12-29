@@ -31,7 +31,6 @@ class MyTile {
         this.scene.scale(0.95, 0.25, 0.95);     
         
         if (this.isSelected) this.geometry.changeMaterial(this.topMaterialSelected);
-        else if (this.isOccupied) this.geometry.changeMaterial(this.topMaterialOccupied);
         else { this.geometry.changeMaterial(this.topMaterial); }
 
         this.geometry.display();
@@ -54,12 +53,6 @@ class MyTile {
         this.topMaterialSelected.setDiffuse(0.0, 0.9, 0.9, 1);
         this.topMaterialSelected.setSpecular(0.1, 0.1, 0.1, 1);
         this.topMaterialSelected.setShininess(10.0);
-
-        this.topMaterialOccupied = new CGFappearance(this.scene);
-        this.topMaterialOccupied.setAmbient(0.1, 0.1, 0.1, 1);
-        this.topMaterialOccupied.setDiffuse(0.0, 0.0, 0.9, 1);
-        this.topMaterialOccupied.setSpecular(0.1, 0.1, 0.1, 1);
-        this.topMaterialOccupied.setShininess(10.0);
 
         this.sideMaterial = new CGFappearance(this.scene);
         this.sideMaterial.setAmbient(0.1, 0.1, 0.1, 1);

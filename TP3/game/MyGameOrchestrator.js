@@ -47,14 +47,13 @@ class MyGameOrchestrator {
     }
 
     onTileSelected(obj, customId, pickResults) {
-
         if (obj instanceof MyTile) {
             
-            if (obj.isEmpty()) {
+            if (obj.isEmpty() && this.animator.animatingElements==null) {
 
                 switch (this.selectedTiles.length) {
                     case 0:
-                        console.log("Selecting First One!", customId);
+                        //console.log("Selecting First One!", customId);
 
                         this.selectedTiles[0] = obj;
                         obj.setOccupied();
@@ -66,17 +65,18 @@ class MyGameOrchestrator {
                     
                     case 1:
                         if (this.containsObject(obj, this.empties)) {
-                            console.log("Selecting Second One!");
+                            //console.log("Selecting Second One!");
                             this.selectedTiles[1] = obj;
                             obj.setOccupied();
 
                             this.selectedTiles[0].isOccupied = true;
                             this.selectedTiles[1].isOccupied = true;
                             
-                            console.log("Selected Tiles Array:");
-                            console.log(this.selectedTiles);
+                            // console.log("Selected Tiles Array:");
+                            // console.log(this.selectedTiles);
                             var gameMove = new MyGameMove(this.selectedTiles, "white"); //TODO add playerColor here
-                            this.animator.animateMove(gameMove);
+                            let jeff = this.gameboard.nextUnassignedPiece();
+                            this.animator.animateMove(gameMove, jeff);
 
                             this.selectedTiles = [];
                             this.clearAdjacentHighlights();
@@ -98,6 +98,12 @@ class MyGameOrchestrator {
                  console.log("Resetting selection!");
             }
 
+        }
+        else {
+            if (this.selectedTiles.length != 0) this.selectedTiles[0].unsetOccupied();
+            this.selectedTiles = [];
+            this.clearAdjacentHighlights();
+            console.log("Resetting selection!");
         }
     }
 
@@ -125,7 +131,7 @@ class MyGameOrchestrator {
         let foundTile;
 
         let indexId = customId - 1;
-        console.log(indexId);
+        // console.log(indexId);
 
         // check row up
         let checkUpId = indexId - 7;
@@ -152,7 +158,7 @@ class MyGameOrchestrator {
             if (foundTile != null && foundTile.empty) emptyAdjacents.push(foundTile);
         }
 
-        console.log("Size: ", emptyAdjacents);
+        // console.log("Size: ", emptyAdjacents);
         return emptyAdjacents;
     }
 

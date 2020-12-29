@@ -1,7 +1,7 @@
 class Water{
     constructor(scene){
         this.scene = scene;
-        this.geometry = new MyCylinder(scene, 0.1, 38, 38, 100, 100);
+        this.geometry = new MyCylinder(scene, 0.1, 38, 38, 10, 10);
         this.texture = new CGFtexture(scene, "./scenes/images/water.jpg");
         this.appearance = new CGFappearance(scene);
 		this.appearance.setAmbient(0.5, 0.5, 0.5, 1);

@@ -3,20 +3,22 @@
  */
 class MyPiece {
     
-    constructor(scene, rowW, colW, rowB, colB) {
+    constructor(scene) {
         this.scene = scene;
-
-        this.rowW = rowW;
-        this.colW = colW;
-        this.rowB = rowB;
-        this.colB = colB;
-
-        console.log([rowW, colW, rowB, colB]);
+        this.assigned = false;
 
         this.initPieceMaterials();
 
         this.blackPart = new MyUnitCubeQuad(scene, this.blackMaterial, this.blackMaterial);
         this.whitePart = new MyUnitCubeQuad(scene, this.whiteMaterial, this.whiteMaterial);
+    }
+
+    setCoords(rowW, colW, rowB, colB){
+        this.rowW = rowW;
+        this.colW = colW;
+        this.rowB = rowB;
+        this.colB = colB;
+        this.assigned = true;
     }
 
     initPieceMaterials() {
@@ -33,31 +35,35 @@ class MyPiece {
         this.whiteMaterial.setDiffuse(1, 1, 1, 1);
     }
 
-    startAnimation(scene, startTime){
-        this.generateKeyframes(startTime);
+    startAnimation(scene){
+        this.generateKeyframes();
         this.animation = new KeyframeAnimation(scene, this.keyframes);
     }
 
-    generateKeyframes(startTime){
+    generateKeyframes(){
         this.keyframes = [];
-        this.keyframes.push(new KeyFrame(startTime,     vec3.fromValues(18,-20,this.rowW-3),          vec3.fromValues(1,1,-90), vec3.fromValues(1,1,1)));
-        this.keyframes.push(new KeyFrame(startTime+0.7, vec3.fromValues(12,-8,this.rowW-3),           vec3.fromValues(1,1,-45), vec3.fromValues(1,1,1)));
-        this.keyframes.push(new KeyFrame(startTime+1.7, vec3.fromValues(0,-1,this.rowW-3),            vec3.fromValues(1,1,0),   vec3.fromValues(1,1,1)));
-        this.keyframes.push(new KeyFrame(startTime+2.7, vec3.fromValues(this.colW-3,-1,this.rowW-3),  vec3.fromValues(1,1,365), vec3.fromValues(1,1,1))); //TODO adjust rotate
-        this.keyframes.push(new KeyFrame(startTime+2.8, vec3.fromValues(this.colW-3,-8,this.rowW-3),  vec3.fromValues(1,1,-2),  vec3.fromValues(1,1,1)));
-        this.keyframes.push(new KeyFrame(startTime+2.9, vec3.fromValues(this.colW-3,-23,this.rowW-3), vec3.fromValues(1,1,2),   vec3.fromValues(1,1,1)));
-        this.keyframes.push(new KeyFrame(startTime+3,   vec3.fromValues(this.colW-3,-23,this.rowW-3), vec3.fromValues(1,1,0),   vec3.fromValues(1,1,1)));
+        let willRotateByX = (this.rowW == this.rowB)? 1:0;
+        let willRotateByZ = (this.colW == this.colB)? 1:0;
+        this.keyframes.push(new KeyFrame(0,   vec3.fromValues(18,-40,this.rowW-3),           vec3.fromValues(0,0,-90), vec3.fromValues(1,1,1)));
+        this.keyframes.push(new KeyFrame(0.7, vec3.fromValues(8.5,-5,this.rowW-3),            vec3.fromValues(0,0,-45), vec3.fromValues(1,1,1)));
+        this.keyframes.push(new KeyFrame(1.7, vec3.fromValues(-4.5,-2,this.rowW-3),             vec3.fromValues(0,0,10),                                 vec3.fromValues(1,1,1)));
+        this.keyframes.push(new KeyFrame(2.7, vec3.fromValues(this.colW-3,-9.7,this.rowW-3), vec3.fromValues(365*willRotateByX,0,365*willRotateByZ), vec3.fromValues(1,1,1)));
+        this.keyframes.push(new KeyFrame(2.8, vec3.fromValues(this.colW-3,-9.7,this.rowW-3), vec3.fromValues(-2*willRotateByX,0,-2*willRotateByZ),   vec3.fromValues(1,1,1)));
+        this.keyframes.push(new KeyFrame(2.9, vec3.fromValues(this.colW-3,-9.7,this.rowW-3), vec3.fromValues(2*willRotateByX,0,2*willRotateByZ),     vec3.fromValues(1,1,1)));
+        this.keyframes.push(new KeyFrame(3,   vec3.fromValues(this.colW-3,-9.7,this.rowW-3), vec3.fromValues(0,0,0),                                 vec3.fromValues(1,1,1)));
     }
 
     display() { 
-        let translation = vec3.fromValues((this.colB-this.colW), 0, (this.rowB-this.rowW));
+        if (!this.assigned) return;
+
+        let blackOffset = vec3.fromValues((this.colB-this.colW), 0, (this.rowB-this.rowW));
 
         this.scene.pushMatrix();
-        this.scene.translate(-3 + this.colW,-9.7,-3 + this.rowW);
+        // this.scene.translate(-3 + this.colW,-9.7,-3 + this.rowW);
         this.scene.scale(0.95,0.14,0.95);
 
         this.scene.pushMatrix();
-        this.scene.translate(...translation);
+        this.scene.translate(...blackOffset);
         this.blackMaterial.apply();
         this.blackPart.display();
         this.scene.popMatrix();
@@ -71,6 +77,7 @@ class MyPiece {
     }
 
     updateAnimation(now){
+        if (!this.assigned) return;  //--------------------------------pro peixe tb???
         this.animation.updateAnimation(now);
     }
 }

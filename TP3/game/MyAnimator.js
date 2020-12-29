@@ -6,29 +6,32 @@ class MyAnimator{
         this.started = false;
         
         this.primitives = []
-        this.primitives["blackFish"] = new Fish(scene, "black");
-        this.primitives["whiteFish"] = new Fish(scene ,"white");
+        this.whiteFish = new Fish(scene ,"white"); this.primitives.push(this.whiteFish);
+        this.blackFish = new Fish(scene, "black"); this.primitives.push(this.blackFish);
+        
         // white ship
         // black ship
     }
 
-    animateMove(gameMove){
+    animateMove(gameMove, newPiece){
         let color = gameMove.playerColor;
         let rowW = gameMove.tileCoordsArray[0].coordinates.row;
         let colW = gameMove.tileCoordsArray[0].coordinates.column;
         let rowB = gameMove.tileCoordsArray[1].coordinates.row;
         let colB = gameMove.tileCoordsArray[1].coordinates.column
 
-        var newPiece = new MyPiece(this.scene, rowW, colW, rowB, colB);
+        newPiece.setCoords(rowW, colW, rowB, colB);
         this.primitives.push(newPiece);
         if (color == "black") {
-            this.primitives["blackFish"].row = rowW;
-            this.animatingElements = new Array(this.primitives["blackFish"], newPiece);
+            this.blackFish.row = rowW;
+            this.animatingElements = new Array(this.blackFish, newPiece);
         }
         else {
-            this.primitives["whiteFish"].row = rowW;
-            this.animatingElements = new Array(this.primitives["whiteFish"], newPiece);
+            this.whiteFish.row = rowW;
+            this.animatingElements = new Array(this.whiteFish, newPiece);
         }
+        console.log(this.animatingElements);
+        //console.log(this.primitives);
     }
 
     update(now){
@@ -37,30 +40,35 @@ class MyAnimator{
         }
 
         else if (!this.started){
-            this.animatingElements.forEach (element => element.startAnimation(this.scene, now));
-            //this.started = true;
+            this.animatingElements.forEach (element => element.startAnimation(this.scene));
+            this.started = true;
+            console.log("started");
         } 
 
-        else if (this.animatingElements[0].animation.ended){
+        else if (this.animatingElements[1].animation.ended){
+            console.log(this.animatingElements);
             this.animatingElements = null;
-            //this.started = false;
+            this.started = false;
+            console.log("ended");
         }
 
         else {
             this.animatingElements.forEach (element => element.updateAnimation(now));
+            console.log("updating");
         }
     }
 
     display(){
         //console.log(this.primitives);
-        this.scene.pushMatrix();
         this.primitives.forEach (element => {
             if (element.animation != null){
+                this.scene.pushMatrix();
+                //console.log(element.rowW, element.animation);
                 element.animation.apply(); 
                 element.display();
+                this.scene.popMatrix();
             }
         });
-        this.scene.popMatrix();
         
     }
 }
