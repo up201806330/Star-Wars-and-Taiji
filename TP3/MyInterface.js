@@ -25,6 +25,13 @@ class MyInterface extends CGFinterface {
         this.lightsFolder = this.gui.addFolder("Lights");
         this.lightsFolder.open();
 
+        this.folder = this.gui.addFolder("Game Actions");
+        this.folder.open();
+        this.folder.add(this.scene, 'movie').name('Movie');
+        this.folder.add(this.scene, 'undo').name('Undo');
+        this.folder.add(this.scene, 'start').name('Start game!');
+        this.folder.add(this.scene, 'restart').name('Restart game!');
+
         this.initKeys();
 
         return true;

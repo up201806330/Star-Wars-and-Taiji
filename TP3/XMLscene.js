@@ -29,6 +29,22 @@ class XMLscene extends CGFscene {
 
         this.initCameras();
 
+        this.start = function() {
+            console.log("Pressed Start");
+        }
+
+        this.restart = function() {
+            console.log("Pressed Restart");
+        }
+
+        this.undo = function() {
+            console.log("Pressed Undo");
+        }
+
+        this.movie = function() {
+            console.log("Pressed Movie");
+        }
+
         this.enableTextures(true);
 
         this.gl.clearDepth(100.0);
