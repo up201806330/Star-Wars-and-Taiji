@@ -50,24 +50,20 @@ class MyAnimator{
         else if (!this.started){
             this.animatingElements.forEach (element => element.startAnimation(this.scene));
             this.started = true;
-            console.log("started");
         } 
 
         else if (this.animatingElements[0].animation.ended){
-            console.log(this.animatingElements);
             this.animatingElements = null;
             this.started = false;
-            console.log("ended");
         }
 
         else {
             this.animatingElements.forEach (element => element.updateAnimation(now));
-            console.log("updating");
         }
     }
 
     display(){
-        console.log(this.primitives);
+        //console.log(this.primitives);
         this.primitives.forEach (element => {
             if (element.animation != null){
                 if (element.animation.currentFrame == -1 && !(element instanceof Cannon)) return;

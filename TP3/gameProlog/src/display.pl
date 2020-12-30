@@ -122,7 +122,8 @@ show_orientations :-
 % predicate that returns the inital board state
 initial(N, GameState) :-
     % nl, write('Initial State Board'), nl,
-    initial_board(N, GameState).
+    initial_board(N, Unflattened),
+    flatten(Unflattened, GameState).
 
 % predicate that returns the intermediate board state
 intermediate(GameState) :-

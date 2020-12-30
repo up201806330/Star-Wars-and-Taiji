@@ -21,6 +21,15 @@ class MyPiece {
         this.assigned = true;
     }
 
+    unsetCoords(){
+        this.rowW = null;
+        this.colW = null;
+        this.rowB = null;
+        this.colB = null;
+        this.assigned = false;
+        this.animation = null;
+    }
+
     initPieceMaterials() {
         this.blackMaterial = new CGFappearance(this.scene);
         this.blackMaterial.setSpecular(1, 1, 1, 1);

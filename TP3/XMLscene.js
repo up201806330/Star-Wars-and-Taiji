@@ -13,7 +13,7 @@ class XMLscene extends CGFscene {
 
         this.lightsStatus = [];
         this.curView = "";
-        this.curScene = 'roomScene';
+        this.curScene = 'gardenScene';
         this.sceneIds = { 'Room': 'roomScene', 'Garden': 'gardenScene' };
     }
 
@@ -30,15 +30,16 @@ class XMLscene extends CGFscene {
         this.initCameras();
 
         this.start = function() {
-            console.log("Pressed Start");
+            // Camera stuff
+            this.gameOrchestrator.startGame();
         }
 
         this.restart = function() {
-            console.log("Pressed Restart");
+            this.gameOrchestrator.startGame();
         }
 
         this.undo = function() {
-            console.log("Pressed Undo");
+            this.gameOrchestrator.undoMove();
         }
 
         this.movie = function() {
@@ -60,7 +61,7 @@ class XMLscene extends CGFscene {
 
         this.defaultAppearance = new CGFappearance(this);
 
-        this.gameOrchestrator = new MyGameOrchestrator(this, this.curScene);
+        this.gameOrchestrator = new MyGameOrchestrator(this);
         this.water = new Water(this);
 
         this.setPickEnabled(true);

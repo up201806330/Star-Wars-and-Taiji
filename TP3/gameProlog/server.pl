@@ -105,7 +105,7 @@ print_header_line(_).
 
 parse_input(handshake, handshake).
 
-parse_input(start_game, Res):- initial('2', Res).
+parse_input(start_game, Res):- initial('1', Res).
 parse_input(move(Gs, Move), Res):- move(Gs, Move, Res).
 parse_input(undo_move(Gs, Move), Res):- undo_move(Gs, Move, Res).
 parse_input(choose_move(Gs, Color, Difficulty), Res):- choose_move(Gs, Color, Difficulty, Res).
