@@ -35,7 +35,7 @@ class XMLscene extends CGFscene {
         }
 
         this.restart = function() {
-            this.gameOrchestrator.startGame();
+            this.gameOrchestrator.restartGame();
         }
 
         this.undo = function() {

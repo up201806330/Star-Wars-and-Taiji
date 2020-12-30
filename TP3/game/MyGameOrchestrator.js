@@ -183,7 +183,14 @@ class MyGameOrchestrator {
 
     // Prolog functions
     startGame(){
-        this.client.makeRequest("start_game");
+        if (this.animator.animatingElements==null) this.client.makeRequest("start_game");
+    }
+
+    restartGame(){
+        if (this.animator.animatingElements==null) {
+            this.client.makeRequest("start_game");
+            this.piecesStack.forEach(element => {console.log(element);element.unsetCoords()});
+        }
     }
     
     move(move, piece){
@@ -197,7 +204,7 @@ class MyGameOrchestrator {
     }
 
     undoMove(){
-        if (this.gameState != null) {
+        if (this.gameState != null && this.animator.animatingElements==null) {
             this.client.makeRequest("undo_move("+this.gameState+","+this.movesStack.pop().toString()+")");
             this.piecesStack.pop().unsetCoords();
         }
