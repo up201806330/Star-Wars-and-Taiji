@@ -15,7 +15,7 @@ class MyGameBoard {
 
         for(let i = 0; i < this.sideBoardLength; i++) {
             for (let j = 0; j < this.sideBoardLength; j++) {
-                this.tiles.push(new MyTile(this.scene, this, {row: i, column: j}, ((i+j)%2)?this.darkTile:this.lightTile));
+                this.tiles.push(new MyTile(this.scene, {row: i, column: j}, ((i+j)%2)?this.darkTile:this.lightTile));
                 // this.tiles[this.tiles.length - 1].piece = new MyPiece(this.scene, 'idk type', []);
             }
         }
@@ -31,8 +31,7 @@ class MyGameBoard {
             if (this.compareCoordinates(this.tiles[i].coordinates, coordinates)) return this.tiles[i];
         }
         
-        console.log("No Tile with these coords:");
-        console.log(coordinates);
+        console.log("No Tile with coords:" + coordinates);
 
         return null;
     }

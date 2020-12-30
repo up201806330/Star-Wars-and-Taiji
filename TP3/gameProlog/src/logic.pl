@@ -86,28 +86,25 @@ winning_player_from_color(Gamemode, CurrentPlayer, _, _ , WinningPlayer):-
 % ----------------------------------------------------------------
 % Turn
 
-% Chooses and executes computer's move, based on difficulty level
-% choose_move(+GameState, +Color, +Level, -NewGameState)
-choose_move(GameState, _, 1, NewGameState):-
+% Chooses computer's move, based on difficulty level
+% choose_move(+GameState, +Color, +Level, -Move)
+choose_move(GameState, _, 1, Move):-
   valid_moves(GameState, _, Moves),
   length(Moves, L),
   random(0, L, MoveIndex),
-  nth0(MoveIndex, Moves, Move),
-  unflattened_move(GameState, Move, NewGameStateAdjusted),
-  flatten(NewGameStateAdjusted, NewGameState).
+  nth0(MoveIndex, Moves, MoveAdjusted),
+  flatten(MoveAdjusted, Move).
 
-choose_move(GameState, Color, 2, NewGameState):-
-  valid_moves(GameState, _, [MovesHead|MovesTail]),!,
-  best_move(GameState, [MovesHead|MovesTail], Color, 0, MovesHead, Move),
-  unflattened_move(GameState, Move, NewGameStateAdjusted),
-  flatten(NewGameStateAdjusted, NewGameState).
+choose_move(GameState, Color, 2, Move):-
+  valid_moves(GameState, _, [MovesHead|MovesTail]), !,
+  best_move(GameState, [MovesHead|MovesTail], Color, 0, MovesHead, MoveAdjusted),
+  flatten(MoveAdjusted, Move).
 
   
-choose_move(GameState, Color, 3, NewGameState):-
-  valid_moves(GameState, _, [MovesHead|MovesTail]),
-  best_move(GameState, [MovesHead|MovesTail], Color, 0, 999, MovesHead, Move),
-  unflattened_move(GameState, Move, NewGameStateAdjusted),
-  flatten(NewGameStateAdjusted, NewGameState).
+choose_move(GameState, Color, 3, Move):-
+  valid_moves(GameState, _, [MovesHead|MovesTail]), !,
+  best_move(GameState, [MovesHead|MovesTail], Color, 0, 999, MovesHead, MoveAdjusted),
+  flatten(MoveAdjusted, Move).
 
   
 % Goes through list of moves and returns the one with the largest score for the computer.

@@ -11,15 +11,21 @@ class MyGameOrchestrator {
 
         // this.gameSequence = new MyGameSequence();
         this.gameboard = new MyGameBoard(scene, 7);
-        // this.theme = new MyScenegraph(…);
         this.client = new Client(scene);
 
         // GameState and game flow flags
         this.gameState = null;
         this.movesStack = [];
         this.piecesStack = [];
+
         this.whiteScore = 0;
         this.blackScore = 0;
+
+        this.currTurn = 'p1';
+        this.currColor;
+        
+        this.AILevel = '1';
+        this.gamemode = 'pve';
 
         this.animator = new MyAnimator(scene);
     }
@@ -29,7 +35,10 @@ class MyGameOrchestrator {
     }
 
     orchestrate() { 
-        
+        if (((this.gamemode == 'pve' && this.currTurn == 1) || this.gamemode == 'eve') && this.animator.animatingElements == null && !this.processingRequest){
+            console.log("Computer turn");
+            this.aiMove();
+        }
     }
     
     managePick(pickMode, pickResults) {
@@ -39,8 +48,6 @@ class MyGameOrchestrator {
                     var obj = pickResults[i][0];
                     if (obj) {
                         var customId = pickResults[i][1];
-                        // console.log("CustomId", customId);
-                        // console.log("Obj", obj);
                         this.onTileSelected(obj, customId, pickResults);
                     }
                 }
@@ -58,7 +65,12 @@ class MyGameOrchestrator {
         if (this.animator.animatingElements!=null){
             console.log("Animation in progress, cant select");
             return;
-        }   
+        }
+        
+        if ((this.gamemode == 'pve' && this.currTurn == 1) || this.gamemode == 'eve'){
+            console.log("Not players turn, cant select");
+            return;
+        }
 
         if (obj instanceof MyTile) {
             
@@ -81,13 +93,10 @@ class MyGameOrchestrator {
                             //console.log("Selecting Second One!");
                             this.selectedTiles[1] = obj;
                             obj.setOccupied();
-
-                            this.selectedTiles[0].isOccupied = true;
-                            this.selectedTiles[1].isOccupied = true;
                             
                             // console.log("Selected Tiles Array:");
                             // console.log(this.selectedTiles);
-                            var gameMove = new MyGameMove(this.selectedTiles, "white"); //TODO add playerColor here
+                            var gameMove = new MyGameMove(this.selectedTiles, this.currColor);
                             var gamePiece = this.gameboard.nextUnassignedPiece();
                             this.move(gameMove, gamePiece);
 
@@ -179,7 +188,6 @@ class MyGameOrchestrator {
         this.scene.pushMatrix();
         this.scene.graph.displayScene();
         this.scene.popMatrix();
-        // this.theme.display(); <--
 
         this.scene.pushMatrix();
         this.scene.defaultAppearance.apply();
@@ -189,24 +197,54 @@ class MyGameOrchestrator {
         this.animator.display();
     }
 
-    // Prolog functions
-    startGame(){
-        if (this.animator.animatingElements==null) this.client.makeRequest("start_game");
+    chooseStartingTurn(){ // TODO animation with this
+        this.currTurn = Math.round(Math.random());
+        this.currColor = "white";
+        console.log(this.currTurn);
+    }
+    
+    turnInString(){
+        switch(this.currTurn){
+            case 0:
+                if (this.gamemode == 'pvp') return 'Player 1';
+                else if (this.gamemode == 'pve') return 'Player';
+                else if (this.gamemode == 'eve') return 'Computer 1';
+                break;
+            case 1:
+                if (this.gamemode == 'pvp') return 'Player 2';
+                else if (this.gamemode == 'pve') return 'Computer';
+                else if (this.gamemode == 'eve') return 'Computer 2';
+                break;
+            default:
+                break;
+        }
     }
 
-    restartGame(){
+    nextTurn(){
+        if (this.currColor == 'white')  this.currColor = 'black';
+        else                            this.currColor = 'white';
+
+        this.currTurn = (this.currTurn + 1) % 2;
+    }
+
+    // Prolog functions
+    startGame(){
         if (this.animator.animatingElements==null) {
             this.client.makeRequest("start_game");
-            this.piecesStack.forEach(element => {console.log(element);element.unsetCoords()});
+            this.piecesStack.forEach(element => element.unsetCoords());
+            this.gameboard.tiles.forEach(element => element.unsetOccupied());
+            this.chooseStartingTurn();
         }
     }
     
     move(move, piece){
+        console.log(move, piece);
         if (this.gameState != null) {
             this.client.makeRequest("move("+this.gameState+","+move.toString()+")");
             this.animator.animateMove(move, piece);
             this.movesStack.push(move);
             this.piecesStack.push(piece);
+            move.occupyTiles();
         }
         else console.log("Can't send request to prolog: Move");
     }
@@ -224,7 +262,7 @@ class MyGameOrchestrator {
     }
 
     aiMove(){
-        if (this.gameState != null && this.aiColor != null && this.aiDifficulty != null) this.client.makeRequest("choose_move("+this.gameState+","+this.aiColor+","+this.aiDifficulty+")");
+        if (this.gameState != null && this.currColor != null && this.AILevel != null) this.client.makeRequest("choose_move("+this.gameState+","+this.currColor+","+this.AILevel+")");
         else console.log("Can't send request to prolog: AI Move");
     }
 
