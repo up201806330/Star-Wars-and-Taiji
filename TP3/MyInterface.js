@@ -23,14 +23,20 @@ class MyInterface extends CGFinterface {
         // add a group of controls (and open/expand by defult)
 
         this.lightsFolder = this.gui.addFolder("Lights");
-        this.lightsFolder.open();
-        // TODO possibly add and remove these according to game state
-        this.folder = this.gui.addFolder("Game Actions");
-        this.folder.open();
-        this.folder.add(this.scene, 'movie').name('Movie');
-        this.folder.add(this.scene, 'undo').name('Undo');
-        this.folder.add(this.scene, 'start').name('Start game!');
-        this.folder.add(this.scene, 'restart').name('Restart game!');
+        // folder hierarchy with .close() in functions
+        this.taijiFolder = this.gui.addFolder("Taiji");
+        this.taijiFolder.open();
+
+        this.mainMenuFolder = this.taijiFolder.addFolder("Main Menu");
+        this.actionsFolder = this.taijiFolder.addFolder("Actions");
+
+        this.mainMenuFolder.add(this.scene, 'start').name('Start game!');
+        this.mainMenuFolder.add(this.scene, 'currAILevel', this.scene.AILevels).name('A.I. Level').onChange(() => {this.scene.changeAILevel();});
+        this.mainMenuFolder.add(this.scene, 'currGamemode', this.scene.gamemodes).name('Gamemode').onChange(() => {this.scene.changeGamemode();});
+        this.mainMenuFolder.open();
+
+        this.actionsFolder.add(this.scene, 'undo').name('Undo');
+        this.actionsFolder.add(this.scene, 'movie').name('Movie');
 
         this.initKeys();
 

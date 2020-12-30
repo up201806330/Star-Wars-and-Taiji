@@ -15,6 +15,10 @@ class XMLscene extends CGFscene {
         this.curView = "";
         this.curScene = 'gardenScene';
         this.sceneIds = { 'Room': 'roomScene', 'Garden': 'gardenScene' };
+        this.currAILevel = '1';
+        this.AILevels = { 'Easy': '1', 'Medium': '2', 'Hard':'3' };
+        this.currGamemode = 'pve';
+        this.gamemodes = { 'Player vs Player' : 'pvp', 'Player vs Computer' : 'pve', 'Computer vs Computer' : 'eve' };
     }
 
     /**
@@ -30,12 +34,9 @@ class XMLscene extends CGFscene {
         this.initCameras();
 
         this.start = function() {
-            // Camera stuff
             this.gameOrchestrator.startGame();
-        }
-
-        this.restart = function() {
-            this.gameOrchestrator.restartGame();
+            this.interface.mainMenuFolder.close();
+            this.interface.actionsFolder.open();
         }
 
         this.undo = function() {
@@ -242,6 +243,13 @@ class XMLscene extends CGFscene {
 
         this.first = false;
         this.graph = new MySceneGraph(this.curScene + '.xml', this);
-        this.gameOrchestrator.animator.curScene = this.curScene;
-      }
+    }
+    
+    changeAILevel(){
+        this.gameOrchestrator.AILevel = this.currAILevel;
+    }
+
+    changeGamemode(){
+        this.gameOrchestrator.gamemode = this.currGamemode;
+    }
 }

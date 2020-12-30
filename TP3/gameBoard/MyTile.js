@@ -5,10 +5,9 @@ class MyTile {
 
     static topMaterialSelected = null;
     static sideMaterial = null;
-    constructor(scene, gameboard, coordinates, material) {
+    constructor(scene, coordinates, material) {
         this.scene = scene;
         this.empty = true;
-        this.gameboard = gameboard;
         this.coordinates = coordinates;
 
         this.isSelected = false;

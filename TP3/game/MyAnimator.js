@@ -39,7 +39,7 @@ class MyAnimator{
         this.primitives.push(newPiece);
         
         // console.log(this.animatingElements);
-        //console.log(this.primitives);
+        // console.log(this.primitives);
     }
 
     update(now){
@@ -68,6 +68,7 @@ class MyAnimator{
             if (element.animation != null){
                 if (element.animation.currentFrame == -1 && !(element instanceof Cannon)) return;
                 if (this.scene.curScene =='gardenScene' && element instanceof Cannon) return;
+                if (this.scene.curScene =='roomScene' && element instanceof Fish) return;
                 this.scene.pushMatrix();
                 //console.log(element.rowW, element.animation);
                 element.animation.apply(); 
@@ -75,6 +76,5 @@ class MyAnimator{
                 this.scene.popMatrix();
             }
         });
-        
     }
 }
