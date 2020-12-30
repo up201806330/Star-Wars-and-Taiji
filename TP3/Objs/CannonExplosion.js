@@ -19,9 +19,9 @@ class CannonExplosion extends PieceTransporter{
 
     generateKeyframes(){
         this.keyframes = [];
-        this.keyframes.push(new KeyFrame(0,   vec3.fromValues(-12,-6,-12), vec3.fromValues(0,0,0), vec3.fromValues(0,0,0)));
-        this.keyframes.push(new KeyFrame(0.3, vec3.fromValues(-13,-6,-13), vec3.fromValues(0,0,0), vec3.fromValues(1,1,1)));
-        this.keyframes.push(new KeyFrame(0.6, vec3.fromValues(-12,-6,-12), vec3.fromValues(0,0,0), vec3.fromValues(0,0,0)));
+        this.keyframes.push(new KeyFrame(0,   vec3.fromValues(-12,-2,-12), vec3.fromValues(0,0,0), vec3.fromValues(0,0,0)));
+        this.keyframes.push(new KeyFrame(0.3, vec3.fromValues(-13,-2,-13), vec3.fromValues(0,0,0), vec3.fromValues(1,1,1)));
+        this.keyframes.push(new KeyFrame(0.6, vec3.fromValues(-12,-2,-12), vec3.fromValues(0,0,0), vec3.fromValues(0,0,0)));
     }
 
     display(){
