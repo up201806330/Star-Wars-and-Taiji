@@ -15,6 +15,12 @@ class XMLscene extends CGFscene {
         this.curView = "";
         this.curScene = 'gardenScene';
         this.sceneIds = { 'Room': 'roomScene', 'Garden': 'gardenScene' };
+
+        this.zoomInCounter = 0;
+        this.zoomOutCounter = 0;
+        this.zoomedIn = false;
+
+        this.targetY = -10;
     }
 
     /**
@@ -44,6 +50,13 @@ class XMLscene extends CGFscene {
 
         this.movie = function() {
             console.log("Pressed Movie");
+        }
+
+        this.zoomIn = function() {
+            console.log("Zomming In");
+            if (this.zoomOutCounter != 0 || this.zoomInCounter != 0) return '¯\_(ツ)_/¯';
+            if (this.zoomedIn) this.zoomOutCounter = 20;
+            else this.zoomInCounter = 20;
         }
 
         this.enableTextures(true);
@@ -174,8 +187,28 @@ class XMLscene extends CGFscene {
             for(var animation in this.graph.animations){
                 this.graph.animations[animation].updateAnimation(now);
             }
+
+            if (this.zoomInCounter > 0) {
+                this.camera.zoom(1.5);
+                this.targetY -= 1.3;
+                this.camera.setTarget(vec3.fromValues(0, this.targetY, -15));
+                
+                this.zoomInCounter--;
+                if (this.zoomInCounter == 0) this.zoomedIn = true;
+            }
+            else if (this.zoomOutCounter > 0) {
+                this.camera.zoom(-1.5);
+                this.targetY += 1.3;
+                this.camera.setTarget(vec3.fromValues(0, this.targetY, -15));
+
+                this.zoomOutCounter--;
+                if (this.zoomOutCounter == 0) this.zoomedIn = false;
+            }
+            
             this.gameOrchestrator.update(now);
             this.gameOrchestrator.orchestrate();
+
+
 
             // Cuz of shaders, this primitive must be hardcoded here
             this.water.updateShader(now);   
@@ -208,7 +241,7 @@ class XMLscene extends CGFscene {
 
         if (this.sceneInited) {
             // Draw axis
-            // this.axis.display();
+            this.axis.display();
  
             this.defaultAppearance.apply();
             
@@ -241,6 +274,13 @@ class XMLscene extends CGFscene {
         this.interface.lightsFolder.close();
 
         this.first = false;
+
+        this.zoomedIn = false;
+        this.zoomInCounter = 0;
+        this.zoomOutCounter = 0;
+        this.targetY = -10;
+
+
         this.graph = new MySceneGraph(this.curScene + '.xml', this);
         this.gameOrchestrator.animator.curScene = this.curScene;
       }

@@ -31,6 +31,7 @@ class MyInterface extends CGFinterface {
         this.folder.add(this.scene, 'undo').name('Undo');
         this.folder.add(this.scene, 'start').name('Start game!');
         this.folder.add(this.scene, 'restart').name('Restart game!');
+        this.folder.add(this.scene, 'zoomIn').name('Zoom!');
 
         this.initKeys();
 
