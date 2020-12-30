@@ -169,8 +169,9 @@
             </texture>
 
             <transformations>
-                <translation x="0" y="20" z="0" />
+                <translation x="-7.5" y="20" z="-7.5" />
                 <rotation axis="x" angle="90" />
+                <scale sx="1.375" sy="1.375" sz="1.0" />
             </transformations>
 
             <descendants>
@@ -186,8 +187,9 @@
             </texture>
 
             <transformations>
-                <translation x="0" y="-20" z="0" />
+                <translation x="-7.5" y="-20" z="-7.5" />
                 <rotation axis="x" angle="-90" />
+                <scale sx="1.375" sy="1.375" sz="1.0" />
             </transformations>
 
             <descendants>
@@ -203,7 +205,8 @@
             </texture>
 
             <transformations>
-                <translation x="0" y="0" z="-20" />
+                <translation x="-7.5" y="0" z="-35" />
+                <scale sx="1.375" sy="1.0" sz="1.0" />
             </transformations>
 
             <descendants>
@@ -219,8 +222,9 @@
             </texture>
 
             <transformations>
-                <translation x="0" y="0" z="20" />
+                <translation x="-7.5" y="0" z="20" />
                 <rotation axis="y" angle="180" />
+                <scale sx="1.375" sy="1.0" sz="1.0" />
             </transformations>
 
             <descendants>
@@ -236,8 +240,9 @@
             </texture>
 
             <transformations>
-                <translation x="20" y="0" z="0" />
+                <translation x="20" y="0" z="-7.5" />
                 <rotation axis="y" angle="-90" />
+                <scale sx="1.375" sy="1.0" sz="1.0" />
             </transformations>
 
             <descendants>
@@ -253,8 +258,9 @@
             </texture>
 
             <transformations>
-                <translation x="-20" y="0" z="0" />
+                <translation x="-35" y="0" z="-7.5" />
                 <rotation axis="y" angle="90" />
+                <scale sx="1.375" sy="1.0" sz="1.0" />
             </transformations>
 
             <descendants>
@@ -610,7 +616,7 @@
             </texture>
 
             <transformations>
-                <translation x="-20" y="-3" z="-13" />
+                <translation x="-35" y="-3" z="-13" />
                 <scale sx="0.2" sy="10" sz="14" />
             </transformations>
 
@@ -644,7 +650,7 @@
             </texture>
 
             <transformations>
-                <translation x="-20" y="-4" z="5" />
+                <translation x="-35" y="-4" z="5" />
                 <scale sx="0.2" sy="12" sz="9" />
             </transformations>
 
@@ -661,7 +667,7 @@
             </texture>
 
             <transformations>
-                <translation x="-7.5" y="-6" z="-19.9" />
+                <translation x="-7.5" y="-6" z="-34.9" />
                 <scale sx="20" sy="15" sz="10" />
             </transformations>
 
@@ -678,7 +684,7 @@
             </texture>
 
             <transformations>
-                <translation x="17.0" y="-15" z="-17.0" />
+                <translation x="15.0" y="-15" z="-30.0" />
                 <scale sx="1.0" sy="1.0" sz="1.0" />
             </transformations>
 
