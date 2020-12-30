@@ -38,7 +38,7 @@ class MyGameBoard {
 
     initTileMaterials(){
         this.darkTile = new CGFappearance(this.scene);
-        this.darkTile.setAmbient(0.1, 0.1, 0.1, 1);
+        this.darkTile.setAmbient(0.1, 0.36, 0.56, 1);
         this.darkTile.setDiffuse(0.4, 0.4, 0.4, 1);
         this.darkTile.setSpecular(0.1, 0.1, 0.1, 1);
         this.darkTile.setShininess(10.0);
@@ -46,7 +46,7 @@ class MyGameBoard {
         this.darkTile.setTextureWrap('REPEAT', 'REPEAT');
         
         this.lightTile = new CGFappearance(this.scene);
-        this.lightTile.setAmbient(0.2, 0.2, 0.2, 1);
+        this.lightTile.setAmbient(0.2, 0.46, 0.66, 1);
         this.lightTile.setDiffuse(0.9, 0.9, 0.9, 1);
         this.lightTile.setSpecular(0.1, 0.1, 0.1, 1);
         this.lightTile.setShininess(10.0);
