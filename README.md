@@ -44,6 +44,6 @@
 
 ----
 
-### [TP3 - Game 3D Interface](TP3)
+### [TP3 - 3D Game Interface](TP3)
 - (items briefly describing main strong points)
 
