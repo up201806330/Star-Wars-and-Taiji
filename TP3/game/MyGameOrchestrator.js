@@ -3,7 +3,7 @@
  */
 class MyGameOrchestrator {
     
-    constructor(scene, curScene) {
+    constructor(scene) {
         this.scene = scene;
 
         this.selectedTiles = [];
@@ -12,11 +12,16 @@ class MyGameOrchestrator {
         // this.gameSequence = new MyGameSequence();
         this.gameboard = new MyGameBoard(scene, 7);
         // this.theme = new MyScenegraph(…);
-        this.client = new Client();
-        // this.gameState = ...;
+        this.client = new Client(scene);
+
+        // GameState and game flow flags
+        this.gameState = null;
+        this.movesStack = [];
+        this.piecesStack = [];
+        this.whiteScore = 0;
+        this.blackScore = 0;
 
         this.animator = new MyAnimator(scene);
-        // this.movesStack
     }
     
     update(now) {
@@ -27,7 +32,6 @@ class MyGameOrchestrator {
         
     }
     
-
     managePick(pickMode, pickResults) {
         if (pickMode == false) {
             if (pickResults != null && pickResults.length > 0) {
@@ -70,12 +74,14 @@ class MyGameOrchestrator {
 
                             this.selectedTiles[0].isOccupied = true;
                             this.selectedTiles[1].isOccupied = true;
+                            this.selectedTiles[0].unsetOccupied();
+                            this.selectedTiles[1].unsetOccupied();
                             
                             // console.log("Selected Tiles Array:");
                             // console.log(this.selectedTiles);
                             var gameMove = new MyGameMove(this.selectedTiles, "white"); //TODO add playerColor here
-                            let jeff = this.gameboard.nextUnassignedPiece();
-                            this.animator.animateMove(gameMove, jeff);
+                            var gamePiece = this.gameboard.nextUnassignedPiece();
+                            this.move(gameMove, gamePiece);
 
                             this.selectedTiles = [];
                             this.clearAdjacentHighlights();
@@ -175,24 +181,35 @@ class MyGameOrchestrator {
         this.animator.display();
     }
 
-    // vv All requests vv
-    //   start_game
-    //   move(Gs, Move)
-    //   undo_move(Gs, Move)
-    //   choose_move(Gs, Color, Difficulty)
-    //   score_and_game_over(Gs)
-
-    sendRequest(requestString){
-        this.client.getPrologRequest(requestString, 
-            function(data){
-                handleReply(requestString, data.target.response);
-            },
-            function(data){
-                console.log("Error sending request to prolog");
-            });
+    // Prolog functions
+    startGame(){
+        this.client.makeRequest("start_game");
+    }
+    
+    move(move, piece){
+        if (this.gameState != null) {
+            this.client.makeRequest("move("+this.gameState+","+move.toString()+")");
+            this.animator.animateMove(move, piece);
+            this.movesStack.push(move);
+            this.piecesStack.push(piece);
+        }
+        else console.log("Can't send request to prolog: Move");
     }
 
-    handleReply(requestString, reply){
-        
+    undoMove(){
+        if (this.gameState != null) {
+            this.client.makeRequest("undo_move("+this.gameState+","+this.movesStack.pop().toString()+")");
+            this.piecesStack.pop().unsetCoords();
+        }
+        else console.log("Can't send request to prolog: Undo Move");
+    }
+
+    aiMove(){
+        if (this.gameState != null && this.aiColor != null && this.aiDifficulty != null) this.client.makeRequest("choose_move("+this.gameState+","+this.aiColor+","+this.aiDifficulty+")");
+        else console.log("Can't send request to prolog: AI Move");
+    }
+
+    scoreAndGameOver(){
+        if (this.gameState != null) this.client.makeRequest("score_and_game_over("+this.gameState+")");
     }
 }

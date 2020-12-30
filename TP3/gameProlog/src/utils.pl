@@ -95,3 +95,30 @@ checkDiffZeroLength(NumCol,NumRow, List, 1, NewList) :- append([[NumRow, NumCol]
 
 checkDiffZeroLength(InputList1, _, 0, InputList1).
 checkDiffZeroLength(InputList1, InputList2, _, NewList) :- append(InputList1, InputList2, NewList).
+
+% Breaks up list of all Vars into list of Rows of length N
+% unflatten(+Vars, -Rows)
+unflatten(Vars, Rows):-
+    length(Vars, L),
+    N is round(sqrt(L)),
+    unflatten(Vars, N, Rows).
+unflatten(Vars, N, Rows):-
+    unflatten(Vars, [], [], 1, N, Rows).
+unflatten([], _, X, _, _, Rows):- Rows = X.
+unflatten([H|T], CurrRow, CurrRows, N, N, Rows):- 
+    append(CurrRow, [H], NewCurrRow), 
+    append(CurrRows, [NewCurrRow], NewCurrRows), 
+    unflatten(T, [], NewCurrRows, 1, N, Rows).
+unflatten([H|T], CurrRow, CurrRows, Counter, N, Rows):-
+    append(CurrRow, [H], NewCurrRow),
+    X is Counter + 1,
+    unflatten(T, NewCurrRow, CurrRows, X, N, Rows).
+
+% flatten(+L, -FlatL)
+flatten([], []) :- !.
+flatten([L|Ls], FlatL) :-
+    !,
+    flatten(L, NewL),
+    flatten(Ls, NewLs),
+    append(NewL, NewLs, FlatL).
+flatten(L, [L]).

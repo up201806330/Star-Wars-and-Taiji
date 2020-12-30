@@ -38,9 +38,10 @@ alternate_color(black, white).
 % Reformatted version of game_over, returns list with [WhiteScore, BlackScore, WhoWhon]
 % score_and_game_over(+GameState, -Output)
 score_and_game_over(GameState, Output):-
-    value(GameState, white, WhiteScore), value(GameState, black, BlackScore),
+    unflatten(GameState, AdjustedGameState),
+    value(AdjustedGameState, white, WhiteScore), value(AdjustedGameState, black, BlackScore),
 
-    valid_moves(GameState, _, Moves),
+    valid_moves(AdjustedGameState, _, Moves),
     length(Moves, Length),
     (
       Length =:= 0 -> % GameOver
@@ -85,21 +86,29 @@ winning_player_from_color(Gamemode, CurrentPlayer, _, _ , WinningPlayer):-
 % ----------------------------------------------------------------
 % Turn
 
-% Chooses computer's move, based on difficulty level
-% choose_move(+GameState, +Color, +Level, -Move)
-choose_move(GameState, _, 1, Move):-
+% Chooses and executes computer's move, based on difficulty level
+% choose_move(+GameState, +Color, +Level, -NewGameState)
+choose_move(GameState, _, 1, NewGameState):-
   valid_moves(GameState, _, Moves),
   length(Moves, L),
   random(0, L, MoveIndex),
-  nth0(MoveIndex, Moves, Move).
+  nth0(MoveIndex, Moves, Move),
+  unflattened_move(GameState, Move, NewGameStateAdjusted),
+  flatten(NewGameStateAdjusted, NewGameState).
 
-choose_move(GameState, Color, 2, Move):-
-  valid_moves(GameState, _, [MovesHead|MovesTail]),
-  best_move(GameState, [MovesHead|MovesTail], Color, 0, MovesHead, Move).
+choose_move(GameState, Color, 2, NewGameState):-
+  valid_moves(GameState, _, [MovesHead|MovesTail]),!,
+  best_move(GameState, [MovesHead|MovesTail], Color, 0, MovesHead, Move),
+  unflattened_move(GameState, Move, NewGameStateAdjusted),
+  flatten(NewGameStateAdjusted, NewGameState).
+
   
-choose_move(GameState, Color, 3, Move):-
+choose_move(GameState, Color, 3, NewGameState):-
   valid_moves(GameState, _, [MovesHead|MovesTail]),
-  best_move(GameState, [MovesHead|MovesTail], Color, 0, 999, MovesHead, Move).
+  best_move(GameState, [MovesHead|MovesTail], Color, 0, 999, MovesHead, Move),
+  unflattened_move(GameState, Move, NewGameStateAdjusted),
+  flatten(NewGameStateAdjusted, NewGameState).
+
   
 % Goes through list of moves and returns the one with the largest score for the computer.
 % If it's being used in hardest difficulty, also checks in case of a draw, and returns the first move that minimizes the opponent score
@@ -107,7 +116,7 @@ choose_move(GameState, Color, 3, Move):-
 best_move(_, [], _, _, CurrBestMove, BestMove):-
   BestMove = CurrBestMove.
 best_move(GameState, [H|T], Color, MaxThisScore, CurrBestMove, BestMove):-
-  move(GameState, H, NewGameState),
+  unflattened_move(GameState, H, NewGameState),
   value(NewGameState, Color, ThisScore),
   (
     ThisScore > MaxThisScore -> % Move maximizes computer score
@@ -119,7 +128,7 @@ best_move(GameState, [H|T], Color, MaxThisScore, CurrBestMove, BestMove):-
 best_move(_, [], _, _, _, CurrBestMove, BestMove):-
   BestMove = CurrBestMove.
 best_move(GameState, [H|T], Color, MaxThisScore, MinOpponentScore, CurrBestMove, BestMove):-
-  move(GameState, H, NewGameState),
+  unflattened_move(GameState, H, NewGameState),
   value(NewGameState, Color, ThisScore),
   alternate_color(Color, OpponentColor),
   value(NewGameState, OpponentColor, OpponentScore),
@@ -203,7 +212,14 @@ success_play(NewGameState, Gamemode, Level, Player, Color) :-
 % Runs a move's changes on GameState i.e. places white and black pieces of new Taijitu on game board
 % move(+GameState, +Move, -NewGameState)
 move(GameState, [White|[Black|_]], NewGameState) :- 
-  white_piece_move(GameState, White, NewGameState1), 
+  unflatten(GameState, AdjustedGameState),
+  white_piece_move(AdjustedGameState, White, NewGameState1), 
+  black_piece_move(NewGameState1, Black, NewGameStateAdjusted),
+  flatten(NewGameStateAdjusted, NewGameState).
+
+unflattened_move(GameState, [White|[Black|_]], NewGameState) :- 
+  unflatten(GameState, AdjustedGameState),
+  white_piece_move(AdjustedGameState, White, NewGameState1), 
   black_piece_move(NewGameState1, Black, NewGameState).
 
 white_piece_move(GameState, [Row | [Col|_]], NewGameState1) :-
@@ -214,8 +230,10 @@ black_piece_move(NewGameState1, [Row | [Col|_]], NewGameState) :-
 
 % undo_move(+GameState, +Move, -NewGameState)
 undo_move(GameState, [[WRow | [WCol|_]]|[[BRow | [BCol|_]]|_]], NewGameState):-
-  replace_(GameState, WRow, WCol, clear, NewGameState1),
-  replace_(NewGameState1, BRow, BCol, clear, NewGameState).
+  unflatten(GameState, AdjustedGameState),
+  replace_(AdjustedGameState, WRow, WCol, clear, NewGameState1),
+  replace_(NewGameState1, BRow, BCol, clear, NewGameStateAdjusted),
+  flatten(NewGameStateAdjusted, NewGameState).
   
 % ----------------------------------------------------------------
 
@@ -371,10 +389,11 @@ value(GameState, Color, Value) :-
 % Returns List of Possible Moves
 % valid_moves(+GameState, +Player, -ListOfMoves)
 valid_moves(GameState, Player, ListOfMoves) :-
-    nth0(0, GameState, Row),
+    unflatten(GameState, AdjustedGameState),
+    nth0(0, AdjustedGameState, Row),
     length(Row, NumCols),
-    length(GameState,NumRows),
-    iterateBoard(GameState, NumRows, NumCols, Player, ListOfMoves).
+    length(AdjustedGameState,NumRows),
+    iterateBoard(AdjustedGameState, NumRows, NumCols, Player, ListOfMoves).
 
 % Iterates over the board matrix and returns the list of valid moves
 % iterateBoard(+GameState, +NumRows, +NumCols, +Player, -ValidMoves)

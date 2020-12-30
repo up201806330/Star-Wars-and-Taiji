@@ -4,15 +4,14 @@ class Cannon extends PieceTransporter{
         this.obj = new CGFOBJModel(scene, 'Objs/models/Cannon.obj');
         
         this.appearance = new CGFappearance(scene);
-        this.appearance.setSpecular(1, 1, 1, 1);
+        this.appearance.setSpecular(0.2, 0.2, 0.2, 1);
         this.appearance.setShininess(120);
-        this.appearance.setAmbient(0.1, 0.1, 0.1, 1);
+        this.appearance.setAmbient(0.5, 0.5, 0.5, 1);
         this.appearance.setDiffuse(0.2, 0.2, 0.3, 1);
 
         // So cannon starts out in scene
         var keyframe = []; 
         keyframe.push(new KeyFrame(0, vec3.fromValues(0,0,0), vec3.fromValues(0,0,0), vec3.fromValues(1,1,1)));
-        keyframe.push(new KeyFrame(0.1, vec3.fromValues(0,0,0), vec3.fromValues(0,0,0), vec3.fromValues(1,1,1)));
         this.animation = new KeyframeAnimation(scene, keyframe);
     }
 

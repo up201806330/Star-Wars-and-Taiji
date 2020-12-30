@@ -61,4 +61,8 @@ class MyTile {
             MyTile.sideMaterial.setShininess(10.0);
         }
     }
+
+    toString(){
+        return "["+this.coordinates.row+","+this.coordinates.column+"]";
+    }
 }

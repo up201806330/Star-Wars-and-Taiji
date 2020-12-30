@@ -24,7 +24,7 @@ class MyInterface extends CGFinterface {
 
         this.lightsFolder = this.gui.addFolder("Lights");
         this.lightsFolder.open();
-
+        // TODO possibly add and remove these according to game state
         this.folder = this.gui.addFolder("Game Actions");
         this.folder.open();
         this.folder.add(this.scene, 'movie').name('Movie');
