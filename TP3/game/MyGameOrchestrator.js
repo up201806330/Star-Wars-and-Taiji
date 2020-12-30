@@ -50,9 +50,19 @@ class MyGameOrchestrator {
     }
 
     onTileSelected(obj, customId, pickResults) {
+        if (this.gameState == null){
+            console.log("Game hasnt started yet, cant select");
+            return;
+        }
+
+        if (this.animator.animatingElements!=null){
+            console.log("Animation in progress, cant select");
+            return;
+        }   
+
         if (obj instanceof MyTile) {
             
-            if (obj.isEmpty() && this.animator.animatingElements==null) {
+            if (obj.isEmpty()) {
 
                 switch (this.selectedTiles.length) {
                     case 0:
@@ -74,8 +84,6 @@ class MyGameOrchestrator {
 
                             this.selectedTiles[0].isOccupied = true;
                             this.selectedTiles[1].isOccupied = true;
-                            this.selectedTiles[0].unsetOccupied();
-                            this.selectedTiles[1].unsetOccupied();
                             
                             // console.log("Selected Tiles Array:");
                             // console.log(this.selectedTiles);
@@ -205,8 +213,12 @@ class MyGameOrchestrator {
 
     undoMove(){
         if (this.gameState != null && this.animator.animatingElements==null) {
-            this.client.makeRequest("undo_move("+this.gameState+","+this.movesStack.pop().toString()+")");
+            let move = this.movesStack.pop();
+            this.client.makeRequest("undo_move(" + this.gameState + "," + move.toString() + ")");
             this.piecesStack.pop().unsetCoords();
+            
+            move.tileCoordsArray[0].unsetOccupied();
+            move.tileCoordsArray[1].unsetOccupied();
         }
         else console.log("Can't send request to prolog: Undo Move");
     }

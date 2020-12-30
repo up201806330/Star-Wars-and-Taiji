@@ -33,7 +33,7 @@ class MyTile {
         this.scene.translate(-3.0, -9.87, -3.0);
         this.scene.scale(0.98, 0.25, 0.98);     
         
-        if (this.isSelected) this.geometry.changeMaterial(MyTile.topMaterialSelected);
+        if (this.isSelected && this.empty) this.geometry.changeMaterial(MyTile.topMaterialSelected);
         else { this.geometry.changeMaterial(this.material); }
 
         this.geometry.display();
