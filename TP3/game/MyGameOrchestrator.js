@@ -9,9 +9,10 @@ class MyGameOrchestrator {
         this.selectedTiles = [];
         this.empties = [];
 
-        // this.gameSequence = new MyGameSequence();
-        this.gameboard = new MyGameBoard(scene, 7);
         this.client = new Client(scene);
+        this.gameboard = new MyGameBoard(scene, 7);
+        this.score = new ScoreDisplay(scene);
+        this.message = new MessageDisplay(scene);
 
         // GameState and game flow flags
         this.gameState = null;
@@ -24,8 +25,10 @@ class MyGameOrchestrator {
         this.currTurn = 'p1';
         this.currColor;
         
-        this.AILevel = '1';
+        this.AILevel = '2';
         this.gamemode = 'pve';
+
+        // this.gameSequence = new MyGameSequence();
 
         this.animator = new MyAnimator(scene);
     }
@@ -35,9 +38,25 @@ class MyGameOrchestrator {
     }
 
     orchestrate() { 
-        if (((this.gamemode == 'pve' && this.currTurn == 1) || this.gamemode == 'eve') && this.animator.animatingElements == null && !this.processingRequest){
-            console.log("Computer turn");
-            this.aiMove();
+        if (this.animator.animatingElements == null && !this.processingRequest){
+            if (this.outdatedMessage) {
+                this.score.updateScore(this.whiteScore, this.blackScore);
+
+                if (this.gameWinner != null){
+                    this.message.setText(this.gameWinner.charAt(0).toUpperCase() + this.gameWinner.slice(1) + " Wins", this.gameWinner == 'white')
+                }
+                else {
+                    this.message.setText(this.turnInString(), this.currColor == 'white');
+                }
+
+                this.outdatedMessage = false;
+            }
+
+            if (((this.gamemode == 'pve' && this.currTurn == 1) || this.gamemode == 'eve')){
+                console.log("Computer turn");
+                console.log(this.whiteScore, this.blackScore);
+                this.aiMove();
+            }
         }
     }
     
@@ -72,6 +91,11 @@ class MyGameOrchestrator {
             return;
         }
 
+        if (this.gameWinner != null){
+            console.log("Game has ended, cant select");
+            return;
+        }
+
         if (obj instanceof MyTile) {
             
             if (obj.isEmpty()) {
@@ -96,7 +120,7 @@ class MyGameOrchestrator {
                             
                             // console.log("Selected Tiles Array:");
                             // console.log(this.selectedTiles);
-                            var gameMove = new MyGameMove(this.selectedTiles, this.currColor);
+                            var gameMove = new MyGameMove((this.currColor == 'white') ? this.selectedTiles : this.selectedTiles.reverse(), this.currColor);
                             var gamePiece = this.gameboard.nextUnassignedPiece();
                             this.move(gameMove, gamePiece);
 
@@ -194,25 +218,35 @@ class MyGameOrchestrator {
         this.gameboard.display();
         this.scene.popMatrix();
         
+        this.scene.pushMatrix();
+        this.score.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.message.display();
+        this.scene.popMatrix();
+        
+        this.scene.pushMatrix();
         this.animator.display();
+        this.scene.popMatrix();
     }
 
     chooseStartingTurn(){ // TODO animation with this
         this.currTurn = Math.round(Math.random());
         this.currColor = "white";
-        console.log(this.currTurn);
+        console.log(this.turnInString());
     }
     
     turnInString(){
         switch(this.currTurn){
             case 0:
-                if (this.gamemode == 'pvp') return 'Player 1';
-                else if (this.gamemode == 'pve') return 'Player';
+                if (this.gamemode == 'pvp') return ' Player 1 ';
+                else if (this.gamemode == 'pve') return '  Player  ';
                 else if (this.gamemode == 'eve') return 'Computer 1';
                 break;
             case 1:
-                if (this.gamemode == 'pvp') return 'Player 2';
-                else if (this.gamemode == 'pve') return 'Computer';
+                if (this.gamemode == 'pvp') return ' Player 2 ';
+                else if (this.gamemode == 'pve') return ' Computer ';
                 else if (this.gamemode == 'eve') return 'Computer 2';
                 break;
             default:
@@ -225,16 +259,17 @@ class MyGameOrchestrator {
         else                            this.currColor = 'white';
 
         this.currTurn = (this.currTurn + 1) % 2;
+        this.outdatedMessage = true;
     }
 
     // Prolog functions
     startGame(){
-        if (this.animator.animatingElements==null) {
-            this.client.makeRequest("start_game");
-            this.piecesStack.forEach(element => element.unsetCoords());
-            this.gameboard.tiles.forEach(element => element.unsetOccupied());
-            this.chooseStartingTurn();
-        }
+        this.client.makeRequest("start_game");
+        this.piecesStack.forEach(element => element.unsetCoords());
+        this.gameboard.tiles.forEach(element => element.unsetOccupied());
+        this.chooseStartingTurn();
+        this.outdatedMessage = true;
+        this.gameWinner = null;
     }
     
     move(move, piece){
@@ -262,7 +297,7 @@ class MyGameOrchestrator {
     }
 
     aiMove(){
-        if (this.gameState != null && this.currColor != null && this.AILevel != null) this.client.makeRequest("choose_move("+this.gameState+","+this.currColor+","+this.AILevel+")");
+        if (this.gameState != null && this.currColor != null && this.AILevel != null && this.gameWinner == null) this.client.makeRequest("choose_move("+this.gameState+","+this.currColor+","+this.AILevel+")");
         else console.log("Can't send request to prolog: AI Move");
     }
 

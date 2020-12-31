@@ -1,10 +1,10 @@
 class MySpriteText{
-    constructor(scene, text){
+    constructor(scene, text, fontPath){
         this.scene = scene;
         this.text = text;
-        // Cenas da spritesheet default da font, hardcoded aqui
         this.initialX = -text.length / 2 ;
-        this.spritesheet = new MySpriteSheet(scene, scene.fontTexture, 16, 6);
+        this.fontTexture = new CGFtexture(this.scene, fontPath);
+        this.spritesheet = new MySpriteSheet(scene, this.fontTexture || scene.fontTexture, 16, 6);
         this.geometry = new MyRectangle(scene, 0, -0.5, 1, 0.5);
     }
 
@@ -13,6 +13,10 @@ class MySpriteText{
             return (character.charCodeAt() - 32);
         }
         else return 0;
+    }
+
+    setText(text){
+        this.text = text;
     }
 
     display(){

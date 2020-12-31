@@ -17,7 +17,7 @@ class XMLscene extends CGFscene {
         this.curScene = 'gardenScene';
         this.sceneIds = { 'Room': 'roomScene', 'Garden': 'gardenScene' };
 
-        this.currAILevel = '1';
+        this.currAILevel = '2';
         this.AILevels = { 'Easy': '1', 'Medium': '2', 'Hard':'3' };
         
         this.currGamemode = 'pve';
@@ -56,10 +56,9 @@ class XMLscene extends CGFscene {
         }
 
         this.zoomIn = function() {
-            console.log("Zomming In");
-            if (this.zoomOutCounter != 0 || this.zoomInCounter != 0) return '¯\_(ツ)_/¯';
-            if (this.zoomedIn) this.zoomOutCounter = 20;
-            else this.zoomInCounter = 20;
+            if (this.zoomOutCounter != 0 || this.zoomInCounter != 0) return;
+            if (this.zoomedIn) this.zoomOutCounter = 10;
+            else this.zoomInCounter = 10;
         }
 
         this.enableTextures(true);
@@ -192,16 +191,16 @@ class XMLscene extends CGFscene {
             }
 
             if (this.zoomInCounter > 0) {
-                this.camera.zoom(1.5);
-                this.targetY -= 1.3;
+                this.camera.zoom(3);
+                this.targetY -= 2.6;
                 this.camera.setTarget(vec3.fromValues(0, this.targetY, -15));
                 
                 this.zoomInCounter--;
                 if (this.zoomInCounter == 0) this.zoomedIn = true;
             }
             else if (this.zoomOutCounter > 0) {
-                this.camera.zoom(-1.5);
-                this.targetY += 1.3;
+                this.camera.zoom(-3);
+                this.targetY += 2.6;
                 this.camera.setTarget(vec3.fromValues(0, this.targetY, -15));
 
                 this.zoomOutCounter--;

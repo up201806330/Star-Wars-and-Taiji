@@ -566,7 +566,7 @@ class MySceneGraph {
     parseSpritesheets(spritesheetsNode){
         var children = spritesheetsNode.children;
 
-        this.scene.fontTexture = new CGFtexture(this.scene, "./scenes/images/font.png");
+        this.scene.fontTexture = new CGFtexture(this.scene, "./scenes/images/blackFont.png");
 
         this.spritesheets = [];
         for (let i = 0; i < children.length; i++) {

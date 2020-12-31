@@ -291,6 +291,7 @@
             </texture>
 
             <transformations>
+                <scale sx="1.25" sy="1.0" sz="1.25" />
                 <translation x="0.0" y="-10.0" z="0.0" />
             </transformations>
 
@@ -561,6 +562,7 @@
 
             <transformations>
                 <rotation axis="x" angle="-90" />
+                <scale sx="1.25" sy="1.0" sz="1.25" />
             </transformations>
 
             <descendants>

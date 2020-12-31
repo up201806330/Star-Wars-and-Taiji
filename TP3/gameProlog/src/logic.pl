@@ -41,7 +41,7 @@ score_and_game_over(GameState, Output):-
     unflatten(GameState, AdjustedGameState),
     value(AdjustedGameState, white, WhiteScore), value(AdjustedGameState, black, BlackScore),
 
-    valid_moves(AdjustedGameState, _, Moves),
+    valid_moves(GameState, _, Moves),
     length(Moves, Length),
     (
       Length =:= 0 -> % GameOver

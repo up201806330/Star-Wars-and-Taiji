@@ -35,21 +35,20 @@ class Client{
 
     handleScoreAndGameOver(scene, data){
         let parts =  data.target.response.substring(1,data.target.response.length-1).split(",");
-        scene.whiteScore = parseInt(parts[0]);
-        scene.blackScore = parseInt(parts[1]);
-        if (parts[1] != "none"){
-            scene.gameOver = true;
-            scene.gameWinner = parts[1];
+        console.log(parts);
+        scene.gameOrchestrator.whiteScore = parseInt(parts[0]);
+        scene.gameOrchestrator.blackScore = parseInt(parts[1]);
+        if (parts[2] != "none"){
+            scene.gameOrchestrator.gameWinner = parts[2];
         }
 
+        scene.gameOrchestrator.nextTurn();
         scene.gameOrchestrator.processingRequest = false;
     }
 
     handleReceivedMove(scene, data){
         scene.gameOrchestrator.gameState = data.target.response;
-        scene.gameOrchestrator.nextTurn();
-        
-        scene.gameOrchestrator.processingRequest = false;
+        scene.gameOrchestrator.scoreAndGameOver();
     }
 
     handleReceivedAIMove(scene, data){
@@ -65,8 +64,6 @@ class Client{
         var piece = scene.gameOrchestrator.gameboard.nextUnassignedPiece();
 
         scene.gameOrchestrator.move(move, piece);
-        
-        //scene.gameOrchestrator.processingRequest = false;
     }
 
     chooseHandler(requestString){
