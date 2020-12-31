@@ -52,7 +52,7 @@ class MyGameOrchestrator {
                 this.outdatedMessage = false;
             }
 
-            if (((this.gamemode == 'pve' && this.currTurn == 1) || this.gamemode == 'eve')){
+            if (((this.gamemode == 'pve' && this.currTurn == 1) || this.gamemode == 'eve') && this.gameWinner == null && this.gameState != null){
                 console.log("Computer turn");
                 console.log(this.whiteScore, this.blackScore);
                 this.aiMove();
@@ -286,9 +286,13 @@ class MyGameOrchestrator {
 
     undoMove(){
         if (this.gameState != null && this.animator.animatingElements==null) {
+            let othersMove = this.movesStack.pop();
             let move = this.movesStack.pop();
+            this.movesStack.push(othersMove);
             this.client.makeRequest("undo_move(" + this.gameState + "," + move.toString() + ")");
+            let othersPiece = this.piecesStack.pop();
             this.piecesStack.pop().unsetCoords();
+            this.piecesStack.push(othersPiece);
             
             move.tileCoordsArray[0].unsetOccupied();
             move.tileCoordsArray[1].unsetOccupied();

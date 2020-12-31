@@ -68,8 +68,8 @@ class Client{
 
     chooseHandler(requestString){
         switch(requestString.substring(0, 4)){
-            case "star":
-            case "undo": return this.handleReceivedGameState;
+            case "star": return this.handleReceivedGameState;
+            case "undo": 
             case "move": return this.handleReceivedMove;
             case "choo": return this.handleReceivedAIMove;
             case "scor": return this.handleScoreAndGameOver;
