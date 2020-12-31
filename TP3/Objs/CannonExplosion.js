@@ -25,8 +25,8 @@ class CannonExplosion extends PieceTransporter{
     }
 
     display(){
-        this.appearance.apply();
         this.scene.pushMatrix();
+        this.appearance.apply();
         this.sphere.display();
         this.scene.popMatrix();
     }

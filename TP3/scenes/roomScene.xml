@@ -40,7 +40,6 @@
         <!-- Sky Box Textures -->
         <texture id="woodFloor" path="./scenes/images/woodFloor.jpg" />
         <texture id="whiteBrickWall" path="./scenes/images/whiteWall.jpg" />
-        <texture id="border" path="./gameBoard/tile-border-2.png" />
         <texture id="wood" path="./scenes/images/woodTable.jpg" />
         <texture id="leather" path="./scenes/images/leather.jpg" />
 

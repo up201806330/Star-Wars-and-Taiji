@@ -32,8 +32,8 @@ class Fish extends PieceTransporter{
     }
 
     display(){
-        this.appearance.apply();
         this.scene.pushMatrix();
+        this.appearance.apply();
         this.scene.scale(1.5,1.5,3.5);
         this.scene.translate(0,0,2.5);
         this.scene.rotate(-Math.PI/2, 0,1,0);

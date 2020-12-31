@@ -8,17 +8,17 @@ class TableScreen{
         this.tri1 = new MyTriangle(scene, 0,0,-1.434,1.004,-1.434,0);
         this.tri2 = new MyTriangle(scene, 0,0,-1.434,0,-1.434,1.004);
 
-        this.appearence = new CGFappearance(this.scene);
-        this.appearence.setSpecular(1, 1, 1, 1);
-        this.appearence.setShininess(120);
-        this.appearence.setAmbient(0.0, 0.16, 0.36, 1);
-        this.appearence.setDiffuse(0.1, 0.1, 0.1, 1);
-        this.appearence.loadTexture('./scenes/images/plastic.jpg');
-        this.appearence.setTextureWrap('REPEAT', 'REPEAT');
+        this.appearance = new CGFappearance(this.scene);
+        this.appearance.setSpecular(1, 1, 1, 1);
+        this.appearance.setShininess(120);
+        this.appearance.setAmbient(0.0, 0.16, 0.36, 1);
+        this.appearance.setDiffuse(0.1, 0.1, 0.1, 1);
+        this.appearance.loadTexture('./scenes/images/plastic.jpg');
+        this.appearance.setTextureWrap('REPEAT', 'REPEAT');
     }
 
     display(){
-        this.appearence.apply();
+        this.appearance.apply();
         this.scene.pushMatrix();
         this.scene.translate(0,0,-1.43);
         this.scene.rotate(Math.PI, 0,1,0);

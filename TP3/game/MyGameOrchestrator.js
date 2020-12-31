@@ -11,7 +11,6 @@ class MyGameOrchestrator {
 
         this.client = new Client(scene);
         this.gameboard = new MyGameBoard(scene, 7);
-        this.plate = new Plate(scene);
         this.score = new ScoreDisplay(scene);
         this.message = new MessageDisplay(scene);
 
@@ -54,8 +53,7 @@ class MyGameOrchestrator {
             }
 
             if (((this.gamemode == 'pve' && this.currTurn == 1) || this.gamemode == 'eve') && this.gameWinner == null && this.gameState != null){
-                console.log("Computer turn");
-                console.log(this.whiteScore, this.blackScore);
+                // console.log("Computer turn");
                 this.aiMove();
             }
         }
@@ -218,10 +216,6 @@ class MyGameOrchestrator {
         this.scene.defaultAppearance.apply();
         this.gameboard.display();
         this.scene.popMatrix();
-
-        this.scene.pushMatrix();
-        this.plate.display();
-        this.scene.popMatrix();
         
         this.scene.pushMatrix();
         this.score.display();
@@ -239,7 +233,7 @@ class MyGameOrchestrator {
     chooseStartingTurn(){ // TODO animation with this
         this.currTurn = Math.round(Math.random());
         this.currColor = "white";
-        console.log(this.turnInString());
+        console.log(this.turnInString() + " is white");
     }
     
     turnInString(){
@@ -278,7 +272,6 @@ class MyGameOrchestrator {
     }
     
     move(move, piece){
-        console.log(move, piece);
         if (this.gameState != null) {
             this.client.makeRequest("move("+this.gameState+","+move.toString()+")");
             this.animator.animateMove(move, piece);
@@ -290,7 +283,7 @@ class MyGameOrchestrator {
     }
 
     undoMove(){
-        if (this.gameState != null && this.animator.animatingElements==null) {
+        if (this.gameState != null && this.animator.animatingElements==null && this.movesStack.length > 1) {
             let othersMove = this.movesStack.pop();
             let move = this.movesStack.pop();
             this.movesStack.push(othersMove);

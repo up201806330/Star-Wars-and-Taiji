@@ -29,8 +29,8 @@ class Cannon extends PieceTransporter{
     }
 
     display(){
-        this.appearance.apply();
         this.scene.pushMatrix();
+        this.appearance.apply();
         this.scene.translate(-20,-13,-20);
         this.scene.rotate(5*Math.PI/4, 0,1,0);
         this.scene.scale(0.2,0.2,0.2);

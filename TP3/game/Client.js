@@ -35,7 +35,6 @@ class Client{
 
     handleScoreAndGameOver(scene, data){
         let parts =  data.target.response.substring(1,data.target.response.length-1).split(",");
-        console.log(parts);
         scene.gameOrchestrator.whiteScore = parseInt(parts[0]);
         scene.gameOrchestrator.blackScore = parseInt(parts[1]);
         if (parts[2] != "none"){

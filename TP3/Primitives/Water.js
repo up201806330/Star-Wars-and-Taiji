@@ -20,9 +20,9 @@ class Water{
     }
 
     display(){
+        this.scene.pushMatrix();
         this.appearance.apply();
         this.scene.setActiveShaderSimple(this.shader);
-        this.scene.pushMatrix();
         this.scene.translate(0, -16, 0);
         this.scene.rotate(-Math.PI/2, 1, 0, 0);
         this.geometry.display();
