@@ -23,7 +23,7 @@ class MyGameOrchestrator {
         this.whiteScore = 0;
         this.blackScore = 0;
 
-        this.currTurn = 'p1';
+        this.currTurn = 0;
         this.currColor;
         
         this.AILevel = '2';
@@ -37,11 +37,12 @@ class MyGameOrchestrator {
     }
 
     orchestrate() { 
-        if (this.animator.animatingElements == null && !this.processingRequest){
+        console.log(this.currTurn);
+        if (!this.isAnimating() && !this.processingRequest){
             if (this.outdatedMessage) {
                 this.score.updateScore(this.whiteScore, this.blackScore);
 
-                if (this.gameWinner != null){
+                if (this.gameHasEnded()){
                     this.message.setText(this.gameWinner.charAt(0).toUpperCase() + this.gameWinner.slice(1) + " Wins", this.gameWinner == 'white')
                 }
                 else {
@@ -51,15 +52,16 @@ class MyGameOrchestrator {
                 this.outdatedMessage = false;
             }
 
-            if (((this.gamemode == 'pve' && this.currTurn == 1) || this.gamemode == 'eve') && this.gameWinner == null && this.gameState != null){
-                // console.log("Computer turn");
-                this.aiMove();
-            }
-
             if (this.movieMoves.length > 0){
                 var move = this.movieMoves.pop();
                 var piece = this.gameboard.nextUnassignedPiece();
                 this.move(move, piece, false);
+                return;
+            }
+
+            if (((this.gamemode == 'pve' && this.currTurn == 1) || this.gamemode == 'eve')){
+                console.log("Computer turn");
+                this.aiMove();
             }
         }
     }
@@ -80,12 +82,15 @@ class MyGameOrchestrator {
     }
 
     onTileSelected(obj, customId, pickResults) {
-        if (this.gameState == null){
+        console.log(obj);
+
+
+        if (!this.gameHasStarted()){
             console.log("Game hasnt started yet, cant select");
             return;
         }
 
-        if (this.animator.animatingElements!=null){
+        if (this.isAnimating()){
             console.log("Animation in progress, cant select");
             return;
         }
@@ -95,7 +100,7 @@ class MyGameOrchestrator {
             return;
         }
 
-        if (this.gameWinner != null){
+        if (this.gameHasEnded()){
             console.log("Game has ended, cant select");
             return;
         }
@@ -268,32 +273,41 @@ class MyGameOrchestrator {
     }
 
     movie(){
-        if (this.gameState == null){
+        if (!this.gameHasStarted()){
             console.log("Can't play movie, game hasn't started yet");
             return;
         }
 
+        if (this.processingRequest || this.isAnimating()){
+            console.log("Can't play movie, processing move");
+            return;
+        }
+
         // Remove all placed pieces from the board, reset to white's turn
-        for (let i = 0 ; i < this.piecesStack.length ; i++) this.piecesStack[i].unsetCoords();
+        let piecesStackLength = this.piecesStack.length;
+        for (let i = 0 ; i < piecesStackLength ; i++) this.piecesStack.pop().unsetCoords();
         this.currColor = "white";
-        this.currTurn = this.firstTurn;
+        this.currTurn = 0;
 
         // Play out all moves in move stack, without updating game state
         this.movieMoves = [].concat(this.movesStack).reverse();
+        this.movesStack = [];
     }
 
     // Prolog functions
     startGame(){
-        this.client.makeRequest("start_game");
-        this.piecesStack.forEach(element => element.unsetCoords());
-        this.gameboard.tiles.forEach(element => element.unsetOccupied());
-        this.chooseStartingTurn();
-        this.outdatedMessage = true;
-        this.gameWinner = null;
+        if (!this.isAnimating()){
+            this.client.makeRequest("start_game");
+            this.piecesStack.forEach(element => element.unsetCoords());
+            this.gameboard.tiles.forEach(element => element.unsetOccupied());
+            this.chooseStartingTurn();
+            this.outdatedMessage = true;
+            this.gameWinner = null;
+        }
     }
     
     move(move, piece, updateState){
-        if (this.gameState != null) {
+        if (this.gameHasStarted()) {
             if (updateState) this.client.makeRequest("move(" + this.gameState + "," + move.toString() + ")");
             this.animator.animateMove(move, piece);
         }
@@ -301,7 +315,7 @@ class MyGameOrchestrator {
     }
 
     undoMove(){
-        if (this.gameState != null && this.animator.animatingElements==null && this.movesStack.length > 1) {
+        if (this.gameHasStarted() && !this.isAnimating() && this.movesStack.length > 1) {
             // Pop second to last move from the stack
             let othersMove = this.movesStack.pop();
             let move = this.movesStack.pop();
@@ -322,11 +336,25 @@ class MyGameOrchestrator {
     }
 
     aiMove(){
-        if (this.gameState != null && this.currColor != null && this.AILevel != null && this.gameWinner == null) this.client.makeRequest("choose_move("+this.gameState+","+this.currColor+","+this.AILevel+")");
+        if (this.gameHasStarted() && !this.gameHasEnded()) this.client.makeRequest("choose_move("+this.gameState+","+this.currColor+","+this.AILevel+")");
         else console.log("Can't send request to prolog: AI Move");
     }
 
     scoreAndGameOver(){
-        if (this.gameState != null) this.client.makeRequest("score_and_game_over(" + this.gameState + ")");
+        if (this.gameHasStarted()) this.client.makeRequest("score_and_game_over(" + this.gameState + ")");
+    }
+
+    // Condtitions
+
+    gameHasStarted(){
+        return this.gameState != null;
+    }
+
+    gameHasEnded(){
+        return this.gameWinner != null;
+    }
+
+    isAnimating(){
+        return this.animator.animatingElements != null;
     }
 }
