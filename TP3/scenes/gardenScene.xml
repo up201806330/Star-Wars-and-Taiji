@@ -49,7 +49,7 @@
         <texture id="rockTex2" path="./scenes/images/rock2.jpg" />
         <texture id="rockTex3" path="./scenes/images/rock3.jpg" />
         <texture id="sandTex" path="./scenes/images/sand1.jpg" />
-        
+
     </textures>
 
     <spritesheets>
@@ -84,16 +84,16 @@
 
         <material id="whiteRockMat">
             <shininess value="1.0" />
-            <ambient r="0.6" g="0.6" b="0.6" a="1.0" />
-            <diffuse r="0.4" g="0.4" b="0.4" a="1.0" />
+            <ambient r="0.3" g="0.3" b="0.3" a="1.0" />
+            <diffuse r="0.3" g="0.3" b="0.3" a="1.0" />
             <specular r="1" g="1" b="1" a="1.0" />
             <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
         </material>
 
         <material id="sandMat">
             <shininess value="1.0" />
-            <ambient r="0.4" g="0.4" b="0.4" a="1.0" />
-            <diffuse r="0.4" g="0.4" b="0.435" a="1.0" />
+            <ambient r="0.6" g="0.6" b="0.2" a="1.0" />
+            <diffuse r="0.4" g="0.4" b="0.235" a="1.0" />
             <specular r="0.1" g="0.1" b="0.135" a="1.0" />
             <emissive r="0.1" g="0.1" b="0.1" a="1.0" />
         </material>
@@ -109,7 +109,7 @@
                 <rotation axis="z" angle="-90" />
                 <scale sx="1" sy="1" sz="1" />
             </keyframe>
-            
+
             <keyframe instant="3.3">
                 <translation x="12" y="-8" z="-1" />
                 <rotation axis="x" angle="0" />
@@ -156,7 +156,7 @@
                 <rotation axis="z" angle="-90" />
                 <scale sx="1" sy="1" sz="1" />
             </keyframe>
-            
+
             <keyframe instant="3.3">
                 <translation x="12" y="-8" z="-1" />
                 <rotation axis="x" angle="0" />
@@ -239,7 +239,7 @@
             </descendants>
         </node>
 
-        
+
         <node id="test">
             <material id="null" />
             <texture id="null">
@@ -248,7 +248,7 @@
 
             <transformations>
             </transformations>
-            
+
             <animationref id="curve1" />
 
             <descendants>
@@ -264,7 +264,7 @@
 
             <transformations>
             </transformations>
-            
+
             <animationref id="curve2" />
 
             <descendants>
@@ -565,7 +565,7 @@
             </transformations>
 
             <descendants>
-                <leaf type="sphere" radius="18" stacks="9" slices="9" /> 
+                <leaf type="sphere" radius="18" stacks="9" slices="9" />
                 <noderef id="topTable" />
             </descendants>
         </node>
@@ -596,7 +596,7 @@
             </transformations>
 
             <descendants>
-                <leaf type="sphere" radius="2" stacks="5" slices="5" /> 
+                <leaf type="sphere" radius="2" stacks="5" slices="5" />
             </descendants>
         </node>
         <node id="smallRock2">
@@ -610,7 +610,7 @@
             </transformations>
 
             <descendants>
-                <leaf type="sphere" radius="2" stacks="6" slices="6" /> 
+                <leaf type="sphere" radius="2" stacks="6" slices="6" />
             </descendants>
         </node>
         <node id="smallRock3">
@@ -624,7 +624,7 @@
             </transformations>
 
             <descendants>
-                <leaf type="sphere" radius="2" stacks="6" slices="6" /> 
+                <leaf type="sphere" radius="2" stacks="6" slices="6" />
             </descendants>
         </node>
         <node id="smallRock4">
@@ -638,7 +638,7 @@
             </transformations>
 
             <descendants>
-                <leaf type="sphere" radius="2" stacks="5" slices="5" /> 
+                <leaf type="sphere" radius="2" stacks="5" slices="5" />
             </descendants>
         </node>
         <node id="smallRock5">
@@ -652,7 +652,7 @@
             </transformations>
 
             <descendants>
-                <leaf type="sphere" radius="2" stacks="7" slices="7" /> 
+                <leaf type="sphere" radius="2" stacks="7" slices="7" />
             </descendants>
         </node>
         <node id="smallRocks">
@@ -918,13 +918,13 @@
             </texture>
 
             <transformations>
-                <translation x="-39" y="-16" z="0" />
-                <scale sx="2" sy="2.4" sz="1.9" /> 
+                <translation x="-39" y="-16" z="-3" />
+                <scale sx="2" sy="2.4" sz="1.9" />
                 <rotation axis="y" angle="15" />
             </transformations>
 
             <descendants>
-                <leaf type="sphere" radius="2" stacks="5" slices="5" /> 
+                <leaf type="sphere" radius="2" stacks="5" slices="5" />
             </descendants>
         </node>
         <node id="smallRock7">
@@ -934,13 +934,13 @@
             </texture>
 
             <transformations>
-                <translation x="-37" y="-16" z="-7" />
+                <translation x="-36" y="-16" z="-8" />
                 <scale sx="2.1" sy="1.9" sz="2.3" />
-                <rotation axis="y" angle="-10" /> 
+                <rotation axis="y" angle="-10" />
             </transformations>
 
             <descendants>
-                <leaf type="sphere" radius="2" stacks="5" slices="5" /> 
+                <leaf type="sphere" radius="2" stacks="5" slices="5" />
             </descendants>
         </node>
         <node id="smallRock8">
@@ -951,12 +951,12 @@
 
             <transformations>
                 <translation x="-34" y="-16" z="-14" />
-                <scale sx="2" sy="2.2" sz="1.8" /> 
+                <scale sx="2" sy="2.2" sz="1.8" />
                 <rotation axis="y" angle="8" />
             </transformations>
 
             <descendants>
-                <leaf type="sphere" radius="2" stacks="5" slices="5" /> 
+                <leaf type="sphere" radius="2" stacks="5" slices="5" />
             </descendants>
         </node>
         <node id="smallRock9">
@@ -966,13 +966,13 @@
             </texture>
 
             <transformations>
-                <translation x="-31" y="-16" z="-22" />
-                <scale sx="2.9" sy="2.9" sz="2.9" /> 
-                <rotation axis="y" angle="20" />
+                <translation x="-30" y="-16" z="-21" />
+                <scale sx="2.9" sy="2.9" sz="2.9" />
+                <rotation axis="y" angle="-40" />
             </transformations>
 
             <descendants>
-                <leaf type="sphere" radius="2" stacks="5" slices="5" /> 
+                <leaf type="sphere" radius="2" stacks="5" slices="5" />
             </descendants>
         </node>
         <node id="smallRock10">
@@ -982,12 +982,12 @@
             </texture>
 
             <transformations>
-                <translation x="-28" y="-16" z="-28" />
-                <scale sx="1.5" sy="1.2" sz="1" /> 
+                <translation x="-25" y="-16" z="-26" />
+                <scale sx="1.5" sy="1.2" sz="1.35" />
             </transformations>
 
             <descendants>
-                <leaf type="sphere" radius="2" stacks="5" slices="5" /> 
+                <leaf type="sphere" radius="2" stacks="5" slices="5" />
             </descendants>
         </node>
         <node id="smallRock11">
@@ -997,13 +997,13 @@
             </texture>
 
             <transformations>
-                <translation x="-23" y="-16" z="-31" />
-                <scale sx="2.2" sy="1.9" sz="2.1" /> 
+                <translation x="-22" y="-16" z="-31" />
+                <scale sx="2.2" sy="1.9" sz="2.1" />
                 <rotation axis="y" angle="-45" />
             </transformations>
 
             <descendants>
-                <leaf type="sphere" radius="2" stacks="5" slices="5" /> 
+                <leaf type="sphere" radius="2" stacks="5" slices="5" />
             </descendants>
         </node>
         <node id="smallRock12">
@@ -1013,13 +1013,13 @@
             </texture>
 
             <transformations>
-                <translation x="-15" y="-16" z="-34" />
-                <scale sx="2.7" sy="2.4" sz="2" /> 
-                <rotation axis="y" angle="10" />
+                <translation x="-14" y="-16" z="-34" />
+                <scale sx="2.7" sy="2.4" sz="2.7" />
+                <rotation axis="y" angle="-40" />
             </transformations>
 
             <descendants>
-                <leaf type="sphere" radius="2" stacks="5" slices="5" /> 
+                <leaf type="sphere" radius="2" stacks="5" slices="5" />
             </descendants>
         </node>
         <node id="smallRock13">
@@ -1029,13 +1029,13 @@
             </texture>
 
             <transformations>
-                <translation x="-7" y="-16" z="-37" />
-                <scale sx="2" sy="2" sz="2" /> 
-                <rotation axis="y" angle="-30" />
+                <translation x="-6" y="-16" z="-36" />
+                <scale sx="2" sy="2" sz="2" />
+                <rotation axis="y" angle="-70" />
             </transformations>
 
             <descendants>
-                <leaf type="sphere" radius="2" stacks="5" slices="5" /> 
+                <leaf type="sphere" radius="2" stacks="5" slices="5" />
             </descendants>
         </node>
         <node id="smallRock14">
@@ -1046,12 +1046,12 @@
 
             <transformations>
                 <translation x="0" y="-16" z="-39" />
-                <scale sx="2.4" sy="1.8" sz="2" /> 
+                <scale sx="2.4" sy="1.8" sz="2" />
                 <rotation axis="y" angle="15" />
             </transformations>
 
             <descendants>
-                <leaf type="sphere" radius="2" stacks="5" slices="5" /> 
+                <leaf type="sphere" radius="2" stacks="5" slices="5" />
             </descendants>
         </node>
         <node id="quarterCircleSmallRocks">
