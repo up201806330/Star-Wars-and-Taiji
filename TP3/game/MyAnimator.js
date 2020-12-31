@@ -14,32 +14,32 @@ class MyAnimator{
         this.animatingElements = [this.cannon];
     }
 
-    animateMove(gameMove, newPiece){
-        let color = gameMove.playerColor;
-        let rowW = gameMove.tileCoordsArray[0].coordinates.row;
-        let colW = gameMove.tileCoordsArray[0].coordinates.column;
-        let rowB = gameMove.tileCoordsArray[1].coordinates.row;
-        let colB = gameMove.tileCoordsArray[1].coordinates.column
+    animateMove(move, piece){
+        let color = move.playerColor;
+        let rowW = move.tileCoordsArray[0].coordinates.row;
+        let colW = move.tileCoordsArray[0].coordinates.column;
+        let rowB = move.tileCoordsArray[1].coordinates.row;
+        let colB = move.tileCoordsArray[1].coordinates.column
 
         if (this.scene.curScene == "gardenScene"){
             if (color == "black") {
                 this.blackFish.row = rowW;
-                this.animatingElements = new Array(newPiece, this.blackFish);
+                this.animatingElements = new Array(piece, this.blackFish);
             }
             else if (color == "white"){
                 this.whiteFish.row = rowW;
-                this.animatingElements = new Array(newPiece, this.whiteFish);
+                this.animatingElements = new Array(piece, this.whiteFish);
             }
         }
         else if (this.scene.curScene == "roomScene"){
-            this.animatingElements = new Array(newPiece, this.cannon, this.cannonExplosion);
+            this.animatingElements = new Array(piece, this.cannon, this.cannonExplosion);
         }
     
-        newPiece.setCoords(rowW, colW, rowB, colB);
-        this.primitives.push(newPiece);
-        
-        // console.log(this.animatingElements);
-        // console.log(this.primitives);
+        this.primitives.push(piece);                         // Pushes new piece to primitives to be displayed by the animator
+        this.scene.gameOrchestrator.movesStack.push(move);   // Pushes new move to stack of executed moves
+        this.scene.gameOrchestrator.piecesStack.push(piece); // Pushes new piece to stack of placed pieces
+        move.occupyTiles();                                  // Updates board's tiles to be full
+        piece.setCoords(rowW, colW, rowB, colB);             // Updates final coords of the piece that will be placed
     }
 
     update(now){
@@ -51,7 +51,6 @@ class MyAnimator{
             this.animatingElements.forEach (element => element.startAnimation(this.scene));
             this.started = true;
         } 
-
         else if (this.animatingElements[0].animation.ended){
             this.animatingElements = null;
             this.started = false;
@@ -66,9 +65,10 @@ class MyAnimator{
         //console.log(this.primitives);
         this.primitives.forEach (element => {
             if (element.animation != null){
-                if (element.animation.currentFrame == -1 && !(element instanceof Cannon)) return;
-                if (this.scene.curScene =='gardenScene' && element instanceof Cannon) return;
-                if (this.scene.curScene =='roomScene' && element instanceof Fish) return;
+                if ((element.animation.currentFrame == -1 && !(element instanceof Cannon)) || // So animating objects (except cannon) don't show before animation starts
+                    (this.scene.curScene =='gardenScene' && element instanceof Cannon) ||     // Hides cannon in garden scene
+                    (this.scene.curScene =='roomScene' && element instanceof Fish)) return;   // Hides fish in room scene
+
                 this.scene.pushMatrix();
                 //console.log(element.rowW, element.animation);
                 element.animation.apply(); 
