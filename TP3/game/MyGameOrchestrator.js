@@ -16,8 +16,9 @@ class MyGameOrchestrator {
 
         // GameState and game flow flags
         this.gameState = null;
-        this.movesStack = [];
-        this.piecesStack = [];
+        this.movesStack = [];  // Stack of executed moves
+        this.piecesStack = []; // Stack of placed pieces
+        this.movieMoves = []   // Stack of moves in movie
 
         this.whiteScore = 0;
         this.blackScore = 0;
@@ -27,8 +28,6 @@ class MyGameOrchestrator {
         
         this.AILevel = '2';
         this.gamemode = 'pve';
-
-        // this.gameSequence = new MyGameSequence();
 
         this.animator = new MyAnimator(scene);
     }
@@ -55,6 +54,12 @@ class MyGameOrchestrator {
             if (((this.gamemode == 'pve' && this.currTurn == 1) || this.gamemode == 'eve') && this.gameWinner == null && this.gameState != null){
                 // console.log("Computer turn");
                 this.aiMove();
+            }
+
+            if (this.movieMoves.length > 0){
+                var move = this.movieMoves.pop();
+                var piece = this.gameboard.nextUnassignedPiece();
+                this.move(move, piece, false);
             }
         }
     }
@@ -121,7 +126,7 @@ class MyGameOrchestrator {
                             // console.log(this.selectedTiles);
                             var gameMove = new MyGameMove((this.currColor == 'white') ? this.selectedTiles : this.selectedTiles.reverse(), this.currColor);
                             var gamePiece = this.gameboard.nextUnassignedPiece();
-                            this.move(gameMove, gamePiece);
+                            this.move(gameMove, gamePiece, true);
 
                             this.selectedTiles = [];
                             this.clearAdjacentHighlights();
@@ -232,6 +237,7 @@ class MyGameOrchestrator {
 
     chooseStartingTurn(){ // TODO animation with this
         this.currTurn = Math.round(Math.random());
+        this.firstTurn = this.currTurn;
         this.currColor = "white";
         console.log(this.turnInString() + " is white");
     }
@@ -261,6 +267,21 @@ class MyGameOrchestrator {
         this.outdatedMessage = true;
     }
 
+    movie(){
+        if (this.gameState == null){
+            console.log("Can't play movie, game hasn't started yet");
+            return;
+        }
+
+        // Remove all placed pieces from the board, reset to white's turn
+        for (let i = 0 ; i < this.piecesStack.length ; i++) this.piecesStack[i].unsetCoords();
+        this.currColor = "white";
+        this.currTurn = this.firstTurn;
+
+        // Play out all moves in move stack, without updating game state
+        this.movieMoves = [].concat(this.movesStack).reverse();
+    }
+
     // Prolog functions
     startGame(){
         this.client.makeRequest("start_game");
@@ -271,29 +292,31 @@ class MyGameOrchestrator {
         this.gameWinner = null;
     }
     
-    move(move, piece){
+    move(move, piece, updateState){
         if (this.gameState != null) {
-            this.client.makeRequest("move("+this.gameState+","+move.toString()+")");
+            if (updateState) this.client.makeRequest("move(" + this.gameState + "," + move.toString() + ")");
             this.animator.animateMove(move, piece);
-            this.movesStack.push(move);
-            this.piecesStack.push(piece);
-            move.occupyTiles();
         }
         else console.log("Can't send request to prolog: Move");
     }
 
     undoMove(){
         if (this.gameState != null && this.animator.animatingElements==null && this.movesStack.length > 1) {
+            // Pop second to last move from the stack
             let othersMove = this.movesStack.pop();
             let move = this.movesStack.pop();
             this.movesStack.push(othersMove);
+
+            // Update state
             this.client.makeRequest("undo_move(" + this.gameState + "," + move.toString() + ")");
+
+            // Unset coords of second to last placed piece
             let othersPiece = this.piecesStack.pop();
             this.piecesStack.pop().unsetCoords();
             this.piecesStack.push(othersPiece);
             
-            move.tileCoordsArray[0].unsetOccupied();
-            move.tileCoordsArray[1].unsetOccupied();
+            // Unoccupy tiles the second to last move occupied
+            move.unoccupyTiles();
         }
         else console.log("Can't send request to prolog: Undo Move");
     }
@@ -304,6 +327,6 @@ class MyGameOrchestrator {
     }
 
     scoreAndGameOver(){
-        if (this.gameState != null) this.client.makeRequest("score_and_game_over("+this.gameState+")");
+        if (this.gameState != null) this.client.makeRequest("score_and_game_over(" + this.gameState + ")");
     }
 }

@@ -52,7 +52,7 @@ class XMLscene extends CGFscene {
         }
 
         this.movie = function() {
-            console.log("Pressed Movie");
+            this.gameOrchestrator.movie();
         }
 
         this.zoomIn = function() {

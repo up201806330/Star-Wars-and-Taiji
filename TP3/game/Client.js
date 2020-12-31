@@ -62,7 +62,7 @@ class Client{
         var move = new MyGameMove([whiteTile, blackTile], scene.gameOrchestrator.currColor);
         var piece = scene.gameOrchestrator.gameboard.nextUnassignedPiece();
 
-        scene.gameOrchestrator.move(move, piece);
+        scene.gameOrchestrator.move(move, piece, true);
     }
 
     chooseHandler(requestString){
