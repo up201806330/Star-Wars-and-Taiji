@@ -36,8 +36,7 @@ class MyGameOrchestrator {
         this.animator.update(now);
     }
 
-    orchestrate() { 
-        console.log(this.currTurn);
+    orchestrate() {
         if (!this.isAnimating() && !this.processingRequest){
             if (this.outdatedMessage) {
                 this.score.updateScore(this.whiteScore, this.blackScore);
@@ -60,7 +59,6 @@ class MyGameOrchestrator {
             }
 
             if (((this.gamemode == 'pve' && this.currTurn == 1) || this.gamemode == 'eve')){
-                console.log("Computer turn");
                 this.aiMove();
             }
         }
@@ -240,7 +238,7 @@ class MyGameOrchestrator {
         this.scene.popMatrix();
     }
 
-    chooseStartingTurn(){ // TODO animation with this
+    chooseStartingTurn(){
         this.currTurn = Math.round(Math.random());
         this.firstTurn = this.currTurn;
         this.currColor = "white";
@@ -337,7 +335,6 @@ class MyGameOrchestrator {
 
     aiMove(){
         if (this.gameHasStarted() && !this.gameHasEnded()) this.client.makeRequest("choose_move("+this.gameState+","+this.currColor+","+this.AILevel+")");
-        else console.log("Can't send request to prolog: AI Move");
     }
 
     scoreAndGameOver(){
@@ -345,7 +342,6 @@ class MyGameOrchestrator {
     }
 
     // Condtitions
-
     gameHasStarted(){
         return this.gameState != null;
     }
