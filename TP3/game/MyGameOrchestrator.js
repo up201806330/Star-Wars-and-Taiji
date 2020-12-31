@@ -11,6 +11,7 @@ class MyGameOrchestrator {
 
         this.client = new Client(scene);
         this.gameboard = new MyGameBoard(scene, 7);
+        this.plate = new Plate(scene);
         this.score = new ScoreDisplay(scene);
         this.message = new MessageDisplay(scene);
 
@@ -216,6 +217,10 @@ class MyGameOrchestrator {
         this.scene.pushMatrix();
         this.scene.defaultAppearance.apply();
         this.gameboard.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.plate.display();
         this.scene.popMatrix();
         
         this.scene.pushMatrix();
