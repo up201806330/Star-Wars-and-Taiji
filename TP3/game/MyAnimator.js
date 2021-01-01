@@ -1,6 +1,7 @@
 class MyAnimator{
     constructor(scene){
         this.scene = scene;
+        
 
         this.started = false;
         
@@ -62,6 +63,7 @@ class MyAnimator{
     }
 
     display(){
+        let h = 49;
         //console.log(this.primitives);
         this.primitives.forEach (element => {
             if (element.animation != null){
@@ -72,7 +74,13 @@ class MyAnimator{
                 this.scene.pushMatrix();
                 //console.log(element.rowW, element.animation);
                 element.animation.apply(); 
+
+                if (element instanceof MyPiece) {
+                    this.scene.registerForPick(h + 1, this.scene.gameOrchestrator.gameboard.pieces[h - 49] ); h++;
+                }
+
                 element.display();
+
                 this.scene.popMatrix();
             }
         });

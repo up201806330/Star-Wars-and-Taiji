@@ -8,10 +8,13 @@ class MyGameBoard {
         // this.gameboard is unnecessary, right?
         this.scene = scene;
         this.tiles = [];
-        this.pieces = new Array();  for(let i = 0 ; i < 24 ; i++) this.pieces.push(new MyPiece(scene));
+        this.pieces = [];
+        
         this.sideBoardLength = sideBoardLength;
 
         this.initTileMaterials();
+
+        for(let m = 0; m < 24; m++) this.pieces.push(new MyPiece(this.scene));
 
         for(let i = 0; i < this.sideBoardLength; i++) {
             for (let j = 0; j < this.sideBoardLength; j++) {
