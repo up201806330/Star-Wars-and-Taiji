@@ -13,6 +13,7 @@ class MyGameOrchestrator {
         this.gameboard = new MyGameBoard(scene, 7);
         this.score = new ScoreDisplay(scene);
         this.message = new MessageDisplay(scene);
+        this.timer = new TimerDisplay(scene);
 
         // GameState and game flow flags
         this.gameState = null;
@@ -34,6 +35,7 @@ class MyGameOrchestrator {
     
     update(now) {
         this.animator.update(now);
+        if (this.gameHasStarted() && !this.gameHasEnded()) this.timer.update(now);
     }
 
     orchestrate() {
@@ -234,6 +236,10 @@ class MyGameOrchestrator {
         this.scene.popMatrix();
         
         this.scene.pushMatrix();
+        this.timer.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
         this.animator.display();
         this.scene.popMatrix();
     }
@@ -268,6 +274,7 @@ class MyGameOrchestrator {
 
         this.currTurn = (this.currTurn + 1) % 2;
         this.outdatedMessage = true;
+        this.timer.reset();
     }
 
     movie(){
