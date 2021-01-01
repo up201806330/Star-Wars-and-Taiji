@@ -6,10 +6,17 @@ class MyGameOrchestrator {
     constructor(scene) {
         this.scene = scene;
 
+        // Picking variables
         this.selectedTiles = [];
         this.empties = [];
 
+        // Prolog client
         this.client = new Client(scene);
+
+        // Animator 
+        this.animator = new MyAnimator(scene);
+
+        // Game objects (are the same on both scenes)
         this.gameboard = new MyGameBoard(scene, 7);
         this.score = new ScoreDisplay(scene);
         this.message = new MessageDisplay(scene);
@@ -29,8 +36,6 @@ class MyGameOrchestrator {
         
         this.AILevel = '2';
         this.gamemode = 'pve';
-
-        this.animator = new MyAnimator(scene);
     }
     
     update(now) {
