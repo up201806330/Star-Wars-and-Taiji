@@ -227,6 +227,7 @@
                 <noderef id="sand" />
                 <noderef id="outlineSmallRocks" />
                 <noderef id="waterOutline" />
+                <noderef id="water" />
 
                 <!-- <noderef id="test" />
                 <noderef id="test2" /> -->
@@ -1147,6 +1148,22 @@
                 <noderef id="quarterCircleSmallRocks4" />
             </descendants>
         </node>
+
+         <node id="water">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="-16" z="0" />
+            </transformations>
+
+            <descendants>
+                <leaf type="water" />
+            </descendants>
+        </node>
+        
 
     </nodes>
 </lsf>

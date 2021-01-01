@@ -134,6 +134,10 @@ class MyPrimitive {
             this.aPrimitive = new Defbarrel(this.graph.scene, base, middle, height, slices, stacks, angle);
         }
 
+        else if (type == "water"){
+            this.aPrimitive = new Water(this.graph.scene);
+        }
+
         else {
             this.graph.onXMLMinorError("Primitive Not Implemented!");
         }

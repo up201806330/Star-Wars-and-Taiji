@@ -77,7 +77,6 @@ class XMLscene extends CGFscene {
         this.defaultAppearance = new CGFappearance(this);
 
         this.gameOrchestrator = new MyGameOrchestrator(this);
-        this.water = new Water(this);
 
         this.setPickEnabled(true);
     }
@@ -209,11 +208,6 @@ class XMLscene extends CGFscene {
             
             this.gameOrchestrator.update(now);
             this.gameOrchestrator.orchestrate();
-
-
-
-            // Cuz of shaders, this primitive must be hardcoded here
-            this.water.updateShader(now);   
         }
     }
 
@@ -248,9 +242,6 @@ class XMLscene extends CGFscene {
             this.defaultAppearance.apply();
             
             this.gameOrchestrator.display();
-            if (this.curScene == "gardenScene"){ // Cuz of shaders, this primitive must be hardcoded here
-                this.water.display();
-            }
 
             // Displays the scene (MySceneGraph function).
             // this.graph.displayScene();

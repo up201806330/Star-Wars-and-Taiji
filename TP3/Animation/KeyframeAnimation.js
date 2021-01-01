@@ -11,7 +11,7 @@ class KeyframeAnimation extends Animation{
         this.transformMatrix = mat4.create();
     };
 
-    updateAnimation(nowT) { 
+    updateAnimation(nowT) {
         let deltaT = 0;
         if(this.lastT != null) deltaT = nowT- this.lastT;
 

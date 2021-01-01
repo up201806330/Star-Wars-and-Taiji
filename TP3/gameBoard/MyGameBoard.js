@@ -65,9 +65,9 @@ class MyGameBoard {
             this.tiles[i].displayTile();
         }
 
-        // for (i; i < this.pieces.length + this.tiles.length; i++) { // TODO if we have time
-        //     this.scene.registerForPick(i + 1, this.pieces[i - this.tiles.length]);
-        // }
+        for (i; i < this.pieces.length + this.tiles.length; i++) { // TODO if we have time
+            this.scene.registerForPick(i + 1, this.pieces[i - this.tiles.length]);
+        }
 
         this.scene.clearPickRegistration(); 
     }
