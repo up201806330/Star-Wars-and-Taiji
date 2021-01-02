@@ -14,7 +14,7 @@ class XMLscene extends CGFscene {
         this.lightsStatus = [];
         this.curView = "";
 
-        this.curScene = 'gardenScene';
+        this.curScene = 'roomScene';
         this.sceneIds = { 'Room': 'roomScene', 'Garden': 'gardenScene' };
 
         this.currAILevel = '2';
@@ -71,6 +71,7 @@ class XMLscene extends CGFscene {
                 this.locked = true;
                 this.interface.setActiveCamera(null);
             }
+            console.log("Is locked? ", this.locked);
         }
 
         this.enableTextures(true);
@@ -81,7 +82,6 @@ class XMLscene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
 
         this.axis = new CGFaxis(this);
-        this.setUpdatePeriod(30);
 
         this.loadingProgressObject=new MyRectangle(this, -1, -.1, 1, .1);
         this.loadingProgress=0;
@@ -147,6 +147,10 @@ class XMLscene extends CGFscene {
         // After graph has loaded, add each light source / camera to the interface
         
         if (this.first) { // not to duplicate elements of the gui
+            this.camera = this.graph.views[this.graph.defaultID];
+            // this.activeView = defaultID;
+            this.curView = this.graph.defaultID;
+
             this.first = false;
             this.interface.addScenesInterface();
             this.interface.initLightsInterface(this.graph.lights);
@@ -161,7 +165,7 @@ class XMLscene extends CGFscene {
         
         // this.gameboard.display();
 
-        this.setUpdatePeriod(100);
+        this.setUpdatePeriod(30);
     }
 
 
@@ -272,6 +276,16 @@ class XMLscene extends CGFscene {
         // ---- END Background, camera and axis setup
     }
 
+    changeView(){
+        
+        this.camera = this.graph.views[this.curView];
+
+        if (!this.locked) {
+            // this.lockUnlockCamera();
+            this.interface.setActiveCamera(this.camera);
+        }
+    }
+
     changeGraph(){
         this.sceneInited = false; // fixed error in console
 
@@ -284,8 +298,7 @@ class XMLscene extends CGFscene {
         this.zoomInCounter = 0;
         this.zoomOutCounter = 0;
         this.targetY = -10;
-        this.locked = true;
-
+        // this.locked = true;
 
         this.graph = new MySceneGraph(this.curScene + '.xml', this);
     }

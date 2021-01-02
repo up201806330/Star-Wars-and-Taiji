@@ -32,7 +32,6 @@ class MySceneGraph {
         this.views = [];
 
         
-        this.curView = '';
         // this.curScene = 'skybox1';
         // this.sceneIds = { 'Earth': 0, 'Space': 1};
 
@@ -382,18 +381,16 @@ class MySceneGraph {
 
         }
 
-        let defaultID = this.reader.getString(viewsNode, "default");
-        if (defaultID == null) {
+        this.defaultID = this.reader.getString(viewsNode, "default");
+        if (this.defaultID == null) {
             this.onXMLError("Missing default view id in scene views.");
         }
 
-        if (this.views[defaultID] == null) {
-            return "Non existant view ID for default view: " + defaultID;
+        if (this.views[this.defaultID] == null) {
+            return "Non existant view ID for default view: " + this.defaultID;
         }
 
-        this.scene.camera = this.views[defaultID];
-        // this.activeView = defaultID;
-        this.scene.curView = defaultID;
+        
 
         // comenting this line locks the camera
         // this.scene.interface.setActiveCamera(this.scene.camera);

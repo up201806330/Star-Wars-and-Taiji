@@ -12,6 +12,10 @@
             <from x="0" y="30" z="30" />
             <to x="0" y="-10" z="-15" />
         </perspective>
+        <perspective id="sideCamera" near="0.1" far="500" angle="45">
+            <from x="0" y="50" z="10" />
+            <to x="0" y="-10" z="-15" />
+        </perspective>
     </views>
 
     <illumination>
