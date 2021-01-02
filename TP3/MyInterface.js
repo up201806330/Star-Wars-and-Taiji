@@ -38,6 +38,7 @@ class MyInterface extends CGFinterface {
         this.actionsFolder.add(this.scene, 'undo').name('Undo');
         this.actionsFolder.add(this.scene, 'movie').name('Movie');
         this.gui.add(this.scene, 'zoomIn').name('Zoom');
+        this.gui.add(this.scene, 'lockUnlockCamera').name('Lock/Unlock View');
 
         this.initKeys();
 
@@ -86,19 +87,11 @@ class MyInterface extends CGFinterface {
     };
 
     initCamerasInterface() {
-
-        // let cameraKey = {};
-        // let keys = Object.keys(graph.views);
-        // for (let key of keys) {
-        //     cameraKey[key] = key;
-        // }
-        // this.gui.add(graph, 'activeView', cameraKey).name("Camera").onChange(console.log("HI"));
         
         this.gui.add(this.scene, 'curView', Object.keys(this.scene.graph.views)).name("View Points").onChange((val) => {
             this.scene.camera = this.scene.graph.views[val];
             this.setActiveCamera(this.scene.camera);
         });
-    
     }
 
     addScenesInterface() {
