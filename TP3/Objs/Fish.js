@@ -7,12 +7,14 @@ class Fish extends PieceTransporter{
         this.appearance = new CGFappearance(scene);
         this.appearance.setSpecular(1, 1, 1, 1);
         this.appearance.setShininess(120);
+        this.appearance.setAmbient(0.8, 0.8, 0.8, 1);
+        this.appearance.setDiffuse(1, 1, 1, 1);
         if (color == "white"){
-            this.appearance.setAmbient(0.8, 0.8, 0.8, 1);
-            this.appearance.setDiffuse(1, 1, 1, 1);
+            this.appearance.loadTexture('./scenes/images/fishW.png');
+            this.appearance.setTextureWrap('REPEAT', 'REPEAT');
         }else {
-            this.appearance.setAmbient(0, 0, 0, 1);
-            this.appearance.setDiffuse(0.2, 0.2, 0.2, 1);
+            this.appearance.loadTexture('./scenes/images/fishB.png');
+            this.appearance.setTextureWrap('REPEAT', 'REPEAT');
         }
     }
 

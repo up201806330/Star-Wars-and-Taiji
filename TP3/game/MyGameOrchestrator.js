@@ -277,6 +277,8 @@ class MyGameOrchestrator {
         if (this.currColor == 'white')  this.currColor = 'black';
         else                            this.currColor = 'white';
 
+        this.selectedTiles = [];
+        this.clearAdjacentHighlights();
         this.currTurn = (this.currTurn + 1) % 2;
         this.outdatedMessage = true;
         this.timer.reset();
