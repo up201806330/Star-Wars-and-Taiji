@@ -30,7 +30,7 @@ class Fish extends PieceTransporter{
         this.keyframes.push(new KeyFrame(0.8, vec3.fromValues(0,-1,this.row - 3),    vec3.fromValues(0,0,0),   vec3.fromValues(1,1,1)));
         this.keyframes.push(new KeyFrame(0.9, vec3.fromValues(0,-1,this.row - 3),    vec3.fromValues(0,0,10),  vec3.fromValues(1,1,1)));
         this.keyframes.push(new KeyFrame(1.5, vec3.fromValues(-12,-8,this.row - 3),  vec3.fromValues(0,0,45),  vec3.fromValues(1,1,1)));
-        this.keyframes.push(new KeyFrame(2.8, vec3.fromValues(-20,-45,this.row - 3), vec3.fromValues(0,0,90),  vec3.fromValues(1,1,1)));
+        this.keyframes.push(new KeyFrame(2.4, vec3.fromValues(-20,-45,this.row - 3), vec3.fromValues(0,0,90),  vec3.fromValues(1,1,1)));
     }
 
     display(){
