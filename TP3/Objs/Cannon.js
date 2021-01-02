@@ -4,10 +4,12 @@ class Cannon extends PieceTransporter{
         this.obj = new CGFOBJModel(scene, 'Objs/models/Cannon.obj');
         
         this.appearance = new CGFappearance(scene);
-        this.appearance.setSpecular(0.2, 0.2, 0.2, 1);
+        this.appearance.setSpecular(0.9, 0.9, 0.9, 1);
         this.appearance.setShininess(120);
-        this.appearance.setAmbient(0.5, 0.5, 0.5, 1);
-        this.appearance.setDiffuse(0.2, 0.2, 0.3, 1);
+        this.appearance.setAmbient(0.9, 0.9, 0.9, 1);
+        this.appearance.setDiffuse(0.9, 0.9, 1.0, 1);
+        this.appearance.loadTexture('./scenes/images/metal.jpg');
+        this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
         // So cannon starts out in scene
         var keyframe = []; 
