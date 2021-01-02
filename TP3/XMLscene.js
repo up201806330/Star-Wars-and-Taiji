@@ -27,6 +27,7 @@ class XMLscene extends CGFscene {
         this.zoomOutCounter = 0;
         this.zoomedIn = false;
         this.targetY = -10;
+        this.locked = true;
     }
 
     /**
@@ -59,6 +60,17 @@ class XMLscene extends CGFscene {
             if (this.zoomOutCounter != 0 || this.zoomInCounter != 0) return;
             if (this.zoomedIn) this.zoomOutCounter = 10;
             else this.zoomInCounter = 10;
+        }
+
+        this.lockUnlockCamera = function() {
+            if (this.locked) {
+                this.locked = false;
+                this.interface.setActiveCamera(this.camera);
+            }
+            else {
+                this.locked = true;
+                this.interface.setActiveCamera(null);
+            }
         }
 
         this.enableTextures(true);
@@ -272,6 +284,7 @@ class XMLscene extends CGFscene {
         this.zoomInCounter = 0;
         this.zoomOutCounter = 0;
         this.targetY = -10;
+        this.locked = true;
 
 
         this.graph = new MySceneGraph(this.curScene + '.xml', this);
