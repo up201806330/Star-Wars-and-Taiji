@@ -14,7 +14,6 @@ class Water extends Animation{
         this.shader = new CGFshader(scene.gl, "./shaders/water.vert", "./shaders/water.frag");
         this.shader.setUniformsValues({timeFactor: 0});
 
-        console.log(this);
     }
 
     apply(){}
