@@ -6,15 +6,15 @@
         <!-- identifier of root node of the scene graph; this node -->
         <!-- must be defined in one of the following NODE declarations -->
     </initials>
-    <views default="defaultCamera">
+    <views default="sideCamera">
         <!-- at least one of the following type of cameras must be declared -->
         <perspective id="defaultCamera" near="0.1" far="500" angle="45">
             <from x="0" y="30" z="30" />
             <to x="0" y="-10" z="-15" />
         </perspective>
         <perspective id="sideCamera" near="0.1" far="500" angle="45">
-            <from x="0" y="50" z="10" />
-            <to x="0" y="-10" z="-15" />
+            <from x="55" y="15" z="5" />
+            <to x="-25" y="-12" z="-10" />
         </perspective>
     </views>
 
