@@ -71,7 +71,6 @@ class XMLscene extends CGFscene {
                 this.locked = true;
                 this.interface.setActiveCamera(null);
             }
-            console.log("Is locked? ", this.locked);
         }
 
         this.enableTextures(true);
@@ -146,8 +145,6 @@ class XMLscene extends CGFscene {
 
         // After graph has loaded, add each light source / camera to the interface
         
-
-
         if (this.first) { // not to duplicate elements of the gui
             this.camera = this.graph.views[this.graph.defaultID];
             // this.interface.setActiveCamera(this.camera);
@@ -269,10 +266,8 @@ class XMLscene extends CGFscene {
  
             this.defaultAppearance.apply();
             
+            // Displays the scene elements
             this.gameOrchestrator.display();
-
-            // Displays the scene (MySceneGraph function).
-            // this.graph.displayScene();
         }
         else {
             // Show some "loading" visuals
@@ -293,24 +288,17 @@ class XMLscene extends CGFscene {
         this.camera = this.graph.views[this.curView];
 
         if (!this.locked) {
-            // this.lockUnlockCamera();
             this.interface.setActiveCamera(this.camera);
         }
     }
 
     changeGraph(){
-        this.sceneInited = false; // fixed error in console
-
-        // this.interface.gui.remove(this.interface.lightsFolder);
-        // this.interface.lightsFolder.close();
-
+        this.sceneInited = false;
         this.first = false;
-
         this.zoomedIn = false;
         this.zoomInCounter = 0;
         this.zoomOutCounter = 0;
         this.targetY = -10;
-        // this.locked = true;
 
         // Turns off lights of previous/to be changed scene
         for (let lightId in this.graph.lights) {

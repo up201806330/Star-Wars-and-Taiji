@@ -307,8 +307,6 @@ class MySceneGraph {
 
             // https://www.w3schools.com/xml/dom_nodes_info.asp
             if (view.nodeName == "perspective") {
-                // console.log("Found a Perspective View!");
-
                 // main parameters
                 id = this.reader.getString(view, perspectiveParameters[i++], nonexistentParameter);
                 near = this.reader.getFloat(view, perspectiveParameters[i++], nonexistentParameter);
@@ -332,13 +330,9 @@ class MySceneGraph {
                 to = vec3.fromValues(xTo, yTo, zTo);
 
                 this.views[id] = new CGFcamera(angle * DEGREE_TO_RAD, near, far, from, to);
-
-                // console.log(this.views["defaultCamera"]);
             }
 
             else if (view.nodeName == "ortho") {
-                // console.log("Found an Ortho View!");
-
                 // main parameters
                 id = this.reader.getString(view, orthoParameters[i++], nonexistentParameter);
                 near = this.reader.getFloat(view, orthoParameters[i++], nonexistentParameter);
@@ -375,8 +369,6 @@ class MySceneGraph {
                 to = vec3.fromValues(xTo, yTo, zTo);          // to "=" target
 
                 this.views[id] = new CGFcameraOrtho(left, right, bottom, top, near, far, from, to, up);
-
-                // console.log(this.views["demoOrtho"]);
             }
 
         }
@@ -389,11 +381,6 @@ class MySceneGraph {
         if (this.views[this.defaultID] == null) {
             return "Non existant view ID for default view: " + this.defaultID;
         }
-
-        
-
-        // comenting this line locks the camera
-        // this.scene.interface.setActiveCamera(this.scene.camera);
 
         return null;
     }

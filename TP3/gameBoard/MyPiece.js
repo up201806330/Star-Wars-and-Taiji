@@ -91,13 +91,10 @@ class MyPiece {
         }
     }
 
-    display() { 
-        //if (!this.assigned) return;
-
+    display() {
         let blackOffset = vec3.fromValues((this.colB-this.colW), 0, (this.rowB-this.rowW));
 
         this.scene.pushMatrix();
-        // this.scene.translate(-3 + this.colW,-9.7,-3 + this.rowW);
         this.scene.scale(0.95,0.14,0.95);
 
         this.scene.pushMatrix();

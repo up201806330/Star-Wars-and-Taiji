@@ -44,8 +44,3 @@ class Cannon extends PieceTransporter{
         this.animation.updateAnimation(now);
     }
 }
-
-
-// Animation notes
-
-// 

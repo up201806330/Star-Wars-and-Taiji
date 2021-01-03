@@ -73,7 +73,6 @@ class MyAnimator{
 
     display(){
         let h = 49;
-        //console.log(this.primitives);
         this.primitives.forEach (element => {
             if (element.animation != null){
                 if ((element.animation.currentFrame == -1 && !(element instanceof Cannon)) || // So animating objects (except cannon) don't show before animation starts
@@ -81,7 +80,6 @@ class MyAnimator{
                     (this.scene.curScene =='roomScene' && element instanceof Fish)) return;   // Hides fish in room scene
 
                 this.scene.pushMatrix();
-                //console.log(element.rowW, element.animation);
                 element.animation.apply(); 
 
                 if (element instanceof MyPiece) {

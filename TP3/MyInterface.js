@@ -21,8 +21,6 @@ class MyInterface extends CGFinterface {
         this.gui = new dat.GUI();
 
         // add a group of controls (and open/expand by defult)
-        
-        // folder hierarchy with .close() in functions
         this.taijiFolder = this.gui.addFolder("Taiji");
         this.taijiFolder.open();
 
@@ -37,6 +35,7 @@ class MyInterface extends CGFinterface {
         this.undoButton = this.actionsFolder.add(this.scene, 'undo').name('Undo');
         this.movieButton = this.actionsFolder.add(this.scene, 'movie').name('Movie');
         this.zoomButton = this.gui.add(this.scene, 'zoomIn').name('Zoom');
+
         this.gui.add(this.scene, 'lockUnlockCamera').name('Lock/Unlock View');
 
         this.lightsFolder = this.gui.addFolder("Lights");
@@ -74,12 +73,8 @@ class MyInterface extends CGFinterface {
 
             // if the light source has parameters associated
             if (lights[lightId] !== undefined) {
-                // console.log(lights[lightId]);
-                // console.log(lights[lightId][0]); // ---> if enable="0" returns "1" !?!?!?
-
                 // true -> light enabled, false -> light disabled
                 this.scene.lightsStatus[lightId] = (lights[lightId][0] !== true) ? false : true;
-                // console.log(this.scene.lightsStatus[lightId]);
 
                 // adds light source to the gui
                 this.lightsFolder.add(this.scene.lightsStatus, lightId);

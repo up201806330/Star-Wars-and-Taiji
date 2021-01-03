@@ -115,8 +115,6 @@ class MyGameOrchestrator {
 
                 switch (this.selectedTiles.length) {
                     case 0:
-                        //console.log("Selecting First One!", customId);
-
                         this.selectedTiles[0] = obj;
                         obj.setOccupied();
 
@@ -127,12 +125,9 @@ class MyGameOrchestrator {
                     
                     case 1:
                         if (this.containsObject(obj, this.empties)) {
-                            //console.log("Selecting Second One!");
                             this.selectedTiles[1] = obj;
                             obj.setOccupied();
                             
-                            // console.log("Selected Tiles Array:");
-                            // console.log(this.selectedTiles);
                             var gameMove = new MyGameMove((this.currColor == 'white') ? this.selectedTiles : this.selectedTiles.reverse(), this.currColor);
                             var gamePiece = this.gameboard.nextUnassignedPiece();
                             this.move(gameMove, gamePiece, true);
@@ -190,7 +185,6 @@ class MyGameOrchestrator {
         let foundTile;
 
         let indexId = customId - 1;
-        // console.log(indexId);
 
         // check row up
         let checkUpId = indexId - 7;
@@ -217,7 +211,6 @@ class MyGameOrchestrator {
             if (foundTile != null && foundTile.empty) emptyAdjacents.push(foundTile);
         }
 
-        // console.log("Size: ", emptyAdjacents);
         return emptyAdjacents;
     }
 

@@ -18,7 +18,6 @@ class PieceExplosion extends PieceTransporter{
     }
 
     startAnimation(scene){
-        console.log("started this shit");
         this.generateKeyframes();
         this.animation = new KeyframeAnimation(scene, this.keyframes);
     }

@@ -28,7 +28,6 @@ class Client{
     // Handlers
     handleReceivedGameState(scene, data) {
         scene.gameOrchestrator.gameState = data.target.response;
-        //console.log(scene.gameOrchestrator.gameState);
 
         scene.gameOrchestrator.processingRequest = false;
     }

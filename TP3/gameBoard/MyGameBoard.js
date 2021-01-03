@@ -4,8 +4,6 @@
 class MyGameBoard {
 
     constructor(scene, sideBoardLength) {
-        // Create a gameboard instance
-        // this.gameboard is unnecessary, right?
         this.scene = scene;
         this.tiles = [];
         this.pieces = [];
@@ -19,7 +17,6 @@ class MyGameBoard {
         for(let i = 0; i < this.sideBoardLength; i++) {
             for (let j = 0; j < this.sideBoardLength; j++) {
                 this.tiles.push(new MyTile(this.scene, {row: i, column: j}, ((i+j)%2)?this.darkTile:this.lightTile));
-                // this.tiles[this.tiles.length - 1].piece = new MyPiece(this.scene, 'idk type', []);
             }
         }
     }
@@ -58,14 +55,12 @@ class MyGameBoard {
     }
 
     display() {
-        //console.log(this.tiles);
-        
         for (var i = 0; i < this.tiles.length; i++) {
             this.scene.registerForPick(i + 1, this.tiles[i]);
             this.tiles[i].displayTile();
         }
 
-        for (i; i < this.pieces.length + this.tiles.length; i++) { // TODO if we have time
+        for (i; i < this.pieces.length + this.tiles.length; i++) {
             this.scene.registerForPick(i + 1, this.pieces[i - this.tiles.length]);
         }
 
