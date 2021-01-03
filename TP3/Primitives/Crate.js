@@ -4,9 +4,9 @@ class Crate {
         this.obj = new CGFOBJModel(scene, 'Objs/models/box_OBJ.obj');
         
         this.appearance = new CGFappearance(scene);
-        this.appearance.setSpecular(1, 1, 1, 1);
+        this.appearance.setSpecular(0.0, 0.0, 0.0, 1);
         this.appearance.setShininess(100);
-        this.appearance.setAmbient(0.0, 0.0, 0.0, 1.0);
+        this.appearance.setAmbient(0.1, 0.1, 0.1, 1.0);
         this.appearance.setDiffuse(0.17, 0.36, 0.22, 1);
         // this.appearance.loadTexture('./scenes/images/fishW.png');
         // this.appearance.setTextureWrap('REPEAT', 'REPEAT');
