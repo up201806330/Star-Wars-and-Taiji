@@ -6,7 +6,7 @@
         <!-- identifier of root node of the scene graph; this node -->
         <!-- must be defined in one of the following NODE declarations -->
     </initials>
-    <views default="sideCamera">
+    <views default="defaultCamera">
         <!-- at least one of the following type of cameras must be declared -->
         <perspective id="defaultCamera" near="0.1" far="500" angle="45">
             <from x="0" y="30" z="30" />
@@ -112,6 +112,22 @@
             <specular r="0.0" g="0.0" b="0.0" a="1.0" />
             <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
         </material>
+
+        <material id="whitePartPieceMaterial">
+            <shininess value="1" />
+            <ambient r="0" g="0" b="0" a="1.0" />
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+            <specular r="0.0" g="0.0" b="0.0" a="1.0" />
+            <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
+        </material>
+
+        <material id="blackPartPieceMaterial">
+            <shininess value="1" />
+            <ambient r="0" g="0" b="0" a="1.0" />
+            <diffuse r="0.0" g="0.0" b="0.0" a="1.0" />
+            <specular r="0.0" g="0.0" b="0.0" a="1.0" />
+            <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
+        </material>
         
     </materials>
 
@@ -142,6 +158,7 @@
                 <noderef id="plant" />
                 <noderef id="door" />
                 <noderef id="crate" />
+                <noderef id="pieces" />
             </descendants>
         </node>
 
@@ -748,13 +765,162 @@
             </texture>
 
             <transformations>
-                <translation x="0" y="-16" z="0" />
+                <translation x="-28" y="-20" z="3.5" />
             </transformations>
 
             <descendants>
                 <leaf type="crate" />
             </descendants>
         </node>
+
+        <node id="pieces">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-28.7" y="-14.1" z="3.0" />
+            </transformations>
+
+            <descendants>
+                <noderef id="piece1" /> <!-- flat -->
+                <noderef id="piece2" />
+                <noderef id="piece3" /> <!--vertical -->
+                <noderef id="piece4" /> <!-- closest to board inclined -->
+                <noderef id="piece5" />
+            </descendants>
+        </node>
+
+        <node id="piece1">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <!-- <translation x="0" y="-16" z="0" /> -->
+            </transformations>
+
+            <descendants>
+                <noderef id="pieceDefault" />
+            </descendants>
+        </node>
+
+        <node id="piece2">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-0.275" y="4" z="-0.5" />
+                <rotation axis="y" angle="-80" />
+                <rotation axis="x" angle="80" />
+                
+            </transformations>
+
+            <descendants>
+                <noderef id="pieceDefault" />
+            </descendants>
+        </node>
+
+        <node id="piece3">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="3.9" z="-0.2" />
+                <rotation axis="y" angle="-20" />
+                <rotation axis="x" angle="110" />
+            </transformations>
+
+            <descendants>
+                <noderef id="pieceDefault" />
+            </descendants>
+        </node>
+
+        <node id="piece4">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="1" y="0.52" z="2" />
+                <rotation axis="z" angle="-15" />
+            </transformations>
+
+            <descendants>
+                <noderef id="pieceDefault" />
+            </descendants>
+        </node>
+
+        <node id="piece5">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="1.0" y="0.8" z="-6.0" />
+                <rotation axis="y" angle="10" />
+                <rotation axis="x" angle="10" />
+            </transformations>
+
+            <descendants>
+                <noderef id="pieceDefault" />
+            </descendants>
+        </node>
+
+        <node id="pieceDefault">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <noderef id="pieceDefaultWhitePart" />
+                <noderef id="pieceDefaultBlackPart" />
+            </descendants>
+        </node>
+
+        <node id="pieceDefaultWhitePart">
+            <material id="whitePartPieceMaterial" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <scale sx="2.0" sy="0.5" sz="2.0" />
+            </transformations>
+
+            <descendants>
+                <noderef id="parallelepipedDefault" />
+            </descendants>
+        </node>
+
+        <node id="pieceDefaultBlackPart">
+            <material id="blackPartPieceMaterial" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="0" z="2.0" />
+                <scale sx="2.0" sy="0.5" sz="2.0" />
+            </transformations>
+
+            <descendants>
+                <noderef id="parallelepipedDefault" />
+            </descendants>
+        </node>
+        
 
     </nodes>
 </lsf>

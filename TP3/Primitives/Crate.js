@@ -17,7 +17,6 @@ class Crate {
     display(){
         this.scene.pushMatrix();
         this.appearance.apply();
-        this.scene.translate(-28.0, -4.0, 3.5);
         
         this.scene.scale(0.5,0.5,0.6);
         // this.scene.rotate(-Math.PI/2, 0,1,0);
