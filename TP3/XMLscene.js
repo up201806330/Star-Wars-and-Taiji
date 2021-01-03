@@ -155,29 +155,27 @@ class XMLscene extends CGFscene {
 
             this.first = false;
 
+            this.interface.initLightsInterface(this.graph.lights);
+
             this.interface.addScenesInterface();
-            
             this.interface.initCamerasInterface(this.graph);
         }
 
-        if (!this.first) {
+        else if (!this.first) {
+
             this.interface.gui.removeFolder(this.interface.lightsFolder);
             this.interface.lightsFolder = this.interface.gui.addFolder("Lights");
 
             this.interface.initLightsInterface(this.graph.lights);
 
-            // this.interface.gui.remove(this.interface.zoomButton);
-            // this.interface.zoomButton.remove();
-            // this.zoomButton = this.gui.add(this.scene, 'zoomIn').name('Zoom');
+            this.interface.sceneChangerGui.remove();
+            this.interface.addScenesInterface();
+
+            this.interface.viewChangerGui.remove();
+            this.interface.initCamerasInterface(this.graph);
         }
         
         this.sceneInited = true;
-
-        // let foundTile = this.gameboard.getTileByBoardCoords({row: 6, column: 7});
-        // if (foundTile != null) console.log(foundTile.coordinates);
-        // else console.log("Not Found!");
-        
-        // this.gameboard.display();
 
         this.setUpdatePeriod(30);
     }
@@ -304,7 +302,7 @@ class XMLscene extends CGFscene {
         this.sceneInited = false; // fixed error in console
 
         // this.interface.gui.remove(this.interface.lightsFolder);
-        this.interface.lightsFolder.close();
+        // this.interface.lightsFolder.close();
 
         this.first = false;
 
@@ -313,6 +311,13 @@ class XMLscene extends CGFscene {
         this.zoomOutCounter = 0;
         this.targetY = -10;
         // this.locked = true;
+
+        // Turns off lights of previous/to be changed scene
+        for (let lightId in this.graph.lights) {
+            if (this.graph.lights[lightId] !== undefined) {
+                this.lightsStatus[lightId] = false;
+            }
+        }
 
         this.graph = new MySceneGraph(this.curScene + '.xml', this);
     }

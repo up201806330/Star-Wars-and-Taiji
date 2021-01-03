@@ -21,8 +21,7 @@ class MyInterface extends CGFinterface {
         this.gui = new dat.GUI();
 
         // add a group of controls (and open/expand by defult)
-
-        this.lightsFolder = this.gui.addFolder("Lights");
+        
         // folder hierarchy with .close() in functions
         this.taijiFolder = this.gui.addFolder("Taiji");
         this.taijiFolder.open();
@@ -35,12 +34,12 @@ class MyInterface extends CGFinterface {
         this.mainMenuFolder.add(this.scene, 'currGamemode', this.scene.gamemodes).name('Gamemode').onChange(() => {this.scene.changeGamemode();});
         this.mainMenuFolder.open();
 
-        this.actionsFolder.add(this.scene, 'undo').name('Undo');
-        this.actionsFolder.add(this.scene, 'movie').name('Movie');
+        this.undoButton = this.actionsFolder.add(this.scene, 'undo').name('Undo');
+        this.movieButton = this.actionsFolder.add(this.scene, 'movie').name('Movie');
         this.zoomButton = this.gui.add(this.scene, 'zoomIn').name('Zoom');
         this.gui.add(this.scene, 'lockUnlockCamera').name('Lock/Unlock View');
 
-        // this.gui.removeFolder(this.taijiFolder);
+        this.lightsFolder = this.gui.addFolder("Lights");
 
         this.initKeys();
 

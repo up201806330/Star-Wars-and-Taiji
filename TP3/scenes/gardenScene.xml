@@ -12,7 +12,7 @@
             <from x="0" y="30" z="30" />
             <to x="0" y="-10" z="-15" />
         </perspective>
-        <perspective id="sideCamera" near="0.1" far="500" angle="45">
+        <perspective id="sideCamera2" near="0.1" far="500" angle="45">
             <from x="55" y="15" z="5" />
             <to x="-25" y="-12" z="-10" />
         </perspective>
