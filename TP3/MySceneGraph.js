@@ -391,9 +391,10 @@ class MySceneGraph {
         }
 
         
-
+        this.scene.camera = this.scene.graph.views[this.defaultID];
         // comenting this line locks the camera
         // this.scene.interface.setActiveCamera(this.scene.camera);
+        this.scene.curView = this.defaultID;
 
         return null;
     }
