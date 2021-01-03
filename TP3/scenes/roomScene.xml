@@ -13,8 +13,8 @@
             <to x="0" y="-10" z="-15" />
         </perspective>
         <perspective id="sideCamera" near="0.1" far="500" angle="45">
-            <from x="0" y="50" z="10" />
-            <to x="0" y="-10" z="-15" />
+            <from x="55" y="15" z="5" />
+            <to x="-25" y="-12" z="-10" />
         </perspective>
     </views>
 
@@ -26,10 +26,28 @@
 
     <lights>
         <!-- NOTE: this block "light" must be repeated as necessary with different "id". At least one light should be present, and a maximum of eight lights is accepted. -->
-        <light id="demoLight">            <!-- light identifier -->
+        <light id="mainLight">            <!-- light identifier -->
             <enable value="1" />
             <!-- enable/disable -->
-            <position x="10" y="12" z="9.5" w="1.0" /><!-- light position; w=1: point light; w=0: directional light -->
+            <position x="19" y="19" z="19" w="1.0" /><!-- light position; w=1: point light; w=0: directional light -->
+            <ambient r="0.8" g="0.8" b="0.8" a="1.0" />                   <!-- ambient component -->
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />             <!-- diffuse component -->
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />            <!-- specular component -->
+        </light>
+
+        <light id="crateLight">            <!-- light identifier -->
+            <enable value="0" />
+            <!-- enable/disable -->
+            <position x="-23" y="-10" z="5" w="1.0" /><!-- light position; w=1: point light; w=0: directional light -->
+            <ambient r="0.8" g="0.8" b="0.8" a="1.0" />                   <!-- ambient component -->
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />             <!-- diffuse component -->
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />            <!-- specular component -->
+        </light>
+
+        <light id="boardLight">            <!-- light identifier -->
+            <enable value="0" />
+            <!-- enable/disable -->
+            <position x="0" y="-8" z="-7" w="1.0" /><!-- light position; w=1: point light; w=0: directional light -->
             <ambient r="0.8" g="0.8" b="0.8" a="1.0" />                   <!-- ambient component -->
             <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />             <!-- diffuse component -->
             <specular r="1.0" g="1.0" b="1.0" a="1.0" />            <!-- specular component -->
@@ -82,19 +100,19 @@
 
         <material id="whiteMaterial">
             <shininess value="1" />
-            <ambient r="0.4" g="0.4" b="0.4" a="1.0" />
+            <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
             <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
             <specular r="0" g="0" b="0" a="1.0" />
-            <emissive r="0.2" g="0.2" b="0.2" a="1.0" />
+            <emissive r="0.1" g="0.1" b="0.1" a="1.0" />
         </material>
 
 
         <material id="skyBoxMaterial">
             <shininess value="1" />
             <ambient r="0" g="0" b="0" a="1.0" />
-            <diffuse r="0" g="0" b="0" a="1.0" />
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
             <specular r="0" g="0" b="0" a="1.0" />
-            <emissive r="1" g="1" b="1" a="1.0" />
+            <emissive r="0.1" g="0.1" b="0.1" a="1.0" />
         </material>
 
         <material id="wallColorMaterial">
@@ -102,13 +120,29 @@
             <ambient r="0" g="0" b="0" a="1.0" />
             <diffuse r="0.49" g="0.65" b="0.90" a="1.0" />
             <specular r="0" g="0" b="0" a="1.0" />
-            <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
+            <emissive r="0.1" g="0.1" b="0.1" a="1.0" />
         </material>
 
         <material id="clayOrangeMaterial">
             <shininess value="1" />
             <ambient r="0" g="0" b="0" a="1.0" />
             <diffuse r="0.98" g="0.42" b="0.06" a="1.0" />
+            <specular r="0.0" g="0.0" b="0.0" a="1.0" />
+            <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
+        </material>
+
+        <material id="whitePartPieceMaterial">
+            <shininess value="1" />
+            <ambient r="0" g="0" b="0" a="1.0" />
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+            <specular r="0.0" g="0.0" b="0.0" a="1.0" />
+            <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
+        </material>
+
+        <material id="blackPartPieceMaterial">
+            <shininess value="1" />
+            <ambient r="0" g="0" b="0" a="1.0" />
+            <diffuse r="0.0" g="0.0" b="0.0" a="1.0" />
             <specular r="0.0" g="0.0" b="0.0" a="1.0" />
             <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
         </material>
@@ -141,6 +175,8 @@
                 <noderef id="window" />
                 <noderef id="plant" />
                 <noderef id="door" />
+                <noderef id="crate" />
+                <noderef id="pieces" />
             </descendants>
         </node>
 
@@ -288,7 +324,7 @@
 
 
         <node id="table">
-            <material id="lightGreyMaterial" />
+            <material id="whiteMaterial" />
             <texture id="clear">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
@@ -569,7 +605,7 @@
             </transformations>
 
             <descendants>
-                <leaf type="cylinder" height="5.0" topRadius="2.0" bottomRadius="2.0" stacks="4" slices="40"/>
+                <leaf type="cylinder" height="4.0" topRadius="2.5" bottomRadius="2.5" stacks="4" slices="40"/>
             </descendants>
         </node>
 
@@ -740,6 +776,169 @@
             </descendants>
         </node>
 
+        <node id="crate">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-28" y="-20" z="3.5" />
+            </transformations>
+
+            <descendants>
+                <leaf type="crate" />
+            </descendants>
+        </node>
+
+        <node id="pieces">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-28.7" y="-14.1" z="3.0" />
+            </transformations>
+
+            <descendants>
+                <noderef id="piece1" /> <!-- flat -->
+                <noderef id="piece2" />
+                <noderef id="piece3" /> <!--vertical -->
+                <noderef id="piece4" /> <!-- closest to board inclined -->
+                <noderef id="piece5" />
+            </descendants>
+        </node>
+
+        <node id="piece1">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <!-- <translation x="0" y="-16" z="0" /> -->
+            </transformations>
+
+            <descendants>
+                <noderef id="pieceDefault" />
+            </descendants>
+        </node>
+
+        <node id="piece2">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-0.275" y="4" z="-0.5" />
+                <rotation axis="y" angle="-80" />
+                <rotation axis="x" angle="80" />
+                
+            </transformations>
+
+            <descendants>
+                <noderef id="pieceDefault" />
+            </descendants>
+        </node>
+
+        <node id="piece3">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="3.9" z="-0.2" />
+                <rotation axis="y" angle="-20" />
+                <rotation axis="x" angle="110" />
+            </transformations>
+
+            <descendants>
+                <noderef id="pieceDefault" />
+            </descendants>
+        </node>
+
+        <node id="piece4">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="1" y="0.52" z="2" />
+                <rotation axis="z" angle="-15" />
+            </transformations>
+
+            <descendants>
+                <noderef id="pieceDefault" />
+            </descendants>
+        </node>
+
+        <node id="piece5">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="1.0" y="0.8" z="-6.0" />
+                <rotation axis="y" angle="10" />
+                <rotation axis="x" angle="10" />
+            </transformations>
+
+            <descendants>
+                <noderef id="pieceDefault" />
+            </descendants>
+        </node>
+
+        <node id="pieceDefault">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <noderef id="pieceDefaultWhitePart" />
+                <noderef id="pieceDefaultBlackPart" />
+            </descendants>
+        </node>
+
+        <node id="pieceDefaultWhitePart">
+            <material id="whitePartPieceMaterial" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <scale sx="2.0" sy="0.5" sz="2.0" />
+            </transformations>
+
+            <descendants>
+                <noderef id="parallelepipedDefault" />
+            </descendants>
+        </node>
+
+        <node id="pieceDefaultBlackPart">
+            <material id="blackPartPieceMaterial" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="0" z="2.0" />
+                <scale sx="2.0" sy="0.5" sz="2.0" />
+            </transformations>
+
+            <descendants>
+                <noderef id="parallelepipedDefault" />
+            </descendants>
+        </node>
+        
 
     </nodes>
 </lsf>

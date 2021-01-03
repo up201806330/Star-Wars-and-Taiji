@@ -21,8 +21,7 @@ class MyInterface extends CGFinterface {
         this.gui = new dat.GUI();
 
         // add a group of controls (and open/expand by defult)
-
-        this.lightsFolder = this.gui.addFolder("Lights");
+        
         // folder hierarchy with .close() in functions
         this.taijiFolder = this.gui.addFolder("Taiji");
         this.taijiFolder.open();
@@ -35,10 +34,12 @@ class MyInterface extends CGFinterface {
         this.mainMenuFolder.add(this.scene, 'currGamemode', this.scene.gamemodes).name('Gamemode').onChange(() => {this.scene.changeGamemode();});
         this.mainMenuFolder.open();
 
-        this.actionsFolder.add(this.scene, 'undo').name('Undo');
-        this.actionsFolder.add(this.scene, 'movie').name('Movie');
-        this.gui.add(this.scene, 'zoomIn').name('Zoom');
+        this.undoButton = this.actionsFolder.add(this.scene, 'undo').name('Undo');
+        this.movieButton = this.actionsFolder.add(this.scene, 'movie').name('Movie');
+        this.zoomButton = this.gui.add(this.scene, 'zoomIn').name('Zoom');
         this.gui.add(this.scene, 'lockUnlockCamera').name('Lock/Unlock View');
+
+        this.lightsFolder = this.gui.addFolder("Lights");
 
         this.initKeys();
 
@@ -87,19 +88,17 @@ class MyInterface extends CGFinterface {
     };
 
     initCamerasInterface() {
-        
-        // this.gui.add(this.scene, 'curView', Object.keys(this.scene.graph.views)).name("View Points").onChange((val) => {
-        //     this.scene.camera = this.scene.graph.views[val];
-        //     this.setActiveCamera(this.scene.camera);
-        //     console.log(this.scene.curView);
-        // });
 
-        this.gui.add(this.scene, 'curView', Object.keys(this.scene.graph.views)).name("View Points").onChange(() => {this.scene.changeView();});
+        this.viewChangerGui = this.gui.add(this.scene, 'curView', Object.keys(this.scene.graph.views)).name("View Points")
+        
+        this.viewChangerGui.onChange(() => {this.scene.changeView();});
     }
 
     addScenesInterface() {
-        // this.gui.add(this.scene.graph, "curScene", [ "skybox1", "skybox2"] ).name("Scene");
-        this.gui.add(this.scene, 'curScene', this.scene.sceneIds).name('Scene').onChange(() => {this.scene.changeGraph();});
+
+        this.sceneChangerGui = this.gui.add(this.scene, 'curScene', this.scene.sceneIds).name('Scene')
+        
+        this.sceneChangerGui.onChange(() => {this.scene.changeGraph();});
     }
 
 }

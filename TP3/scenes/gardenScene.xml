@@ -12,9 +12,9 @@
             <from x="0" y="30" z="30" />
             <to x="0" y="-10" z="-15" />
         </perspective>
-        <perspective id="sideCamera" near="0.1" far="500" angle="45">
-            <from x="0" y="50" z="10" />
-            <to x="0" y="-10" z="-15" />
+        <perspective id="sideCamera2" near="0.1" far="500" angle="45">
+            <from x="55" y="15" z="5" />
+            <to x="-25" y="-12" z="-10" />
         </perspective>
     </views>
 
@@ -26,10 +26,19 @@
 
     <lights>
         <!-- NOTE: this block "light" must be repeated as necessary with different "id". At least one light should be present, and a maximum of eight lights is accepted. -->
-        <light id="demoLight">            <!-- light identifier -->
+        <light id="mainLight">            <!-- light identifier -->
             <enable value="1" />
             <!-- enable/disable -->
-            <position x="30" y="30" z="9.5" w="1.0" /><!-- light position; w=1: point light; w=0: directional light -->
+            <position x="40" y="40" z="40" w="1.0" /><!-- light position; w=1: point light; w=0: directional light -->
+            <ambient r="0.8" g="0.8" b="0.8" a="1.0" />                   <!-- ambient component -->
+            <diffuse r="0.9" g="0.9" b="0.9" a="1.0" />             <!-- diffuse component -->
+            <specular r="0.9" g="0.9" b="0.9" a="1.0" />            <!-- specular component -->
+        </light>
+
+        <light id="boardLight">            <!-- light identifier -->
+            <enable value="0" />
+            <!-- enable/disable -->
+            <position x="0" y="-8" z="-7" w="1.0" /><!-- light position; w=1: point light; w=0: directional light -->
             <ambient r="0.8" g="0.8" b="0.8" a="1.0" />                   <!-- ambient component -->
             <diffuse r="0.9" g="0.9" b="0.9" a="1.0" />             <!-- diffuse component -->
             <specular r="0.9" g="0.9" b="0.9" a="1.0" />            <!-- specular component -->
@@ -67,7 +76,7 @@
             <ambient r="0.1" g="0.1" b="0.135" a="1.0" />
             <diffuse r="0.4" g="0.4" b="0.435" a="1.0" />
             <specular r="0.1" g="0.1" b="0.135" a="1.0" />
-            <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
+            <emissive r="0.1" g="0.1" b="0.1" a="1.0" />
         </material>
 
         <material id="skyBoxMaterial">
@@ -1153,7 +1162,7 @@
             </descendants>
         </node>
 
-         <node id="water">
+        <node id="water">
             <material id="null" />
             <texture id="null">
                 <amplification afs="1.0" aft="1.0" />
