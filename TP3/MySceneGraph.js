@@ -382,6 +382,10 @@ class MySceneGraph {
             return "Non existant view ID for default view: " + this.defaultID;
         }
 
+
+        this.scene.camera = this.scene.graph.views[this.defaultID];
+        this.scene.curView = this.defaultID;
+
         return null;
     }
 
