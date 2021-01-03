@@ -37,8 +37,10 @@ class MyInterface extends CGFinterface {
 
         this.actionsFolder.add(this.scene, 'undo').name('Undo');
         this.actionsFolder.add(this.scene, 'movie').name('Movie');
-        this.gui.add(this.scene, 'zoomIn').name('Zoom');
+        this.zoomButton = this.gui.add(this.scene, 'zoomIn').name('Zoom');
         this.gui.add(this.scene, 'lockUnlockCamera').name('Lock/Unlock View');
+
+        // this.gui.removeFolder(this.taijiFolder);
 
         this.initKeys();
 
@@ -94,7 +96,7 @@ class MyInterface extends CGFinterface {
     }
 
     addScenesInterface() {
-        
+
         this.sceneChangerGui = this.gui.add(this.scene, 'curScene', this.scene.sceneIds).name('Scene')
         
         this.sceneChangerGui.onChange(() => {this.scene.changeGraph();});

@@ -146,15 +146,29 @@ class XMLscene extends CGFscene {
 
         // After graph has loaded, add each light source / camera to the interface
         
+
+
         if (this.first) { // not to duplicate elements of the gui
             this.camera = this.graph.views[this.graph.defaultID];
-            // this.activeView = defaultID;
+            // this.interface.setActiveCamera(this.camera);
             this.curView = this.graph.defaultID;
 
             this.first = false;
+
             this.interface.addScenesInterface();
-            this.interface.initLightsInterface(this.graph.lights);
+            
             this.interface.initCamerasInterface(this.graph);
+        }
+
+        if (!this.first) {
+            this.interface.gui.removeFolder(this.interface.lightsFolder);
+            this.interface.lightsFolder = this.interface.gui.addFolder("Lights");
+
+            this.interface.initLightsInterface(this.graph.lights);
+
+            // this.interface.gui.remove(this.interface.zoomButton);
+            // this.interface.zoomButton.remove();
+            // this.zoomButton = this.gui.add(this.scene, 'zoomIn').name('Zoom');
         }
         
         this.sceneInited = true;

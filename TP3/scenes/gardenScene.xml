@@ -26,7 +26,16 @@
 
     <lights>
         <!-- NOTE: this block "light" must be repeated as necessary with different "id". At least one light should be present, and a maximum of eight lights is accepted. -->
-        <light id="demoLight">            <!-- light identifier -->
+        <light id="demoLight2">            <!-- light identifier -->
+            <enable value="1" />
+            <!-- enable/disable -->
+            <position x="30" y="30" z="9.5" w="1.0" /><!-- light position; w=1: point light; w=0: directional light -->
+            <ambient r="0.8" g="0.8" b="0.8" a="1.0" />                   <!-- ambient component -->
+            <diffuse r="0.9" g="0.9" b="0.9" a="1.0" />             <!-- diffuse component -->
+            <specular r="0.9" g="0.9" b="0.9" a="1.0" />            <!-- specular component -->
+        </light>
+
+        <light id="demoLight3">            <!-- light identifier -->
             <enable value="1" />
             <!-- enable/disable -->
             <position x="30" y="30" z="9.5" w="1.0" /><!-- light position; w=1: point light; w=0: directional light -->
