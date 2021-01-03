@@ -11,6 +11,7 @@ class MyAnimator{
         
         this.cannon = new Cannon(scene);                    this.primitives.push(this.cannon);
         this.cannonExplosion = new CannonExplosion(scene);  this.primitives.push(this.cannonExplosion);
+        this.pieceExplosion = new PieceExplosion(scene);    this.primitives.push(this.pieceExplosion);
 
         this.animatingElements = [this.cannon];
     }
@@ -41,6 +42,14 @@ class MyAnimator{
         this.scene.gameOrchestrator.piecesStack.push(piece); // Pushes new piece to stack of placed pieces
         move.occupyTiles();                                  // Updates board's tiles to be full
         piece.setCoords(rowW, colW, rowB, colB);             // Updates final coords of the piece that will be placed
+    }
+
+    animateUndo(move, piece){
+        if (this.scene.curScene == "gardenScene") this.animatingElements = new Array(piece);
+        else if (this.scene.curScene == "roomScene") {
+            this.pieceExplosion.setCoords(piece);
+            this.animatingElements = new Array(this.pieceExplosion, piece);
+        }
     }
 
     update(now){
