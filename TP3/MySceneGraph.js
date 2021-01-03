@@ -1026,7 +1026,7 @@ class MySceneGraph {
                 }
 
                 else if (nodeDescendants[k].nodeName == "leaf") {
-                    let primType = this.reader.getItem(nodeDescendants[k], "type", ["rectangle", "triangle", "torus", "cylinder", "sphere", "plane", "patch", "defbarrel", "spritetext", "spriteanim", "water"]);
+                    let primType = this.reader.getItem(nodeDescendants[k], "type", ["rectangle", "triangle", "torus", "cylinder", "sphere", "plane", "patch", "defbarrel", "spritetext", "spriteanim", "water", "crate"]);
 
                     if (primType == null) {
                         this.onXMLError("Unknown primitive type!");

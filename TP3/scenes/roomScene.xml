@@ -141,6 +141,7 @@
                 <noderef id="window" />
                 <noderef id="plant" />
                 <noderef id="door" />
+                <noderef id="crate" />
             </descendants>
         </node>
 
@@ -740,6 +741,20 @@
             </descendants>
         </node>
 
+        <node id="crate">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="-16" z="0" />
+            </transformations>
+
+            <descendants>
+                <leaf type="crate" />
+            </descendants>
+        </node>
 
     </nodes>
 </lsf>

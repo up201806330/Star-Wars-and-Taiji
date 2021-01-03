@@ -1153,7 +1153,7 @@
             </descendants>
         </node>
 
-         <node id="water">
+        <node id="water">
             <material id="null" />
             <texture id="null">
                 <amplification afs="1.0" aft="1.0" />

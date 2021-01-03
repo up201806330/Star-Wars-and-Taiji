@@ -138,6 +138,10 @@ class MyPrimitive {
             this.aPrimitive = new Water(this.graph.scene);
         }
 
+        else if (type == "crate") {
+            this.aPrimitive = new Crate(this.graph.scene);
+        }
+
         else {
             this.graph.onXMLMinorError("Primitive Not Implemented!");
         }
