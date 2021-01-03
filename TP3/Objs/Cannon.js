@@ -6,7 +6,7 @@ class Cannon extends PieceTransporter{
         this.appearance = new CGFappearance(scene);
         this.appearance.setSpecular(0.9, 0.9, 0.9, 1);
         this.appearance.setShininess(120);
-        this.appearance.setAmbient(0.9, 0.9, 0.9, 1);
+        this.appearance.setAmbient(0.4, 0.4, 0.4, 1);
         this.appearance.setDiffuse(0.9, 0.9, 1.0, 1);
         this.appearance.loadTexture('./scenes/images/metal.jpg');
         this.appearance.setTextureWrap('REPEAT', 'REPEAT');
