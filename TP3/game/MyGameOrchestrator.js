@@ -36,6 +36,8 @@ class MyGameOrchestrator {
         
         this.AILevel = '2';
         this.gamemode = 'pve';
+
+        this.isUndoingMove = false;
     }
     
     update(now) {
@@ -87,9 +89,6 @@ class MyGameOrchestrator {
     }
 
     onTileSelected(obj, customId, pickResults) {
-        console.log(obj);
-
-
         if (!this.gameHasStarted()){
             console.log("Game hasnt started yet, cant select");
             return;
@@ -320,6 +319,7 @@ class MyGameOrchestrator {
     
     move(move, piece, updateState){
         if (this.gameHasStarted()) {
+            this.isUndoingMove = false;
             if (updateState) this.client.makeRequest("move(" + this.gameState + "," + move.toString() + ")");
             this.animator.animateMove(move, piece);
         }
@@ -327,22 +327,24 @@ class MyGameOrchestrator {
     }
 
     undoMove(){
-        if (this.gameHasStarted() && !this.isAnimating() && this.movesStack.length > 1) {
-            // Pop second to last move from the stack
-            let othersMove = this.movesStack.pop();
+        if (this.gameHasStarted() && !this.isAnimating()) {
+            this.isUndoingMove = true;
+
+            // Pop last move from the stack
             let move = this.movesStack.pop();
-            this.movesStack.push(othersMove);
 
             // Update state
             this.client.makeRequest("undo_move(" + this.gameState + "," + move.toString() + ")");
 
-            // Unset coords of second to last placed piece
-            let othersPiece = this.piecesStack.pop();
-            this.piecesStack.pop().unsetCoords();
-            this.piecesStack.push(othersPiece);
+            // Unset coords of last placed piece
+            let piece = this.piecesStack.pop();
             
             // Unoccupy tiles the second to last move occupied
             move.unoccupyTiles();
+            piece.unsetCoords();
+
+            // Start animating
+            this.animator.animateUndo(move, piece);
         }
         else console.log("Can't send request to prolog: Undo Move");
     }

@@ -41,7 +41,7 @@ class Client{
             scene.gameOrchestrator.gameWinner = parts[2];
         }
 
-        scene.gameOrchestrator.nextTurn();
+        if (!scene.gameOrchestrator.isUndoingMove) scene.gameOrchestrator.nextTurn(); // Only switches turn if a move was processed
         scene.gameOrchestrator.processingRequest = false;
     }
 
