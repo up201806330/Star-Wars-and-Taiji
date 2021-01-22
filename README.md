@@ -1,7 +1,5 @@
 # LAIG Projects
 
-[Try it out](https://joaoasousa.github.io/CGRA_2Y2S)
-
 - **Project name:** Projects developed for the LAIG course
 - **Short description:** Two small projects depicting a Star Wars ship dog chase animation and a 3D interface for the board game [Taiji](https://boardgamegeek.com/boardgame/31926/taiji).
 - **Institution:** [FEUP](https://sigarra.up.pt/feup/en/web_page.Inicial)
