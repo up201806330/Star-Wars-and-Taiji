@@ -155,7 +155,7 @@ class XMLscene extends CGFscene {
 
         if (this.sceneInited) {
             // Draw axis
-            this.axis.display();
+            // this.axis.display();
  
             this.defaultAppearance.apply();
 

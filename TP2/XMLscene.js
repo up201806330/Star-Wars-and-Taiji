@@ -34,7 +34,7 @@ class XMLscene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
 
         this.axis = new CGFaxis(this);
-        this.setUpdatePeriod(100);
+        this.setUpdatePeriod(30);
 
         this.loadingProgressObject=new MyRectangle(this, -1, -.1, 1, .1);
         this.loadingProgress=0;
@@ -102,7 +102,7 @@ class XMLscene extends CGFscene {
 
         this.sceneInited = true;
 
-        this.setUpdatePeriod(100);
+        this.setUpdatePeriod(30);
     }
 
     /**
@@ -171,7 +171,7 @@ class XMLscene extends CGFscene {
 
         if (this.sceneInited) {
             // Draw axis
-            this.axis.display();
+            // this.axis.display();
  
             this.defaultAppearance.apply();
 
