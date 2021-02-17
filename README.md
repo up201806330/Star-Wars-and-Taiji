@@ -7,7 +7,7 @@
 - **Project grades:** 
   - *TP1:* 19.3/20.0
   - *TP2:* 19.5/20.0
-  - *TP3:* ?/20.0
+  - *TP3:* 19.4/20.0
 - **Group members:**
     - [João António Cardoso Vieira e Basto de Sousa](https://github.com/JoaoASousa) ([up201806613@fe.up.pt](up201806613@fe.up.pt))
     - [Rafael Soares Ribeiro](https://github.com/up201806330) ([up201806330@fe.up.pt](up201806330@fe.up.pt))
